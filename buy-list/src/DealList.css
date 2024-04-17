@@ -1,0 +1,18 @@
+.deal-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.deal-list__item {
+  width: 74%;
+}
+
+.deal-list__item:not(:last-child) {
+  margin-bottom: 5px;
+}
