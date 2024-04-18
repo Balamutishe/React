@@ -6,3 +6,9 @@ export const UserSchema = z.object({
 });
 
 export type User = z.infer<typeof UserSchema>;
+
+export function fetchUser(id: string): Promise<User> {
+  return fetch(`/api/users/${id}`)
+    .then((response) => response.json())
+    .then((data) => UserSchema.parse(data));
+}
