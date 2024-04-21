@@ -14,10 +14,15 @@ export function fetchUser(id: string): Promise<User> {
     .then((data) => UserSchema.parse(data));
 }
 
-export function registerUser(
-  username: string,
-  password: string
-): Promise<void> {
+export function registerUser({
+  email,
+  username,
+  password,
+}: {
+  email: string;
+  username: string;
+  password: string;
+}): Promise<void> {
   return fetch(`/api/register`, {
     method: 'POST',
     headers: {
@@ -25,6 +30,7 @@ export function registerUser(
     },
 
     body: JSON.stringify({
+      email,
       username,
       password,
     }),
@@ -41,6 +47,17 @@ export function login(username: string, password: string): Promise<void> {
       username,
       password,
     }),
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
+
+export function logout(): Promise<void> {
+  return fetch(`/api/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
     .then(validateResponse)
     .then(() => undefined);

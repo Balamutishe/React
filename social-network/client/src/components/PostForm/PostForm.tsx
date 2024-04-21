@@ -9,6 +9,7 @@ import './PostForm.css';
 import { useMutation } from '@tanstack/react-query';
 import { createPost } from '../../api/Post';
 import { queryClient } from '../../api/queryClient';
+import { LogoutButton } from '../LogoutButton';
 
 export interface IPostFormProps {}
 
@@ -53,6 +54,8 @@ export const PostForm: FC<IPostFormProps> = () => {
         title='Опубликовать'
         isLoading={createPostMutation.isPending}
       />
+
+      <LogoutButton />
     </form>
   );
 };
