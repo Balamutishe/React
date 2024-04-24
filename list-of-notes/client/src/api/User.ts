@@ -14,13 +14,34 @@ export function registerUser({
   email,
   password,
 }: RegisterUser): Promise<void> {
-  return fetch(`/register`, {
+  return fetch(`/api/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       username,
+      email,
+      password,
+    }),
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
+
+export function login({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}): Promise<void> {
+  return fetch(`/api/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
       email,
       password,
     }),
