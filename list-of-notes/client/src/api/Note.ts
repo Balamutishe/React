@@ -22,7 +22,7 @@ export const FetchNotesListSchema = z.object({
 
 export type FetchNotesListResponse = z.infer<typeof FetchNotesListSchema>;
 
-export function fetchNotesList() {
+export function fetchNotesList(): Promise<FetchNotesListResponse> {
   return fetch(`/api/notes`)
     .then(validateResponse)
     .then((response) => response.json())

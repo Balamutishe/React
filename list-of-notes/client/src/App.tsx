@@ -1,14 +1,18 @@
+import { QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
 import { Account } from './components/Account/Account';
-import { NotesListView } from './components/NotesListView';
+import { FetchNotesListView } from './components/NotesListView/FetchNotesListView';
+import { queryClient } from './api/queryClient';
 
 function App() {
   return (
-    <div className='app'>
-      <Account />
+    <QueryClientProvider client={queryClient}>
+      <div className='app'>
+        <Account />
 
-      <NotesListView />
-    </div>
+        <FetchNotesListView />
+      </div>
+    </QueryClientProvider>
   );
 }
 

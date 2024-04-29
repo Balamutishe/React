@@ -1,21 +1,21 @@
 import { z } from 'zod';
 import { validateResponse } from './validateResponse';
 
-const UserSchema = z.object({
+export const UserSchema = z.object({
   id: z.string(),
   email: z.string(),
   username: z.string(),
 });
 
-type User = z.infer<typeof UserSchema>;
+export type User = z.infer<typeof UserSchema>;
 
-const RegisterUserSchema = z.object({
+export const RegisterUserSchema = z.object({
   username: z.string(),
   email: z.string(),
   password: z.string(),
 });
 
-type RegisterUser = z.infer<typeof RegisterUserSchema>;
+export type RegisterUser = z.infer<typeof RegisterUserSchema>;
 
 export function registerUser({
   username,
@@ -56,6 +56,19 @@ export function login({
   })
     .then(validateResponse)
     .then(() => undefined);
+}
+
+export function logout(): Promise<void> {
+  return fetch(`http://localhost:5173/api/logout`)
+    .then(validateResponse)
+    .then(() => undefined);
+}
+
+export function fetchUser(id: string): Promise<User> {
+  return fetch(`/api/users/${id}`)
+    .then(validateResponse)
+    .then((response) => response.json())
+    .then((data) => UserSchema.parse(data));
 }
 
 export function fetchMe(): Promise<User> {

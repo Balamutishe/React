@@ -11,10 +11,10 @@ import { registerUser } from '../../api/User';
 import { queryClient } from '../../api/queryClient';
 
 const registerUserSchema = z.object({
-  email: z
+  email: z.string().email('Введите корректный E-mail'),
+  username: z
     .string()
     .min(5, 'В имени пользователя должно быть не менее 5 символов'),
-  username: z.string().email('Введите корректный email'),
   password: z
     .string()
     .min(8, 'Пароль должен состоять не менее чем из 8 символов'),
@@ -23,10 +23,6 @@ const registerUserSchema = z.object({
 type createRegisterForm = z.infer<typeof registerUserSchema>;
 
 export const RegistrationForm: FC = () => {
-  // const [email, setEmail] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-
   const {
     register,
     handleSubmit,
@@ -50,17 +46,17 @@ export const RegistrationForm: FC = () => {
       })}
     >
       <FormField
-        label='E-mail пользователя'
-        errorMessage={errors.email?.message}
-      >
-        <input {...register('email')} />
-      </FormField>
-
-      <FormField
         label='Имя пользователя'
         errorMessage={errors.username?.message}
       >
         <input {...register('username')} />
+      </FormField>
+
+      <FormField
+        label='E-mail пользователя'
+        errorMessage={errors.email?.message}
+      >
+        <input {...register('email')} />
       </FormField>
 
       <FormField label='Пароль' errorMessage={errors.password?.message}>

@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createNote } from '../../api/Note';
 import { queryClient } from '../../api/queryClient';
+import { LogoutButton } from '../LogoutButton';
 
 const createNoteSchema = z.object({
   title: z
@@ -32,6 +33,9 @@ export const NoteForm: FC = () => {
   const createNoteMutation = useMutation(
     {
       mutationFn: createNote,
+      onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['notes'] });
+      },
     },
     queryClient
   );
@@ -52,6 +56,7 @@ export const NoteForm: FC = () => {
       <Button type='submit' isLoading={createNoteMutation.isPending}>
         Сохранить
       </Button>
+      <LogoutButton />
     </form>
   );
 };

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchMe } from '../../api/User';
+import { fetchMe, logout } from '../../api/User';
 import { Loader } from '../Loader';
 import { AuthForm } from '../AuthForm';
 import { PostForm } from '../PostForm';
