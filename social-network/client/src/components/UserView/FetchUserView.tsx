@@ -13,7 +13,7 @@ export const FetchUserView: FC<FetchUserViewProps> = ({ userId }) => {
   const userQuery = useQuery(
     {
       queryFn: () => fetchUser(userId),
-      queryKey: ['users', userId],
+      queryKey: ['user', userId],
     },
     queryClient
   );
@@ -26,8 +26,8 @@ export const FetchUserView: FC<FetchUserViewProps> = ({ userId }) => {
     case 'error':
       return (
         <div>
-          <span>Произошла ошибка</span>
-          <button onClick={() => userQuery.refetch()}>Попробовать снова</button>
+          <span>Произошла ошибка :(</span>
+          <button onClick={() => userQuery.refetch()}>Повторить запрос</button>
         </div>
       );
   }

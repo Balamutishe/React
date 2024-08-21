@@ -3,8 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 
 import { FormField } from '../FormField';
 import { Button } from '../Button';
-import './LoginForm.css';
 import { login } from '../../api/User';
+import './LoginForm.css';
 import { queryClient } from '../../api/queryClient';
 
 export const LoginForm: FC = () => {
@@ -23,6 +23,8 @@ export const LoginForm: FC = () => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    loginMutation.mutate();
   };
 
   return (

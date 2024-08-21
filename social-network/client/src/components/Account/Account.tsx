@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchMe, logout } from '../../api/User';
+import { fetchMe } from '../../api/User';
+import { queryClient } from '../../api/queryClient';
 import { Loader } from '../Loader';
 import { AuthForm } from '../AuthForm';
 import { PostForm } from '../PostForm';
-import { queryClient } from '../../api/queryClient';
 
 export const Account = () => {
-  const meQuery = useQuery(
+  const queryMe = useQuery(
     {
       queryFn: () => fetchMe(),
       queryKey: ['users', 'me'],
@@ -14,12 +14,12 @@ export const Account = () => {
     queryClient
   );
 
-  switch (meQuery.status) {
+  switch (queryMe.status) {
     case 'pending':
       return <Loader />;
-    case 'success':
-      return <PostForm />;
     case 'error':
       return <AuthForm />;
+    case 'success':
+      return <PostForm />;
   }
 };

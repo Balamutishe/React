@@ -21,7 +21,7 @@ export const FetchPostListView = () => {
     case 'error':
       return (
         <div>
-          <span>Произошла ошибка</span>
+          <span>Произошла ошибка :(</span>
           <button onClick={() => postListQuery.refetch()}>
             Повторить запрос
           </button>

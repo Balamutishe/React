@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import { PostList } from '../../api/Post';
 
 import { PostView } from '../PostView';
 import './PostListView.css';
-import { PostList } from '../../api/Post';
 
 interface PostListViewProps {
   postList: PostList;

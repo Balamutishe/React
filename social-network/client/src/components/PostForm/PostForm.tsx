@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,29 +7,27 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../Button';
 import { FormField } from '../FormField';
 import './PostForm.css';
-import { useMutation } from '@tanstack/react-query';
 import { createPost } from '../../api/Post';
 import { queryClient } from '../../api/queryClient';
-import { LogoutButton } from '../LogoutButton';
 
 export interface IPostFormProps {}
 
-const createPostSchema = z.object({
+const createPostShema = z.object({
   text: z.string().min(10, 'Длинна поста должна быть не менее 10 символов'),
 });
 
-type createPostForm = z.infer<typeof createPostSchema>;
+type CreatePostForm = z.infer<typeof createPostShema>;
 
 export const PostForm: FC<IPostFormProps> = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<createPostForm>({
-    resolver: zodResolver(createPostSchema),
+  } = useForm<CreatePostForm>({
+    resolver: zodResolver(createPostShema),
   });
 
-  const createPostMutation = useMutation(
+  const postMutation = useMutation(
     {
       mutationFn: createPost,
       onSuccess() {
@@ -40,9 +39,7 @@ export const PostForm: FC<IPostFormProps> = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(({ text }) => {
-        createPostMutation.mutate(text);
-      })}
+      onSubmit={handleSubmit(({ text }) => postMutation.mutate(text))}
       className='post-form'
     >
       <FormField label='Текст поста' errorMessage={errors.text?.message}>
@@ -52,10 +49,8 @@ export const PostForm: FC<IPostFormProps> = () => {
       <Button
         type='submit'
         title='Опубликовать'
-        isLoading={createPostMutation.isPending}
+        isLoading={postMutation.isPending}
       />
-
-      <LogoutButton />
     </form>
   );
 };

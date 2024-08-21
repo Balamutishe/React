@@ -22,5 +22,23 @@
     "text": "А ты как?",
     "authorId": "df7182dd-b3c6-46cf-9133-f922f988c75d",
     "createdAt": 1704901870088
+  },
+  "97ac4365-4a2d-4d96-abbb-4845b9639682": {
+    "id": "97ac4365-4a2d-4d96-abbb-4845b9639682",
+    "text": "Всем привет!!!\n",
+    "authorId": "b00ac8c2-60e1-4076-ae04-5a40bc0459fa",
+    "createdAt": 1724221615363
+  },
+  "75da810d-976e-4a65-8fcc-358ba1356aee": {
+    "id": "75da810d-976e-4a65-8fcc-358ba1356aee",
+    "text": "Всем пока!!!\n",
+    "authorId": "b00ac8c2-60e1-4076-ae04-5a40bc0459fa",
+    "createdAt": 1724221769334
+  },
+  "bf803554-615e-43c7-a53f-6bf3a2f6d2bd": {
+    "id": "bf803554-615e-43c7-a53f-6bf3a2f6d2bd",
+    "text": "Хороший вечер\n",
+    "authorId": "b00ac8c2-60e1-4076-ae04-5a40bc0459fa",
+    "createdAt": 1724254034344
   }
 }
