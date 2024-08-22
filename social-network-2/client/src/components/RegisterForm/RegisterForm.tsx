@@ -55,7 +55,9 @@ export const RegisterForm: FC = () => {
         <span>{registerUserMutation.error.message}</span>
       )}
 
-      <Button>Зарегистрироваться</Button>
+      <Button type='submit' isLoading={registerUserMutation.isPending}>
+        Зарегистрироваться
+      </Button>
     </form>
   );
 };
