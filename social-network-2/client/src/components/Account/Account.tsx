@@ -4,6 +4,7 @@ import { queryClient } from '../../api/queryClient';
 import { Loader } from '../Loader';
 import { AuthForm } from '../AuthForm';
 import { NoteForm } from '../NoteForm';
+import { FetchNotesListView } from '../NotesListView/FetchNotesListView';
 
 export const Account = () => {
   const queryMe = useQuery(
@@ -20,6 +21,11 @@ export const Account = () => {
     case 'error':
       return <AuthForm />;
     case 'success':
-      return <NoteForm />;
+      return (
+        <>
+          <NoteForm />
+          <FetchNotesListView />
+        </>
+      );
   }
 };

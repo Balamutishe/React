@@ -3,8 +3,8 @@ import { validateResponse } from './validateResponse';
 
 const UserShema = z.object({
   id: z.string(),
-  username: z.string(),
   email: z.string(),
+  username: z.string(),
 });
 
 export type User = z.infer<typeof UserShema>;
