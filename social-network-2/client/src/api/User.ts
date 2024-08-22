@@ -44,6 +44,12 @@ export function loginUser(email: string, password: string): Promise<void> {
     .then(() => undefined);
 }
 
+export function logoutUser(): Promise<void> {
+  return fetch('/api/logout', {
+    method: 'POST',
+  }).then(() => undefined);
+}
+
 export function fetchUserMe(): Promise<User> {
   return fetch('/api/users/me')
     .then(validateResponse)
