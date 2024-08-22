@@ -14,7 +14,7 @@ export function registerUser(
   email: string,
   password: string
 ): Promise<void> {
-  return fetch('/register', {
+  return fetch('/api/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export function registerUser(
 }
 
 export function loginUser(email: string, password: string): Promise<void> {
-  return fetch('/login', {
+  return fetch('/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export function loginUser(email: string, password: string): Promise<void> {
 }
 
 export function fetchUserMe(): Promise<User> {
-  return fetch('/users/me')
+  return fetch('/api/users/me')
     .then(validateResponse)
     .then((response) => response.json())
     .then((data) => UserShema.parse(data));
