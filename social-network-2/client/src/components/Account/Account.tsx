@@ -11,6 +11,7 @@ export const Account = () => {
     {
       queryFn: () => fetchUserMe(),
       queryKey: ['users', 'me'],
+      retry: false,
     },
     queryClient
   );

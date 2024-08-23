@@ -4,9 +4,9 @@ import { useState, FormEventHandler } from 'react';
 import { FormField } from '../FormField';
 import { Button } from '../Button';
 import './NoteForm.css';
-import { Logout } from '../Logout/Logout';
 import { createNote } from '../../api/Note';
 import { queryClient } from '../../api/queryClient';
+import { LogoutButton } from '../LogoutButton';
 
 export const NoteForm = () => {
   const [title, setTitle] = useState('');
@@ -46,7 +46,7 @@ export const NoteForm = () => {
         </FormField>
         <Button>Сохранить</Button>
       </form>
-      <Logout />
+      <LogoutButton />
     </div>
   );
 };
