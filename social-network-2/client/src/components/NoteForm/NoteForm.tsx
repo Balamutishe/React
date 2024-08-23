@@ -1,33 +1,52 @@
+import { useMutation } from '@tanstack/react-query';
+import { useState, FormEventHandler } from 'react';
+
 import { FormField } from '../FormField';
 import { Button } from '../Button';
 import './NoteForm.css';
-import { useMutation } from '@tanstack/react-query';
+import { Logout } from '../Logout/Logout';
+import { createNote } from '../../api/Note';
 import { queryClient } from '../../api/queryClient';
-import { logoutUser } from '../../api/User';
 
 export const NoteForm = () => {
-  const logoutUserMutate = useMutation(
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+
+  const createNoteMutation = useMutation(
     {
-      mutationFn: () => logoutUser(),
+      mutationFn: () => createNote(title, text),
       onSuccess() {
-        queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
+        queryClient.invalidateQueries({ queryKey: ['notes'] });
       },
     },
     queryClient
   );
 
+  const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    createNoteMutation.mutate();
+  };
+
   return (
     <div>
-      <form className='note-form'>
+      <form className='note-form' onSubmit={handleFormSubmit}>
         <FormField label='Заголовок'>
-          <input type='text' />
+          <input
+            type='text'
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
         </FormField>
         <FormField label='Текст'>
-          <textarea />
+          <textarea
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+          />
         </FormField>
         <Button>Сохранить</Button>
       </form>
-      <Button onClick={() => logoutUserMutate.mutate()}>Выйти</Button>
+      <Logout />
     </div>
   );
 };
