@@ -1,59 +1,54 @@
 import { FormField } from '../FormField';
 import { Button } from '../Button';
 import './RegisterForm.css';
-import { FC, FormEventHandler, useState } from 'react';
+import { FC } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '../../api/User';
 import { queryClient } from '../../api/queryClient';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const registerUserShema = z.object({
+  username: z.string().min(5, 'имя должно быть не короче 5 символов'),
+  email: z.string().email('введите корректный E-mail'),
+  password: z.string().min(8, 'пароль должен состоять минимум из 8 символов'),
+});
+
+type RegisterUserForm = z.infer<typeof registerUserShema>;
 
 export const RegisterForm: FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterUserForm>({
+    resolver: zodResolver(registerUserShema),
+  });
 
   const registerUserMutation = useMutation(
     {
-      mutationFn: () => registerUser(username, email, password),
-      onSuccess() {
-        setUsername('');
-        setPassword('');
-        setEmail('');
-      },
+      mutationFn: registerUser,
     },
     queryClient
   );
 
-  const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-
-    registerUserMutation.mutate();
-  };
-
   return (
-    <form className='register-form' onSubmit={handleFormSubmit}>
-      <FormField label='Имя'>
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-      </FormField>
-      <FormField label='Email'>
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </FormField>
-      <FormField label='Пароль'>
-        <input
-          value={password}
-          type='password'
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </FormField>
-
-      {registerUserMutation.error && (
-        <span>{registerUserMutation.error.message}</span>
+    <form
+      className='register-form'
+      onSubmit={handleSubmit((registerUser) =>
+        registerUserMutation.mutate(registerUser)
       )}
+    >
+      <FormField label='Имя' errorMessage={errors.username?.message}>
+        <input {...register('username')} />
+      </FormField>
+      <FormField label='Email' errorMessage={errors.email?.message}>
+        <input {...register('email')} />
+      </FormField>
+      <FormField label='Пароль' errorMessage={errors.password?.message}>
+        <input {...register('password')} />
+      </FormField>
 
       <Button type='submit' isLoading={registerUserMutation.isPending}>
         Зарегистрироваться

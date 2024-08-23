@@ -9,11 +9,15 @@ const UserShema = z.object({
 
 export type User = z.infer<typeof UserShema>;
 
-export function registerUser(
-  username: string,
-  email: string,
-  password: string
-): Promise<void> {
+export function registerUser({
+  username,
+  email,
+  password,
+}: {
+  username: string;
+  email: string;
+  password: string;
+}): Promise<void> {
   return fetch('/api/register', {
     method: 'POST',
     headers: {
