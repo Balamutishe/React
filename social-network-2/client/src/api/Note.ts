@@ -29,7 +29,13 @@ export function fetchNotesList(): Promise<FetchNotesList> {
     .then((data) => FetchNoteListShema.parse(data));
 }
 
-export function createNote(title: string, text: string): Promise<void> {
+export function createNote({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}): Promise<void> {
   return fetch('/api/notes', {
     method: 'POST',
     headers: {
