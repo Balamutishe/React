@@ -1,18 +1,33 @@
 import './LoginForm.css';
 import { FormField } from '../FormField';
 import { Button } from '../Button';
-import { FormEventHandler, useState } from 'react';
+import { FC } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { loginUser } from '../../api/User';
 import { queryClient } from '../../api/queryClient';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
-export const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginUserShema = z.object({
+  email: z.string().email('введите корректный E-mail'),
+  password: z.string().min(8, 'пароль должен состоять минимум из 8 символов'),
+});
+
+type LoginUserForm = z.infer<typeof LoginUserShema>;
+
+export const LoginForm: FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginUserForm>({
+    resolver: zodResolver(LoginUserShema),
+  });
 
   const loginUserMutate = useMutation(
     {
-      mutationFn: () => loginUser(email, password),
+      mutationFn: loginUser,
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
       },
@@ -20,29 +35,17 @@ export const LoginForm = () => {
     queryClient
   );
 
-  const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-
-    loginUserMutate.mutate();
-  };
-
   return (
-    <form className='login-form' onSubmit={handleFormSubmit}>
-      <FormField label='Email'>
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
+    <form
+      className='login-form'
+      onSubmit={handleSubmit((loginUser) => loginUserMutate.mutate(loginUser))}
+    >
+      <FormField label='Email' errorMessage={errors.email?.message}>
+        <input {...register('email')} />
       </FormField>
-      <FormField label='Пароль'>
-        <input
-          type='password'
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+      <FormField label='Пароль' errorMessage={errors.password?.message}>
+        <input type='password' {...register('password')} />
       </FormField>
-
-      {loginUserMutate.error && <span>{loginUserMutate.error.message}</span>}
 
       <Button type='submit' isLoading={loginUserMutate.isPending}>
         Войти

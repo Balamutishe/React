@@ -33,7 +33,13 @@ export function registerUser({
     .then(() => undefined);
 }
 
-export function loginUser(email: string, password: string): Promise<void> {
+export function loginUser({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}): Promise<void> {
   return fetch('/api/login', {
     method: 'POST',
     headers: {

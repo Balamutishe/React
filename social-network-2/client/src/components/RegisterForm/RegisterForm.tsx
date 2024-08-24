@@ -9,13 +9,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-const registerUserShema = z.object({
+const RegisterUserShema = z.object({
   username: z.string().min(5, 'имя должно быть не короче 5 символов'),
   email: z.string().email('введите корректный E-mail'),
   password: z.string().min(8, 'пароль должен состоять минимум из 8 символов'),
 });
 
-type RegisterUserForm = z.infer<typeof registerUserShema>;
+type RegisterUserForm = z.infer<typeof RegisterUserShema>;
 
 export const RegisterForm: FC = () => {
   const {
@@ -23,7 +23,7 @@ export const RegisterForm: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterUserForm>({
-    resolver: zodResolver(registerUserShema),
+    resolver: zodResolver(RegisterUserShema),
   });
 
   const registerUserMutation = useMutation(
