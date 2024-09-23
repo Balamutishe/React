@@ -1,4 +1,3 @@
-import './App.css';
 import { BaseLayout } from './ui/BaseLayout/BaseLayout';
 
 function App() {

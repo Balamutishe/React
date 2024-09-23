@@ -1,5 +1,4 @@
 import { Logo } from '../Logo/Logo';
-import './BaseLayout.css';
 
 export const BaseLayout = () => {
   return (

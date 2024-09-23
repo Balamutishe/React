@@ -18,6 +18,46 @@
   box-sizing: border-box;
 }
 
+::-webkit-input-placeholder {
+  font-family: 'Play',
+    Inter,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+::-moz-placeholder {
+  font-family: 'Play',
+    Inter,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+:-ms-input-placeholder {
+  font-family: 'Play',
+    Inter,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+:-moz-placeholder {
+  font-family: 'Play',
+    Inter,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
 body {
   margin: 0 auto;
   min-width: 320px;
@@ -51,4 +91,33 @@ button {
   font-family: inherit;
   background-color: inherit;
   cursor: pointer;
+}
+
+.container {
+  padding: 24px 80px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+  border: #393B3C 1px;
+
+  background-color: #393B3C;
+}
+
+.input {
+  width: 86%;
+
+  border: none;
+  background-color: inherit;
+
+  font-size: 18px;
+  line-height: 24px;
+
+  color: #fff;
 }
