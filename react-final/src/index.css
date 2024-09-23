@@ -24,6 +24,9 @@ body {
   max-width: 1440px;
   height: 100vh;
 
+  background-color: #0A0B0B;
+
+  font-family: 'Play', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 24px;
 }
