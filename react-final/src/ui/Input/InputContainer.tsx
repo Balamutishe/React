@@ -7,5 +7,5 @@ interface IInputContainerProps {
 }
 
 export const InputContainer: FC<IInputContainerProps> = ({ children }) => {
-  return <div className='container-input'>{children}</div>;
+  return <div className='input-container'>{children}</div>;
 };

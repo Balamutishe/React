@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface IButtonProps {
-  title: string;
+  title: string | ReactNode;
   variant?: 'default' | 'primary' | 'menu';
   onClick?: () => void;
 }
