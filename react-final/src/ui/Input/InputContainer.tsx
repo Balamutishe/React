@@ -4,8 +4,12 @@ import './Input.css';
 
 interface IInputContainerProps {
   children: ReactNode;
+  variant: 'dark' | 'light';
 }
 
-export const InputContainer: FC<IInputContainerProps> = ({ children }) => {
-  return <div className='input-container'>{children}</div>;
+export const InputContainer: FC<IInputContainerProps> = ({
+  children,
+  variant,
+}) => {
+  return <div className={`input-container ${variant}`}>{children}</div>;
 };

@@ -1,13 +1,14 @@
 .input {
     width: 86%;
 
-    border: none;
     background-color: inherit;
 
     font-size: 18px;
     line-height: 24px;
+}
 
-    color: #fff;
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .input-container {
@@ -17,8 +18,25 @@
 
     padding: 16px 52px;
 
+    border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 8px;
-    border: #393B3C 1px;
+}
 
+.dark {
+    color: #FFFFFF;
     background-color: #393B3C;
+}
+
+.light {
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.input-container:focus,
+.input-container:hover {
+    border: 1px solid rgb(180, 169, 255);
+}
+
+.input-container--error {
+    border: 1px solid rgb(255, 117, 117);
 }
