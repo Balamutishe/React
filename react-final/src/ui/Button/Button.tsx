@@ -2,13 +2,13 @@ import { FC } from 'react';
 
 interface IButtonProps {
   title: string;
-  variant?: string;
+  variant?: 'default' | 'primary' | 'menu';
   onClick?: () => void;
 }
 
 export const Button: FC<IButtonProps> = ({ title, variant, onClick }) => {
   return (
-    <button className={variant} onClick={onClick}>
+    <button className={`button ${variant}`} onClick={onClick}>
       {title}
     </button>
   );

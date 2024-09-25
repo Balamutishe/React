@@ -1,15 +1,20 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
+
+import './Input.css';
 
 interface IInputProps {
+  type: string;
   placeholder: string;
-  icon?: ReactNode;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input: FC<IInputProps> = ({ icon, placeholder }) => {
+export const Input: FC<IInputProps> = ({ type, placeholder, onChange }) => {
   return (
-    <div className='container-input'>
-      {icon}
-      <input type='text' placeholder={placeholder} className='input' />
-    </div>
+    <input
+      type={type}
+      placeholder={placeholder}
+      onChange={onChange}
+      className='input'
+    />
   );
 };

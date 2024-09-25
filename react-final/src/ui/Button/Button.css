@@ -1,0 +1,57 @@
+.button {
+    padding: 16px 48px;
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 28px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #FFFFFF;
+}
+
+.default {
+    background-color: #393B3C;
+}
+
+.default:focus,
+.default:hover {
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.default:active {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: #747474;
+}
+
+.primary {
+    background-color: #8577E1;
+}
+
+.primary:focus,
+.primary:hover {
+    background-color: #8577E1;
+}
+
+.primary:active {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: #D6D2F1;
+}
+
+.menu {
+    padding: 8px 0;
+
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.menu:focus,
+.menu:hover {
+    border-bottom: 1.5px solid rgb(220, 93, 252);
+}
+
+.menu:active {
+    border-bottom: 1.5px solid rgb(230, 141, 252);
+}
