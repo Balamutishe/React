@@ -5,16 +5,22 @@ import './Input.css';
 interface IInputProps {
   type: string;
   placeholder: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  variant: 'dark' | 'light';
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input: FC<IInputProps> = ({ type, placeholder, onChange }) => {
+export const Input: FC<IInputProps> = ({
+  type,
+  placeholder,
+  variant,
+  onChange,
+}) => {
   return (
     <input
       type={type}
       placeholder={placeholder}
       onChange={onChange}
-      className='input'
+      className={`input ${variant}`}
     />
   );
 };

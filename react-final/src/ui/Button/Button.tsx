@@ -1,8 +1,10 @@
 import { FC, ReactNode } from 'react';
 
+import './Button.css';
+
 interface IButtonProps {
   title: string | ReactNode;
-  variant?: 'default' | 'primary' | 'menu';
+  variant: 'default' | 'primary' | 'menu' | 'svg';
   onClick?: () => void;
 }
 

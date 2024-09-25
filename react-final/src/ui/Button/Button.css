@@ -10,17 +10,26 @@
     color: #FFFFFF;
 }
 
+.svg {
+    padding: 16px 20px;
+
+    background-color: #393B3C;
+}
+
 .default {
     background-color: #393B3C;
 }
 
 .default:focus,
-.default:hover {
+.default:hover,
+.svg:focus,
+.svg:hover {
     color: #000000;
     background-color: #FFFFFF;
 }
 
-.default:active {
+.default:active,
+.svg:active {
     color: rgba(255, 255, 255, 0.5);
     background-color: #747474;
 }
@@ -41,6 +50,8 @@
 
 .menu {
     padding: 8px 0;
+
+    border-radius: 0;
 
     font-size: 24px;
     font-weight: 400;
