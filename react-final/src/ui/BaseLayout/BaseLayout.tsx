@@ -8,6 +8,7 @@ import { Preview } from '../Preview/Preview';
 import { List } from '../List/List';
 
 import './BaseLayout.css';
+import { FooterContent } from '../FooterContent/FooterContent';
 
 export const BaseLayout = () => {
   return (
@@ -42,7 +43,9 @@ export const BaseLayout = () => {
           <List variant='movie' />
         </div>
       </main>
-      <footer className='container'></footer>
+      <footer className='container footer'>
+        <FooterContent />
+      </footer>
     </>
   );
 };

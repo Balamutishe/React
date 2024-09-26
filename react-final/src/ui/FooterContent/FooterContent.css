@@ -1,0 +1,76 @@
+.footer__content {
+    display: flex;
+    justify-content: space-between;
+
+    color: #FFFFFF;
+}
+
+.company-description {
+    display: flex;
+    align-items: center;
+}
+
+.company-name {
+    display: flex;
+    align-items: center;
+
+    margin-right: 14px;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.company-copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-copyright__text {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.container-logo {
+    display: flex;
+    align-items: center;
+
+    margin-right: 14px;
+}
+
+.company-copyright__logo {
+    margin-right: 12px;
+}
+
+.socials-list {
+    display: flex;
+    align-items: center;
+}
+
+.socials-list__item {
+    display: flex;
+    align-items: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 8px 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.ok-logo {
+    padding: 8px 12px;
+}
+
+.youtube-logo {
+    padding: 8px 9px;
+}
+
+.socials-list__item:not(:last-child) {
+    margin-right: 24px;
+}
