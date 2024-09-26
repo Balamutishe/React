@@ -3,10 +3,11 @@ import { Input } from '../Input/Input';
 import { Logo } from '../Logo/Logo';
 import SearchSvg from '../../assets/input-search.svg?react';
 import CloseSvg from '../../assets/input-exit.svg?react';
-
-import './BaseLayout.css';
 import { Button } from '../Button/Button';
 import { Preview } from '../Preview/Preview';
+import { List } from '../List/List';
+
+import './BaseLayout.css';
 
 export const BaseLayout = () => {
   return (
@@ -37,7 +38,9 @@ export const BaseLayout = () => {
       </header>
       <main className='container main'>
         <div className='main__title'>Топ 10 фильмов</div>
-        <div className='main__content'></div>
+        <div className='main__content'>
+          <List variant='movie' />
+        </div>
       </main>
       <footer className='container'></footer>
     </>

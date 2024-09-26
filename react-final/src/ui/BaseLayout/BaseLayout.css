@@ -34,6 +34,8 @@
 }
 
 .header__preview {
+    max-height: 680px;
+
     padding: 106px 80px 122px 80px;
 }
 
@@ -53,7 +55,5 @@
 }
 
 .main__content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    width: 100%;
 }

@@ -1,9 +1,33 @@
 .list {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+
+    width: 100%;
 }
 
-.list>*:nth-last-child(n+6) {
+.list__item-movie {
+    width: 18%;
+    height: 336px;
+}
+
+.list__item-movie:not(:nth-child(5n)) {
+    margin-right: 32px;
+}
+
+.list__item-movie:nth-last-child(n+6) {
+    margin-bottom: 64px;
+}
+
+.list__item-genre {
+    width: 22%;
+    height: 304px;
+}
+
+.list__item-genre:not(:nth-child(4n)) {
+    margin-right: 38px;
+}
+
+.list__item-genre:nth-last-child(n+5) {
     margin-bottom: 64px;
 }
