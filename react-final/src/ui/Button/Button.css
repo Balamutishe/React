@@ -10,32 +10,24 @@
     color: #FFFFFF;
 }
 
-.svg {
-    padding: 16px 20px;
-
-    background-color: #393B3C;
-}
 
 .default {
     background-color: #393B3C;
 }
 
 .default:focus,
-.default:hover,
-.svg:focus,
-.svg:hover {
+.default:hover {
     color: #000000;
     background-color: #FFFFFF;
 }
 
-.default:active,
-.svg:active {
+.default:active {
     color: rgba(255, 255, 255, 0.5);
     background-color: #747474;
 }
 
 .primary {
-    background-color: #8577E1;
+    background-color: #6A5DC2;
 }
 
 .primary:focus,
@@ -65,4 +57,19 @@
 
 .menu:active {
     border-bottom: 1.5px solid rgb(230, 141, 252);
+}
+
+.svg {
+    padding: 16px 20px;
+
+    background-color: #393B3C;
+}
+
+.svg:focus,
+.svg:hover {
+    background-color: #8577E1;
+}
+
+.svg:active {
+    background-color: #D6D2F1;
 }
