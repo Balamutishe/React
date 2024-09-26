@@ -4,6 +4,8 @@
 
 .header {
     position: relative;
+
+    margin-bottom: 40px;
 }
 
 .header__menu {
@@ -33,4 +35,25 @@
 
 .header__preview {
     padding: 106px 80px 122px 80px;
+}
+
+.main {
+    padding: 0 80px 80px 80px;
+    margin-bottom: 40px;
+}
+
+.main__title {
+    margin-bottom: 64px;
+
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+.main__content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

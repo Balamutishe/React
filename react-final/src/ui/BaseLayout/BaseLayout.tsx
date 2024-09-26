@@ -35,7 +35,10 @@ export const BaseLayout = () => {
           <Preview />
         </div>
       </header>
-      <main className='container'></main>
+      <main className='container main'>
+        <div className='main__title'>Топ 10 фильмов</div>
+        <div className='main__content'></div>
+      </main>
       <footer className='container'></footer>
     </>
   );
