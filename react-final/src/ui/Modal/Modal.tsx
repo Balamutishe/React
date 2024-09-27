@@ -3,6 +3,8 @@ import { FC, ReactNode } from 'react';
 import Logo from '../../assets/header-logo.svg?react';
 import CloseSvg from '../../assets/close.svg?react';
 
+import './Modal.css';
+
 interface IModalProps {
   variant: 'auth' | 'register' | 'success';
   title?: string;
@@ -14,11 +16,11 @@ export const Modal: FC<IModalProps> = ({ variant, title, children }) => {
     <div className='overlay'>
       <div className='modal'>
         <button className='button-modal-close'>
-          <CloseSvg width={24} height={24} />
+          <CloseSvg width={22} height={22} />
         </button>
         <div className='modal__content'>
           <div className='modal__header'>
-            <Logo className='modal__logo' />
+            <Logo width={180} height={24} className='modal__logo' />
             {variant === 'register' ? (
               <h2 className='modal__title'>{title}</h2>
             ) : null}
