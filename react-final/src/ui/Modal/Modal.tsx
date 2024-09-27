@@ -7,11 +7,10 @@ import './Modal.css';
 
 interface IModalProps {
   variant: 'auth' | 'register' | 'success';
-  title?: string;
   children?: ReactNode;
 }
 
-export const Modal: FC<IModalProps> = ({ variant, title, children }) => {
+export const Modal: FC<IModalProps> = ({ variant, children }) => {
   return (
     <div className='overlay'>
       <div className='modal'>
@@ -20,10 +19,7 @@ export const Modal: FC<IModalProps> = ({ variant, title, children }) => {
         </button>
         <div className='modal__content'>
           <div className='modal__header'>
-            <Logo width={180} height={24} className='modal__logo' />
-            {variant === 'register' ? (
-              <h2 className='modal__title'>{title}</h2>
-            ) : null}
+            <Logo width={180} height={24} />
           </div>
           <div className='modal__main'>{children}</div>
           <div className='modal__footer'>

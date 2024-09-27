@@ -6,9 +6,9 @@ import CloseSvg from '../../assets/input-exit.svg?react';
 import { Button } from '../Button/Button';
 import { Preview } from '../Preview/Preview';
 import { List } from '../List/List';
+import { FooterContent } from '../FooterContent/FooterContent';
 
 import './BaseLayout.css';
-import { FooterContent } from '../FooterContent/FooterContent';
 
 export const BaseLayout = () => {
   return (

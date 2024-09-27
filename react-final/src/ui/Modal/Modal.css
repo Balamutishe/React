@@ -54,25 +54,12 @@
 
 .modal__header {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     width: 100%;
 
-    margin-bottom: 24px;
-}
-
-.modal__logo {
     margin-bottom: 40px;
-}
-
-.modal__title {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 32px;
-
-    color: #000000;
 }
 
 .modal__main {
