@@ -28,7 +28,7 @@ export const Modal: FC<IModalProps> = ({ variant, children }) => {
                 variant === 'success' ? 'hidden' : 'modal__footer-button'
               }
             >
-              {variant === 'register' ? 'Регистрация' : 'У меня есть пароль'}
+              {variant === 'register' ? 'У меня есть пароль' : 'Регистрация'}
             </button>
           </div>
         </div>

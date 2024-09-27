@@ -4,11 +4,8 @@
     background-color: inherit;
 
     font-size: 18px;
+    font-weight: 700;
     line-height: 24px;
-}
-
-.input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
 }
 
 .input-container {
@@ -18,20 +15,28 @@
 
     width: 100%;
 
-    padding: 12px 22px;
+    padding: 12px 26px;
 
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 8px;
 }
 
 .dark {
-    color: #FFFFFF;
+    color: rgba(255, 255, 255, 0.5);
     background-color: #393B3C;
 }
 
+.input.dark::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .light {
-    color: #000000;
+    color: rgba(0, 0, 0, 0.7);
     background-color: #FFFFFF;
+}
+
+.input.light::placeholder {
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .input-container:focus,
