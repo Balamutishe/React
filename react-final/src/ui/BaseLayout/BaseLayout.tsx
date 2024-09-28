@@ -6,15 +6,15 @@ import { Logo } from '../Logo/Logo';
 import SearchSvg from '../../assets/input-search.svg?react';
 import CloseSvg from '../../assets/input-exit.svg?react';
 import { Button } from '../Button/Button';
-import { Preview } from '../Preview/Preview';
-import { List } from '../List/List';
+import { FetchTopListFilms } from '../List/FetchListTopFilms';
 import { FooterContent } from '../FooterContent/FooterContent';
 import { Modal } from '../Modal/Modal';
 
 import './BaseLayout.css';
+import { FetchRandomFilm } from '../Preview/FetchRandomFilm';
 
 export const BaseLayout = () => {
-  const [visible, setVisibility] = useState(true);
+  const [visible, setVisibility] = useState(false);
 
   const handleClick = () => {
     setVisibility(!visible);
@@ -43,13 +43,13 @@ export const BaseLayout = () => {
           </div>
         </div>
         <div className='header__preview'>
-          <Preview />
+          <FetchRandomFilm />
         </div>
       </header>
       <main className='container main'>
         <div className='main__title'>Топ 10 фильмов</div>
         <div className='main__content'>
-          <List variant='movie' />
+          <FetchTopListFilms />
         </div>
       </main>
       <footer className='container footer'>

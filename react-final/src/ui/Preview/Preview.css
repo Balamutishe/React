@@ -44,6 +44,10 @@
     background-color: #308E21;
 }
 
+.preview__genre:not(:last-child) {
+    margin-right: 10px;
+}
+
 .preview__title {
     color: rgba(255, 255, 255);
 

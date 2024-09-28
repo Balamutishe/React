@@ -12,7 +12,7 @@
 }
 
 .list__item-movie:not(:nth-child(5n)) {
-    margin-right: 32px;
+    margin-right: 29px;
 }
 
 .list__item-movie:nth-last-child(n+6) {

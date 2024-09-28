@@ -34,7 +34,7 @@
 }
 
 .header__preview {
-    max-height: 680px;
+    min-height: 680px;
 
     padding: 106px 80px 122px 80px;
 }

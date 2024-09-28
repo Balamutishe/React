@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import FilmPreview from '../../assets/filmPrewiev.jpg';
 
 import './Card.css';
 
@@ -15,8 +14,8 @@ export const Card: FC<ICardProps> = ({ variant, title, image, raiting }) => {
     case 'movie':
       return (
         <div className={`card card-${variant}`}>
-          <img src={FilmPreview} alt='' className={`card__image-${variant}`} />
-          <div className='card__raiting'>{raiting} 1</div>
+          <img src={image} alt='' className={`card__image-${variant}`} />
+          <div className='card__raiting'>{raiting}</div>
         </div>
       );
     case 'genre':

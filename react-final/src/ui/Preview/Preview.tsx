@@ -1,12 +1,18 @@
+import { FC } from 'react';
+
 import StarRaiting from '../../assets/star-raiting.svg?react';
 import LikeSvg from '../../assets/like-logo.svg?react';
 import SyncSvg from '../../assets/update-logo.svg?react';
-import PreviewImg from '../../assets/header-prewiev.jpg';
 import { Button } from '../Button/Button';
+import { TMovie } from '../../api/Movie';
 
 import './Preview.css';
 
-export const Preview = () => {
+interface IPreviewProps {
+  data: TMovie;
+}
+
+export const Preview: FC<IPreviewProps> = ({ data }) => {
   return (
     <div className='preview'>
       <div className='preview__content-left'>
@@ -14,18 +20,18 @@ export const Preview = () => {
           <div className='preview__about'>
             <div className='preview__about_raiting'>
               <StarRaiting />
-              7.5
+              {data.tmdbRating}
             </div>
-            <div>1979</div>
-            <div>детектив</div>
-            <div>1 ч 7 мин</div>
+            <div>{data.relaseYear}</div>
+            <div>
+              {data.genres.map((genre) => (
+                <span className='preview__genre'>{genre}</span>
+              ))}
+            </div>
+            <div>{data.runtime} мин</div>
           </div>
-          <h2 className='preview__title'>
-            Шерлок Холмс и доктор Ватсон: Знакомство
-          </h2>
-          <p className='preview__text'>
-            Увлекательные приключения самого известного сыщика всех времен
-          </p>
+          <h2 className='preview__title'>{data.title}</h2>
+          <p className='preview__text'>{data.plot}</p>
         </div>
         <div className='preview__buttons'>
           <Button title='Трейлер' variant='primary' />
@@ -35,7 +41,7 @@ export const Preview = () => {
         </div>
       </div>
       <div className='preview__image'>
-        <img src={PreviewImg} alt='#' />
+        <img src={data.posterUrl} alt='#' />
       </div>
     </div>
   );
