@@ -10,7 +10,7 @@ import PasswordLogo from '../../assets/password.svg?react';
 import './Form.css';
 
 interface IFormProps {
-  variant: 'register' | 'auth' | 'success';
+  variant: 'register' | 'login' | 'success';
   title?: string;
 }
 
@@ -18,32 +18,48 @@ export const Form: FC<IFormProps> = ({ variant, title }) => {
   return (
     <form className='form'>
       {title && <h2 className='form__title'>{title}</h2>}
-      <div className='form__inputs'>
-        <InputContainer variant='light'>
-          <MailLogo />
-          <Input type='email' placeholder='Электронная почта' variant='light' />
-        </InputContainer>
-        <InputContainer variant='light'>
-          <UserLogo />
-          <Input type='text' placeholder='Имя' variant='light' />
-        </InputContainer>
-        <InputContainer variant='light'>
-          <UserLogo />
-          <Input type='text' placeholder='Фамилия' variant='light' />
-        </InputContainer>
-        <InputContainer variant='light'>
-          <PasswordLogo />
-          <Input type='password' placeholder='Пароль' variant='light' />
-        </InputContainer>
-        <InputContainer variant='light'>
-          <PasswordLogo />
-          <Input
-            type='password'
-            placeholder='Подтвердите пароль'
-            variant='light'
-          />
-        </InputContainer>
-      </div>
+      {variant !== 'success' ? (
+        <div className='form__inputs'>
+          <InputContainer variant='light'>
+            <MailLogo />
+            <Input
+              type='email'
+              placeholder='Электронная почта'
+              variant='light'
+            />
+          </InputContainer>
+          {variant === 'register' && (
+            <InputContainer variant='light'>
+              <UserLogo />
+              <Input type='text' placeholder='Имя' variant='light' />
+            </InputContainer>
+          )}
+          {variant === 'register' && (
+            <InputContainer variant='light'>
+              <UserLogo />
+              <Input type='text' placeholder='Фамилия' variant='light' />
+            </InputContainer>
+          )}
+          <InputContainer variant='light'>
+            <PasswordLogo />
+            <Input type='password' placeholder='Пароль' variant='light' />
+          </InputContainer>
+          {variant === 'register' && (
+            <InputContainer variant='light'>
+              <PasswordLogo />
+              <Input
+                type='password'
+                placeholder='Подтвердите пароль'
+                variant='light'
+              />
+            </InputContainer>
+          )}
+        </div>
+      ) : (
+        <p className='form__text'>
+          Используйте вашу электронную почту для входа
+        </p>
+      )}
 
       <Button
         title={variant === 'register' ? 'Создать аккаунт' : 'Войти'}

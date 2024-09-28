@@ -8,7 +8,6 @@ import { Preview } from '../Preview/Preview';
 import { List } from '../List/List';
 import { FooterContent } from '../FooterContent/FooterContent';
 import { Modal } from '../Modal/Modal';
-import { Form } from '../Form/Form';
 
 import './BaseLayout.css';
 
@@ -48,9 +47,7 @@ export const BaseLayout = () => {
       <footer className='container footer'>
         <FooterContent />
       </footer>
-      <Modal variant='register'>
-        <Form variant='register' title='Регистрация' />
-      </Modal>
+      <Modal />
     </>
   );
 };

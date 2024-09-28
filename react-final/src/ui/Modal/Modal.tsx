@@ -1,16 +1,14 @@
-import { FC, ReactNode } from 'react';
+import { useState } from 'react';
 
+import { Form } from '../Form/Form';
 import Logo from '../../assets/header-logo.svg?react';
 import CloseSvg from '../../assets/close.svg?react';
 
 import './Modal.css';
 
-interface IModalProps {
-  variant: 'auth' | 'register' | 'success';
-  children?: ReactNode;
-}
+export const Modal = () => {
+  const [authState, setAuthState] = useState('register');
 
-export const Modal: FC<IModalProps> = ({ variant, children }) => {
   return (
     <div className='overlay'>
       <div className='modal'>
@@ -21,15 +19,28 @@ export const Modal: FC<IModalProps> = ({ variant, children }) => {
           <div className='modal__header'>
             <Logo width={180} height={24} />
           </div>
-          <div className='modal__main'>{children}</div>
+          <div className='modal__main'>
+            <Form
+              title={authState === 'register' ? 'Регистрация' : ''}
+              variant={authState === 'register' ? 'register' : 'login'}
+            />
+          </div>
           <div className='modal__footer'>
-            <button
-              className={
-                variant === 'success' ? 'hidden' : 'modal__footer-button'
-              }
-            >
-              {variant === 'register' ? 'У меня есть пароль' : 'Регистрация'}
-            </button>
+            {authState === 'register' ? (
+              <button
+                className='modal__footer-button'
+                onClick={() => setAuthState('login')}
+              >
+                Регистрация
+              </button>
+            ) : (
+              <button
+                className='modal__footer-button'
+                onClick={() => setAuthState('register')}
+              >
+                У меня есть пароль
+              </button>
+            )}
           </div>
         </div>
       </div>
