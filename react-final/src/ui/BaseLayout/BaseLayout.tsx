@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { InputContainer } from '../Input/InputContainer';
 import { Input } from '../Input/Input';
 import { Logo } from '../Logo/Logo';
@@ -12,6 +14,12 @@ import { Modal } from '../Modal/Modal';
 import './BaseLayout.css';
 
 export const BaseLayout = () => {
+  const [visible, setVisibility] = useState(true);
+
+  const handleClick = () => {
+    setVisibility(!visible);
+  };
+
   return (
     <>
       <header className='container header'>
@@ -31,7 +39,7 @@ export const BaseLayout = () => {
             </span>
           </div>
           <div>
-            <Button title='Войти' variant='menu' />
+            <Button title='Войти' variant='menu' onClick={handleClick} />
           </div>
         </div>
         <div className='header__preview'>
@@ -47,7 +55,7 @@ export const BaseLayout = () => {
       <footer className='container footer'>
         <FooterContent />
       </footer>
-      <Modal />
+      <Modal visible={visible} handleClick={handleClick} />
     </>
   );
 };

@@ -11,13 +11,12 @@ import './Form.css';
 
 interface IFormProps {
   variant: 'register' | 'login' | 'success';
-  title?: string;
 }
 
-export const Form: FC<IFormProps> = ({ variant, title }) => {
+export const Form: FC<IFormProps> = ({ variant }) => {
   return (
     <form className='form'>
-      {title && <h2 className='form__title'>{title}</h2>}
+      {variant === 'register' && <h2 className='form__title'>Регистрация</h2>}
       {variant !== 'success' ? (
         <div className='form__inputs'>
           <InputContainer variant='light'>
