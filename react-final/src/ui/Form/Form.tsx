@@ -1,8 +1,12 @@
-import { FC, useState } from 'react';
+import { FC, useState, FormEventHandler } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { InputContainer } from '../Input/InputContainer';
+import { registerUser } from '../../api/User';
+import { loginUser } from '../../api/User';
+import { queryClient } from '../../api/queryClient';
 import MailLogo from '../../assets/mail.svg?react';
 import UserLogo from '../../assets/userdata.svg?react';
 import PasswordLogo from '../../assets/password.svg?react';
@@ -20,8 +24,36 @@ export const Form: FC<IFormProps> = ({ variant }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const registerMutation = useMutation(
+    {
+      mutationFn: () => registerUser(email, password, name, surname),
+    },
+    queryClient
+  );
+
+  const userLoginMutation = useMutation(
+    {
+      mutationFn: () => loginUser(email, password),
+      onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
+      },
+    },
+    queryClient
+  );
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    switch (variant) {
+      case 'register':
+        return registerMutation.mutate();
+      case 'login':
+        return userLoginMutation.mutate();
+    }
+  };
+
   return (
-    <form className='form'>
+    <form className='form' onSubmit={handleSubmit}>
       {variant === 'register' && <h2 className='form__title'>Регистрация</h2>}
       {variant !== 'success' ? (
         <div className='form__inputs'>

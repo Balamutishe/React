@@ -33,14 +33,14 @@ export const Modal: FC<IModalProps> = ({ visible, handleClick }) => {
                 className='modal__footer-button'
                 onClick={() => setAuthState('login')}
               >
-                Регистрация
+                У меня есть пароль
               </button>
             ) : (
               <button
                 className='modal__footer-button'
                 onClick={() => setAuthState('register')}
               >
-                У меня есть пароль
+                Регистрация
               </button>
             )}
           </div>

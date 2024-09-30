@@ -1,6 +1,9 @@
 import { FC } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '../Button/Button';
+import { logoutUser } from '../../api/User';
+import { queryClient } from '../../api/queryClient';
 
 import './Account.css';
 import { User } from '../../api/User';
@@ -10,6 +13,16 @@ interface IAccountSettingsProps {
 }
 
 export const AccountSettings: FC<IAccountSettingsProps> = ({ user }) => {
+  const logoutUserMutate = useMutation(
+    {
+      mutationFn: () => logoutUser(),
+      onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
+      },
+    },
+    queryClient
+  );
+
   return (
     <div className='account__settings'>
       <div className='account__userdata'>
@@ -32,7 +45,11 @@ export const AccountSettings: FC<IAccountSettingsProps> = ({ user }) => {
         </div>
       </div>
 
-      <Button title='Выйти из аккаунта' variant='primary' />
+      <Button
+        title='Выйти из аккаунта'
+        variant='primary'
+        onClick={() => logoutUserMutate.mutate()}
+      />
     </div>
   );
 };
