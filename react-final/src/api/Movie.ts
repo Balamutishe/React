@@ -67,3 +67,12 @@ export function fetchListTopFilms(): Promise<TMovieList> {
     .then((response) => response.json());
   // .then((data) => MovieListShema.parse(data));
 }
+
+export function fetchListFavoritesFilms() {
+  return fetch(`${URL}/favorites`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then(validateResponse)
+    .then((response) => response.json());
+}

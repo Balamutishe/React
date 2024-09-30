@@ -1,0 +1,19 @@
+.account {
+    width: 50%;
+
+    padding: 64px 80px;
+}
+
+.account__title {
+    margin-bottom: 64px;
+
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+}
+
+.account__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

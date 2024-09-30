@@ -6,13 +6,13 @@ import SyncSvg from '../../assets/update-logo.svg?react';
 import { Button } from '../Button/Button';
 import { TMovie } from '../../api/Movie';
 
-import './Preview.css';
+import './PreviewFilm.css';
 
 interface IPreviewProps {
   data: TMovie;
 }
 
-export const Preview: FC<IPreviewProps> = ({ data }) => {
+export const PreviewFilm: FC<IPreviewProps> = ({ data }) => {
   return (
     <div className='preview'>
       <div className='preview__content-left'>

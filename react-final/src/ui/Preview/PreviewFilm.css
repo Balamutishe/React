@@ -1,5 +1,10 @@
-.prewiev {
+.preview {
     display: flex;
+    align-items: center;
+
+    height: 680px;
+
+    padding: 0 80px 0 80px;
 }
 
 .preview__content-left {
@@ -69,7 +74,7 @@
     top: 0;
     right: 0;
 
-    width: 65%;
+    width: 40%;
     height: 100%;
 
     z-index: -1;

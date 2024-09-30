@@ -1,3 +1,13 @@
+.list__title {
+    margin-bottom: 64px;
+
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
 .list {
     display: flex;
     justify-content: flex-start;

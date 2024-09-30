@@ -7,21 +7,25 @@ import { TMovieList } from '../../api/Movie';
 interface IListProps {
   variant: 'movie' | 'genre';
   list: TMovieList;
+  title?: string;
 }
 
-export const List: FC<IListProps> = ({ variant, list }) => {
+export const List: FC<IListProps> = ({ variant, list, title }) => {
   return (
-    <ul className='list'>
-      {list.map((item) => (
-        <li className={`list__item-${variant}`}>
-          <Card
-            variant={variant}
-            title={item.title}
-            image={item.posterUrl}
-            raiting={item.tmdbRating}
-          />
-        </li>
-      ))}
-    </ul>
+    <div className='list-container'>
+      {title && <h2 className='list__title'>{title}</h2>}
+      <ul className='list'>
+        {list.map((item) => (
+          <li className={`list__item-${variant}`}>
+            <Card
+              variant={variant}
+              title={item.title}
+              image={item.posterUrl}
+              raiting={item.tmdbRating}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchRandomFilm } from '../../api/Movie';
 import { queryClient } from '../../api/queryClient';
-import { Preview } from './Preview';
+import { PreviewFilm } from './PreviewFilm';
 
 export const FetchRandomFilm = () => {
   const randomListQuery = useQuery(
@@ -23,6 +23,6 @@ export const FetchRandomFilm = () => {
         </div>
       );
     case 'success':
-      return <Preview data={randomListQuery.data} />;
+      return <PreviewFilm data={randomListQuery.data} />;
   }
 };

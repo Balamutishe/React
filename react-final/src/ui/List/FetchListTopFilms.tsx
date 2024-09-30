@@ -23,6 +23,12 @@ export const FetchTopListFilms = () => {
         </div>
       );
     case 'success':
-      return <List variant='movie' list={TopListFilmsQuerry.data} />;
+      return (
+        <List
+          variant='movie'
+          list={TopListFilmsQuerry.data}
+          title='Топ 10 фильмов'
+        />
+      );
   }
 };
