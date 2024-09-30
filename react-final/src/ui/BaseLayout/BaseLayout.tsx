@@ -12,12 +12,18 @@ import { fetchUser } from '../../api/User';
 
 import './BaseLayout.css';
 import { Account } from '../Account/Account';
+import { AccountSettings } from '../Account/AccountSettings';
 
 export const BaseLayout = () => {
   const [visible, setVisibility] = useState(false);
+  const [accountContent, setAccountContent] = useState(false);
 
   const handleSetVisibility = () => {
     setVisibility(!visible);
+  };
+
+  const handleSetAccountContent = () => {
+    setAccountContent(!accountContent);
   };
 
   const queryUser = useQuery(
@@ -54,11 +60,15 @@ export const BaseLayout = () => {
           <header className='container header'>
             <Menu onClick={handleSetVisibility} />
             <div className='header__preview'>
-              <Account />
+              <Account onClick={handleSetAccountContent} />
             </div>
           </header>
           <main className='container main'>
-            <FetchFavoritesListFilms />
+            {accountContent ? (
+              <FetchFavoritesListFilms />
+            ) : (
+              <AccountSettings user={queryUser.data} />
+            )}
           </main>
           <footer className='container footer'>
             <FooterContent />
