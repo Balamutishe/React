@@ -14,6 +14,7 @@ import './BaseLayout.css';
 import { FetchRandomFilm } from '../Preview/FetchRandomFilm';
 
 export const BaseLayout = () => {
+  const [searchValue, setSearchValue] = useState('');
   const [visible, setVisibility] = useState(false);
 
   const handleClick = () => {
@@ -33,7 +34,13 @@ export const BaseLayout = () => {
             <span className='header__search'>
               <InputContainer variant='dark'>
                 <SearchSvg />
-                <Input type='text' placeholder='Поиск' variant='dark' />
+                <Input
+                  value={searchValue}
+                  type='text'
+                  placeholder='Поиск'
+                  variant='dark'
+                  onChange={(event) => setSearchValue(event.target.value)}
+                />
                 <CloseSvg />
               </InputContainer>
             </span>
