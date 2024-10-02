@@ -45,7 +45,15 @@ export function fetchFilm(id: number): Promise<TMovie> {
   })
     .then(validateResponse)
     .then((response) => response.json());
-  // .then((data) => MovieShema.parse(data));
+}
+
+export function fetchListFilms(): Promise<TMovieList> {
+  return fetch(`${URL}/movie`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then(validateResponse)
+    .then((response) => response.json());
 }
 
 export function fetchRandomFilm(): Promise<TMovie> {
@@ -55,7 +63,6 @@ export function fetchRandomFilm(): Promise<TMovie> {
   })
     .then(validateResponse)
     .then((response) => response.json());
-  // .then((data) => MovieShema.parse(data));
 }
 
 export function fetchListTopFilms(): Promise<TMovieList> {
@@ -65,7 +72,6 @@ export function fetchListTopFilms(): Promise<TMovieList> {
   })
     .then(validateResponse)
     .then((response) => response.json());
-  // .then((data) => MovieListShema.parse(data));
 }
 
 export function fetchListFavoritesFilms() {

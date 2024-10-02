@@ -58,6 +58,11 @@
     sans-serif;
 }
 
+#root {
+  position: relative;
+  height: 100%;
+}
+
 body {
   margin: 0 auto;
   min-width: 320px;

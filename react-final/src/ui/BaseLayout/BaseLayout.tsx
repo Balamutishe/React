@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { FetchFavoritesListFilms } from '../List/FetchFavoritesFilms';
 import { FetchTopListFilms } from '../List/FetchListTopFilms';
 import { FetchRandomFilm } from '../Preview/FetchRandomFilm';
 import { FooterContent } from '../FooterContent/FooterContent';
@@ -12,18 +11,12 @@ import { fetchUser } from '../../api/User';
 
 import './BaseLayout.css';
 import { Account } from '../Account/Account';
-import { AccountSettings } from '../Account/AccountSettings';
 
 export const BaseLayout = () => {
   const [visible, setVisibility] = useState(false);
-  const [accountContent, setAccountContent] = useState(false);
 
   const handleSetVisibility = () => {
     setVisibility(!visible);
-  };
-
-  const handleSetAccountContent = () => {
-    setAccountContent(!accountContent);
   };
 
   const queryUser = useQuery(
@@ -39,41 +32,36 @@ export const BaseLayout = () => {
     case 'error':
       return (
         <>
-          <header className='container header'>
+          <Modal visible={visible} handleClick={handleSetVisibility} />
+
+          <header className='header'>
             <Menu onClick={handleSetVisibility} />
             <div className='header__preview'>
               <FetchRandomFilm />
             </div>
           </header>
-          <main className='container main'>
+          <main className='main'>
             <FetchTopListFilms />
           </main>
-          <footer className='container footer'>
+          <footer className='footer'>
             <FooterContent />
           </footer>
-          <Modal visible={visible} handleClick={handleSetVisibility} />
         </>
       );
     case 'success':
       return (
         <>
-          <header className='container header'>
+          <Modal visible={visible} handleClick={handleSetVisibility} />
+
+          <header className='header'>
             <Menu onClick={handleSetVisibility} />
-            <div className='header__preview'>
-              <Account onClick={handleSetAccountContent} />
-            </div>
           </header>
-          <main className='container main'>
-            {accountContent ? (
-              <FetchFavoritesListFilms />
-            ) : (
-              <AccountSettings user={queryUser.data} />
-            )}
+          <main className='main'>
+            <Account user={queryUser.data} />
           </main>
-          <footer className='container footer'>
+          <footer className='footer'>
             <FooterContent />
           </footer>
-          <Modal visible={visible} handleClick={handleSetVisibility} />
         </>
       );
   }

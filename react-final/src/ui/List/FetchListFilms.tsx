@@ -1,23 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchListFavoritesFilms } from '../../api/Movie';
+import { fetchListFilms } from '../../api/Movie';
 import { queryClient } from '../../api/queryClient';
 import { List } from './List';
 
-export const FetchFavoritesListFilms = () => {
-  const favoritesListFilmsQuerry = useQuery(
+export const FetchListFilms = () => {
+  const queryListFilms = useQuery(
     {
-      queryFn: () => fetchListFavoritesFilms(),
-      queryKey: ['favoritesFilms'],
+      queryKey: ['list-films'],
+      queryFn: () => fetchListFilms(),
     },
     queryClient
   );
 
-  switch (favoritesListFilmsQuerry.status) {
+  switch (queryListFilms.status) {
     case 'error':
       return (
         <div>
           <span>Произошла ошибка :(</span>
-          <button onClick={() => favoritesListFilmsQuerry.refetch()}>
+          <button onClick={() => queryListFilms.refetch()}>
             Повторить запрос
           </button>
         </div>
@@ -25,12 +25,12 @@ export const FetchFavoritesListFilms = () => {
     case 'success':
       return (
         <>
-          {favoritesListFilmsQuerry.data.length !== 0 ? (
-            <List variant='movie' list={favoritesListFilmsQuerry.data} />
+          {queryListFilms.data.length !== 0 ? (
+            <List variant='movie' list={queryListFilms.data} />
           ) : (
             <List
               variant='movie'
-              list={favoritesListFilmsQuerry.data}
+              list={queryListFilms.data}
               title='Список пуст'
             />
           )}
