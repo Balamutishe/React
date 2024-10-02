@@ -4,7 +4,7 @@ import { queryClient } from '../../api/queryClient';
 import { PreviewFilm } from './PreviewFilm';
 
 export const FetchRandomFilm = () => {
-  const randomListQuery = useQuery(
+  const queryRandomList = useQuery(
     {
       queryKey: ['randomFilm'],
       queryFn: () => fetchRandomFilm(),
@@ -12,17 +12,22 @@ export const FetchRandomFilm = () => {
     queryClient
   );
 
-  switch (randomListQuery.status) {
+  switch (queryRandomList.status) {
     case 'error':
       return (
         <div>
           <span>Произошла ошибка :(</span>
-          <button onClick={() => randomListQuery.refetch()}>
+          <button onClick={() => queryRandomList.refetch()}>
             Повторить запрос
           </button>
         </div>
       );
     case 'success':
-      return <PreviewFilm data={randomListQuery.data} />;
+      return (
+        <PreviewFilm
+          data={queryRandomList.data}
+          refetch={queryRandomList.refetch}
+        />
+      );
   }
 };

@@ -61,12 +61,6 @@ export function loginUser(email: string, password: string): Promise<void> {
     .then(() => undefined);
 }
 
-// export const logoutResultShema = z.object({
-//   result: z.string(),
-// });
-
-// export type logoutResult = z.infer<typeof logoutResultShema>;
-
 export function logoutUser(): Promise<void> {
   return fetch(`${URL}/auth/logout`, {
     method: 'GET',
