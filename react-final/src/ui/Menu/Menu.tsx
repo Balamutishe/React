@@ -1,4 +1,5 @@
 import { useState, FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import { InputContainer } from '../Input/InputContainer';
 import { Input } from '../Input/Input';
@@ -22,8 +23,12 @@ export const Menu: FC<IMenuProps> = ({ onClick }) => {
         <Logo />
       </div>
       <div className='header__menu_navigation'>
-        <Button title='Главная' variant='menu' />
-        <Button title='Жанры' variant='menu' />
+        <Link to={'/'}>
+          <Button title='Главная' variant='menu' />
+        </Link>
+        <Link to={'/genres'}>
+          <Button title='Жанры' variant='menu' />
+        </Link>
         <span className='header__menu_search'>
           <InputContainer variant='dark'>
             <SearchSvg />
