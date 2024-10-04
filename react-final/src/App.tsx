@@ -11,6 +11,7 @@ import { queryClient } from './api/queryClient';
 import { fetchUser } from './api/User';
 
 import './style.css';
+import { FilmPage } from './pages/FilmPage/FilmPage';
 
 function App() {
   const [visible, setVisibility] = useState(false);
@@ -51,6 +52,7 @@ function App() {
                 )
               }
             />
+            <Route path='/movie/:movieId' element={<FilmPage />} />
           </Routes>
         </main>
         <footer className='footer'>

@@ -27,6 +27,7 @@ export const FetchRandomFilm = () => {
         <PreviewFilm
           data={queryRandomList.data}
           refetch={queryRandomList.refetch}
+          variant='random'
         />
       );
   }

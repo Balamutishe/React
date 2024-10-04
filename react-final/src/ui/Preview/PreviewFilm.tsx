@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { QueryObserverResult, useMutation } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 import StarRaiting from '../../assets/star-raiting.svg?react';
 import LikeSvg from '../../assets/like-logo.svg?react';
@@ -9,14 +10,14 @@ import { appendFavoritesFilm, TMovie } from '../../api/Movie';
 import { queryClient } from '../../api/queryClient';
 
 import './PreviewFilm.css';
-import { QueryObserverResult } from '@tanstack/react-query';
 
 interface IPreviewProps {
   data: TMovie;
   refetch: () => Promise<QueryObserverResult<TMovie, Error>>;
+  variant?: 'random' | 'main';
 }
 
-export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch }) => {
+export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
   const mutateFavoritesFilms = useMutation(
     {
       mutationFn: () => appendFavoritesFilm(data.id),
@@ -48,13 +49,24 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch }) => {
         </div>
         <div className='preview__buttons'>
           <Button title='Трейлер' variant='primary' />
-          <Button title='О фильме' variant='default' />
+          {variant === 'random' && (
+            <Link to={`/movie/${data.id}`}>
+              <Button title='О фильме' variant='default' />
+            </Link>
+          )}
+
           <Button
             title={<LikeSvg width={20} height={18.5} />}
             variant='svg'
             onClick={() => mutateFavoritesFilms.mutate()}
           />
-          <Button title={<SyncSvg />} variant='svg' onClick={() => refetch()} />
+          {variant === 'random' && (
+            <Button
+              title={<SyncSvg />}
+              variant='svg'
+              onClick={() => refetch()}
+            />
+          )}
         </div>
       </div>
       <div className='preview__image'>
