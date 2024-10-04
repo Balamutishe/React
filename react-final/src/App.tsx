@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { FooterContent } from './ui/FooterContent/FooterContent';
 import { Modal } from './ui/Modal/Modal';
 import { Menu } from './ui/Menu/Menu';
+import { AccountPage } from './pages/AccountPage/AccountPage';
+import { MainPage } from './pages/MainPage/MainPage';
 import { queryClient } from './api/queryClient';
 import { fetchUser } from './api/User';
-import { MainPage } from './pages/MainPage/MainPage';
 
 import './style.css';
 
@@ -33,11 +34,23 @@ function App() {
         <Modal visible={visible} handleClick={handleSetVisibility} />
 
         <header className='header'>
-          <Menu onClick={handleSetVisibility} />
+          <Menu
+            onClick={handleSetVisibility}
+            userName={queryUser.data?.name}
+            authStatus={queryUser.status}
+          />
         </header>
         <main className='main'>
           <Routes>
             <Route path='/' element={<MainPage />} />
+            <Route
+              path='/account'
+              element={
+                queryUser.status === 'success' && (
+                  <AccountPage user={queryUser.data} />
+                )
+              }
+            />
           </Routes>
         </main>
         <footer className='footer'>

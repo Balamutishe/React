@@ -11,10 +11,12 @@ import { Button } from '../Button/Button';
 import './Menu.css';
 
 interface IMenuProps {
+  authStatus: 'pending' | 'success' | 'error';
+  userName: string | undefined;
   onClick: () => void;
 }
 
-export const Menu: FC<IMenuProps> = ({ onClick }) => {
+export const Menu: FC<IMenuProps> = ({ onClick, authStatus, userName }) => {
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -44,7 +46,16 @@ export const Menu: FC<IMenuProps> = ({ onClick }) => {
         </span>
       </div>
       <div>
-        <Button title='Войти' variant='menu' onClick={onClick} />
+        {authStatus === 'error' ? (
+          <Button title='Войти' variant='menu' onClick={onClick} />
+        ) : (
+          <Link to={'/account'}>
+            <Button
+              title={userName ? userName : 'Имя пользователя не найдено'}
+              variant='menu'
+            />
+          </Link>
+        )}
       </div>
     </div>
   );

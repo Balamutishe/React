@@ -16,7 +16,7 @@ export const List: FC<IListProps> = ({ variant, list, title }) => {
       {title && <h2 className='list__title'>{title}</h2>}
       <ul className='list'>
         {list.map((item) => (
-          <li className={`list__item-${variant}`}>
+          <li className={`list__item-${variant}`} key={item.id}>
             <Card
               variant={variant}
               title={item.title}

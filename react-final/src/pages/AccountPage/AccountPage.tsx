@@ -1,22 +1,23 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import { Button } from '../Button/Button';
+import { Button } from '../../ui/Button/Button';
+import { FetchFavoritesListFilms } from '../../ui/List/FetchFavoritesFilms';
 import { logoutUser } from '../../api/User';
 import { queryClient } from '../../api/queryClient';
 import { User } from '../../api/User';
-import { FetchFavoritesListFilms } from '../List/FetchFavoritesFilms';
 import MailSvg from '../../assets/mail.svg?react';
 import LikeSvg from '../../assets/like-logo.svg?react';
 import UserSvg from '../../assets/userdata.svg?react';
 
-import './Account.css';
+import './AccountPage.css';
 
-interface IAccountProps {
+interface IAccountPageProps {
   user: User;
 }
 
-export const Account: FC<IAccountProps> = ({ user }) => {
+export const AccountPage: FC<IAccountPageProps> = ({ user }) => {
   const [accountContent, setAccountContent] = useState(true);
 
   const logoutUserMutate = useMutation(
@@ -51,7 +52,7 @@ export const Account: FC<IAccountProps> = ({ user }) => {
         </div>
       </div>
       <div className='account__content'>
-        {accountContent ? (
+        {accountContent && user ? (
           <div className='settings'>
             <div className='userdata'>
               <div className='userdata__logo'>
@@ -75,12 +76,13 @@ export const Account: FC<IAccountProps> = ({ user }) => {
                 <span className='userdata__text'>{user.email}</span>
               </div>
             </div>
-
-            <Button
-              title='Выйти из аккаунта'
-              variant='primary'
-              onClick={() => logoutUserMutate.mutate()}
-            />
+            <Link to={'/'}>
+              <Button
+                title='Выйти из аккаунта'
+                variant='primary'
+                onClick={() => logoutUserMutate.mutate()}
+              />
+            </Link>
           </div>
         ) : (
           <FetchFavoritesListFilms />

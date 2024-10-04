@@ -35,8 +35,10 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch }) => {
             </div>
             <div>{data.relaseYear}</div>
             <div>
-              {data.genres.map((genre) => (
-                <span className='preview__genre'>{genre}</span>
+              {data.genres.map((genre, index) => (
+                <span className='preview__genre' key={index}>
+                  {genre}
+                </span>
               ))}
             </div>
             <div>{data.runtime} мин</div>
