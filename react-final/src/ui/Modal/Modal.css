@@ -72,24 +72,6 @@
     margin-bottom: 40px;
 }
 
-.modal__main {
-    margin-bottom: 24px;
-}
-
-.modal__footer {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-}
-
-.modal__footer-button {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
-
-    color: #000000;
-}
-
 .hidden {
     display: none;
 }

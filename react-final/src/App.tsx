@@ -32,7 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <Modal visible={visible} handleClick={handleSetVisibility} />
+        <Modal visible={visible} handleSetVisibility={handleSetVisibility} />
 
         <header className='header'>
           <Menu
