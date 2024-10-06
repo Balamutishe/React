@@ -9,16 +9,13 @@ import { AccountPage } from './pages/AccountPage/AccountPage';
 import { MainPage } from './pages/MainPage/MainPage';
 import { queryClient } from './api/queryClient';
 import { fetchUser } from './api/User';
+import { authStatusContext } from './contexts/authStatusContext';
+import { FilmPage } from './pages/FilmPage/FilmPage';
 
 import './style.css';
-import { FilmPage } from './pages/FilmPage/FilmPage';
 
 function App() {
   const [visible, setVisibility] = useState(false);
-
-  const handleSetVisibility = () => {
-    setVisibility(!visible);
-  };
 
   const queryUser = useQuery(
     {
@@ -29,37 +26,43 @@ function App() {
     queryClient
   );
 
-  return (
-    <BrowserRouter>
-      <>
-        <Modal visible={visible} handleSetVisibility={handleSetVisibility} />
+  const handleSetVisibility = () => {
+    setVisibility(!visible);
+  };
 
-        <header className='header'>
-          <Menu
-            onClick={handleSetVisibility}
-            userName={queryUser.data?.name}
-            authStatus={queryUser.status}
-          />
-        </header>
-        <main className='main'>
-          <Routes>
-            <Route path='/' element={<MainPage />} />
-            <Route
-              path='/account'
-              element={
-                queryUser.status === 'success' && (
-                  <AccountPage user={queryUser.data} />
-                )
-              }
+  return (
+    <authStatusContext.Provider value={{ status: queryUser.status }}>
+      <BrowserRouter>
+        <>
+          <Modal visible={visible} handleSetVisibility={handleSetVisibility} />
+
+          <header className='header'>
+            <Menu
+              onClick={handleSetVisibility}
+              userName={queryUser.data?.name}
+              authStatus={queryUser.status}
             />
-            <Route path='/movie/:movieId' element={<FilmPage />} />
-          </Routes>
-        </main>
-        <footer className='footer'>
-          <FooterContent />
-        </footer>
-      </>
-    </BrowserRouter>
+          </header>
+          <main className='main'>
+            <Routes>
+              <Route path='/' element={<MainPage />} />
+              <Route
+                path='/account'
+                element={
+                  queryUser.status === 'success' && (
+                    <AccountPage user={queryUser.data} />
+                  )
+                }
+              />
+              <Route path='/movie/:movieId' element={<FilmPage />} />
+            </Routes>
+          </main>
+          <footer className='footer'>
+            <FooterContent />
+          </footer>
+        </>
+      </BrowserRouter>
+    </authStatusContext.Provider>
   );
 }
 

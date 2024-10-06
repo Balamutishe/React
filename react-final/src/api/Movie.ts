@@ -83,7 +83,7 @@ export function fetchListFavoritesFilms() {
     .then((response) => response.json());
 }
 
-export function appendFavoritesFilm(id: number): Promise<void> {
+export function appendFavoritesFilm(id: string): Promise<void> {
   return fetch(`${URL}/favorites`, {
     method: 'POST',
     credentials: 'include',

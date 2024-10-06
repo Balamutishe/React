@@ -18,7 +18,7 @@ interface IFormProps {
 }
 
 export const Form: FC<IFormProps> = ({ handleSetVisibility }) => {
-  const [authState, setAuthState] = useState('success');
+  const [authState, setAuthState] = useState('register');
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');

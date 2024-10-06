@@ -12,8 +12,6 @@ interface IModalProps {
 }
 
 export const Modal: FC<IModalProps> = ({ visible, handleSetVisibility }) => {
-  // const [authState, setAuthState] = useState('register');
-
   return (
     <div className={visible ? 'overlay visible' : 'overlay invisible'}>
       <div className='modal'>
