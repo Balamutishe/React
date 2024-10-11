@@ -74,6 +74,15 @@ export function fetchListTopFilms(): Promise<TMovieList> {
     .then((response) => response.json());
 }
 
+export function fetchFilmsGenres(): Promise<string[]> {
+  return fetch(`${URL}/movie/genres`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then(validateResponse)
+    .then((response) => response.json());
+}
+
 export function fetchListFavoritesFilms() {
   return fetch(`${URL}/favorites`, {
     method: 'GET',

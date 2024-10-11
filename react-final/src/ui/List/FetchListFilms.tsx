@@ -26,13 +26,9 @@ export const FetchListFilms = () => {
       return (
         <>
           {queryListFilms.data.length !== 0 ? (
-            <List variant='movie' list={queryListFilms.data} />
+            <List moviesList={queryListFilms.data} />
           ) : (
-            <List
-              variant='movie'
-              list={queryListFilms.data}
-              title='Список пуст'
-            />
+            <List moviesList={queryListFilms.data} title='Список пуст' />
           )}
         </>
       );

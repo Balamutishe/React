@@ -13,6 +13,7 @@ import { authStatusContext } from './contexts/authStatusContext';
 import { FilmPage } from './pages/FilmPage/FilmPage';
 
 import './style.css';
+import { FilmGenresPage } from './pages/FilmGenresPage/FilmGenresPage';
 
 function App() {
   const [visible, setVisibility] = useState(false);
@@ -55,6 +56,7 @@ function App() {
                 }
               />
               <Route path='/movie/:movieId' element={<FilmPage />} />
+              <Route path='/genres' element={<FilmGenresPage />} />
             </Routes>
           </main>
           <footer className='footer'>

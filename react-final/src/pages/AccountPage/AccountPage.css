@@ -1,9 +1,13 @@
 .account {
-    width: 50%;
+    width: 100%;
 
     padding: 64px 80px;
 
     color: #FFFFFF;
+}
+
+.account__header {
+    width: 50%;
 }
 
 .account__title {
@@ -29,6 +33,10 @@
 
 .account__button>svg {
     margin-right: 10px;
+}
+
+.account__content .list-container {
+    padding: 0;
 }
 
 .settings {

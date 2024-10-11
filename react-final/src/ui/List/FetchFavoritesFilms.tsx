@@ -26,11 +26,10 @@ export const FetchFavoritesListFilms = () => {
       return (
         <>
           {favoritesListFilmsQuerry.data.length !== 0 ? (
-            <List variant='movie' list={favoritesListFilmsQuerry.data} />
+            <List moviesList={favoritesListFilmsQuerry.data} />
           ) : (
             <List
-              variant='movie'
-              list={favoritesListFilmsQuerry.data}
+              moviesList={favoritesListFilmsQuerry.data}
               title='Список пуст'
             />
           )}

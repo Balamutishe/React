@@ -1,33 +1,41 @@
 import { FC } from 'react';
 
 import './Card.css';
+import { TMovie } from '../../api/Movie';
 
 interface ICardProps {
   variant: 'movie' | 'genre';
-  image?: string;
-  title?: string;
-  raiting?: number;
+  movie?: TMovie;
+  genre?: string;
 }
 
-export const Card: FC<ICardProps> = ({ variant, title, image, raiting }) => {
+export const Card: FC<ICardProps> = ({ variant, movie, genre }) => {
   switch (variant) {
     case 'movie':
       return (
-        <div className={`card card-${variant}`}>
-          <img src={image} alt='' className={`card__image-${variant}`} />
-          <div className='card__raiting'>{raiting}</div>
-        </div>
+        movie && (
+          <div className={`card card-${variant}`}>
+            <img
+              src={movie.posterUrl}
+              alt=''
+              className={`card__image-${variant}`}
+            />
+            <div className='card__raiting'>{movie.tmdbRating}</div>
+          </div>
+        )
       );
     case 'genre':
       return (
-        <div className={`card card-${variant}`}>
-          <div className='image-container'>
-            <img src={image} alt='' className={`card__image-${variant}`} />
+        genre && (
+          <div className={`card card-${variant}`}>
+            <div className='image-container'>
+              <img src='#' alt='' className={`card__image-${variant}`} />
+            </div>
+            <div className='title-container'>
+              <h3 className='card__title'>{genre}</h3>
+            </div>
           </div>
-          <div className='title-container'>
-            <h3 className='card__title'>{title}</h3>
-          </div>
-        </div>
+        )
       );
   }
 };

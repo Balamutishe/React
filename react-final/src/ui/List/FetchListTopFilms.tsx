@@ -24,11 +24,7 @@ export const FetchTopListFilms = () => {
       );
     case 'success':
       return (
-        <List
-          variant='movie'
-          list={TopListFilmsQuerry.data}
-          title='Топ 10 фильмов'
-        />
+        <List moviesList={TopListFilmsQuerry.data} title='Топ 10 фильмов' />
       );
   }
 };
