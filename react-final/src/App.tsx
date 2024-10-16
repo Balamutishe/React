@@ -32,17 +32,20 @@ function App() {
   };
 
   return (
-    <authStatusContext.Provider value={{ status: queryUser.status }}>
+    <authStatusContext.Provider
+      value={{
+        status: queryUser.status,
+        userName: queryUser.data
+          ? queryUser.data.name
+          : 'Имя пользователя не найдено',
+      }}
+    >
       <BrowserRouter>
         <>
           <Modal visible={visible} handleSetVisibility={handleSetVisibility} />
 
           <header className='header'>
-            <Menu
-              onClick={handleSetVisibility}
-              userName={queryUser.data?.name}
-              authStatus={queryUser.status}
-            />
+            <Menu handleSetVisibility={handleSetVisibility} />
           </header>
           <main className='main'>
             <Routes>

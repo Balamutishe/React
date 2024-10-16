@@ -7,6 +7,7 @@
 
     backdrop-filter: blur(20px);
     background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }
 
 .header__menu_navigation {
@@ -17,8 +18,38 @@
 }
 
 .header__menu_search {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
 
     width: 65%;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+
+    display: none;
+
+    width: 100%;
+
+    border-radius: 8px;
+
+    padding: 12px 26px;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+
+    color: rgba(255, 255, 255, 0.5);
+    background-color: #393B3C;
+}
+
+.dropdown--visible {
+    display: block;
+}
+
+.dropdown__list li {
+    margin-bottom: 5px;
 }
