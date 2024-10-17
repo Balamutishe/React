@@ -1,0 +1,111 @@
+.dropdown {
+    position: absolute;
+    top: 145%;
+
+    width: 100%;
+
+
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    padding: 8px;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+
+    background-color: #393B3C;
+
+    z-index: 1;
+}
+
+.dropdown_visible {
+    display: block;
+}
+
+.dropdown_invisible {
+    display: none;
+}
+
+.dropdown__list {
+    max-height: 474px;
+    overflow-y: auto;
+}
+
+.dropdown__list-item {
+    height: 94px;
+
+    padding: 20px 8px;
+}
+
+.dropdown__link {
+    height: 100%;
+
+}
+
+.movie-search {
+    display: flex;
+
+    height: 100%;
+}
+
+.movie-search__content_left {
+    width: 8%;
+    height: 100%;
+
+    margin-right: 16px;
+}
+
+.movie-search__content_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 80%;
+}
+
+.movie-search__about {
+    display: flex;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.movie-search__about>* {
+    display: flex;
+    align-items: center;
+}
+
+.movie-search__about>*:not(:last-child) {
+    margin-right: 12px;
+}
+
+.movie-search__raiting {
+    padding: 2px 12px;
+
+    border-radius: 16px;
+
+    font-weight: 700;
+
+    color: rgba(255, 255, 255);
+    background-color: #308E21;
+}
+
+.star_raiting_img {
+    margin-right: 2px;
+}
+
+.movie-search__genre:not(:last-child) {
+    margin-right: 12px;
+}
+
+.movie-search__title {
+    color: #FFFFFF;
+
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+}

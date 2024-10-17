@@ -58,9 +58,17 @@
     sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 #root {
   position: relative;
   height: 100%;
+}
+
+html {
+  box-sizing: inherit;
 }
 
 body {
@@ -123,9 +131,17 @@ ul {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 
 .header {
+  position: relative;
+
   margin-bottom: 60px;
+
+  z-index: 2;
 }
 
 .main {

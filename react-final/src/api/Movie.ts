@@ -24,7 +24,7 @@ const MovieShema = z.object({
   awardsSummary: z.string(),
   runtime: z.number(),
   trailerUrl: z.string(),
-  relaseYear: z.number(),
+  releaseYear: z.number(),
   countriesOfOrigin: z.array(z.string()),
   originalTitle: z.string(),
   searchL: z.string(),

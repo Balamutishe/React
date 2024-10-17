@@ -4,15 +4,14 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { InputContainer } from '../Input/InputContainer';
 import { Input } from '../Input/Input';
 import { Logo } from '../Logo/Logo';
-import SearchSvg from '../../assets/input-search.svg?react';
-import CloseSvg from '../../assets/input-exit.svg?react';
 import { Button } from '../Button/Button';
 import { authStatusContext } from '../../contexts/authStatusContext';
+import { DropdownList } from '../DropdownList/DropdownList';
+
+import SearchSvg from '../../assets/input-search.svg?react';
+import CloseSvg from '../../assets/input-exit.svg?react';
 
 import './Menu.css';
-import { useQuery } from '@tanstack/react-query';
-import { fetchListFilms } from '../../api/Movie';
-import { queryClient } from '../../api/queryClient';
 
 interface IMenuProps {
   handleSetVisibility: () => void;
@@ -29,21 +28,6 @@ export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
   };
 
   const searchMovie = searchParam.get('movieTitle') || '';
-
-  const queryMoviesList = useQuery(
-    {
-      queryKey: ['movies', 'list'],
-      queryFn: () => fetchListFilms(),
-    },
-    queryClient
-  );
-
-  const filteredMovieList = queryMoviesList.data
-    ? queryMoviesList.data.filter(({ title }) => {
-        if (searchMovie !== '')
-          return title.toLowerCase().includes(searchMovie.toLowerCase());
-      })
-    : [];
 
   return (
     <div className='header__menu'>
@@ -69,23 +53,7 @@ export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
             />
             <CloseSvg />
           </InputContainer>
-          <div
-            className={
-              filteredMovieList.length === 0 && searchMovie === ''
-                ? 'dropdown'
-                : 'dropdown dropdown--visible'
-            }
-          >
-            <ul className='dropdown__list'>
-              {filteredMovieList.length !== 0
-                ? filteredMovieList.map((movie) => (
-                    <li>
-                      <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
-                    </li>
-                  ))
-                : 'Фильм не найден'}
-            </ul>
-          </div>
+          <DropdownList searchData={searchMovie} />
         </span>
       </div>
       <div>
