@@ -11,9 +11,10 @@ import { queryClient } from './api/queryClient';
 import { fetchUser } from './api/User';
 import { authStatusContext } from './contexts/authStatusContext';
 import { FilmPage } from './pages/FilmPage/FilmPage';
+import { GenresPage } from './pages/GenresPage/GenresPage';
 
 import './style.css';
-import { FilmGenresPage } from './pages/FilmGenresPage/FilmGenresPage';
+import { ListFilmsGenrePage } from './pages/ListFilmsGenrePage/ListFilmsGenrePage';
 
 function App() {
   const [visible, setVisibility] = useState(false);
@@ -59,7 +60,8 @@ function App() {
                 }
               />
               <Route path='/movie/:movieId' element={<FilmPage />} />
-              <Route path='/genres' element={<FilmGenresPage />} />
+              <Route path='/genres' element={<GenresPage />} />
+              <Route path='/movie' element={<ListFilmsGenrePage />} />
             </Routes>
           </main>
           <footer className='footer'>

@@ -1,4 +1,5 @@
 import { FC, ChangeEvent, useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { InputContainer } from '../Input/InputContainer';
@@ -7,6 +8,8 @@ import { Logo } from '../Logo/Logo';
 import { Button } from '../Button/Button';
 import { authStatusContext } from '../../contexts/authStatusContext';
 import { DropdownList } from '../DropdownList/DropdownList';
+import { queryClient } from '../../api/queryClient';
+import { fetchListFilms } from '../../api/Movie';
 
 import SearchSvg from '../../assets/input-search.svg?react';
 import CloseSvg from '../../assets/input-exit.svg?react';
@@ -21,13 +24,25 @@ export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
   const { status, userName } = useContext(authStatusContext);
   const [searchParam, setSearchParam] = useSearchParams();
 
+  const queryListFilms = useQuery(
+    {
+      queryKey: ['movie', 'title'],
+      queryFn: () => fetchListFilms(`${searchParam}`),
+    },
+    queryClient
+  );
+
   const handleSearchParam = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchParam({
-      movieTitle: event.target.value,
+      title: event.target.value,
     });
+
+    queryListFilms.refetch();
   };
 
-  const searchMovie = searchParam.get('movieTitle') || '';
+  const searchParamMovie = searchParam.get('title') || '';
+
+  const filteredList = queryListFilms.data ? queryListFilms.data : [];
 
   return (
     <div className='header__menu'>
@@ -45,7 +60,7 @@ export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
           <InputContainer variant='dark'>
             <SearchSvg />
             <Input
-              value={searchMovie}
+              value={searchParamMovie}
               type='text'
               placeholder='Поиск'
               variant='dark'
@@ -53,7 +68,10 @@ export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
             />
             <CloseSvg />
           </InputContainer>
-          <DropdownList searchData={searchMovie} />
+          <DropdownList
+            filteredList={filteredList}
+            searchParamMovie={searchParamMovie}
+          />
         </span>
       </div>
       <div>

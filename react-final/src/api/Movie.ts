@@ -47,8 +47,8 @@ export function fetchFilm(id: number): Promise<TMovie> {
     .then((response) => response.json());
 }
 
-export function fetchListFilms(): Promise<TMovieList> {
-  return fetch(`${URL}/movie`, {
+export function fetchListFilms(searchParam: string): Promise<TMovieList> {
+  return fetch(`${URL}/movie?${searchParam}`, {
     method: 'GET',
     credentials: 'include',
   })

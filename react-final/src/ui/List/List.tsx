@@ -28,7 +28,7 @@ export const List: FC<IListProps> = ({ moviesList, genresList, title }) => {
         {genresList &&
           genresList.map((genre) => (
             <li className='list__item-genre' key={crypto.randomUUID()}>
-              <Link to={`/movie/${genre}`}>
+              <Link to={`/movie?genre=${genre}`}>
                 <Card variant='genre' genre={genre} />
               </Link>
             </li>

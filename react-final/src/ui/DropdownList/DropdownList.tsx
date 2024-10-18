@@ -1,45 +1,31 @@
-import { FC } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-
-import { queryClient } from '../../api/queryClient';
-import { fetchListFilms } from '../../api/Movie';
+import { FC } from 'react';
 
 import StarRaiting from '../../assets/star-raiting.svg?react';
 
 import './DropdownList.css';
+import { TMovieList } from '../../api/Movie';
 
 interface IDropdownList {
-  searchData: string;
+  filteredList: TMovieList;
+  searchParamMovie: string;
 }
 
-export const DropdownList: FC<IDropdownList> = ({ searchData }) => {
-  const queryMoviesList = useQuery(
-    {
-      queryKey: ['movies', 'list'],
-      queryFn: () => fetchListFilms(),
-    },
-    queryClient
-  );
-
-  const filteredMovieList = queryMoviesList.data
-    ? queryMoviesList.data.filter(({ title }) => {
-        if (searchData !== '')
-          return title.toLowerCase().includes(searchData.toLowerCase());
-      })
-    : [];
-
+export const DropdownList: FC<IDropdownList> = ({
+  filteredList,
+  searchParamMovie,
+}) => {
   return (
     <div
       className={
-        filteredMovieList.length === 0 && searchData === ''
+        searchParamMovie === ''
           ? 'dropdown dropdown_invisible'
           : 'dropdown dropdown_visible'
       }
     >
       <ul className='dropdown__list'>
-        {filteredMovieList.length !== 0
-          ? filteredMovieList.map((movie) => (
+        {filteredList.length !== 0
+          ? filteredList.map((movie) => (
               <li key={movie.id} className='dropdown__list-item'>
                 <Link to={`/movie/${movie.id}`} className='dropdown__link'>
                   <div className='movie-search'>

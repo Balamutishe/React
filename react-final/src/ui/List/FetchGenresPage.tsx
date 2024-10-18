@@ -4,7 +4,7 @@ import { queryClient } from '../../api/queryClient';
 import { fetchFilmsGenres } from '../../api/Movie';
 import { List } from './List';
 
-export const FetchFilmGenresPage = () => {
+export const FetchGenresPage = () => {
   const queryFilmGenres = useQuery(
     {
       queryKey: ['film', 'genres'],
@@ -24,6 +24,6 @@ export const FetchFilmGenresPage = () => {
         </div>
       );
     case 'success':
-      return <List genresList={queryFilmGenres.data} />;
+      return <List genresList={queryFilmGenres.data} title='Жанры фильмов' />;
   }
 };
