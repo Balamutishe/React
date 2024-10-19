@@ -2,13 +2,13 @@ import { FC, useContext } from 'react';
 import { QueryObserverResult, useMutation } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
-import StarRaiting from '../../assets/star-raiting.svg?react';
 import LikeSvg from '../../assets/like-logo.svg?react';
 import SyncSvg from '../../assets/update-logo.svg?react';
 import { Button } from '../Button/Button';
 import { appendFavoritesFilm, TMovie } from '../../api/Movie';
 import { queryClient } from '../../api/queryClient';
 import { authStatusContext } from '../../contexts/authStatusContext';
+import { FilmRaiting } from '../FilmRaiting/FilmRaiting';
 
 import './PreviewFilm.css';
 
@@ -33,10 +33,7 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
       <div className='preview__content-left'>
         <div className='preview__description'>
           <div className='preview__about'>
-            <div className='preview__about_raiting'>
-              <StarRaiting />
-              {data.tmdbRating}
-            </div>
+            <FilmRaiting raiting={data.tmdbRating} />
             <div>{data.releaseYear}</div>
             <div>
               {data.genres.map((genre, index) => (

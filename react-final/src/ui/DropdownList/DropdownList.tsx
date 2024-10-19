@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 
-import StarRaiting from '../../assets/star-raiting.svg?react';
+import { TMovieList } from '../../api/Movie';
+import { FilmRaiting } from '../FilmRaiting/FilmRaiting';
 
 import './DropdownList.css';
-import { TMovieList } from '../../api/Movie';
 
 interface IDropdownList {
   filteredList: TMovieList;
@@ -34,14 +34,9 @@ export const DropdownList: FC<IDropdownList> = ({
                     </div>
                     <div className='movie-search__content_right'>
                       <div className='movie-search__about'>
-                        <span className='movie-search__raiting'>
-                          <StarRaiting
-                            width={14}
-                            height={14}
-                            className='star_raiting_img'
-                          />
-                          {movie.tmdbRating.toFixed(1)}
-                        </span>
+                        <FilmRaiting
+                          raiting={Number(movie.tmdbRating.toFixed(1))}
+                        />
                         <span className='movie-search__relase-year'>
                           {movie.releaseYear}
                         </span>

@@ -11,6 +11,11 @@
 }
 
 .preview__content-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
     width: 50%;
     height: 100%;
 }
@@ -78,8 +83,8 @@
     top: -160px;
     right: 0;
 
-    width: 40%;
-    height: 120%;
+    width: 59%;
+    height: 124%;
 
     z-index: -1;
 
