@@ -6,6 +6,7 @@ import { PreviewFilm } from '../../ui/Preview/PreviewFilm';
 import { queryClient } from '../../api/queryClient';
 
 import './FilmPage.css';
+import { useEffect } from 'react';
 
 export const FilmPage = () => {
   const { movieId } = useParams();
@@ -16,6 +17,10 @@ export const FilmPage = () => {
     },
     queryClient
   );
+
+  useEffect(() => {
+    queryFilm.refetch();
+  }, [queryFilm]);
 
   switch (queryFilm.status) {
     case 'error':
