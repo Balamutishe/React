@@ -33,7 +33,7 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
       <div className='preview__content-left'>
         <div className='preview__description'>
           <div className='preview__about'>
-            <FilmRaiting raiting={data.tmdbRating} />
+            <FilmRaiting raiting={Number(data.tmdbRating.toFixed(1))} />
             <div>{data.releaseYear}</div>
             <div>
               {data.genres.map((genre, index) => (

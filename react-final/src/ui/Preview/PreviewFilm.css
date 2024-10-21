@@ -6,7 +6,6 @@
 
     height: 680px;
 
-    margin-bottom: 40px;
     padding: 0 80px 0 80px;
 }
 
@@ -71,6 +70,11 @@
 }
 
 .preview__text {
+    display: -webkit-box;
+    line-clamp: initial;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     color: rgba(255, 255, 255, 0.7);
 }
 
