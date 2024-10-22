@@ -1,11 +1,17 @@
 import { createContext } from 'react';
+import { User } from '../api/User';
 
 type TAuthStatusContextParams = {
   status: string;
-  userName: string;
+  user: User | undefined;
 };
 
 export const authStatusContext = createContext<TAuthStatusContextParams>({
   status: '',
-  userName: '',
+  user: {
+    name: '',
+    surname: '',
+    email: '',
+    favorites: [],
+  },
 });

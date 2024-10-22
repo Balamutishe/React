@@ -20,7 +20,7 @@ export const Card: FC<ICardProps> = ({ variant, movie, genre }) => {
               alt=''
               className={`card__image-${variant}`}
             />
-            <div className='card__raiting'>{movie.tmdbRating}</div>
+            <div className='card__raiting'>{movie.tmdbRating.toFixed(1)}</div>
           </div>
         )
       );

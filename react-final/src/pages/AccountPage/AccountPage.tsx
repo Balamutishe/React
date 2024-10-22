@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
@@ -6,18 +6,15 @@ import { Button } from '../../ui/Button/Button';
 import { FetchFavoritesListFilms } from '../../ui/List/FetchFavoritesFilms';
 import { logoutUser } from '../../api/User';
 import { queryClient } from '../../api/queryClient';
-import { User } from '../../api/User';
 import MailSvg from '../../assets/mail.svg?react';
 import LikeSvg from '../../assets/like-logo.svg?react';
 import UserSvg from '../../assets/userdata.svg?react';
 
 import './AccountPage.css';
+import { authStatusContext } from '../../contexts/authStatusContext';
 
-interface IAccountPageProps {
-  user: User;
-}
-
-export const AccountPage: FC<IAccountPageProps> = ({ user }) => {
+export const AccountPage = () => {
+  const { user } = useContext(authStatusContext);
   const [accountContent, setAccountContent] = useState(false);
 
   const logoutUserMutate = useMutation(

@@ -36,9 +36,7 @@ function App() {
     <authStatusContext.Provider
       value={{
         status: queryUser.status,
-        userName: queryUser.data
-          ? queryUser.data.name
-          : 'Имя пользователя не найдено',
+        user: queryUser.data,
       }}
     >
       <BrowserRouter>
@@ -53,11 +51,7 @@ function App() {
               <Route path='/' element={<MainPage />} />
               <Route
                 path='/account'
-                element={
-                  queryUser.status === 'success' && (
-                    <AccountPage user={queryUser.data} />
-                  )
-                }
+                element={queryUser.status === 'success' && <AccountPage />}
               />
               <Route path='/movie/:movieId' element={<FilmPage />} />
               <Route path='/genres' element={<GenresPage />} />

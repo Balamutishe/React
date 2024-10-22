@@ -21,7 +21,7 @@ interface IMenuProps {
 }
 
 export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
-  const { status, userName } = useContext(authStatusContext);
+  const { status, user } = useContext(authStatusContext);
   const [searchParam, setSearchParam] = useSearchParams();
 
   const queryListFilms = useQuery(
@@ -79,7 +79,7 @@ export const Menu: FC<IMenuProps> = ({ handleSetVisibility }) => {
           <Button title='Войти' variant='menu' onClick={handleSetVisibility} />
         ) : (
           <Link to={'/account'}>
-            <Button title={userName} variant='menu' />
+            <Button title={user?.name} variant='menu' />
           </Link>
         )}
       </div>

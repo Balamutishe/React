@@ -106,3 +106,12 @@ export function appendFavoritesFilm(id: string): Promise<void> {
     .then(validateResponse)
     .then(() => undefined);
 }
+
+export function deleteFavoritesFilm(id: string): Promise<void> {
+  return fetch(`${URL}/favorites/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
