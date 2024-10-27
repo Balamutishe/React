@@ -7,7 +7,7 @@ const MovieShema = z.object({
   keywords: z.array(z.string()),
   backdropUrl: z.string(),
   production: z.string(),
-  trailerYoutubeId: z.string(),
+  trailerYouTubeId: z.string(),
   language: z.string(),
   tmdbRating: z.number(),
   title: z.string(),

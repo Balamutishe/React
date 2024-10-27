@@ -14,7 +14,7 @@ interface IModalProps {
 export const Modal: FC<IModalProps> = ({ visible, handleSetVisibility }) => {
   return (
     <div className={visible ? 'overlay visible' : 'overlay invisible'}>
-      <div className='modal'>
+      <div className='modal modal_form'>
         <button className='button-modal-close' onClick={handleSetVisibility}>
           <CloseSvg width={22} height={22} />
         </button>

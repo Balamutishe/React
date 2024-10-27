@@ -32,8 +32,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
+.modal_form {
     width: 564px;
+}
+
+.modal_trailer {
+    width: 1104px;
+    height: 540px;
+}
+
+.trailer-container {
+    width: 85%;
+    height: 100%;
+
+    background-color: #000000;
 }
 
 .button-modal-close {
