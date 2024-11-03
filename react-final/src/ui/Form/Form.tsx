@@ -1,4 +1,4 @@
-import { FC, useState, FormEventHandler } from 'react';
+import { useState, FormEventHandler } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '../Button/Button';
@@ -13,11 +13,7 @@ import PasswordLogo from '../../assets/password.svg?react';
 
 import './Form.css';
 
-interface IFormProps {
-  handleSetVisibility: () => void;
-}
-
-export const Form: FC<IFormProps> = ({ handleSetVisibility }) => {
+export const Form = () => {
   const [authState, setAuthState] = useState('register');
 
   const [email, setEmail] = useState('');
@@ -40,7 +36,6 @@ export const Form: FC<IFormProps> = ({ handleSetVisibility }) => {
     {
       mutationFn: () => loginUser(email, password),
       onSuccess() {
-        handleSetVisibility();
         queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
       },
     },
@@ -62,95 +57,95 @@ export const Form: FC<IFormProps> = ({ handleSetVisibility }) => {
 
   return (
     <>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         {authState === 'register' && (
-          <h2 className='form__title'>Регистрация</h2>
+          <h2 className="form__title">Регистрация</h2>
         )}
         {authState === 'success' && (
-          <h2 className='form__title'>Регистрация завершена</h2>
+          <h2 className="form__title">Регистрация завершена</h2>
         )}
         {authState !== 'success' ? (
-          <div className='form__inputs'>
-            <InputContainer variant='light'>
+          <div className="form__inputs">
+            <InputContainer variant="light">
               <MailLogo />
               <Input
                 value={email}
-                type='email'
-                placeholder='Электронная почта'
-                variant='light'
+                type="email"
+                placeholder="Электронная почта"
+                variant="light"
                 onChange={(event) => setEmail(event.target.value)}
               />
             </InputContainer>
             {authState === 'register' && (
-              <InputContainer variant='light'>
+              <InputContainer variant="light">
                 <UserLogo />
                 <Input
                   value={name}
-                  type='text'
-                  placeholder='Имя'
-                  variant='light'
+                  type="text"
+                  placeholder="Имя"
+                  variant="light"
                   onChange={(event) => setName(event.target.value)}
                 />
               </InputContainer>
             )}
             {authState === 'register' && (
-              <InputContainer variant='light'>
+              <InputContainer variant="light">
                 <UserLogo />
                 <Input
                   value={surname}
-                  type='text'
-                  placeholder='Фамилия'
-                  variant='light'
+                  type="text"
+                  placeholder="Фамилия"
+                  variant="light"
                   onChange={(event) => setSurname(event.target.value)}
                 />
               </InputContainer>
             )}
-            <InputContainer variant='light'>
+            <InputContainer variant="light">
               <PasswordLogo />
               <Input
                 value={password}
-                type='password'
-                placeholder='Пароль'
-                variant='light'
+                type="password"
+                placeholder="Пароль"
+                variant="light"
                 onChange={(event) => setPassword(event.target.value)}
               />
             </InputContainer>
             {authState === 'register' && (
-              <InputContainer variant='light'>
+              <InputContainer variant="light">
                 <PasswordLogo />
                 <Input
                   value={confirmPassword}
-                  type='password'
-                  placeholder='Подтвердите пароль'
-                  variant='light'
+                  type="password"
+                  placeholder="Подтвердите пароль"
+                  variant="light"
                   onChange={(event) => setConfirmPassword(event.target.value)}
                 />
               </InputContainer>
             )}
           </div>
         ) : (
-          <p className='form__text'>
+          <p className="form__text">
             Используйте вашу электронную почту для входа
           </p>
         )}
 
         <Button
           title={authState === 'register' ? 'Создать аккаунт' : 'Войти'}
-          variant='primary'
+          variant="primary"
         />
       </form>
       {authState !== 'success' && (
-        <div className='form-variant-switch'>
+        <div className="form-variant-switch">
           {authState === 'register' ? (
             <button
-              className='form-variant-switch__button'
+              className="form-variant-switch__button"
               onClick={() => setAuthState('login')}
             >
               У меня есть пароль
             </button>
           ) : (
             <button
-              className='form-variant-switch__button'
+              className="form-variant-switch__button"
               onClick={() => setAuthState('register')}
             >
               Регистрация
