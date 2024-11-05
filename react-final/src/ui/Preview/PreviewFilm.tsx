@@ -1,5 +1,5 @@
-import { FC, useContext, useState } from 'react';
-import { QueryObserverResult, useMutation } from '@tanstack/react-query';
+import { FC, useContext, useEffect, useState } from 'react';
+import { QueryObserverResult } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
 import LikeSvg from '../../assets/like-logo.svg?react';
@@ -12,9 +12,10 @@ import {
   deleteFavoritesFilm,
   TMovie,
 } from '../../api/Movie';
-import { queryClient } from '../../api/queryClient';
 import { authStatusContext } from '../../contexts/authStatusContext';
 import { FilmRaiting } from '../FilmRaiting/FilmRaiting';
+import { useQueryUser } from '../../hooks/useQueryUser';
+import { useMutationFavoritesFilms } from '../../hooks/useMutationFavoritesFilms';
 
 import './PreviewFilm.css';
 
@@ -25,40 +26,33 @@ interface IPreviewProps {
 }
 
 export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
-  const { status, user, handleSetVisibility } = useContext(authStatusContext);
+  const queryUser = useQueryUser();
+  const userListFilmsFavorites = queryUser.data ? queryUser.data.favorites : [];
 
-  const userListFilmsFavorites = user ? user.favorites : [];
-  const isFavorites = userListFilmsFavorites.includes(data.id.toString());
-  const [favoritesState, setFavoritesState] = useState(isFavorites);
+  const { status, handleSetVisibility } = useContext(authStatusContext);
 
-  const mutateAppendFavoritesFilms = useMutation(
-    {
-      mutationFn: () => appendFavoritesFilm(data.id.toString()),
-      onSuccess() {
-        queryClient.invalidateQueries({ queryKey: ['favoritesFilms'] });
-      },
-    },
-    queryClient
+  const [favoritesState, setFavoritesState] = useState(
+    userListFilmsFavorites.includes(data.id.toString())
   );
 
-  const mutateDeleteFavoritesFilms = useMutation(
-    {
-      mutationFn: () => deleteFavoritesFilm(data.id.toString()),
-      onSuccess() {
-        queryClient.invalidateQueries({ queryKey: ['favoritesFilms'] });
-      },
-    },
-    queryClient
+  useEffect(() => {
+    setFavoritesState(userListFilmsFavorites.includes(data.id.toString()));
+  }, [data.id, userListFilmsFavorites]);
+
+  const mutationFavoritesFilmsDelete = useMutationFavoritesFilms(
+    data.id.toString(),
+    () => deleteFavoritesFilm(data.id.toString())
+  );
+
+  const mutationFavoritesFilmsAppend = useMutationFavoritesFilms(
+    data.id.toString(),
+    () => appendFavoritesFilm(data.id.toString())
   );
 
   const handleIsFavoritesFilm = () => {
-    if (favoritesState) {
-      setFavoritesState(false);
-      return mutateDeleteFavoritesFilms.mutate();
-    } else {
-      setFavoritesState(true);
-      return mutateAppendFavoritesFilms.mutate();
-    }
+    return favoritesState
+      ? mutationFavoritesFilmsDelete.mutate()
+      : mutationFavoritesFilmsAppend.mutate();
   };
 
   return (
@@ -103,7 +97,9 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
                 )
               }
               variant="svg"
-              onClick={() => handleIsFavoritesFilm()}
+              onClick={() => {
+                handleIsFavoritesFilm();
+              }}
             />
           )}
           {variant === 'random' && (

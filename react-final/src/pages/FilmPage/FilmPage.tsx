@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 import { fetchFilm } from '../../api/Movie';
 import { PreviewFilm } from '../../ui/Preview/PreviewFilm';
@@ -19,9 +19,9 @@ export const FilmPage = () => {
     queryClient
   );
 
-  useEffect(() => {
-    queryFilm.refetch();
-  }, [queryFilm]);
+  // useEffect(() => {
+  //   queryFilm.refetch();
+  // }, [queryFilm]);
 
   const trailerUrl =
     queryFilm.status === 'success' ? queryFilm.data.trailerUrl : '';

@@ -1,9 +1,9 @@
-import { FetchGenresPage } from '../../ui/List/FetchGenresPage';
+import { GenresListView } from '../../ui/List/GenresListView';
 
 export const GenresPage = () => {
   return (
     <div>
-      <FetchGenresPage />
+      <GenresListView />
     </div>
   );
 };
