@@ -1,5 +1,4 @@
 import { ChangeEvent, useContext } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { InputContainer } from '../Input/InputContainer';
@@ -8,8 +7,8 @@ import { Logo } from '../Logo/Logo';
 import { Button } from '../Button/Button';
 import { authStatusContext } from '../../contexts/authStatusContext';
 import { DropdownList } from '../DropdownList/DropdownList';
-import { queryClient } from '../../api/queryClient';
-import { fetchListFilms } from '../../api/Movie';
+import { useQueryUser } from '../../hooks/useQueryUser';
+import { useQueryListFilms } from '../../hooks/useQueryListFilms';
 
 import SearchSvg from '../../assets/input-search.svg?react';
 import CloseSvg from '../../assets/input-exit.svg?react';
@@ -17,28 +16,24 @@ import CloseSvg from '../../assets/input-exit.svg?react';
 import './Menu.css';
 
 export const Menu = () => {
-  const { status, user, handleSetVisibility } = useContext(authStatusContext);
+  const { handleSetVisibility } = useContext(authStatusContext);
   const [searchParam, setSearchParam] = useSearchParams();
 
-  const queryListFilms = useQuery(
-    {
-      queryKey: ['movie', 'title'],
-      queryFn: () => fetchListFilms(`${searchParam}`),
-    },
-    queryClient
-  );
+  const user = useQueryUser();
+
+  const listFilms = useQueryListFilms(`${searchParam}`);
 
   const handleSearchParam = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchParam({
       title: event.target.value,
     });
 
-    queryListFilms.refetch();
+    listFilms.refetch();
   };
 
   const searchParamMovie = searchParam.get('title') || '';
 
-  const filteredList = queryListFilms.data ? queryListFilms.data : [];
+  const filteredList = listFilms.data ? listFilms.data : [];
 
   return (
     <div className="header__menu">
@@ -71,11 +66,11 @@ export const Menu = () => {
         </span>
       </div>
       <div>
-        {status === 'error' ? (
+        {user.status === 'error' ? (
           <Button title="Войти" variant="menu" onClick={handleSetVisibility} />
         ) : (
           <Link to={'/account'}>
-            <Button title={user?.name} variant="menu" />
+            <Button title={user.data?.name} variant="menu" />
           </Link>
         )}
       </div>

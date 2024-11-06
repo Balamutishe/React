@@ -1,31 +1,21 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '../../ui/Button/Button';
 import { ListFavoritesFilmsView } from '../../ui/List/ListFavoritesFilmsView';
-import { logoutUser } from '../../api/User';
-import { queryClient } from '../../api/queryClient';
+import { useMutationUserLogout } from '../../hooks/useMutationUserLogout';
+import { useQueryUser } from '../../hooks/useQueryUser';
 import MailSvg from '../../assets/mail.svg?react';
 import LikeSvg from '../../assets/like-logo.svg?react';
-import UserSvg from '../../assets/userdata.svg?react';
-import { authStatusContext } from '../../contexts/authStatusContext';
+import UserSvg from '../../assets/userdatawhite.svg?react';
 
 import './AccountPage.css';
 
 export const AccountPage = () => {
-  const { user } = useContext(authStatusContext);
   const [accountContent, setAccountContent] = useState(false);
 
-  const logoutUserMutate = useMutation(
-    {
-      mutationFn: () => logoutUser(),
-      onSuccess() {
-        queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
-      },
-    },
-    queryClient
-  );
+  const userLogout = useMutationUserLogout();
+  const user = useQueryUser().data;
 
   return (
     <div className="account">
@@ -79,7 +69,7 @@ export const AccountPage = () => {
               <Button
                 title="Выйти из аккаунта"
                 variant="primary"
-                onClick={() => logoutUserMutate.mutate()}
+                onClick={() => userLogout.mutate()}
               />
             </Link>
           </div>

@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { QueryObserverResult } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
@@ -26,34 +26,29 @@ interface IPreviewProps {
 }
 
 export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
+  const { handleSetVisibility } = useContext(authStatusContext);
   const queryUser = useQueryUser();
-  const userListFilmsFavorites = queryUser.data ? queryUser.data.favorites : [];
 
-  const { status, handleSetVisibility } = useContext(authStatusContext);
+  const userListFilmsFavorites = useMemo(
+    () => (queryUser.data ? queryUser.data.favorites : []),
+    [queryUser.data]
+  );
 
   const [favoritesState, setFavoritesState] = useState(
     userListFilmsFavorites.includes(data.id.toString())
   );
 
+  const mutationFavoritesFilms = useMutationFavoritesFilms(
+    data.id.toString(),
+    () =>
+      favoritesState
+        ? deleteFavoritesFilm(data.id.toString())
+        : appendFavoritesFilm(data.id.toString())
+  );
+
   useEffect(() => {
     setFavoritesState(userListFilmsFavorites.includes(data.id.toString()));
   }, [data.id, userListFilmsFavorites]);
-
-  const mutationFavoritesFilmsDelete = useMutationFavoritesFilms(
-    data.id.toString(),
-    () => deleteFavoritesFilm(data.id.toString())
-  );
-
-  const mutationFavoritesFilmsAppend = useMutationFavoritesFilms(
-    data.id.toString(),
-    () => appendFavoritesFilm(data.id.toString())
-  );
-
-  const handleIsFavoritesFilm = () => {
-    return favoritesState
-      ? mutationFavoritesFilmsDelete.mutate()
-      : mutationFavoritesFilmsAppend.mutate();
-  };
 
   return (
     <div className="preview">
@@ -78,30 +73,30 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
           <Button
             title="Трейлер"
             variant="primary"
-            onClick={(event) => {
-              handleSetVisibility(event);
-            }}
+            onClick={handleSetVisibility}
           />
           {variant === 'random' && (
             <Link to={`/movie/${data.id}`}>
               <Button title="О фильме" variant="default" />
             </Link>
           )}
-          {status === 'success' && (
-            <Button
-              title={
-                favoritesState ? (
-                  <LikeSuccessSvg width={20} height={18.5} />
-                ) : (
-                  <LikeSvg width={20} height={18.5} />
-                )
-              }
-              variant="svg"
-              onClick={() => {
-                handleIsFavoritesFilm();
-              }}
-            />
-          )}
+          <Button
+            title={
+              favoritesState ? (
+                <LikeSuccessSvg width={20} height={18.5} />
+              ) : (
+                <LikeSvg width={20} height={18.5} />
+              )
+            }
+            variant="svg"
+            onClick={
+              queryUser.status === 'success'
+                ? () => {
+                    mutationFavoritesFilms.mutate();
+                  }
+                : handleSetVisibility
+            }
+          />
           {variant === 'random' && (
             <Button
               title={<SyncSvg />}

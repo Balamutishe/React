@@ -9,13 +9,12 @@ import { authStatusContext } from './contexts/authStatusContext';
 import { FilmPage } from './pages/FilmPage/FilmPage';
 import { GenresPage } from './pages/GenresPage/GenresPage';
 import { ListFilmsPage } from './pages/ListFilmsPage/ListFilmsPage';
-import { useQueryUser } from './hooks/useQueryUser';
 
 import './style.css';
 
 function App() {
   const [visible, setVisibility] = useState(false);
-  const [modalVariant, setModalVariant] = useState('form');
+  const [modalVariant, setModalVariant] = useState('');
 
   const handleSetVisibility = (event: React.BaseSyntheticEvent) => {
     setVisibility((visible) => (visible ? false : true));
@@ -24,18 +23,12 @@ function App() {
       setModalVariant('trailer');
     }
 
-    if (event.target.innerText === 'Войти') {
-      setModalVariant('form');
-    }
+    setModalVariant('form');
   };
-
-  const user = useQueryUser();
 
   return (
     <authStatusContext.Provider
       value={{
-        status: user.status,
-        user: user.data,
         visible: visible,
         modalVariant: modalVariant,
         handleSetVisibility: handleSetVisibility,
