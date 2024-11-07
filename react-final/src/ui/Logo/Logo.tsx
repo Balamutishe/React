@@ -1,9 +1,11 @@
 import HeaderLogo from '../../assets/header-logo.svg?react';
 
+import './Logo.css';
+
 export const Logo = () => {
   return (
-    <div className='header__logo'>
-      <HeaderLogo />
+    <div className="logo-container">
+      <HeaderLogo className="logo" />
     </div>
   );
 };

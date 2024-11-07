@@ -19,10 +19,6 @@ export const FilmPage = () => {
     queryClient
   );
 
-  // useEffect(() => {
-  //   queryFilm.refetch();
-  // }, [queryFilm]);
-
   const trailerUrl =
     queryFilm.status === 'success' ? queryFilm.data.trailerUrl : '';
   const poster = queryFilm.status === 'success' ? queryFilm.data.posterUrl : '';

@@ -21,9 +21,9 @@ function App() {
 
     if (event.target.innerText === 'Трейлер') {
       setModalVariant('trailer');
+    } else {
+      setModalVariant('form');
     }
-
-    setModalVariant('form');
   };
 
   return (

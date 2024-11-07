@@ -1,26 +1,21 @@
 .header__menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 24px 80px;
-
-    backdrop-filter: blur(20px);
-    background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header__menu_navigation {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    width: 65%;
+  width: 65%;
 }
 
 .header__menu_search {
-    position: relative;
+  position: relative;
 
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    width: 70%;
+  width: 70%;
 }

@@ -1,49 +1,49 @@
 .input {
-    width: 86%;
+  width: 86%;
 
-    background-color: inherit;
+  background-color: inherit;
 
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 0.75rem;
 }
 
 .input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    width: 100%;
+  width: 100%;
 
-    padding: 12px 26px;
+  padding: 12px 26px;
 
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
 }
 
 .dark {
-    color: rgba(255, 255, 255, 0.5);
-    background-color: #393B3C;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #393b3c;
 }
 
 .input.dark::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .light {
-    color: rgba(0, 0, 0, 0.7);
-    background-color: #FFFFFF;
+  color: rgba(0, 0, 0, 0.7);
+  background-color: #ffffff;
 }
 
 .input.light::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .input-container:focus,
 .input-container:hover {
-    border: 1px solid rgb(180, 169, 255);
+  border: 1px solid rgb(180, 169, 255);
 }
 
 .input-container--error {
-    border: 1px solid rgb(255, 117, 117);
+  border: 1px solid rgb(255, 117, 117);
 }
