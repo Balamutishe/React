@@ -60,7 +60,7 @@
 }
 
 .svg {
-  padding: 16px 20px;
+  padding: 16px 18px;
 
   background-color: #393b3c;
 }
@@ -76,6 +76,82 @@
 
 @media (max-width: 1200px) {
   .menu {
-    padding: 16px 0;
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .primary,
+  .default {
+    padding: 16px 28px;
+  }
+
+  .menu {
+    padding: 12px 0;
+  }
+
+  .svg {
+    padding: 16px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .primary,
+  .default {
+    padding: 14px 20px;
+  }
+
+  .svg {
+    padding: 12px 14px;
+  }
+
+  .svg svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .menu {
+    padding: 8px 0;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+  }
+
+  .primary,
+  .default {
+    padding: 10px 10px;
+
+    font-size: 0.65rem;
+  }
+
+  .svg {
+    padding: 8px 10px;
+  }
+
+  .svg svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .preview__about > :not(:last-child) {
+    margin-right: 6px;
+  }
+}
+
+@media (max-width: 376px) {
+  .primary,
+  .default {
+    padding: 16px 48px;
+    font-size: 1rem;
+  }
+
+  .svg {
+    padding: 18px 22px;
+  }
+
+  .svg svg {
+    width: 22px;
+    height: 14px;
   }
 }

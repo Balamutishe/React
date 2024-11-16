@@ -78,3 +78,17 @@
 
   color: #ffffff;
 }
+
+@media (max-width: 768px) {
+  .card__raiting {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card__raiting {
+    padding: 7px 12px;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+  }
+}

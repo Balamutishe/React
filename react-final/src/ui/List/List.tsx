@@ -14,25 +14,25 @@ interface IListProps {
 
 export const List: FC<IListProps> = ({ moviesList, genresList, title }) => {
   return (
-    <div className="list-container">
-      {title && <h2 className="list__title">{title}</h2>}
+    <div className='list-container'>
+      {title && <h2 className='list__title'>{title}</h2>}
       {moviesList && (
-        <ul className="list list_movie">
+        <ul className='list list_movie'>
           {moviesList.map((movie) => (
-            <li className="list__item-movie" key={crypto.randomUUID()}>
+            <li className='list__item-movie' key={crypto.randomUUID()}>
               <Link to={`/movie/${movie.id}`}>
-                <Card variant="movie" movie={movie} />
+                <Card variant='movie' movie={movie} />
               </Link>
             </li>
           ))}
         </ul>
       )}
       {genresList && (
-        <ul className="list list_genres">
+        <ul className='list list_genres'>
           {genresList.map((genre) => (
-            <li className="list__item-genre" key={crypto.randomUUID()}>
+            <li className='list__item-genre' key={crypto.randomUUID()}>
               <Link to={`/movie?genre=${genre}`}>
-                <Card variant="genre" genre={genre} />
+                <Card variant='genre' genre={genre} />
               </Link>
             </li>
           ))}
