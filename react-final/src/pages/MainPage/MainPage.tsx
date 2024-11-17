@@ -16,6 +16,7 @@ export const MainPage = () => {
       <Modal trailerUrl={trailerUrl} poster={poster} />
 
       <RandomFilmView queryRandomFilm={RandomFilm} />
+
       <TopListFilmsView />
     </>
   );

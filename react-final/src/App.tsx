@@ -36,19 +36,19 @@ function App() {
     >
       <BrowserRouter>
         <>
-          <header className="header">
+          <header className='header'>
             <Menu />
           </header>
-          <main className="main">
+          <main className='main'>
             <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/account" element={<AccountPage />} />
-              <Route path="/movie/:movieId" element={<FilmPage />} />
-              <Route path="/genres" element={<GenresPage />} />
-              <Route path="/movie" element={<ListFilmsPage />} />
+              <Route path='/' element={<MainPage />} />
+              <Route path='/account' element={<AccountPage />} />
+              <Route path='/movie/:movieId' element={<FilmPage />} />
+              <Route path='/genres' element={<GenresPage />} />
+              <Route path='/movie' element={<ListFilmsPage />} />
             </Routes>
           </main>
-          <footer className="footer">
+          <footer className='footer'>
             <FooterContent />
           </footer>
         </>

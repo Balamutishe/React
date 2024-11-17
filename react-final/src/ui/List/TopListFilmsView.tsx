@@ -15,6 +15,6 @@ export const TopListFilmsView = () => {
         </div>
       );
     case 'success':
-      return <List moviesList={TopListFilms.data} title="Топ 10 фильмов" />;
+      return <List moviesList={TopListFilms.data} title='Топ 10 фильмов' />;
   }
 };

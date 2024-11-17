@@ -92,3 +92,9 @@
     line-height: 0.75rem;
   }
 }
+
+@media (max-width: 376px) {
+  .card-movie {
+    height: 336px;
+  }
+}

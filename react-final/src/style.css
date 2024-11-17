@@ -152,8 +152,6 @@ a {
   }
 
   .footer {
-    width: 100%;
-
     padding: 20px 40px;
   }
 }
@@ -173,8 +171,6 @@ a {
   }
 
   .footer {
-    width: 100%;
-
     padding: 20px 20px;
   }
 }
@@ -198,4 +194,8 @@ a {
     font-size: 18px;
     line-height: 24px;
   }
+
+    .footer {
+      padding: 24px 20px;
+    }
 }
