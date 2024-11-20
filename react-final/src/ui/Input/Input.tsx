@@ -1,12 +1,12 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import './Input.css';
+import "./Input.css";
 
 interface IInputProps {
   value: string | undefined;
   type: string;
   placeholder: string;
-  variant: 'dark' | 'light';
+  variant: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

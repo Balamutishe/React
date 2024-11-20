@@ -8,6 +8,16 @@
   line-height: 0.75rem;
 }
 
+.input--visible {
+  display: block;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.input--invisible {
+  display: none;
+}
+
 .input-container {
   display: flex;
   justify-content: space-between;
@@ -48,12 +58,30 @@
   border: 1px solid rgb(255, 117, 117);
 }
 
+.search-icon--active {
+  display: none;
+}
+
+.icon-close {
+  display: block;
+}
+
+.icon-close--active {
+  right: 20px;
+
+  display: block;
+}
+
+.icon-close--disactive {
+  display: none;
+}
+
 @media (max-width: 992px) {
   .input-container {
     padding: 12px 16px;
   }
 
-  .input-container svg:first-child {
+  .search-icon {
     width: 20px;
     height: 20px;
   }
@@ -63,11 +91,6 @@
   .input-container {
     padding: 8px 16px;
   }
-
-  .input-container svg:first-child {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 @media (max-width: 576px) {
@@ -75,17 +98,54 @@
     padding: 6px 10px;
   }
 
-  .input-container svg:first-child {
+  .search-icon {
     width: 12px;
     height: 12px;
   }
 
-  .input-container svg:last-child {
-    width: 10px;
-    height: 10px;
+  .input {
+    width: 80%;
+  }
+}
+
+@media (max-width: 376px) {
+  .input-container {
+    width: 100%;
+
+    padding: 0;
+
+    background-color: inherit;
+
+    border: none;
+    border-radius: 0;
+  }
+
+  .input-container:focus,
+  .input-container:hover {
+    border: none;
+  }
+
+  .search-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .search-icon path {
+    fill-opacity: 1;
   }
 
   .input {
-    width: 80%;
+    width: 90%;
+
+    background-color: inherit;
+  }
+
+  .icon-close {
+    width: 15px;
+    height: 15px;
+  }
+
+  .icon-close path {
+    fill-opacity: 1;
   }
 }

@@ -1,23 +1,26 @@
-import { ChangeEvent, useContext } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
-import { InputContainer } from '../Input/InputContainer';
-import { Input } from '../Input/Input';
-import { Logo } from '../Logo/Logo';
-import { Button } from '../Button/Button';
-import { authStatusContext } from '../../contexts/authStatusContext';
-import { DropdownList } from '../DropdownList/DropdownList';
-import { useQueryUser } from '../../hooks/useQueryUser';
-import { useQueryListFilms } from '../../hooks/useQueryListFilms';
+import { InputContainer } from "../Input/InputContainer";
+import { Input } from "../Input/Input";
+import { Logo } from "../Logo/Logo";
+import { Button } from "../Button/Button";
+import { authStatusContext } from "../../contexts/authStatusContext";
+import { DropdownList } from "../DropdownList/DropdownList";
+import { useQueryUser } from "../../hooks/useQueryUser";
+import { useQueryListFilms } from "../../hooks/useQueryListFilms";
 
-import SearchSvg from '../../assets/input-search.svg?react';
-import CloseSvg from '../../assets/input-exit.svg?react';
+import SearchSvg from "../../assets/input-search.svg?react";
+import CloseSvg from "../../assets/input-exit.svg?react";
+import GenresIcon from "../../assets/menuGenresIcon.svg?react";
+import UserIcon from "../../assets/userdatawhite.svg?react";
 
-import './Menu.css';
+import "./Menu.css";
 
 export const Menu = () => {
   const { handleSetVisibility } = useContext(authStatusContext);
   const [searchParam, setSearchParam] = useSearchParams();
+  const [inputVisible, setInputVisibility] = useState(false);
 
   const user = useQueryUser();
 
@@ -31,46 +34,113 @@ export const Menu = () => {
     listFilms.refetch();
   };
 
-  const searchParamMovie = searchParam.get('title') || '';
+  const searchParamMovie = searchParam.get("title") || "";
 
   const filteredList = listFilms.data ? listFilms.data : [];
 
+  const [windowSize, setWindowSize] = useState(0);
+
+  useEffect(() => {
+    setWindowSize(window.innerWidth);
+  }, [windowSize]);
+
   return (
     <div className="header__menu">
-      <div>
+      <Link to={"/"}>
         <Logo />
-      </div>
-      <div className="header__menu_navigation">
-        <Link to={'/'}>
-          <Button title="Главная" variant="menu" />
-        </Link>
-        <Link to={'/genres'}>
-          <Button title="Жанры" variant="menu" />
-        </Link>
-        <span className="header__menu_search">
-          <InputContainer variant="dark">
-            <SearchSvg />
-            <Input
-              value={searchParamMovie}
-              type="text"
-              placeholder="Поиск"
-              variant="dark"
-              onChange={handleSearchParam}
+      </Link>
+      <div className="header__menu_right">
+        <div className="header__menu_navigation">
+          {windowSize > 376 && (
+            <Link to={"/"}>
+              <Button title="Главная" variant="menu" />
+            </Link>
+          )}
+          <Link to={"/genres"} className="link-to-genres-page">
+            {windowSize > 376 ? (
+              <Button title="Жанры" variant="menu" />
+            ) : (
+              <GenresIcon />
+            )}
+          </Link>
+          <span
+            className={
+              windowSize > 376
+                ? "header__menu_search"
+                : inputVisible
+                ? "header__menu_search header__menu_search-active"
+                : "header__menu_search header__menu_search-disactive"
+            }
+          >
+            <InputContainer variant="dark">
+              <SearchSvg
+                className={
+                  windowSize > 376
+                    ? "search-icon"
+                    : inputVisible
+                    ? "search-icon search-icon--active"
+                    : "search-icon"
+                }
+                onClick={() => setInputVisibility(!inputVisible)}
+              />
+              <Input
+                value={searchParamMovie}
+                type="text"
+                placeholder="Поиск"
+                variant={
+                  windowSize > 376
+                    ? "dark"
+                    : inputVisible
+                    ? "input--visible dark"
+                    : "input--invisible"
+                }
+                onChange={handleSearchParam}
+              />
+              <CloseSvg
+                className={
+                  windowSize > 376
+                    ? "icon-close"
+                    : inputVisible
+                    ? "icon-close icon-close--active"
+                    : "icon-close icon-close--disactive"
+                }
+                onClick={() => {
+                  if (windowSize > 376) {
+                    setSearchParam("");
+                  } else {
+                    setInputVisibility(!inputVisible);
+                    setSearchParam("");
+                  }
+                }}
+              />
+            </InputContainer>
+            <DropdownList
+              filteredList={filteredList}
+              searchParamMovie={searchParamMovie}
             />
-            <CloseSvg />
-          </InputContainer>
-          <DropdownList
-            filteredList={filteredList}
-            searchParamMovie={searchParamMovie}
-          />
-        </span>
-      </div>
-      <div>
-        {user.status === 'error' ? (
-          <Button title="Войти" variant="menu" onClick={handleSetVisibility} />
+          </span>
+        </div>
+        {user.status === "error" ? (
+          windowSize > 376 ? (
+            <Button
+              title="Войти"
+              variant="menu"
+              onClick={handleSetVisibility}
+            />
+          ) : (
+            <button onClick={handleSetVisibility}>
+              <UserIcon />
+            </button>
+          )
         ) : (
-          <Link to={'/account'}>
-            <Button title={user.data?.name} variant="menu" />
+          <Link to={"/account"}>
+            {windowSize > 376 ? (
+              <Button title={user.data?.name} variant="menu" />
+            ) : (
+              <Link to={"/account"}>
+                <UserIcon />
+              </Link>
+            )}
           </Link>
         )}
       </div>

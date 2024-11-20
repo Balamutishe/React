@@ -94,6 +94,12 @@
 }
 
 @media (max-width: 376px) {
+  .card__raiting {
+    padding: 18px 24px;
+    font-size: 1.4rem;
+    line-height: 0.75rem;
+  }
+
   .card-movie {
     height: 336px;
   }

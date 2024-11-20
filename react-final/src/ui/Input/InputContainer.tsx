@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode } from "react";
 
-import './Input.css';
+import "./Input.css";
 
 interface IInputContainerProps {
   children: ReactNode;
-  variant: 'dark' | 'light';
+  variant: string;
 }
 
 export const InputContainer: FC<IInputContainerProps> = ({
