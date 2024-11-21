@@ -46,3 +46,16 @@
     width: 10px;
   }
 }
+
+@media (max-width: 376px) {
+  .raiting {
+    height: 14px;
+    padding: 4px 4px;
+  }
+
+  .raiting__image {
+    margin-right: 2px;
+    height: 7px;
+    width: 7px;
+  }
+}
