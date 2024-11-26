@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'Play';
   src: local('Play Regular'), local('Play-Regular'),
-    url('./fonts/playregular.woff2') format('woff2'),
     url('./fonts/playregular.woff') format('woff'),
     url('./fonts/playregular.ttf') format('truetype');
   font-weight: 400;
@@ -11,7 +10,6 @@
 @font-face {
   font-family: 'Play';
   src: local('Play Bold'), local('Play-Bold'),
-    url('./fonts/playbold.woff2') format('woff2'),
     url('./fonts/playbold.woff') format('woff'),
     url('./fonts/playbold.ttf') format('truetype');
   font-weight: 700;
@@ -195,7 +193,7 @@ a {
     line-height: 24px;
   }
 
-    .footer {
-      padding: 24px 20px;
-    }
+  .footer {
+    padding: 24px 20px;
+  }
 }

@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Card } from "../Card/Card";
-import { FilmSwiper } from "../Swiper/Swiper";
-import { TMovieList } from "../../api/Movie";
+import { Card } from '../Card/Card';
+import { FilmSwiper } from '../Swiper/Swiper';
+import { TMovieList } from '../../api/Movie';
 
-import "./List.css";
+import './List.css';
 
 interface IListProps {
   moviesList?: TMovieList;
@@ -16,7 +16,7 @@ interface IListProps {
 export const List: FC<IListProps> = ({ moviesList, genresList, title }) => {
   const [windowSize, setWindowSize] = useState(1440);
 
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     setWindowSize(window.innerWidth);
   });
 
