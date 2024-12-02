@@ -1,33 +1,33 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 
-import { FooterContent } from "./ui/FooterContent/FooterContent";
-import { Menu } from "./ui/Menu/Menu";
-import { AccountPage } from "./pages/AccountPage/AccountPage";
-import { MainPage } from "./pages/MainPage/MainPage";
-import { authStatusContext } from "./contexts/authStatusContext";
-import { FilmPage } from "./pages/FilmPage/FilmPage";
-import { GenresPage } from "./pages/GenresPage/GenresPage";
-import { ListFilmsPage } from "./pages/ListFilmsPage/ListFilmsPage";
+import { FooterContent } from './ui/FooterContent/FooterContent';
+import { Menu } from './ui/Menu/Menu';
+import { AccountPage } from './pages/AccountPage/AccountPage';
+import { MainPage } from './pages/MainPage/MainPage';
+import { modalContext } from './contexts/modalContext';
+import { FilmPage } from './pages/FilmPage/FilmPage';
+import { GenresPage } from './pages/GenresPage/GenresPage';
+import { ListFilmsPage } from './pages/ListFilmsPage/ListFilmsPage';
 
-import "./style.css";
+import './style.css';
 
 function App() {
   const [visible, setVisibility] = useState(false);
-  const [modalVariant, setModalVariant] = useState("");
+  const [modalVariant, setModalVariant] = useState('');
 
   const handleSetVisibility = (event: React.BaseSyntheticEvent) => {
     setVisibility((visible) => (visible ? false : true));
 
-    if (event.target.innerText === "Трейлер") {
-      setModalVariant("trailer");
+    if (event.target.innerText === 'Трейлер') {
+      setModalVariant('trailer');
     } else {
-      setModalVariant("form");
+      setModalVariant('form');
     }
   };
 
   return (
-    <authStatusContext.Provider
+    <modalContext.Provider
       value={{
         visible: visible,
         modalVariant: modalVariant,
@@ -53,7 +53,7 @@ function App() {
           </footer>
         </>
       </BrowserRouter>
-    </authStatusContext.Provider>
+    </modalContext.Provider>
   );
 }
 

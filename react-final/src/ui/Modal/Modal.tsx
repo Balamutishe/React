@@ -3,7 +3,7 @@ import { useContext, FC } from 'react';
 import { Form } from '../Form/Form';
 import Logo from '../../assets/header-logo.svg?react';
 import CloseSvg from '../../assets/close.svg?react';
-import { authStatusContext } from '../../contexts/authStatusContext';
+import { modalContext } from '../../contexts/modalContext';
 import { Player } from '../Player/Player';
 
 import './Modal.css';
@@ -15,7 +15,7 @@ interface IModalProps {
 
 export const Modal: FC<IModalProps> = ({ trailerUrl, poster }) => {
   const { visible, modalVariant, handleSetVisibility } =
-    useContext(authStatusContext);
+    useContext(modalContext);
 
   return (
     <div className={visible ? 'overlay visible' : 'overlay invisible'}>

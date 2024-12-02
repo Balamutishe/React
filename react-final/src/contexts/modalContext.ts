@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 
-type TAuthStatusContextParams = {
+type TModalContextParams = {
   visible: boolean;
   modalVariant: string;
   handleSetVisibility: (event: React.BaseSyntheticEvent) => void;
 };
 
-export const authStatusContext = createContext<TAuthStatusContextParams>({
+export const modalContext = createContext<TModalContextParams>({
   visible: false,
   modalVariant: '',
   handleSetVisibility: () => {},

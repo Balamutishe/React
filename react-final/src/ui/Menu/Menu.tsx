@@ -5,7 +5,7 @@ import { InputContainer } from '../Input/InputContainer';
 import { Input } from '../Input/Input';
 import { Logo } from '../Logo/Logo';
 import { Button } from '../Button/Button';
-import { authStatusContext } from '../../contexts/authStatusContext';
+import { modalContext } from '../../contexts/modalContext';
 import { DropdownList } from '../DropdownList/DropdownList';
 import { useQueryUser } from '../../hooks/useQueryUser';
 import { useQueryListFilms } from '../../hooks/useQueryListFilms';
@@ -18,7 +18,7 @@ import UserIcon from '../../assets/userdatawhite.svg?react';
 import './Menu.css';
 
 export const Menu = () => {
-  const { handleSetVisibility } = useContext(authStatusContext);
+  const { handleSetVisibility } = useContext(modalContext);
   const [searchParam, setSearchParam] = useSearchParams();
   const [inputVisible, setInputVisibility] = useState(false);
 

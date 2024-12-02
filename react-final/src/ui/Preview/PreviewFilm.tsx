@@ -12,7 +12,7 @@ import {
   deleteFavoritesFilm,
   TMovie,
 } from '../../api/Movie';
-import { authStatusContext } from '../../contexts/authStatusContext';
+import { modalContext } from '../../contexts/modalContext';
 import { FilmRaiting } from '../FilmRaiting/FilmRaiting';
 import { useQueryUser } from '../../hooks/useQueryUser';
 import { useMutationFavoritesFilms } from '../../hooks/useMutationFavoritesFilms';
@@ -26,7 +26,7 @@ interface IPreviewProps {
 }
 
 export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
-  const { handleSetVisibility } = useContext(authStatusContext);
+  const { handleSetVisibility } = useContext(modalContext);
   const queryUser = useQueryUser();
 
   const userListFilmsFavorites = useMemo(

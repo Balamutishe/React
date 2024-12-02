@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { FC } from "react";
+import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
-import { TMovieList } from "../../api/Movie";
-import { FilmRaiting } from "../FilmRaiting/FilmRaiting";
+import { TMovieList } from '../../api/Movie';
+import { TMovie } from '../../api/Movie';
 
-import "./DropdownList.css";
+import './DropdownList.css';
 
 interface IDropdownList {
   filteredList: TMovieList;
@@ -15,12 +15,24 @@ export const DropdownList: FC<IDropdownList> = ({
   filteredList,
   searchParamMovie,
 }) => {
+  const filterGenresList = (movie: TMovie): string[] => {
+    const arr = [];
+
+    for (let i = 0; i < movie.genres.length; i++) {
+      if (i <= 2) {
+        arr.push(movie.genres[i]);
+      }
+    }
+
+    return arr;
+  };
+
   return (
     <div
       className={
-        searchParamMovie === ""
-          ? "dropdown dropdown_invisible"
-          : "dropdown dropdown_visible"
+        searchParamMovie === ''
+          ? 'dropdown dropdown_invisible'
+          : 'dropdown dropdown_visible'
       }
     >
       <ul className="dropdown__list">
@@ -34,19 +46,10 @@ export const DropdownList: FC<IDropdownList> = ({
                     </div>
                     <div className="movie-search__content_right">
                       <div className="movie-search__about">
-                        <FilmRaiting
-                          raiting={Number(movie.tmdbRating.toFixed(1))}
-                        />
                         <span className="movie-search__relase-year">
                           {movie.releaseYear}
                         </span>
-                        <span>
-                          {movie.genres.map((genre, index) => (
-                            <span className="movie-search__genre" key={index}>
-                              {genre}
-                            </span>
-                          ))}
-                        </span>
+                        <span>{filterGenresList(movie)}</span>
                         <span className="movie-runtime">
                           {movie.runtime} мин
                         </span>
@@ -57,7 +60,7 @@ export const DropdownList: FC<IDropdownList> = ({
                 </Link>
               </li>
             ))
-          : "Фильм не найден"}
+          : 'Фильм не найден'}
       </ul>
     </div>
   );
