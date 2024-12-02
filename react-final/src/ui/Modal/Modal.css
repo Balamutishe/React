@@ -1,91 +1,104 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 
-    transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
-    z-index: 999;
+  z-index: 999;
 }
 
 .visible {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .invisible {
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .modal {
-    position: relative;
+  position: relative;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal_form {
-    width: 564px;
+  width: 564px;
 }
 
 .modal_trailer {
-    width: 1104px;
-    height: 540px;
+  width: 1104px;
+  height: 540px;
 }
 
 .trailer-container {
-    width: 85%;
-    height: 100%;
+  width: 85%;
+  height: 100%;
 
-    background-color: #000000;
+  background-color: #000000;
 }
 
 .button-modal-close {
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    width: 48px;
-    height: 48px;
+  width: 48px;
+  height: 48px;
 
-    border-radius: 24px;
+  border-radius: 24px;
 
-    background: rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
 }
 
 .modal__content {
-    width: 75%;
+  width: 75%;
 
-    padding: 64px 40px;
+  padding: 64px 40px;
 
-    border-radius: 24px;
-    background-color: #FFFFFF;
+  border-radius: 24px;
+  background-color: #ffffff;
 }
 
 .modal__header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    width: 100%;
+  width: 100%;
 
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .hidden {
-    display: none;
+  display: none;
+}
+
+@media (max-width: 376px) {
+  .modal__content {
+    width: 89%;
+
+    padding: 64px 20px 32px 20px;
+  }
+
+  .button-modal-close {
+    top: 10px;
+    right: 30px;
+  }
 }

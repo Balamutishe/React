@@ -67,7 +67,7 @@ export const Form = () => {
         {authState !== 'success' ? (
           <div className="form__inputs">
             <InputContainer variant="light">
-              <MailLogo />
+              <MailLogo className="form__input-logo" />
               <Input
                 value={email}
                 type="email"
@@ -78,7 +78,7 @@ export const Form = () => {
             </InputContainer>
             {authState === 'register' && (
               <InputContainer variant="light">
-                <UserLogo />
+                <UserLogo className="form__input-logo" />
                 <Input
                   value={name}
                   type="text"
@@ -90,7 +90,7 @@ export const Form = () => {
             )}
             {authState === 'register' && (
               <InputContainer variant="light">
-                <UserLogo />
+                <UserLogo className="form__input-logo" />
                 <Input
                   value={surname}
                   type="text"
@@ -101,7 +101,7 @@ export const Form = () => {
               </InputContainer>
             )}
             <InputContainer variant="light">
-              <PasswordLogo />
+              <PasswordLogo className="form__input-logo" />
               <Input
                 value={password}
                 type="password"
@@ -112,7 +112,7 @@ export const Form = () => {
             </InputContainer>
             {authState === 'register' && (
               <InputContainer variant="light">
-                <PasswordLogo />
+                <PasswordLogo className="form__input-logo" />
                 <Input
                   value={confirmPassword}
                   type="password"

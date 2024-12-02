@@ -45,6 +45,12 @@
   width: 24px;
 }
 
+.menu__input,
+.menu__input:hover {
+  border: none;
+  border-radius: 0;
+}
+
 .header__menu_account {
   display: flex;
   align-items: center;

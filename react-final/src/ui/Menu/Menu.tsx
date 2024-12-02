@@ -75,7 +75,7 @@ export const Menu = () => {
                 : 'header__menu_search header__menu_search-disactive'
             }
           >
-            <InputContainer variant="dark">
+            <InputContainer variant="menu__input">
               <SearchSvg
                 className={
                   windowSize > 376
@@ -94,8 +94,8 @@ export const Menu = () => {
                   windowSize > 376
                     ? 'dark'
                     : inputVisible
-                    ? 'input--visible dark'
-                    : 'input--invisible'
+                    ? 'dark input--visible'
+                    : 'dark input--invisible'
                 }
                 onChange={handleSearchParam}
               />
