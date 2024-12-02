@@ -135,6 +135,15 @@ a {
   padding: 40px 80px;
 }
 
+.swiper {
+  height: 360px;
+}
+
+.swiper-slide {
+  top: 11px;
+  left: 15px;
+}
+
 @media (max-width: 1200px) {
   html {
     font-size: 20px;

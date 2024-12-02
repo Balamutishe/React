@@ -94,6 +94,10 @@
 }
 
 @media (max-width: 376px) {
+  .card {
+    box-shadow: none;
+  }
+
   .card__raiting {
     padding: 18px 24px;
     font-size: 1.4rem;

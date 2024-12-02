@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -6,7 +7,11 @@ import { useQueryTopListFilms } from '../../hooks/useQueryTopListFilms';
 
 import 'swiper/css';
 
-export const FilmSwiper = () => {
+interface FilmSwiperProps {
+  title: string;
+}
+
+export const FilmSwiper: FC<FilmSwiperProps> = ({ title }) => {
   const TopListFilms = useQueryTopListFilms();
 
   switch (TopListFilms.status) {
@@ -21,15 +26,18 @@ export const FilmSwiper = () => {
       );
     case 'success':
       return (
-        <Swiper height={336} spaceBetween={50} slidesPerView={1.4}>
-          {TopListFilms.data.map((movie) => (
-            <SwiperSlide>
-              <Link to={`/movie/${movie.id}`}>
-                <Card variant='movie' movie={movie} />
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <>
+          <h2>{title}</h2>
+          <Swiper height={336} spaceBetween={50} slidesPerView={1.4}>
+            {TopListFilms.data.map((movie) => (
+              <SwiperSlide key={movie.id}>
+                <Link to={`/movie/${movie.id}`}>
+                  <Card variant="movie" movie={movie} />
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </>
       );
   }
 };

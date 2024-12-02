@@ -86,7 +86,8 @@
 }
 
 @media (max-width: 376px) {
-  .list_movie {
+  .list_movie,
+  .list_genres {
     grid-template-columns: repeat(1, 100%);
     grid-auto-rows: 336px;
     gap: 13px;

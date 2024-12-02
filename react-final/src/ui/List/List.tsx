@@ -1,8 +1,7 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Card } from '../Card/Card';
-import { FilmSwiper } from '../Swiper/Swiper';
 import { TMovieList } from '../../api/Movie';
 
 import './List.css';
@@ -14,29 +13,20 @@ interface IListProps {
 }
 
 export const List: FC<IListProps> = ({ moviesList, genresList, title }) => {
-  const [windowSize, setWindowSize] = useState(1440);
-
-  window.addEventListener('resize', () => {
-    setWindowSize(window.innerWidth);
-  });
-
   return (
     <div className="list-container">
       {title && <h2 className="list__title">{title}</h2>}
-      {moviesList &&
-        (windowSize > 376 ? (
-          <ul className="list list_movie">
-            {moviesList.map((movie) => (
-              <li className="list__item-movie" key={crypto.randomUUID()}>
-                <Link to={`/movie/${movie.id}`}>
-                  <Card variant="movie" movie={movie} />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <FilmSwiper />
-        ))}
+      {moviesList && (
+        <ul className="list list_movie">
+          {moviesList.map((movie) => (
+            <li className="list__item-movie" key={crypto.randomUUID()}>
+              <Link to={`/movie/${movie.id}`}>
+                <Card variant="movie" movie={movie} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
       {genresList && (
         <ul className="list list_genres">
           {genresList.map((genre) => (

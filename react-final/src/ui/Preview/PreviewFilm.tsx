@@ -50,6 +50,18 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
     setFavoritesState(userListFilmsFavorites.includes(data.id.toString()));
   }, [data.id, userListFilmsFavorites]);
 
+  const filterGenresList = () => {
+    const listGenres: string[] = [];
+
+    for (let i = 0; i < data.genres.length; i++) {
+      if (i <= 2) {
+        listGenres.push(data.genres[i]);
+      }
+    }
+
+    return listGenres;
+  };
+
   return (
     <div className="preview">
       <div className="preview__content-left">
@@ -57,13 +69,11 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
           <div className="preview__about">
             <FilmRaiting raiting={Number(data.tmdbRating.toFixed(1))} />
             <div>{data.releaseYear}</div>
-            <div>
-              {data.genres.map((genre, index) => (
-                <span className="preview__genre" key={index}>
-                  {genre}
-                </span>
+            <ul className="list-genres">
+              {filterGenresList().map((genre) => (
+                <li key={crypto.randomUUID()}>{genre}</li>
               ))}
-            </div>
+            </ul>
             <div>{data.runtime} мин</div>
           </div>
           <h2 className="preview__title">{data.title}</h2>
