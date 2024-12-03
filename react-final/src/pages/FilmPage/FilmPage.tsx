@@ -36,7 +36,11 @@ export const FilmPage = () => {
         <div>
           <Modal trailerUrl={trailerUrl} poster={poster} />
 
-          <PreviewFilm data={queryFilm.data} refetch={queryFilm.refetch} />
+          <PreviewFilm
+            data={queryFilm.data}
+            refetch={queryFilm.refetch}
+            variant="filmPage"
+          />
           <div className="film-about">
             <h3 className="film-about__title">О фильме</h3>
             <div className="film-about__desc">

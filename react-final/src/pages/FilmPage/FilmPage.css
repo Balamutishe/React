@@ -7,9 +7,9 @@
 .film-about__title {
   margin-bottom: 64px;
 
-  font-size: 40px;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 1.5rem;
 }
 
 .film-about__desc {
@@ -39,6 +39,37 @@
   width: 20%;
 }
 
-.film-about__desc_item > div:nth-child() {
+/* .film-about__desc_item > div:nth-child() {
   width: 20%;
+} */
+
+@media (max-width: 376px) {
+  .film-about {
+    padding: 0 0 32px 0;
+  }
+
+  .film-about__title {
+    margin-bottom: 25px;
+  }
+
+  .film-about__desc {
+    height: 348px;
+  }
+
+  .film-about__desc_item {
+    flex-direction: column;
+  }
+
+  .film-about__desc_item > div:first-child {
+    width: 100%;
+
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+
+    color: rgb(255, 255, 255, 0.5);
+  }
+
+  .film-about__desc_item:not(:last-child) {
+    margin-bottom: 12px;
+  }
 }

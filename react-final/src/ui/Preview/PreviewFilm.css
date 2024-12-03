@@ -90,6 +90,13 @@
   align-items: center;
 }
 
+.preview__buttons_film-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
 .preview__buttons > *:not(:last-child) {
   margin-right: 16px;
 }
@@ -204,5 +211,9 @@
   .preview__buttons > *:first-child {
     margin-right: 0;
     margin-bottom: 16px;
+  }
+
+  .preview__buttons_film-page .primary {
+    width: 75%;
   }
 }

@@ -22,7 +22,7 @@ import './PreviewFilm.css';
 interface IPreviewProps {
   data: TMovie;
   refetch: () => Promise<QueryObserverResult<TMovie, Error>>;
-  variant?: 'random' | 'main';
+  variant: 'random' | 'main' | 'filmPage';
 }
 
 export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
@@ -79,7 +79,13 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
           <h2 className="preview__title">{data.title}</h2>
           <p className="preview__text">{data.plot}</p>
         </div>
-        <div className="preview__buttons">
+        <div
+          className={
+            variant === 'filmPage'
+              ? 'preview__buttons_film-page'
+              : 'preview__buttons'
+          }
+        >
           <Button
             title="Трейлер"
             variant="primary"
