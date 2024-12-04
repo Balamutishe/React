@@ -1,7 +1,7 @@
 .account {
   width: 100%;
 
-  padding: 64px 80px;
+  padding: 32px 0 32px 0;
 
   color: #ffffff;
 }
@@ -89,4 +89,17 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
+}
+
+@media (max-width: 376px) {
+  .account__header {
+    width: 100%;
+  }
+
+  .account__title {
+    margin-bottom: 32px;
+
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
 }

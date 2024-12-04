@@ -17,6 +17,12 @@ export const AccountPage = () => {
   const userLogout = useMutationUserLogout();
   const user = useQueryUser().data;
 
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', () => {
+    setWindowSize(window.innerWidth);
+  });
+
   return (
     <div className="account">
       <div className="account__header">
@@ -25,7 +31,7 @@ export const AccountPage = () => {
           <div className="account__button">
             <LikeSvg />
             <Button
-              title="Избранные фильмы"
+              title={windowSize > 376 ? 'Избранные фильмы' : 'Избранное'}
               variant="menu"
               onClick={() => setAccountContent(!accountContent)}
             />
@@ -33,7 +39,7 @@ export const AccountPage = () => {
           <div className="account__button">
             <UserSvg />
             <Button
-              title="Настройки аккаунта"
+              title={windowSize > 376 ? 'Настройки аккаунта' : 'Настройки'}
               variant="menu"
               onClick={() => setAccountContent(!accountContent)}
             />

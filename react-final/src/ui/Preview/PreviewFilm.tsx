@@ -62,6 +62,12 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
     return listGenres;
   };
 
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', () => {
+    setWindowSize(window.innerWidth);
+  });
+
   return (
     <div className="preview">
       <div className="preview__content-left">
@@ -81,7 +87,7 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
         </div>
         <div
           className={
-            variant === 'filmPage'
+            variant === 'filmPage' && windowSize <= 376
               ? 'preview__buttons_film-page'
               : 'preview__buttons'
           }

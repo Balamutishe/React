@@ -117,6 +117,11 @@ a {
 .header {
   position: relative;
 
+  display: flex;
+  align-items: center;
+
+  height: 96px;
+
   padding: 24px 80px;
 
   backdrop-filter: blur(20px);
@@ -201,6 +206,10 @@ a {
   html {
     font-size: 18px;
     line-height: 24px;
+  }
+
+  .header {
+    height: 56px;
   }
 
   .footer {

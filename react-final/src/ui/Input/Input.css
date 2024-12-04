@@ -1,6 +1,7 @@
 .input {
   width: 86%;
 
+  color: rgb(255, 255, 255, 0.5);
   background-color: inherit;
 
   font-size: 0.75rem;
@@ -37,7 +38,6 @@
 
 .dark {
   color: rgba(255, 255, 255, 0.5);
-  background-color: #393b3c;
 }
 
 .input.dark::placeholder {

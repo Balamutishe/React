@@ -94,8 +94,8 @@ export const Menu = () => {
                   windowSize > 376
                     ? 'dark'
                     : inputVisible
-                    ? 'dark input--visible'
-                    : 'dark input--invisible'
+                    ? 'input--visible'
+                    : 'input--invisible'
                 }
                 onChange={handleSearchParam}
               />
