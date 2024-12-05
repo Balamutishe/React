@@ -26,7 +26,7 @@ interface IPreviewProps {
 }
 
 export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
-  const { handleSetVisibility } = useContext(modalContext);
+  const { handleSetVisibility, handleSwitchModal } = useContext(modalContext);
   const queryUser = useQueryUser();
 
   const userListFilmsFavorites = useMemo(
@@ -95,7 +95,10 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
           <Button
             title="Трейлер"
             variant="primary"
-            onClick={handleSetVisibility}
+            onClick={(event) => {
+              handleSetVisibility();
+              handleSwitchModal(event);
+            }}
           />
           {variant === 'random' && (
             <Link to={`/movie/${data.id}`}>

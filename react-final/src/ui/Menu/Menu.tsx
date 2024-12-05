@@ -18,7 +18,7 @@ import UserIcon from '../../assets/userdatawhite.svg?react';
 import './Menu.css';
 
 export const Menu = () => {
-  const { handleSetVisibility } = useContext(modalContext);
+  const { handleSetVisibility, handleSwitchModal } = useContext(modalContext);
   const [searchParam, setSearchParam] = useSearchParams();
   const [inputVisible, setInputVisibility] = useState(false);
 
@@ -129,10 +129,18 @@ export const Menu = () => {
               <Button
                 title="Войти"
                 variant="menu"
-                onClick={handleSetVisibility}
+                onClick={(event) => {
+                  handleSetVisibility();
+                  handleSwitchModal(event);
+                }}
               />
             ) : (
-              <button onClick={handleSetVisibility}>
+              <button
+                onClick={(event) => {
+                  handleSetVisibility();
+                  handleSwitchModal(event);
+                }}
+              >
                 <UserIcon />
               </button>
             )}

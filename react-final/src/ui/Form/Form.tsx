@@ -1,4 +1,4 @@
-import { useState, FormEventHandler } from 'react';
+import { useState, FormEventHandler, useContext } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '../Button/Button';
@@ -12,8 +12,10 @@ import UserLogo from '../../assets/userdata.svg?react';
 import PasswordLogo from '../../assets/password.svg?react';
 
 import './Form.css';
+import { modalContext } from '../../contexts/modalContext';
 
 export const Form = () => {
+  const { handleSetVisibility } = useContext(modalContext);
   const [authState, setAuthState] = useState('register');
 
   const [email, setEmail] = useState('');
@@ -37,6 +39,7 @@ export const Form = () => {
       mutationFn: () => loginUser(email, password),
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
+        handleSetVisibility();
       },
     },
     queryClient

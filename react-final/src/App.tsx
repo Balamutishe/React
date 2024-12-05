@@ -16,9 +16,11 @@ function App() {
   const [visible, setVisibility] = useState(false);
   const [modalVariant, setModalVariant] = useState('');
 
-  const handleSetVisibility = (event: React.BaseSyntheticEvent) => {
+  const handleSetVisibility = () => {
     setVisibility((visible) => (visible ? false : true));
+  };
 
+  const handleSwitchModal = (event: React.BaseSyntheticEvent) => {
     if (event.target.innerText === 'Трейлер') {
       setModalVariant('trailer');
     } else {
@@ -32,6 +34,7 @@ function App() {
         visible: visible,
         modalVariant: modalVariant,
         handleSetVisibility: handleSetVisibility,
+        handleSwitchModal: handleSwitchModal,
       }}
     >
       <BrowserRouter>
