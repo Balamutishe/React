@@ -10,9 +10,9 @@ import { queryClient } from '../../api/queryClient';
 import MailLogo from '../../assets/mail.svg?react';
 import UserLogo from '../../assets/userdata.svg?react';
 import PasswordLogo from '../../assets/password.svg?react';
+import { modalContext } from '../../contexts/modalContext';
 
 import './Form.css';
-import { modalContext } from '../../contexts/modalContext';
 
 export const Form = () => {
   const { handleSetVisibility } = useContext(modalContext);
