@@ -1,8 +1,17 @@
+import { useState } from 'react';
+
 import { useQueryListFavoritesFilms } from '../../hooks/useQueryListFavoritesFilms';
 import { List } from './List';
+import { FilmSwiper } from '../Swiper/Swiper';
 
 export const ListFavoritesFilmsView = () => {
   const ListFavoritesFilms = useQueryListFavoritesFilms();
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  window.addEventListener('resize', () => {
+    setWindowSize(window.innerWidth);
+  });
 
   switch (ListFavoritesFilms.status) {
     case 'error':
@@ -17,10 +26,16 @@ export const ListFavoritesFilmsView = () => {
     case 'success':
       return (
         <>
-          {ListFavoritesFilms.data.length !== 0 ? (
-            <List moviesList={ListFavoritesFilms.data} />
+          {windowSize > 376 ? (
+            <List
+              moviesList={ListFavoritesFilms.data}
+              title={ListFavoritesFilms.data.length !== 0 ? '' : 'Список пуст'}
+            />
           ) : (
-            <List moviesList={ListFavoritesFilms.data} title="Список пуст" />
+            <FilmSwiper
+              data={ListFavoritesFilms.data}
+              title={ListFavoritesFilms.data.length !== 0 ? '' : 'Список пуст'}
+            />
           )}
         </>
       );

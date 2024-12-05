@@ -29,7 +29,7 @@ export const TopListFilmsView = () => {
           {windowSize > 376 ? (
             <List moviesList={TopListFilms.data} title="Топ 10 фильмов" />
           ) : (
-            <FilmSwiper title={'Топ 10 фильмов'} />
+            <FilmSwiper title={'Топ 10 фильмов'} data={TopListFilms.data} />
           )}
         </>
       );
