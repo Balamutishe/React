@@ -1,23 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { fetchFilm } from '../../api/Movie';
 import { PreviewFilm } from '../../ui/Preview/PreviewFilm';
-import { queryClient } from '../../api/queryClient';
 import { Modal } from '../../ui/Modal/Modal';
+import { useQueryFilm } from '../../hooks/useQueryFilm';
 
 import './FilmPage.css';
 
 export const FilmPage = () => {
   const { movieId } = useParams();
-  const queryFilm = useQuery(
-    {
-      queryKey: ['film', 'id'],
-      queryFn: () => fetchFilm(Number(movieId)),
-    },
-    queryClient
-  );
+  const queryFilm = useQueryFilm(Number(movieId));
+
+  useEffect(() => {
+    if (queryFilm.data && Number(movieId) !== queryFilm.data.id) {
+      queryFilm.refetch();
+    }
+  });
 
   const trailerUrl =
     queryFilm.status === 'success' ? queryFilm.data.trailerUrl : '';

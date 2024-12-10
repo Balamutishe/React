@@ -39,7 +39,7 @@ export const DropdownList: FC<IDropdownList> = ({
       <ul className="dropdown__list">
         {filteredList.length !== 0 ? (
           filteredList.map((movie) => (
-            <li key={movie.id} className="dropdown__list-item">
+            <li key={crypto.randomUUID()} className="dropdown__list-item">
               <Link to={`/movie/${movie.id}`} className="dropdown__link">
                 <div className="movie-search">
                   <div className="movie-search__content_left">
@@ -53,11 +53,11 @@ export const DropdownList: FC<IDropdownList> = ({
                       <span className="movie-search__relase-year">
                         {movie.releaseYear}
                       </span>
-                      <span className="movie-search__genres-list">
+                      <ul className="movie-search__genres-list">
                         {filterGenresList(movie).map((genre) => (
-                          <span>{genre}</span>
+                          <li key={crypto.randomUUID()}>{genre}</li>
                         ))}
-                      </span>
+                      </ul>
                       <span className="movie-runtime">{movie.runtime} мин</span>
                     </div>
                     <h2 className="movie-search__title">{movie.title}</h2>
@@ -67,7 +67,7 @@ export const DropdownList: FC<IDropdownList> = ({
             </li>
           ))
         ) : (
-          <li>Фильм не найден</li>
+          <li key={crypto.randomUUID()}>Фильм не найден</li>
         )}
       </ul>
     </div>

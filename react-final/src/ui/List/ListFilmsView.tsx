@@ -8,23 +8,23 @@ export const ListFilmsView = () => {
 
   const searchParamFilms = serachParam.get('genre') || '';
 
-  const ListFilms = useQueryListFilms(`genre=${searchParamFilms}`);
+  const listFilms = useQueryListFilms(`genre=${searchParamFilms}`);
 
-  switch (ListFilms.status) {
+  switch (listFilms.status) {
     case 'error':
       return (
         <div>
           <span>Произошла ошибка :(</span>
-          <button onClick={() => ListFilms.refetch()}>Повторить запрос</button>
+          <button onClick={() => listFilms.refetch()}>Повторить запрос</button>
         </div>
       );
     case 'success':
       return (
         <>
-          {ListFilms.data.length !== 0 ? (
-            <List moviesList={ListFilms.data} title={searchParamFilms} />
+          {listFilms.data.length !== 0 ? (
+            <List moviesList={listFilms.data} title={searchParamFilms} />
           ) : (
-            <List moviesList={ListFilms.data} title="Список пуст" />
+            <List moviesList={listFilms.data} title="Список пуст" />
           )}
         </>
       );
