@@ -23,7 +23,7 @@ export const FilmRaiting: FC<IFilmRaiting> = ({ raiting }) => {
 
   return (
     <div className={raitingStyle}>
-      <StarRaiting className='raiting__image' />
+      <StarRaiting className="raiting__image" />
       {raiting}
     </div>
   );

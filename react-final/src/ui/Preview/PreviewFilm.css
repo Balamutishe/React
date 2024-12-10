@@ -159,7 +159,7 @@
 
     flex-direction: column-reverse;
 
-    height: 620px;
+    height: 640px;
   }
 
   .preview__title {
@@ -170,7 +170,7 @@
     position: static;
 
     width: 112%;
-    height: 280px;
+    height: 258px;
 
     margin-bottom: 24px;
   }

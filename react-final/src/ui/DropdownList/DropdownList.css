@@ -1,6 +1,6 @@
 .dropdown {
   position: absolute;
-  top: 145%;
+  top: 150%;
 
   width: 100%;
 
@@ -82,19 +82,12 @@
   margin-right: 12px;
 }
 
-.movie-search__raiting {
-  padding: 2px 12px;
-
-  border-radius: 16px;
-
-  font-weight: 700;
-
-  color: rgba(255, 255, 255);
-  background-color: #308e21;
+.movie-search__genres-list > *:not(:last-child) {
+  margin-right: 6px;
 }
 
-.star_raiting_img {
-  margin-right: 2px;
+.movie-search__about > *:first-child {
+  padding: 2px 6px;
 }
 
 .movie-search__genre:not(:last-child) {
@@ -110,18 +103,29 @@
 }
 
 @media (max-width: 376px) {
+  .dropdown {
+    max-height: 100vh;
+
+    top: 126%;
+    right: 0;
+  }
+
+  .dropdown__list {
+    max-height: 100vh;
+  }
+
   .dropdown__list-item {
-    height: 50px;
+    height: 70px;
     padding: 10px 0px;
   }
 
   .movie-search__title {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 16px;
+    line-height: 16px;
   }
 
   .movie-search__about > :not(:last-child) {
-    margin-right: 2px;
+    margin-right: 6px;
   }
 
   .movie-search__content_left {
@@ -130,16 +134,8 @@
   }
 
   .movie-search__about {
-    font-size: 7px;
+    font-size: 10px;
     line-height: 10px;
-  }
-
-  .movie-runtime {
-    display: none;
-  }
-
-  .movie-search__content_left {
-    display: none;
   }
 
   .movie-search__content_right {

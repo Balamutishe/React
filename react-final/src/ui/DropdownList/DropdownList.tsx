@@ -5,6 +5,7 @@ import { TMovieList } from '../../api/Movie';
 import { TMovie } from '../../api/Movie';
 
 import './DropdownList.css';
+import { FilmRaiting } from '../FilmRaiting/FilmRaiting';
 
 interface IDropdownList {
   filteredList: TMovieList;
@@ -36,31 +37,38 @@ export const DropdownList: FC<IDropdownList> = ({
       }
     >
       <ul className="dropdown__list">
-        {filteredList.length !== 0
-          ? filteredList.map((movie) => (
-              <li key={movie.id} className="dropdown__list-item">
-                <Link to={`/movie/${movie.id}`} className="dropdown__link">
-                  <div className="movie-search">
-                    <div className="movie-search__content_left">
-                      <img src={movie.posterUrl} alt="#" />
-                    </div>
-                    <div className="movie-search__content_right">
-                      <div className="movie-search__about">
-                        <span className="movie-search__relase-year">
-                          {movie.releaseYear}
-                        </span>
-                        <span>{filterGenresList(movie)}</span>
-                        <span className="movie-runtime">
-                          {movie.runtime} мин
-                        </span>
-                      </div>
-                      <h2 className="movie-search__title">{movie.title}</h2>
-                    </div>
+        {filteredList.length !== 0 ? (
+          filteredList.map((movie) => (
+            <li key={movie.id} className="dropdown__list-item">
+              <Link to={`/movie/${movie.id}`} className="dropdown__link">
+                <div className="movie-search">
+                  <div className="movie-search__content_left">
+                    <img src={movie.posterUrl} alt="#" />
                   </div>
-                </Link>
-              </li>
-            ))
-          : 'Фильм не найден'}
+                  <div className="movie-search__content_right">
+                    <div className="movie-search__about">
+                      <FilmRaiting
+                        raiting={Number(movie.tmdbRating.toFixed(1))}
+                      />
+                      <span className="movie-search__relase-year">
+                        {movie.releaseYear}
+                      </span>
+                      <span className="movie-search__genres-list">
+                        {filterGenresList(movie).map((genre) => (
+                          <span>{genre}</span>
+                        ))}
+                      </span>
+                      <span className="movie-runtime">{movie.runtime} мин</span>
+                    </div>
+                    <h2 className="movie-search__title">{movie.title}</h2>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <li>Фильм не найден</li>
+        )}
       </ul>
     </div>
   );

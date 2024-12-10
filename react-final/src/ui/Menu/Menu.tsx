@@ -77,13 +77,7 @@ export const Menu = () => {
           >
             <InputContainer variant="menu__input">
               <SearchSvg
-                className={
-                  windowSize > 376
-                    ? 'search-icon'
-                    : inputVisible
-                    ? 'search-icon search-icon--active'
-                    : 'search-icon'
-                }
+                className="search-icon"
                 onClick={() => setInputVisibility(!inputVisible)}
               />
               <Input
@@ -147,11 +141,11 @@ export const Menu = () => {
           </div>
         ) : (
           <div className={inputVisible ? 'disactive' : 'header__menu_account'}>
-            <Link to={'/account'}>
+            <Link to={'/account'} className="account-link">
               {windowSize > 376 ? (
                 <Button title={user.data?.name} variant="menu" />
               ) : (
-                <UserIcon />
+                <UserIcon className="account-logo" />
               )}
             </Link>
           </div>

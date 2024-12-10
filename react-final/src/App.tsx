@@ -14,7 +14,7 @@ import './style.css';
 
 function App() {
   const [visible, setVisibility] = useState(false);
-  const [modalVariant, setModalVariant] = useState('');
+  const [modalVariant, setModalVariant] = useState('form');
 
   const handleSetVisibility = () => {
     setVisibility((visible) => (visible ? false : true));

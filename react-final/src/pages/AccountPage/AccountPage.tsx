@@ -12,7 +12,7 @@ import UserSvg from '../../assets/userdatawhite.svg?react';
 import './AccountPage.css';
 
 export const AccountPage = () => {
-  const [accountContent, setAccountContent] = useState(false);
+  const [accountContent, setAccountContent] = useState('settings');
 
   const userLogout = useMutationUserLogout();
   const user = useQueryUser().data;
@@ -33,7 +33,7 @@ export const AccountPage = () => {
             <Button
               title={windowSize > 376 ? 'Избранные фильмы' : 'Избранное'}
               variant="menu"
-              onClick={() => setAccountContent(!accountContent)}
+              onClick={() => setAccountContent('favorites')}
             />
           </div>
           <div className="account__button">
@@ -41,13 +41,13 @@ export const AccountPage = () => {
             <Button
               title={windowSize > 376 ? 'Настройки аккаунта' : 'Настройки'}
               variant="menu"
-              onClick={() => setAccountContent(!accountContent)}
+              onClick={() => setAccountContent('settings')}
             />
           </div>
         </div>
       </div>
       <div className="account__content">
-        {accountContent && user ? (
+        {accountContent === 'settings' && user ? (
           <div className="settings">
             <div className="userdata">
               <div className="userdata__logo">
