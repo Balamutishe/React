@@ -46,8 +46,8 @@ function App() {
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/account" element={<AccountPage />} />
-              <Route path="/movie/:movieId" element={<FilmPage />} />
               <Route path="/genres" element={<GenresPage />} />
+              <Route path="/movie/:movieId" element={<FilmPage />} />
               <Route path="/movie" element={<ListFilmsPage />} />
             </Routes>
           </main>

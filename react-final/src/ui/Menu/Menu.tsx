@@ -26,15 +26,23 @@ export const Menu = () => {
 
   const listFilms = useQueryListFilms(`${searchParam}`);
 
+  const searchMovieTitle = searchParam.get('title') || '';
+  const searchMovieGenre = searchParam.get('genre') || '';
+
   const handleSearchParam = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchParam({
-      title: event.target.value,
-    });
+    if (location.search.includes('genre')) {
+      setSearchParam({
+        genre: searchMovieGenre,
+        title: event.target.value,
+      });
+    } else {
+      setSearchParam({
+        title: event.target.value,
+      });
+    }
 
     listFilms.refetch();
   };
-
-  const searchParamMovie = searchParam.get('title') || '';
 
   const filteredList = listFilms.data ? listFilms.data : [];
 
@@ -81,7 +89,7 @@ export const Menu = () => {
                 onClick={() => setInputVisibility(!inputVisible)}
               />
               <Input
-                value={searchParamMovie}
+                value={searchMovieTitle}
                 type="text"
                 placeholder="Поиск"
                 variant={
@@ -113,7 +121,7 @@ export const Menu = () => {
             </InputContainer>
             <DropdownList
               filteredList={filteredList}
-              searchParamMovie={searchParamMovie}
+              searchParamMovie={searchMovieTitle}
             />
           </span>
         </div>
