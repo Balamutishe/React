@@ -1,24 +1,30 @@
 import { FC } from 'react';
 import ReactPlayer from 'react-player';
-import PlayIcon from '../../assets/player-button.svg?react';
 
 interface IPlayerProps {
   url: string;
-  poster: string;
+  playingState: boolean;
 }
 
 import './Player.css';
 
-export const Player: FC<IPlayerProps> = ({ url, poster }) => {
+export const Player: FC<IPlayerProps> = ({ url, playingState }) => {
   return (
     <div className="player-wrapper">
       <ReactPlayer
         className="react-player"
         url={url}
-        light={poster}
-        playIcon={<PlayIcon />}
         width="100%"
         height="100%"
+        playing={playingState}
+        config={{
+          youtube: {
+            playerVars: {
+              showinfo: 1,
+              modestbranding: 1,
+            },
+          },
+        }}
       />
     </div>
   );

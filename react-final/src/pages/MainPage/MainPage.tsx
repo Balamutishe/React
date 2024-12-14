@@ -8,12 +8,10 @@ export const MainPage = () => {
 
   const trailerUrl =
     RandomFilm.status === 'success' ? RandomFilm.data.trailerUrl : '';
-  const poster =
-    RandomFilm.status === 'success' ? RandomFilm.data.posterUrl : '';
 
   return (
     <>
-      <Modal trailerUrl={trailerUrl} poster={poster} />
+      <Modal trailerUrl={trailerUrl} />
 
       <RandomFilmView queryRandomFilm={RandomFilm} />
 

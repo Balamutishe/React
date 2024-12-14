@@ -1,4 +1,10 @@
 .player-wrapper {
-  width: 90%;
+  width: 85%;
   height: 100%;
+}
+
+@media (max-width: 376px) {
+  .player-wrapper {
+    width: 100%;
+  }
 }

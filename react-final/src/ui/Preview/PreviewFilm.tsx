@@ -119,7 +119,10 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
                 ? () => {
                     mutationFavoritesFilms.mutate();
                   }
-                : handleSetVisibility
+                : (event) => {
+                    handleSetVisibility();
+                    handleSwitchModal(event);
+                  }
             }
           />
           {variant === 'random' && (

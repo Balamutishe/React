@@ -86,7 +86,11 @@ export const Menu = () => {
             <InputContainer variant="menu__input">
               <SearchSvg
                 className="search-icon"
-                onClick={() => setInputVisibility(!inputVisible)}
+                onClick={
+                  windowSize > 376
+                    ? () => {}
+                    : () => setInputVisibility(!inputVisible)
+                }
               />
               <Input
                 value={searchMovieTitle}

@@ -17,7 +17,7 @@ function App() {
   const [modalVariant, setModalVariant] = useState('form');
 
   const handleSetVisibility = () => {
-    setVisibility((visible) => (visible ? false : true));
+    setVisibility(!visible);
   };
 
   const handleSwitchModal = (event: React.BaseSyntheticEvent) => {

@@ -9,22 +9,32 @@ import { Player } from '../Player/Player';
 import './Modal.css';
 
 interface IModalProps {
-  trailerUrl: string;
-  poster: string;
+  trailerUrl?: string;
 }
 
-export const Modal: FC<IModalProps> = ({ trailerUrl, poster }) => {
+export const Modal: FC<IModalProps> = ({ trailerUrl }) => {
   const { visible, modalVariant, handleSetVisibility } =
     useContext(modalContext);
 
   return (
-    <div className={visible ? 'overlay visible' : 'overlay invisible'}>
+    <div
+      className={visible ? 'overlay visible' : 'overlay invisible'}
+      onClick={handleSetVisibility}
+    >
       <div
         className={
           modalVariant === 'form' ? 'modal modal_form' : 'modal modal_trailer'
         }
+        onClick={(e) => e.stopPropagation()}
       >
-        <button className="button-modal-close" onClick={handleSetVisibility}>
+        <button
+          className={
+            modalVariant === 'form'
+              ? 'button-modal-close'
+              : 'button-modal-close button-modal-close-trailer'
+          }
+          onClick={handleSetVisibility}
+        >
           <CloseSvg width={22} height={22} />
         </button>
         {modalVariant === 'form' ? (
@@ -37,7 +47,7 @@ export const Modal: FC<IModalProps> = ({ trailerUrl, poster }) => {
             </div>
           </div>
         ) : (
-          <Player url={trailerUrl} poster={poster} />
+          trailerUrl && <Player url={trailerUrl} playingState={visible} />
         )}
       </div>
     </div>

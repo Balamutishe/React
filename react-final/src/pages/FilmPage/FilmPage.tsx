@@ -19,7 +19,6 @@ export const FilmPage = () => {
 
   const trailerUrl =
     queryFilm.status === 'success' ? queryFilm.data.trailerUrl : '';
-  const poster = queryFilm.status === 'success' ? queryFilm.data.posterUrl : '';
 
   switch (queryFilm.status) {
     case 'error':
@@ -32,7 +31,7 @@ export const FilmPage = () => {
     case 'success':
       return (
         <div>
-          <Modal trailerUrl={trailerUrl} poster={poster} />
+          <Modal trailerUrl={trailerUrl} />
 
           <PreviewFilm
             data={queryFilm.data}
@@ -44,27 +43,51 @@ export const FilmPage = () => {
             <div className="film-about__desc">
               <div className="film-about__desc_item">
                 <div>Язык оригинала</div>
-                <div>{queryFilm.data.language}</div>
+                <div>
+                  {queryFilm.data.language !== null
+                    ? queryFilm.data.language
+                    : 'Нет данных'}
+                </div>
               </div>
               <div className="film-about__desc_item">
                 <div>Бюджет</div>
-                <div>{queryFilm.data.budget}</div>
+                <div>
+                  {queryFilm.data.budget !== null
+                    ? queryFilm.data.budget
+                    : 'Нет данных'}
+                </div>
               </div>
               <div className="film-about__desc_item">
                 <div>Выручка</div>
-                <div>{queryFilm.data.revenue}</div>
+                <div>
+                  {queryFilm.data.revenue !== null
+                    ? queryFilm.data.revenue
+                    : 'Нет данных'}
+                </div>
               </div>
               <div className="film-about__desc_item">
                 <div>Режиссёр</div>
-                <div>{queryFilm.data.director}</div>
+                <div>
+                  {queryFilm.data.director !== null
+                    ? queryFilm.data.director
+                    : 'Нет данных'}
+                </div>
               </div>
               <div className="film-about__desc_item">
                 <div>Продакшен</div>
-                <div>{queryFilm.data.production}</div>
+                <div>
+                  {queryFilm.data.production !== null
+                    ? queryFilm.data.production
+                    : 'Нет данных'}
+                </div>
               </div>
               <div className="film-about__desc_item">
                 <div>Награды</div>
-                <div>{queryFilm.data.awardsSummary}</div>
+                <div>
+                  {queryFilm.data.awardsSummary !== null
+                    ? queryFilm.data.awardsSummary
+                    : 'Нет данных'}
+                </div>
               </div>
             </div>
           </div>
