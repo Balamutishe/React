@@ -1,10 +1,13 @@
-import { useContext, FC } from 'react';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Form } from '../Form/Form';
-import Logo from '../../assets/header-logo.svg?react';
-import CloseSvg from '../../assets/close.svg?react';
-import { modalContext } from '../../contexts/modalContext';
 import { Player } from '../Player/Player';
+import { toggleVisible } from '../../store/visibleSlice';
+import { RootState } from '../../store/index';
+
+import CloseSvg from '../../assets/close.svg?react';
+import Logo from '../../assets/header-logo.svg?react';
 
 import './Modal.css';
 
@@ -13,31 +16,38 @@ interface IModalProps {
 }
 
 export const Modal: FC<IModalProps> = ({ trailerUrl }) => {
-  const { visible, modalVariant, handleSetVisibility } =
-    useContext(modalContext);
+  const modalVisible = useSelector((state: RootState) => state.modalVisible);
+  const modalType = useSelector((state: RootState) => state.modalType);
+
+  const dispatch = useDispatch();
 
   return (
     <div
-      className={visible ? 'overlay visible' : 'overlay invisible'}
-      onClick={handleSetVisibility}
+      className={modalVisible ? 'overlay visible' : 'overlay invisible'}
+      onClick={() => dispatch(toggleVisible(!modalVisible))}
     >
       <div
         className={
-          modalVariant === 'form' ? 'modal modal_form' : 'modal modal_trailer'
+          modalType === 'modalRegister'
+            ? 'modal modal_form'
+            : 'modal modal_trailer'
         }
         onClick={(e) => e.stopPropagation()}
       >
         <button
           className={
-            modalVariant === 'form'
+            modalType === 'modalRegister'
               ? 'button-modal-close'
               : 'button-modal-close button-modal-close-trailer'
           }
-          onClick={handleSetVisibility}
+          onClick={() => {
+            dispatch(toggleVisible(!modalVisible));
+          }}
         >
           <CloseSvg width={22} height={22} />
         </button>
-        {modalVariant === 'form' ? (
+
+        {modalType === 'modalRegister' ? (
           <div className="modal__content">
             <div className="modal__header">
               <Logo width={180} height={24} />
@@ -47,7 +57,7 @@ export const Modal: FC<IModalProps> = ({ trailerUrl }) => {
             </div>
           </div>
         ) : (
-          trailerUrl && <Player url={trailerUrl} playingState={visible} />
+          trailerUrl && <Player url={trailerUrl} playingState={modalVisible} />
         )}
       </div>
     </div>

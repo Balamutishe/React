@@ -1,5 +1,6 @@
-import { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { QueryObserverResult } from '@tanstack/react-query';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import LikeSvg from '../../assets/like-logo.svg?react';
@@ -12,10 +13,12 @@ import {
   deleteFavoritesFilm,
   TMovie,
 } from '../../api/Movie';
-import { modalContext } from '../../contexts/modalContext';
 import { FilmRaiting } from '../FilmRaiting/FilmRaiting';
 import { useQueryUser } from '../../hooks/useQueryUser';
 import { useMutationFavoritesFilms } from '../../hooks/useMutationFavoritesFilms';
+import { toggleVisible } from '../../store/visibleSlice';
+import { toggleModalType } from '../../store/modalTypeSlice';
+import { RootState } from '../../store';
 
 import './PreviewFilm.css';
 
@@ -26,7 +29,10 @@ interface IPreviewProps {
 }
 
 export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
-  const { handleSetVisibility, handleSwitchModal } = useContext(modalContext);
+  const modalVisible = useSelector((state: RootState) => state.modalVisible);
+
+  const dispatch = useDispatch();
+
   const queryUser = useQueryUser();
 
   const userListFilmsFavorites = useMemo(
@@ -95,9 +101,9 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
           <Button
             title="Трейлер"
             variant="primary"
-            onClick={(event) => {
-              handleSetVisibility();
-              handleSwitchModal(event);
+            onClick={() => {
+              dispatch(toggleModalType('modalTrailer'));
+              dispatch(toggleVisible(!modalVisible));
             }}
           />
           {variant === 'random' && (
@@ -119,9 +125,9 @@ export const PreviewFilm: FC<IPreviewProps> = ({ data, refetch, variant }) => {
                 ? () => {
                     mutationFavoritesFilms.mutate();
                   }
-                : (event) => {
-                    handleSetVisibility();
-                    handleSwitchModal(event);
+                : () => {
+                    dispatch(toggleModalType('modalRegister'));
+                    dispatch(toggleVisible(!modalVisible));
                   }
             }
           />

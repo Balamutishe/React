@@ -1,14 +1,17 @@
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { InputContainer } from '../Input/InputContainer';
 import { Input } from '../Input/Input';
 import { Logo } from '../Logo/Logo';
 import { Button } from '../Button/Button';
-import { modalContext } from '../../contexts/modalContext';
 import { DropdownList } from '../DropdownList/DropdownList';
 import { useQueryUser } from '../../hooks/useQueryUser';
 import { useQueryListFilms } from '../../hooks/useQueryListFilms';
+import { toggleVisible } from '../../store/visibleSlice';
+import { toggleModalType } from '../../store/modalTypeSlice';
+import { RootState } from '../../store';
 
 import SearchSvg from '../../assets/input-search.svg?react';
 import CloseSvg from '../../assets/input-exit.svg?react';
@@ -18,7 +21,10 @@ import UserIcon from '../../assets/userdatawhite.svg?react';
 import './Menu.css';
 
 export const Menu = () => {
-  const { handleSetVisibility, handleSwitchModal } = useContext(modalContext);
+  const modalVisible = useSelector((state: RootState) => state.modalVisible);
+
+  const dispatch = useDispatch();
+
   const [searchParam, setSearchParam] = useSearchParams();
   const [inputVisible, setInputVisibility] = useState(false);
 
@@ -135,16 +141,16 @@ export const Menu = () => {
               <Button
                 title="Войти"
                 variant="menu"
-                onClick={(event) => {
-                  handleSetVisibility();
-                  handleSwitchModal(event);
+                onClick={() => {
+                  dispatch(toggleModalType('modalRegister'));
+                  dispatch(toggleVisible(!modalVisible));
                 }}
               />
             ) : (
               <button
-                onClick={(event) => {
-                  handleSetVisibility();
-                  handleSwitchModal(event);
+                onClick={() => {
+                  dispatch(toggleModalType('modalRegister'));
+                  dispatch(toggleVisible(!modalVisible));
                 }}
               >
                 <UserIcon />

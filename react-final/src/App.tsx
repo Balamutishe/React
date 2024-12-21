@@ -1,42 +1,20 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { Provider } from 'react-redux';
 
 import { FooterContent } from './ui/FooterContent/FooterContent';
 import { Menu } from './ui/Menu/Menu';
 import { AccountPage } from './pages/AccountPage/AccountPage';
 import { MainPage } from './pages/MainPage/MainPage';
-import { modalContext } from './contexts/modalContext';
 import { FilmPage } from './pages/FilmPage/FilmPage';
 import { GenresPage } from './pages/GenresPage/GenresPage';
 import { ListFilmsPage } from './pages/ListFilmsPage/ListFilmsPage';
+import store from './store';
 
 import './style.css';
 
 function App() {
-  const [visible, setVisibility] = useState(false);
-  const [modalVariant, setModalVariant] = useState('form');
-
-  const handleSetVisibility = () => {
-    setVisibility(!visible);
-  };
-
-  const handleSwitchModal = (event: React.BaseSyntheticEvent) => {
-    if (event.target.innerText === 'Трейлер') {
-      setModalVariant('trailer');
-    } else {
-      setModalVariant('form');
-    }
-  };
-
   return (
-    <modalContext.Provider
-      value={{
-        visible: visible,
-        modalVariant: modalVariant,
-        handleSetVisibility: handleSetVisibility,
-        handleSwitchModal: handleSwitchModal,
-      }}
-    >
+    <Provider store={store}>
       <BrowserRouter>
         <>
           <header className="header">
@@ -56,7 +34,7 @@ function App() {
           </footer>
         </>
       </BrowserRouter>
-    </modalContext.Provider>
+    </Provider>
   );
 }
 

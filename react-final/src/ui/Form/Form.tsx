@@ -1,4 +1,5 @@
-import { useState, FormEventHandler, useContext } from 'react';
+import { useState, FormEventHandler } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '../Button/Button';
@@ -7,15 +8,19 @@ import { InputContainer } from '../Input/InputContainer';
 import { registerUser } from '../../api/User';
 import { loginUser } from '../../api/User';
 import { queryClient } from '../../api/queryClient';
+import { toggleVisible } from '../../store/visibleSlice';
+import { RootState } from '../../store';
+
 import MailLogo from '../../assets/mail.svg?react';
 import UserLogo from '../../assets/userdata.svg?react';
 import PasswordLogo from '../../assets/password.svg?react';
-import { modalContext } from '../../contexts/modalContext';
 
 import './Form.css';
 
 export const Form = () => {
-  const { handleSetVisibility } = useContext(modalContext);
+  const modalVisible = useSelector((state: RootState) => state.modalVisible);
+  const dispatch = useDispatch();
+
   const [authState, setAuthState] = useState('register');
 
   const [email, setEmail] = useState('');
@@ -39,7 +44,7 @@ export const Form = () => {
       mutationFn: () => loginUser(email, password),
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
-        handleSetVisibility();
+        dispatch(toggleVisible(!modalVisible));
       },
     },
     queryClient
