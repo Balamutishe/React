@@ -11,7 +11,7 @@ import UserSvg from '../../assets/userdatawhite.svg?react';
 
 import './AccountPage.css';
 
-export const AccountPage = () => {
+const AccountPage = () => {
   const [accountContent, setAccountContent] = useState('settings');
 
   const userLogout = useMutationUserLogout();
@@ -86,3 +86,5 @@ export const AccountPage = () => {
     </div>
   );
 };
+
+export default AccountPage;

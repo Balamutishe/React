@@ -1,7 +1,7 @@
 import { ListFilmsView } from '../../ui/List/ListFilmsView';
 import { Modal } from '../../ui/Modal/Modal';
 
-export const ListFilmsPage = () => {
+const ListFilmsPage = () => {
   return (
     <div>
       <Modal />
@@ -10,3 +10,5 @@ export const ListFilmsPage = () => {
     </div>
   );
 };
+
+export default ListFilmsPage;

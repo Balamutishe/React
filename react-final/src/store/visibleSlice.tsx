@@ -4,7 +4,10 @@ const visibleSlice = createSlice({
   name: 'modalVisible',
   initialState: false,
   reducers: {
-    toggleVisible: (state, action) => (state = action.payload),
+    toggleVisible: (state, action) => {
+      console.log(state);
+      return (state = action.payload);
+    },
   },
 });
 

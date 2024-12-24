@@ -1,7 +1,7 @@
 import { GenresListView } from '../../ui/List/GenresListView';
 import { Modal } from '../../ui/Modal/Modal';
 
-export const GenresPage = () => {
+const GenresPage = () => {
   return (
     <div>
       <Modal />
@@ -10,3 +10,5 @@ export const GenresPage = () => {
     </div>
   );
 };
+
+export default GenresPage;

@@ -7,7 +7,7 @@ import { useQueryFilm } from '../../hooks/useQueryFilm';
 
 import './FilmPage.css';
 
-export const FilmPage = () => {
+const FilmPage = () => {
   const { movieId } = useParams();
   const queryFilm = useQueryFilm(Number(movieId));
 
@@ -95,3 +95,5 @@ export const FilmPage = () => {
       );
   }
 };
+
+export default FilmPage;

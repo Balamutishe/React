@@ -4,7 +4,10 @@ const modalTypeSlice = createSlice({
   name: 'modalType',
   initialState: 'modalRegister',
   reducers: {
-    toggleModalType: (state, action) => (state = action.payload),
+    toggleModalType: (state, action) => {
+      console.log(state);
+      return (state = action.payload);
+    },
   },
 });
 

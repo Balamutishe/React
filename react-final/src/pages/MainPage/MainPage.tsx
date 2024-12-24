@@ -3,7 +3,7 @@ import { RandomFilmView } from '../../ui/Preview/RandomFilmView';
 import { Modal } from '../../ui/Modal/Modal';
 import { useQueryRandomFilm } from '../../hooks/useQueryRandomFilm';
 
-export const MainPage = () => {
+const MainPage = () => {
   const RandomFilm = useQueryRandomFilm();
 
   const trailerUrl =
@@ -19,3 +19,5 @@ export const MainPage = () => {
     </>
   );
 };
+
+export default MainPage;
