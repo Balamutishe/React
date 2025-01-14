@@ -7,6 +7,7 @@ import { FormSuccess } from "./ui/FormSuccess/FormSuccess";
 import { RootState } from "../../store";
 
 import "./Form.css";
+import { FormCreateNote } from "./ui/FormCreateNote/FormCreateNote";
 
 export const FormView = () => {
   const formType = useSelector((state: RootState) => state.switchFormType);
@@ -20,5 +21,7 @@ export const FormView = () => {
       return <FormLogin />;
     case "success":
       return <FormSuccess />;
+    case "createNote":
+      return <FormCreateNote />;
   }
 };

@@ -1,15 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchUserMe } from "../../api/User";
-import { queryClient } from "../../api/queryClient";
+import { useDispatch } from "react-redux";
 
 import { FormView } from "../../components/Form/FormView";
 import { Menu } from "../../components/Menu/Menu";
-import { Button } from "../../components/Button/Button";
 import { NoteList } from "../../components/NoteList/NoteList";
+import { queryClient } from "../../api/queryClient";
+import { fetchUserMe } from "../../api/User";
+import { setUserData } from "../../store/userInfo";
+import { toggleFormType } from "../../store/switchFormType";
 
 import "./AuthPage.css";
 
 export const AuthPage = () => {
+  const dispatch = useDispatch();
+
   const queryMe = useQuery(
     {
       queryFn: () => fetchUserMe(),
@@ -23,19 +27,25 @@ export const AuthPage = () => {
     case "error":
       return (
         <div className="page-auth">
-          <FormView />
+          <div className="overlay">
+            <FormView />
+          </div>
         </div>
       );
     case "success":
+      dispatch(
+        setUserData({
+          username: queryMe.data.username,
+        })
+      );
+
+      dispatch(toggleFormType("createNote"));
+
       return (
         <>
           <Menu />
-          <div className="container-button-add">
-            <Button
-              variant="button-default button-add"
-              title="Добавить задачу
-              "
-            />
+          <div className="overlay overlay-notes">
+            <FormView />
           </div>
           <NoteList />
         </>

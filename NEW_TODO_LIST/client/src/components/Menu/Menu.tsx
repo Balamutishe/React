@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
 import { Button } from "../Button/Button";
 import { FormField } from "../Form/ui/FormField";
 import { Input } from "../Input/Input";
 import { queryClient } from "../../api/queryClient";
 import { logoutUser } from "../../api/User";
+import { RootState } from "../../store";
 
 import "./Menu.css";
 
 export const Menu = () => {
+  const { username } = useSelector((state: RootState) => state.userInfo);
   const [searchValue, setSearchValue] = useState("");
 
   const logoutUserMutate = useMutation(
@@ -24,7 +27,7 @@ export const Menu = () => {
 
   return (
     <div className="menu">
-      <h1 className="menu__title">Список задач username</h1>
+      <h1 className="menu__title">Список задач {username}</h1>
       <div className="menu__search">
         <FormField label="">
           <Input
@@ -37,6 +40,7 @@ export const Menu = () => {
         </FormField>
       </div>
       <div className="menu__actions">
+        <Button variant="button-default" title="Добавить дело" />
         <Button
           variant="button-default"
           title="Выйти"
