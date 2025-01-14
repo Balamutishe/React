@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode } from "react";
 
-import './Button.css';
+import "./Button.css";
 
 interface IButtonProps {
   title: string | ReactNode;
-  variant: 'default' | 'primary' | 'menu' | 'svg';
+  variant: string;
   onClick?: (event: React.BaseSyntheticEvent) => void;
 }
 

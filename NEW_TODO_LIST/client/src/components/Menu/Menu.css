@@ -4,4 +4,19 @@
   align-items: center;
 
   width: 100%;
+
+  padding: 20px 80px;
+
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.menu__title {
+  color: #ffffff;
+
+  font-size: 36px;
+}
+
+.menu__search {
+  width: 40%;
 }

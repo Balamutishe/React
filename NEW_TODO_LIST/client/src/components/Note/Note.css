@@ -1,0 +1,22 @@
+.note {
+  max-height: 120px;
+}
+
+.note__title {
+  margin-bottom: 10px;
+
+  color: #1b1b1b;
+}
+
+.note__text {
+  margin-bottom: 10px;
+
+  font-size: 24px;
+  font-weight: 500;
+
+  color: #1b1b1b;
+}
+
+.note__link {
+  font-weight: 600;
+}

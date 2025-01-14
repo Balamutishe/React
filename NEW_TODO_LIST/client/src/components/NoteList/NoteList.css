@@ -1,0 +1,15 @@
+.container-notes-list {
+  padding: 0 80px;
+}
+
+.notes-list > li:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.notes-list__item {
+  padding: 24px 40px;
+
+  border-radius: 20px;
+
+  background-color: #ffffff;
+}
