@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import { FormRegister } from "./ui/FormRegister/FormRegister";
 import { FormLogin } from "./ui/FormLogin/FormLogin";
@@ -6,7 +7,6 @@ import { FormSuccess } from "./ui/FormSuccess/FormSuccess";
 import { RootState } from "../../store";
 
 import "./Form.css";
-import { useEffect } from "react";
 
 export const FormView = () => {
   const formType = useSelector((state: RootState) => state.switchFormType);

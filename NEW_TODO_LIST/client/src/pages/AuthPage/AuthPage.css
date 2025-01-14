@@ -7,3 +7,15 @@
   width: 100%;
   height: 100vh;
 }
+
+.container-button-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 160px;
+}
+
+.button-add {
+  font-size: 28px;
+}

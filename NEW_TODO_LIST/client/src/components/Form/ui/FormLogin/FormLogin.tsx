@@ -1,10 +1,13 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { toggleFormType } from "../../../../store/switchFormType";
 import { Button } from "../../../Button/Button";
 import { Input } from "../../../Input/Input";
 import { FormField } from "../FormField";
+import { queryClient } from "../../../../api/queryClient";
+import { loginUser } from "../../../../api/User";
 
 export const FormLogin = () => {
   const dispatch = useDispatch();
@@ -12,9 +15,25 @@ export const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const loginUserMutate = useMutation(
+    {
+      mutationFn: () => loginUser({ email, password }),
+      onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+      },
+    },
+    queryClient
+  );
+
   return (
     <div className="overlay">
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          loginUserMutate.mutate();
+        }}
+      >
         <h2 className="form__title">Вход</h2>
         <div className="form__inputs">
           <FormField label="">

@@ -1,23 +1,39 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleFormType } from "../../../../store/switchFormType";
+import { useMutation } from "@tanstack/react-query";
 
 import { Button } from "../../../Button/Button";
 import { Input } from "../../../Input/Input";
 import { FormField } from "../FormField";
+import { queryClient } from "../../../../api/queryClient";
+import { registerUser } from "../../../../api/User";
 
 export const FormRegister = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const registerUserMutation = useMutation(
+    {
+      mutationFn: () => registerUser({ username, email, password }),
+    },
+    queryClient
+  );
+
   return (
     <div className="overlay">
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          registerUserMutation.mutate();
+        }}
+      >
         <h2 className="form__title">Регистрация</h2>
         <div className="form__inputs">
           <FormField label="">
@@ -32,10 +48,10 @@ export const FormRegister = () => {
           <FormField label="">
             <Input
               name="name"
-              value={name}
+              value={username}
               type="text"
               placeholder="Имя"
-              onChange={(event) => setName(event.target.value)}
+              onChange={(event) => setUsername(event.target.value)}
             />
           </FormField>
           <FormField label="">
