@@ -7,14 +7,11 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <Provider store={store}>
-        <header></header>
-        <main className="app">
-          <AuthPage />
-        </main>
-      </Provider>
-    </>
+    <Provider store={store}>
+      <div className="app">
+        <AuthPage />
+      </div>
+    </Provider>
   );
 }
 
