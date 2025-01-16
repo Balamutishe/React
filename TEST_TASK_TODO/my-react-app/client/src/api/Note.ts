@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { validateResponse } from "../api/validateResponse";
+import { validateResponse } from "./validateResponse";
 
 export const NoteShema = z.object({
   id: z.string(),
