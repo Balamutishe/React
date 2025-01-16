@@ -1,0 +1,74 @@
+.button {
+  padding: 16px 48px;
+
+  border-radius: 28px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.button-default {
+  background-color: #393b3c;
+}
+
+.button-default:focus,
+.button-default:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.button-default:active {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #747474;
+}
+
+.button-primary {
+  background-color: #6a5dc2;
+}
+
+.button-primary:focus,
+.button-primary:hover {
+  background-color: #8577e1;
+}
+
+.button-primary:active {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #d6d2f1;
+}
+
+.button-menu {
+  padding: 8px 0;
+
+  border: 1.5px solid rgb(0, 0, 0, 0);
+  border-radius: 0;
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+/* .menu:focus,
+.menu:hover {
+  border-bottom: 1.5px solid rgb(220, 93, 252);
+}
+
+.menu:active {
+  border-bottom: 1.5px solid rgb(230, 141, 252);
+} */
+
+.button-svg {
+  padding: 16px 18px;
+
+  background-color: #393b3c;
+}
+
+.button-svg:focus,
+.button-svg:hover {
+  background-color: #8577e1;
+}
+
+.button-svg:active {
+  background-color: #d6d2f1;
+}

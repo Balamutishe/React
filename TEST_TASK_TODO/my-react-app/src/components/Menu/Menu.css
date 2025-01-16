@@ -1,0 +1,27 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 40px;
+  padding: 20px 80px;
+
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.menu__title {
+  color: #ffffff;
+
+  font-size: 36px;
+}
+
+.menu__search {
+  width: 40%;
+}
+
+.menu__actions > button:not(:last-child) {
+  margin-right: 10px;
+}

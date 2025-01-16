@@ -1,0 +1,35 @@
+.note-desc {
+  padding: 40px 80px;
+
+  border-radius: 20px;
+
+  background-color: #ffffff;
+}
+
+.note-desc__title {
+  margin-bottom: 40px;
+}
+
+.note-desc > textarea {
+  width: 100%;
+  min-height: 600px;
+
+  padding: 10px 20px;
+
+  border: none;
+
+  font: 500 24px Arial;
+  overflow: hidden;
+}
+
+.note-desc__text {
+  margin-bottom: 40px;
+
+  font-weight: 500;
+
+  color: #4b4b4b;
+}
+
+.note-desc__button {
+  background-color: rgb(189, 0, 0);
+}
