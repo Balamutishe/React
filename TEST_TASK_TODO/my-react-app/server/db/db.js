@@ -1,51 +1,63 @@
-const crypto = require("crypto");
+import { randomUUID, createHash } from "crypto";
+import { JSONFilePreset } from "lowdb/node";
 
-const hash = (data) => crypto.createHash("sha256").update(data).digest("hex");
+export const db = await JSONFilePreset("db.json", {});
 
-const DB = {
-  users: [],
-  notes: [],
-  sessions: {},
-};
+export const hash = (data) => createHash("sha256").update(data).digest("hex");
 
-const createUser = async ({ username, email, password }) => {
+// const DB = {
+//   users: [],
+//   notes: [],
+//   sessions: {},
+// };
+
+export const createUser = async ({ username, email, password }) => {
   if (!username || !password || !email) {
     throw new Error("Введите корректные данные пользователя");
   }
 
   const user = {
-    id: crypto.randomUUID(),
+    id: randomUUID(),
     email: email,
     username: username,
     password: hash(password),
   };
 
-  DB.users.push(user);
+  // DB.users.push(user);
+  await db.update(({ users }) => {
+    users[user.id] = user;
+  });
 
   return user;
 };
 
-const findUserByUserEmail = async (email) => {
-  return DB.users.find((user) => user.email === email);
+export const findUserByUserEmail = async (email) => {
+  console.log(db.users);
+  return db.users.find(([key, user]) => user.email === email);
 };
 
-const findUserBySessionId = async (sessionId) => {
-  const userId = DB.sessions[sessionId];
+export const findUserBySessionId = async (sessionId) => {
+  const userId = db.sessions.find(([key, value]) => key === sessionId);
+  // const userId = DB.sessions[sessionId];
   if (!userId) return;
-  return DB.users.find((u) => u.id === userId);
+  // return DB.users.find((u) => u.id === userId);
+  return db.users.find(([key, user]) => user.id === id);
 };
 
-const createSession = async (userId) => {
+export const createSession = async (userId) => {
   const sessionId = crypto.randomUUID();
-  DB.sessions[sessionId] = userId;
+  // DB.sessions[sessionId] = userId;
+  await db.update(({ sessions }) => {
+    sessions[sessionId] = userId;
+  });
   return sessionId;
 };
 
-const deleteSession = async (sessionId) => {
-  delete DB.sessions[sessionId];
+export const deleteSession = async (sessionId) => {
+  delete db.sessions[sessionId];
 };
 
-const auth = () => async (req, res, next) => {
+export const auth = () => async (req, res, next) => {
   if (!req.cookies["sessionId"]) {
     return next();
   }
@@ -55,15 +67,4 @@ const auth = () => async (req, res, next) => {
   req.user = user;
   req.sessionId = req.cookies["sessionsId"];
   next();
-};
-
-module.exports = {
-  DB,
-  createUser,
-  findUserByUserEmail,
-  findUserBySessionId,
-  createSession,
-  deleteSession,
-  auth,
-  hash,
 };

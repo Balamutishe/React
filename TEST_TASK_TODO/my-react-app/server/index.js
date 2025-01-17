@@ -1,11 +1,11 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const users = require("./routes/users.js");
-const auth = require("./routes/auth.js");
+import express, { json } from "express";
+import cookieParser from "cookie-parser";
+import users from "./routes/users.js";
+import auth from "./routes/auth.js";
 
 const app = express();
 
-app.use(express.json());
+app.use(json());
 app.use(cookieParser());
 
 app.use("/users", users);

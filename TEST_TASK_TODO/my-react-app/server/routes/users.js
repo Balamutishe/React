@@ -1,8 +1,8 @@
-const express = require("express");
+import { Router } from "express";
 
-const { auth } = require("../db/db.js");
+import { auth } from "../db/db.js";
 
-const usersRouter = express.Router();
+const usersRouter = Router();
 
 usersRouter.get("/me", auth(), (req, res) => {
   if (!req.user) {
@@ -16,4 +16,4 @@ usersRouter.get("/me", auth(), (req, res) => {
     .json({ email: user.email, username: user.username, id: user.id });
 });
 
-module.exports = usersRouter;
+export default usersRouter;

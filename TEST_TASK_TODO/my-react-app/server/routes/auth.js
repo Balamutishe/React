@@ -1,17 +1,14 @@
-const express = require("express");
+import { Router } from "express";
 
-const bodyParser = require("body-parser");
-const {
-  DB,
+import {
   createUser,
   deleteSession,
   createSession,
   findUserByUserEmail,
-  auth,
   hash,
-} = require("../db/db.js");
+} from "../db/db.js";
 
-const authRouter = express.Router();
+const authRouter = Router();
 
 authRouter.post("/logout", async (req, res) => {
   if (!req.user) {
@@ -39,15 +36,11 @@ authRouter.post("/login", async (req, res) => {
   const user = await findUserByUserEmail(email);
 
   if (!user || user.password !== hash(password)) {
-    return res.status(401).send("Неверный email или пароль");
-  }
-
-  if (!user || user.password !== hash(password)) {
-    res.redirect("/?authError=true");
+    res.send("Неверный email или пароль").redirect("/?authError=true");
   } else {
     const sessionId = await createSession(user.id);
     res.cookie("sessionId", sessionId, { httpOnly: true }).redirect("/");
   }
 });
 
-module.exports = authRouter;
+export default authRouter;
