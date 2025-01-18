@@ -14,18 +14,16 @@ const saveNotesList = async (data) => {
 };
 
 const createNote = async (title, text) => {
-  const response = await restoreNotesList("NoteList");
-  // const data = await response.json();
+  const data = await restoreNotesList("NoteList");
   const note = {
     id: crypto.randomUUID(),
     title: title,
     text: text,
-    done: false,
   };
 
-  console.log(response);
+  data.push(note);
 
-  // await saveNotesList(data);
+  await saveNotesList(data);
 
   return note;
 };
