@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const { response } = require("express");
 const LocalStorage = require("node-localstorage").LocalStorage;
 localStorage = new LocalStorage("./db");
 
@@ -7,34 +8,51 @@ const restoreNotesList = async (nameStorage) => {
   return (rawNotesList = localStorage.getItem(nameStorage) || []);
 };
 
-const database = restoreNotesList("NoteList");
+let database = [];
+
+(async () => {
+  database = await restoreNotesList("NoteList");
+})();
 
 const saveNotesList = async (data) => {
   localStorage.setItem("NoteList", JSON.stringify(data));
 };
 
 const createNote = async (title, text) => {
-  const data = await restoreNotesList("NoteList");
   const note = {
     id: crypto.randomUUID(),
     title: title,
     text: text,
   };
 
-  data.push(note);
+  database = [...database, note];
 
-  await saveNotesList(data);
+  await saveNotesList(database);
 
   return note;
 };
 
 const getOneNote = async (id) => {
-  return await database.find((note) => note.id === id);
+  const data = await JSON.parse(database);
+  return data.find((note) => note.id === id);
+};
+
+const deleteNote = async (id) => {
+  const data = await restoreNotesList("NoteList");
+  const parseData = await JSON.parse(data);
+
+  const filterParseData = parseData.filter((note) => note.id !== id);
+
+  database = [...filterParseData];
+
+  await saveNotesList(database);
+
+  return database;
 };
 
 module.exports = {
-  database,
   restoreNotesList,
-  createNote,
   getOneNote,
+  createNote,
+  deleteNote,
 };

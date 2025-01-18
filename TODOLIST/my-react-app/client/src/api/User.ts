@@ -1,5 +1,8 @@
 export const fetchNotesList = async () => {
-  return fetch("/api");
+  const response = await fetch("/api");
+  const data = await response.json();
+
+  return data;
 };
 
 export const createNote = (title: string, text: string) => {
@@ -13,4 +16,32 @@ export const createNote = (title: string, text: string) => {
       text,
     }),
   }).then(() => undefined);
+};
+
+export const findNote = async (id: string) => {
+  const response = await fetch(`/api/notes/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+    }),
+  });
+
+  const note = response.json();
+
+  return note;
+};
+
+export const deleteNote = async (id: string) => {
+  return await fetch(`/api/notes/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+    }),
+  });
 };
