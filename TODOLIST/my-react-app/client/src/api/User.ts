@@ -1,11 +1,30 @@
-export const fetchNotesList = async () => {
-  const response = await fetch("/api");
-  const data = await response.json();
+import { validateResponse } from "./validateResponse";
+import { z } from "zod";
 
-  return data;
-};
+export const NoteShema = z.object({
+  id: z.string(),
+  title: z.string(),
+  text: z.string(),
+});
 
-export const createNote = (title: string, text: string) => {
+export type Note = z.infer<typeof NoteShema>;
+
+export const NotesListShema = z.array(NoteShema);
+
+export type NotesList = z.infer<typeof NotesListShema>;
+
+export const FetchNoteListShema = z.array(NoteShema);
+
+export type FetchNotesList = z.infer<typeof FetchNoteListShema>;
+
+export function fetchNotesList(): Promise<FetchNotesList> {
+  return fetch("/api")
+    .then(validateResponse)
+    .then((response) => response.json())
+    .then((data) => FetchNoteListShema.parse(data));
+}
+
+export function createNote(title: string, text: string) {
   return fetch("/api", {
     method: "POST",
     headers: {
@@ -15,11 +34,13 @@ export const createNote = (title: string, text: string) => {
       title,
       text,
     }),
-  }).then(() => undefined);
-};
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
 
-export const findNote = async (id: string) => {
-  const response = await fetch(`/api/notes/${id}`, {
+export function findNote(id: string) {
+  return fetch(`/api/notes/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,21 +48,31 @@ export const findNote = async (id: string) => {
     body: JSON.stringify({
       id,
     }),
-  });
+  })
+    .then(validateResponse)
+    .then((response) => response.json());
+}
 
-  const note = response.json();
-
-  return note;
-};
-
-export const deleteNote = async (id: string) => {
-  return await fetch(`/api/notes/${id}`, {
+export function deleteNote(id: string) {
+  return fetch(`/api/notes/${id}`, {
     method: "DELETE",
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
+
+export function changeNote(id: string, noteTitle: string, noteText: string) {
+  return fetch(`/api/notes/${id}`, {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       id,
+      noteTitle,
+      noteText,
     }),
-  });
-};
+  })
+    .then(validateResponse)
+    .then((response) => response.json());
+}

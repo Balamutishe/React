@@ -5,6 +5,7 @@ const {
   createNote,
   getOneNote,
   deleteNote,
+  changeNote,
 } = require("./db/db.js");
 
 app.use(express.json());
@@ -16,12 +17,13 @@ app.post("/", async (req, res) => {
     res.send("Введите корректные значения").redirect("/createNoteError=error");
   } else {
     const note = await createNote(title, text);
-    res.status(201).send(note);
+    res.status(201).send(note.id);
   }
 });
 
 app.get("/", async (req, res) => {
   const data = await restoreNotesList("NoteList");
+
   if (!data) {
     return res.status(400).send("Список не найден");
   } else {
@@ -37,24 +39,32 @@ app.post("/notes/:id", async (req, res) => {
   if (note) {
     return res.status(200).json(note);
   } else {
-    return res.status(404).send("Запись не найдена");
+    return res.status(404).send({ message: "Запись не найдена" });
   }
 });
 
 app.delete("/notes/:id", async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
-  const filterData = await deleteNote(id);
+  if (!id) {
+    return res.status(400).send({ message: "Невалидный запрос" });
+  } else {
+    await deleteNote(id);
+    return res.status(201).json({ message: "Запись успешно удалена" });
+  }
+});
 
-  console.log(filterData);
+app.patch("/notes/:id", async (req, res) => {
+  const { id, noteTitle, noteText } = req.body;
 
-  // const filterData = await deleteNote(id);
-  // console.log(filterData);
-  // if (filterData) {
-  //   return res.status(200).send(`Запись ${id} удалена`);
-  // } else {
-  //   return res.status(404).send("Запись не найдена");
-  // }
+  console.log({ id, noteTitle, noteText });
+
+  if (!id) {
+    return res.status(400).send({ message: "Невалидный запрос" });
+  } else {
+    await changeNote(id, noteTitle, noteText);
+    return res.status(201).send({ message: "Запись успешно изменена" });
+  }
 });
 
 const port = process.env.PORT || 5000;

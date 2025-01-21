@@ -1,18 +1,20 @@
 const crypto = require("crypto");
-const { response } = require("express");
-const LocalStorage = require("node-localstorage").LocalStorage;
-localStorage = new LocalStorage("./db");
 
-const restoreNotesList = async (nameStorage) => {
-  // return await localStorage.getItem(nameStorage);
-  return (rawNotesList = localStorage.getItem(nameStorage) || []);
-};
+if (typeof localStorage === "undefined" || localStorage === null) {
+  let LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./db/NoteList");
+}
 
-let database = [];
+async function restoreNotesList(nameStorage) {
+  let data = [];
 
-(async () => {
-  database = await restoreNotesList("NoteList");
-})();
+  if (localStorage !== null && localStorage.length !== 0) {
+    data = localStorage.getItem(nameStorage);
+    return await JSON.parse(data);
+  }
+
+  return data;
+}
 
 const saveNotesList = async (data) => {
   localStorage.setItem("NoteList", JSON.stringify(data));
@@ -25,29 +27,43 @@ const createNote = async (title, text) => {
     text: text,
   };
 
-  database = [...database, note];
+  const database = await restoreNotesList("NoteList");
 
-  await saveNotesList(database);
+  const updateDatabase = [...database, note];
+  await saveNotesList(updateDatabase);
 
   return note;
 };
 
 const getOneNote = async (id) => {
-  const data = await JSON.parse(database);
-  return data.find((note) => note.id === id);
+  const database = await restoreNotesList();
+  return database.find((note) => note.id === id);
 };
 
 const deleteNote = async (id) => {
-  const data = await restoreNotesList("NoteList");
-  const parseData = await JSON.parse(data);
+  const database = await restoreNotesList("NoteList");
+  const filterParseData = await database.filter((note) => note.id !== id);
 
-  const filterParseData = parseData.filter((note) => note.id !== id);
+  await saveNotesList(filterParseData);
 
-  database = [...filterParseData];
+  return filterParseData;
+};
 
-  await saveNotesList(database);
+const changeNote = async (id, noteTitle, noteText) => {
+  const database = await restoreNotesList("NoteList");
 
-  return database;
+  const updateDatabase = database.map((item) => {
+    if (item.id === id) {
+      item.title = noteTitle;
+      item.text = noteText;
+    }
+
+    return item;
+  });
+
+  await saveNotesList(updateDatabase);
+
+  return updateDatabase;
 };
 
 module.exports = {
@@ -55,4 +71,5 @@ module.exports = {
   getOneNote,
   createNote,
   deleteNote,
+  changeNote,
 };
