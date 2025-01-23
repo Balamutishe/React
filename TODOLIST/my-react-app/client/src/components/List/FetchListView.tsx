@@ -1,14 +1,18 @@
 import { List } from "./List";
 import { useQueryList } from "../../hooks/useQueryList";
+import { FormNoteAdd } from "../FormNoteAdd/FormNoteAdd";
 
 export const FetchListView = () => {
   const queryList = useQueryList();
 
-  const list = queryList.data ? queryList.data : [];
-
   switch (queryList.status) {
     case "success":
-      return <List list={list} refetch={queryList.refetch} />;
+      return (
+        <>
+          <FormNoteAdd refetch={queryList.refetch} />
+          <List list={queryList.data} refetch={queryList.refetch} />
+        </>
+      );
     case "error":
       return (
         <div>

@@ -31,8 +31,8 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/notes/:id", async (req, res) => {
-  const { id } = req.body;
+app.get("/notes/:id", async (req, res) => {
+  const { id } = req.params;
 
   const note = await getOneNote(id);
 
@@ -50,7 +50,7 @@ app.delete("/notes/:id", async (req, res) => {
     return res.status(400).send({ message: "Невалидный запрос" });
   } else {
     await deleteNote(id);
-    return res.status(201).json({ message: "Запись успешно удалена" });
+    return res.status(201).send({ message: "Запись успешно удалена" });
   }
 });
 

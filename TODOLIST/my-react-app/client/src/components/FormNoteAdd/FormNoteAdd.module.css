@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+
+  padding: 20px;
+
+  border: 1px solid #5e5d5d;
+  border-radius: 10px;
+
+  background-color: #d6d6d6;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+}
+
+.inputs > *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 10px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 600;
+}

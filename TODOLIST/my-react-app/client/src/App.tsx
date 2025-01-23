@@ -1,14 +1,16 @@
-import { Form } from "./components/Form/Form";
-import { FetchListView } from "./components/List/FetchListView";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import "./App.css";
+import { MainPage } from "./pages/MainPage/MainPage";
+import { NotePage } from "./pages/NotePage/NotePage";
 
 function App() {
   return (
-    <>
-      <Form />
-      <FetchListView />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/notes/:id" element={<NotePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,21 +1,24 @@
 import { FC } from "react";
 import { QueryObserverResult } from "@tanstack/react-query";
 
-import { Card } from "../Card/Card";
-import { Note } from "../../api/User";
+import { Note } from "../Note/Note";
+import { TNote } from "../../api/Notes";
+
+import styles from "./List.module.css";
 
 interface IListProps {
-  list: Note[];
-  refetch: () => Promise<QueryObserverResult<Note[], Error>>;
+  list: TNote[];
+  refetch: () => Promise<QueryObserverResult<TNote[], Error>>;
 }
 
 export const List: FC<IListProps> = ({ list, refetch }) => {
   return (
     <>
-      <ul>
+      <h2 className={styles.title}>Список дел</h2>
+      <ul className={styles.list}>
         {list.map((item) => (
           <li key={item.id}>
-            <Card
+            <Note
               title={item.title}
               text={item.text}
               id={item.id}

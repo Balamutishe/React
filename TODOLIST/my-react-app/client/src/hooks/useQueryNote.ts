@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../api/queryClient";
-import { fetchNotesList } from "../api/Notes";
+import { fetchNote } from "../api/Notes";
 
-export const useQueryList = () => {
+export const useQueryNote = (id: string) => {
   return useQuery(
     {
-      queryFn: () => fetchNotesList(),
-      queryKey: ["notesList"],
+      queryFn: () => fetchNote(id),
+      queryKey: ["note"],
     },
     queryClient
   );

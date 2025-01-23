@@ -36,8 +36,10 @@ const createNote = async (title, text) => {
 };
 
 const getOneNote = async (id) => {
-  const database = await restoreNotesList();
-  return database.find((note) => note.id === id);
+  const database = await restoreNotesList("NoteList");
+  const note = await database.find((note) => note.id === id);
+  console.log(note);
+  return note;
 };
 
 const deleteNote = async (id) => {

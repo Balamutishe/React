@@ -7,7 +7,7 @@ export const NoteShema = z.object({
   text: z.string(),
 });
 
-export type Note = z.infer<typeof NoteShema>;
+export type TNote = z.infer<typeof NoteShema>;
 
 export const NotesListShema = z.array(NoteShema);
 
@@ -39,15 +39,9 @@ export function createNote(title: string, text: string) {
     .then(() => undefined);
 }
 
-export function findNote(id: string) {
+export function fetchNote(id: string) {
   return fetch(`/api/notes/${id}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      id,
-    }),
+    method: "GET",
   })
     .then(validateResponse)
     .then((response) => response.json());
