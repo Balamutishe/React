@@ -3,7 +3,7 @@ import { useState, FC } from "react";
 
 import { createNote, TNote } from "../../api/Notes";
 
-import styles from "./FormNoteAdd.module.css";
+import "./FormNoteAdd.scss";
 
 interface IFormProps {
   refetch: () => Promise<QueryObserverResult<TNote[], Error>>;
@@ -22,10 +22,9 @@ export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={(e) => handleFormSubmit(e)}>
-      <div className={styles.inputs}>
+    <form className="form-add" onSubmit={(e) => handleFormSubmit(e)}>
+      <div className="form-add__inputs">
         <input
-          className={styles.input}
           type="text"
           name="title"
           value={title}
@@ -33,7 +32,6 @@ export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
-          className={styles.input}
           type="text"
           name="text"
           value={text}
@@ -41,7 +39,7 @@ export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
           onChange={(e) => setText(e.target.value)}
         />
       </div>
-      <button className={styles.button} type="submit">
+      <button className="form-add__button" type="submit">
         Добавить дело
       </button>
     </form>

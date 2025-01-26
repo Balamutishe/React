@@ -1,0 +1,13 @@
+.main-page {
+  &__title {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 40px;
+
+    color: #ffffff;
+
+    font-size: 5rem;
+    font-weight: 800;
+  }
+}

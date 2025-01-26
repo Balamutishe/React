@@ -4,7 +4,8 @@ import { QueryObserverResult } from "@tanstack/react-query";
 import { Note } from "../Note/Note";
 import { TNote } from "../../api/Notes";
 
-import styles from "./List.module.css";
+// import styles from "./List.module.css";
+import "./List.scss";
 
 interface IListProps {
   list: TNote[];
@@ -13,11 +14,11 @@ interface IListProps {
 
 export const List: FC<IListProps> = ({ list, refetch }) => {
   return (
-    <>
-      <h2 className={styles.title}>Список дел</h2>
-      <ul className={styles.list}>
+    <div className="container-list">
+      <ul className="list">
+        <h2 className="list__title">Список дел</h2>
         {list.map((item) => (
-          <li key={item.id}>
+          <li className="list__item" key={item.id}>
             <Note
               title={item.title}
               text={item.text}
@@ -27,6 +28,6 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };

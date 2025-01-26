@@ -1,10 +1,10 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { QueryObserverResult } from "@tanstack/react-query";
 
 import { deleteNote, TNote } from "../../api/Notes";
 
-import styles from "./Note.module.css";
-import { Link } from "react-router-dom";
+import "./Note.scss";
 
 interface INoteProps {
   title: string;
@@ -15,14 +15,17 @@ interface INoteProps {
 
 export const Note: FC<INoteProps> = ({ title, text, id, refetch }) => {
   return (
-    <div className={styles.note}>
-      <div className={styles.desc}>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.text}>{text}</p>
+    <div className="note">
+      <div className="note__desc">
+        <h3 className="note__title">{title}</h3>
+        <p className="note__text">{text}</p>
       </div>
-      <div className={styles.actions}>
-        <Link to={`/notes/${id}`}>Подробнее</Link>
+      <div className="note__actions">
+        <button className="note__button">
+          <Link to={`/notes/${id}`}>Подробнее</Link>
+        </button>
         <button
+          className="note__button"
           onClick={() => {
             deleteNote(id);
             refetch();
