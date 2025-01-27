@@ -1,10 +1,9 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { QueryObserverResult } from "@tanstack/react-query";
 
 import { Note } from "../Note/Note";
 import { TNote } from "../../api/Notes";
 
-// import styles from "./List.module.css";
 import "./List.scss";
 
 interface IListProps {
@@ -13,11 +12,27 @@ interface IListProps {
 }
 
 export const List: FC<IListProps> = ({ list, refetch }) => {
+  const [visibleNote, setVisibleNote] = useState(3);
+
+  const handleFilteredList = () => {
+    return list.filter((item, index) => {
+      if (index < visibleNote) {
+        return item;
+      }
+    });
+  };
+
+  const filterList = handleFilteredList();
+
+  const handleLoadNote = () => {
+    setVisibleNote(visibleNote + 3);
+  };
+
   return (
     <div className="container-list">
       <ul className="list">
         <h2 className="list__title">Список дел</h2>
-        {list.map((item) => (
+        {filterList.map((item) => (
           <li className="list__item" key={item.id}>
             <Note
               title={item.title}
@@ -28,6 +43,16 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
           </li>
         ))}
       </ul>
+      <button
+        className={
+          visibleNote === list.length || visibleNote > list.length
+            ? "button--load invisible"
+            : "button--load visible"
+        }
+        onClick={() => handleLoadNote()}
+      >
+        Загрузить еще
+      </button>
     </div>
   );
 };

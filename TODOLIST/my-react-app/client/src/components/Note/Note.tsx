@@ -21,9 +21,9 @@ export const Note: FC<INoteProps> = ({ title, text, id, refetch }) => {
         <p className="note__text">{text}</p>
       </div>
       <div className="note__actions">
-        <button className="note__button">
-          <Link to={`/notes/${id}`}>Подробнее</Link>
-        </button>
+        <Link className="note__button" to={`/notes/${id}`}>
+          Подробнее
+        </Link>
         <button
           className="note__button"
           onClick={() => {
