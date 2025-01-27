@@ -12,11 +12,11 @@ interface IListProps {
 }
 
 export const List: FC<IListProps> = ({ list, refetch }) => {
-  const [visibleNote, setVisibleNote] = useState(3);
+  const [countNote, setCountNote] = useState(3);
 
   const handleFilteredList = () => {
     return list.filter((item, index) => {
-      if (index < visibleNote) {
+      if (index < countNote) {
         return item;
       }
     });
@@ -24,8 +24,10 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
 
   const filterList = handleFilteredList();
 
+  console.log(filterList.length);
+
   const handleLoadNote = () => {
-    setVisibleNote(visibleNote + 3);
+    setCountNote(countNote + 3);
   };
 
   return (
@@ -45,7 +47,7 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
       </ul>
       <button
         className={
-          visibleNote === list.length || visibleNote > list.length
+          countNote === list.length || countNote > list.length
             ? "button--load invisible"
             : "button--load visible"
         }
