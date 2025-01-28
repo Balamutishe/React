@@ -24,8 +24,6 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
 
   const filterList = handleFilteredList();
 
-  console.log(filterList.length);
-
   const handleLoadNote = () => {
     setCountNote(countNote + 3);
   };
@@ -33,13 +31,16 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
   return (
     <div className="container-list">
       <ul className="list">
-        <h2 className="list__title">Список дел</h2>
+        <h2 className="list__title">
+          {list.length === 0 ? "Список дел пуст" : "Список дел"}
+        </h2>
         {filterList.map((item) => (
           <li className="list__item" key={item.id}>
             <Note
               title={item.title}
               text={item.text}
               id={item.id}
+              date={item.date}
               refetch={refetch}
             />
           </li>

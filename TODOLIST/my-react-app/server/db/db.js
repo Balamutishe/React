@@ -25,6 +25,7 @@ const createNote = async (title, text) => {
     id: crypto.randomUUID(),
     title: title,
     text: text,
+    date: new Date().toLocaleDateString("ru"),
   };
 
   const database = await restoreNotesList("NoteList");
@@ -58,6 +59,7 @@ const changeNote = async (id, noteTitle, noteText) => {
     if (item.id === id) {
       item.title = noteTitle;
       item.text = noteText;
+      item.date = new Date().toLocaleString("ru");
     }
 
     return item;

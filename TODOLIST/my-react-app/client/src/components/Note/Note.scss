@@ -15,6 +15,12 @@
   color: #ffffff;
   background-color: #d6d6d6;
 
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   &__desc {
     margin-bottom: 20px;
   }

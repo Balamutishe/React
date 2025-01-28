@@ -5,6 +5,7 @@ export const NoteShema = z.object({
   id: z.string(),
   title: z.string(),
   text: z.string(),
+  date: z.string(),
 });
 
 export type TNote = z.infer<typeof NoteShema>;

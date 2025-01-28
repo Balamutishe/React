@@ -1,11 +1,11 @@
 :root {
+  background-color: #424242;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
 
   font-size: 14px;
   font-weight: 400;
-
-  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,10 +21,6 @@
 
 html {
   box-sizing: inherit;
-
-  background-image: url("../public/business-smartphone-mobile-iphone-wallpaper-preview.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 
 body {
