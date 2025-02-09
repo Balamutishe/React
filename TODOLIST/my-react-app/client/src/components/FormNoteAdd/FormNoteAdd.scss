@@ -36,7 +36,7 @@
 
     & > input:hover,
     & > input:focus {
-      outline: 2px solid brown;
+      outline: 2px solid red;
     }
 
     & > input:hover::placeholder {
@@ -50,7 +50,7 @@
     font-size: 1.5rem;
     font-weight: 600;
 
-    background-color: brown;
+    background-color: red;
 
     border-radius: 10px;
     outline: 2px solid #1d1d1d;

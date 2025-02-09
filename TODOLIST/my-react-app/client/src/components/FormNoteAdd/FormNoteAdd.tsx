@@ -1,7 +1,8 @@
 import { QueryObserverResult } from "@tanstack/react-query";
 import { useState, FC } from "react";
 
-import { createNote, TNote } from "../../api/Notes";
+import { TNote } from "../../api/Notes";
+import { useMutationNoteCreated } from "../../hooks/useMutationNoteCreated";
 
 import "./FormNoteAdd.scss";
 
@@ -11,18 +12,22 @@ interface IFormProps {
 
 export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
+
+  const createNote = useMutationNoteCreated(title, description, refetch);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createNote(title, text);
-    setTitle("");
-    setText("");
-    refetch();
+    createNote.mutate();
   };
 
   return (
-    <form className="form-add" onSubmit={(e) => handleFormSubmit(e)}>
+    <form
+      className="form-add"
+      onSubmit={(e) => {
+        handleFormSubmit(e);
+      }}
+    >
       <div className="form-add__inputs">
         <input
           type="text"
@@ -33,10 +38,10 @@ export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
         />
         <input
           type="text"
-          name="text"
-          value={text}
+          name="description"
+          value={description}
           placeholder="Подробности дела"
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
       <button className="form-add__button" type="submit">

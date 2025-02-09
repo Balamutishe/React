@@ -1,27 +1,37 @@
 import { FC, useEffect, useState } from "react";
 import { QueryObserverResult } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
-import { deleteNote, changeNote, TNote } from "../../api/Notes";
+import { TNote } from "../../api/Notes";
+import { useMutationNoteDelete } from "../../hooks/useMutationNoteDelete";
+import { useMutationNoteChanged } from "../../hooks/useMutationNoteChanged";
 
 import styles from "./NoteDesc.module.css";
-import { Link } from "react-router-dom";
 
 interface INoteDescProps {
   title: string;
-  text: string;
-  id: string;
+  description: string;
+  id: number;
   refetch: () => Promise<QueryObserverResult<TNote, Error>>;
 }
 
-export const NoteDesc: FC<INoteDescProps> = ({ title, text, id }) => {
+export const NoteDesc: FC<INoteDescProps> = ({
+  title,
+  description,
+  id,
+  refetch,
+}) => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteText, setNoteText] = useState("");
   const [disabled, setDisabled] = useState(true);
 
+  const changeNote = useMutationNoteChanged(id, noteTitle, noteText, refetch);
+  const deleteNote = useMutationNoteDelete(id);
+
   useEffect(() => {
     setNoteTitle(title);
-    setNoteText(text);
-  }, [title, text]);
+    setNoteText(description);
+  }, [title, description]);
 
   return (
     <div className={styles.container}>
@@ -36,7 +46,8 @@ export const NoteDesc: FC<INoteDescProps> = ({ title, text, id }) => {
           }}
           onBlur={() => {
             setDisabled(true);
-            changeNote(id, noteTitle, noteText);
+
+            changeNote.mutate();
           }}
         />
         <textarea
@@ -49,16 +60,23 @@ export const NoteDesc: FC<INoteDescProps> = ({ title, text, id }) => {
           }}
           onBlur={() => {
             setDisabled(true);
-            changeNote(id, noteTitle, noteText);
+
+            changeNote.mutate();
           }}
         />
       </div>
       <div className={styles.actions}>
-        <button onClick={() => setDisabled(!disabled)}>Изменить дело</button>
+        <button
+          onClick={() => {
+            setDisabled(!disabled);
+          }}
+        >
+          Изменить дело
+        </button>
         <Link
           to={"/"}
           onClick={() => {
-            deleteNote(id);
+            deleteNote.mutate();
           }}
         >
           Удалить дело

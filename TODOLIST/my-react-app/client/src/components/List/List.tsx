@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { QueryObserverResult } from "@tanstack/react-query";
 
 import { Note } from "../Note/Note";
@@ -13,20 +13,21 @@ interface IListProps {
 
 export const List: FC<IListProps> = ({ list, refetch }) => {
   const [countNote, setCountNote] = useState(3);
+  const [buttonLoadVisible, setButtonLoadVisible] = useState(false);
 
-  const handleFilteredList = () => {
-    return list.filter((item, index) => {
-      if (index < countNote) {
-        return item;
-      }
-    });
-  };
+  useEffect(() => {
+    if (countNote === list.length || countNote > list.length) {
+      setButtonLoadVisible(true);
+    } else {
+      setButtonLoadVisible(false);
+    }
+  }, [countNote, list]);
 
-  const filterList = handleFilteredList();
-
-  const handleLoadNote = () => {
-    setCountNote(countNote + 3);
-  };
+  const filterList = list.filter((item, index) => {
+    if (index < countNote) {
+      return item;
+    }
+  });
 
   return (
     <div className="container-list">
@@ -38,9 +39,9 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
           <li className="list__item" key={item.id}>
             <Note
               title={item.title}
-              text={item.text}
+              description={item.description}
               id={item.id}
-              date={item.date}
+              created_at={item.created_at}
               refetch={refetch}
             />
           </li>
@@ -48,11 +49,9 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
       </ul>
       <button
         className={
-          countNote === list.length || countNote > list.length
-            ? "button--load invisible"
-            : "button--load visible"
+          buttonLoadVisible ? "button--load invisible" : "button--load visible"
         }
-        onClick={() => handleLoadNote()}
+        onClick={() => setCountNote(countNote + 3)}
       >
         Загрузить еще
       </button>

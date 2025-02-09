@@ -17,7 +17,7 @@ export const FetchNoteDescView = () => {
       return (
         <NoteDesc
           title={queryNote.data.title}
-          text={queryNote.data.text}
+          description={queryNote.data.description}
           id={queryNote.data.id}
           refetch={queryNote.refetch}
         />

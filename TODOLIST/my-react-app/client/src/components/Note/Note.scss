@@ -12,7 +12,7 @@
 
   border-radius: 10px;
 
-  color: #ffffff;
+  color: #1d1d1d;
   background-color: #d6d6d6;
 
   &__header {
@@ -64,12 +64,12 @@
 
     &:hover,
     &:focus {
-      color: brown;
-      outline: 2px solid brown;
+      color: red;
+      outline: 2px solid red;
     }
 
     &:hover > a {
-      color: brown;
+      color: red;
     }
 
     & > a {
@@ -79,10 +79,10 @@
 
   &:hover,
   &:focus {
-    outline: 2px solid brown;
+    outline: 2px solid red;
 
     background-color: #e9e9e9;
 
-    color: brown;
+    color: red;
   }
 }
