@@ -3,6 +3,7 @@ import { QueryObserverResult } from "@tanstack/react-query";
 
 import { Note } from "../Note/Note";
 import { TNote } from "../../api/Notes";
+import { FormNoteAdd } from "../FormNoteAdd/FormNoteAdd";
 
 import "./List.scss";
 
@@ -12,7 +13,7 @@ interface IListProps {
 }
 
 export const List: FC<IListProps> = ({ list, refetch }) => {
-  const [countNote, setCountNote] = useState(3);
+  const [countNote, setCountNote] = useState(6);
   const [buttonLoadVisible, setButtonLoadVisible] = useState(false);
 
   useEffect(() => {
@@ -32,16 +33,13 @@ export const List: FC<IListProps> = ({ list, refetch }) => {
   return (
     <div className="container-list">
       <ul className="list">
-        <h2 className="list__title">
-          {list.length === 0 ? "Список дел пуст" : "Список дел"}
-        </h2>
+        <FormNoteAdd refetch={refetch} />
         {filterList.map((item) => (
           <li className="list__item" key={item.id}>
             <Note
               title={item.title}
               description={item.description}
               id={item.id}
-              created_at={item.created_at}
               refetch={refetch}
             />
           </li>

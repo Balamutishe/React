@@ -33,14 +33,14 @@ export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
           type="text"
           name="title"
           value={title}
-          placeholder="Название дела"
+          placeholder="Название"
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type="text"
           name="description"
           value={description}
-          placeholder="Подробности дела"
+          placeholder="Описание"
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>

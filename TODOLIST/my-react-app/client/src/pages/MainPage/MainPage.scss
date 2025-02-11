@@ -1,13 +1,5 @@
-.main-page {
-  &__title {
-    display: flex;
-    justify-content: center;
+.main {
+  position: relative;
 
-    margin-bottom: 20px;
-
-    color: #ffffff;
-
-    font-size: 4rem;
-    font-weight: 800;
-  }
+  min-height: 600px;
 }

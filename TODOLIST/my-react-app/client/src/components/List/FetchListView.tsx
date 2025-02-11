@@ -1,6 +1,5 @@
 import { List } from "./List";
 import { useQueryList } from "../../hooks/useQueryList";
-import { FormNoteAdd } from "../FormNoteAdd/FormNoteAdd";
 
 export const FetchListView = () => {
   const queryList = useQueryList();
@@ -10,7 +9,6 @@ export const FetchListView = () => {
     case "success":
       return (
         <>
-          <FormNoteAdd refetch={queryList.refetch} />
           <List list={list} refetch={queryList.refetch} />
         </>
       );

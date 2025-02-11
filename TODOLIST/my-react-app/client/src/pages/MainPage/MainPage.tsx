@@ -1,6 +1,7 @@
 import { FetchListView } from "../../components/List/FetchListView";
 import { AuthForm } from "../../components/AuthForm/AuthForm";
 import { useQueryUser } from "../../hooks/useQueryUser";
+import { Header } from "../../components/Header/Header";
 
 import "./MainPage.scss";
 
@@ -11,14 +12,18 @@ export const MainPage = () => {
     case "error":
       return (
         <div className="main-page">
-          <AuthForm />
+          <main className="main">
+            <AuthForm />
+          </main>
         </div>
       );
     case "success":
       return (
         <div className="main-page">
-          <h1 className="main-page__title">TODOLIST</h1>
-          <FetchListView />
+          <Header username={queryUser.data.username} authState={true} />
+          <main>
+            <FetchListView />
+          </main>
         </div>
       );
   }

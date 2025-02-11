@@ -2,6 +2,8 @@ import { FormEventHandler, useState } from "react";
 import { useMutationUserLogin } from "../../hooks/useMutationUserLogin";
 import { useMutationUserRegister } from "../../hooks/useMutationUserRegister";
 
+import "./AuthForm.scss";
+
 export const AuthForm = () => {
   const [authStatus, setAuthStatus] = useState("login");
   const [username, setUsername] = useState("");
@@ -22,11 +24,15 @@ export const AuthForm = () => {
   };
 
   return (
-    <>
-      {authStatus === "register" && <title>Регистрация</title>}
-      <form onSubmit={handleFormSubmit}>
-        <div>
+    <div className="container-form">
+      <form className="form-auth" onSubmit={handleFormSubmit}>
+        <h2 className="form-auth__title">
+          {authStatus === "register" ? "Регистрация" : "Войдите чтобы начать"}
+        </h2>
+
+        <div className="form-auth__inputs">
           <input
+            className="form-auth__input"
             type="text"
             name="username"
             placeholder="Введите имя"
@@ -34,6 +40,7 @@ export const AuthForm = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
+            className="form-auth__input"
             type="password"
             name="password"
             placeholder="Введите пароль"
@@ -41,17 +48,22 @@ export const AuthForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">
+        <button className="form-auth__button" type="submit">
           {authStatus === "login" ? "Войти" : "Зарегистрироваться"}
         </button>
+        <div
+          className="form-auth__switch"
+          onClick={() =>
+            setAuthStatus((status) =>
+              status === "login" ? "register" : "login"
+            )
+          }
+        >
+          {authStatus === "login"
+            ? "Еще нет аккаунта?"
+            : "Уже зарегистрированы"}
+        </div>
       </form>
-      <button
-        onClick={() =>
-          setAuthStatus((status) => (status === "login" ? "register" : "login"))
-        }
-      >
-        {authStatus === "login" ? "Еще нет аккаунта?" : "Уже зарегистрированы"}
-      </button>
-    </>
+    </div>
   );
 };

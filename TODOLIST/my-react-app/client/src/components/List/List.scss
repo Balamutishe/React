@@ -1,37 +1,32 @@
 .list {
+  display: grid;
+  grid-template-columns: repeat(3, 32%);
+  grid-auto-rows: 300px;
+  gap: 28px;
+
   margin-bottom: 20px;
-
-  &__title {
-    margin-bottom: 20px;
-
-    color: #ffffff;
-    font-size: 3rem;
-  }
-
-  &__item:not(:last-child) {
-    margin-bottom: 20px;
-  }
 }
 
 .button--load {
-  padding: 10px;
+  padding: 14px;
 
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 1rem;
 
   border-radius: 10px;
-  outline: 2px solid #000000;
+  outline: 1px solid #000000;
 
-  color: #ffffff;
-  background-color: red;
+  color: #000000;
+  background-color: #ffffff;
+
+  cursor: pointer;
 }
 
 .button--load:hover,
 .button--load:focus {
-  outline: 2px solid red;
+  color: rgb(0, 199, 7);
 
-  color: #000000;
-  background-color: #ffffff;
+  outline: 2px solid rgb(0, 199, 7);
 }
 
 .visible {
