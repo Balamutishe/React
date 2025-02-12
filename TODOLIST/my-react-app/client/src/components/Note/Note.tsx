@@ -4,6 +4,7 @@ import { QueryObserverResult } from "@tanstack/react-query";
 
 import { TNote } from "../../api/Notes";
 import { useMutationNoteDelete } from "../../hooks/useMutationNoteDelete";
+import { Button } from "../Button/Button";
 
 import "./Note.scss";
 
@@ -26,18 +27,17 @@ export const Note: FC<INoteProps> = ({ title, description, id, refetch }) => {
         <p className="note__text">{description}</p>
       </div>
       <div className="note__actions">
-        <button className="note__button">
+        <Button variant="note__button">
           <Link to={`/notes/${id}`}>Подробнее</Link>
-        </button>
-        <button
-          className="note__button"
+        </Button>
+        <Button
           onClick={() => {
             deleteNote.mutate();
             refetch();
           }}
         >
           Удалить
-        </button>
+        </Button>
       </div>
     </div>
   );

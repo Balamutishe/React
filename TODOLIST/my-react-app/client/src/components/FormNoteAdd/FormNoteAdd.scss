@@ -5,12 +5,10 @@
 
   width: 100%;
   min-height: 300px;
-
   padding: 20px 20px;
-
   border-radius: 10px;
 
-  background-color: rgb(122, 255, 122);
+  background-color: rgb(121, 213, 255);
 
   &__inputs {
     display: flex;
@@ -18,7 +16,6 @@
 
     & > input {
       padding: 20px 20px;
-
       border-radius: 6px;
 
       font-size: 1rem;
@@ -34,35 +31,5 @@
     & > input:not(:last-child) {
       margin-bottom: 10px;
     }
-
-    & > input:hover,
-    & > input:focus {
-      outline: 2px solid rgb(0, 199, 7);
-    }
-
-    & > input:hover::placeholder {
-      color: rgb(0, 199, 7);
-    }
-  }
-
-  &__button {
-    padding: 14px;
-
-    font-size: 1rem;
-    font-weight: 500;
-
-    background-color: #ffffff;
-
-    border-radius: 10px;
-    outline: 1px solid #1d1d1d;
-
-    cursor: pointer;
-  }
-
-  &__button:hover,
-  &__button:focus {
-    color: rgb(0, 199, 7);
-
-    outline: 2px solid rgb(0, 199, 7);
   }
 }

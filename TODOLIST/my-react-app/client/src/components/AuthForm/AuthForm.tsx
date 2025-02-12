@@ -1,6 +1,8 @@
 import { FormEventHandler, useState } from "react";
 import { useMutationUserLogin } from "../../hooks/useMutationUserLogin";
 import { useMutationUserRegister } from "../../hooks/useMutationUserRegister";
+import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 
 import "./AuthForm.scss";
 
@@ -31,16 +33,16 @@ export const AuthForm = () => {
         </h2>
 
         <div className="form-auth__inputs">
-          <input
-            className="form-auth__input"
+          <Input
+            variant="form-auth__input"
             type="text"
             name="username"
             placeholder="Введите имя"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <input
-            className="form-auth__input"
+          <Input
+            variant="form-auth__input"
             type="password"
             name="password"
             placeholder="Введите пароль"
@@ -48,22 +50,18 @@ export const AuthForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="form-auth__button" type="submit">
+        <Button variant="form-auth__button">
           {authStatus === "login" ? "Войти" : "Зарегистрироваться"}
-        </button>
-        <div
-          className="form-auth__switch"
-          onClick={() =>
-            setAuthStatus((status) =>
-              status === "login" ? "register" : "login"
-            )
-          }
-        >
-          {authStatus === "login"
-            ? "Еще нет аккаунта?"
-            : "Уже зарегистрированы"}
-        </div>
+        </Button>
       </form>
+      <Button
+        variant="form-auth__switch"
+        onClick={() =>
+          setAuthStatus((status) => (status === "login" ? "register" : "login"))
+        }
+      >
+        {authStatus === "login" ? "Еще нет аккаунта?" : "Уже зарегистрированы?"}
+      </Button>
     </div>
   );
 };

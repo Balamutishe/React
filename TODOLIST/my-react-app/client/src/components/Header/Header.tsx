@@ -1,7 +1,9 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useMutationUserLogout } from "../../hooks/useMutationUserLogout";
 
 import "./Header.scss";
-import { useMutationUserLogout } from "../../hooks/useMutationUserLogout";
+import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 
 interface IHeaderProps {
   authState: boolean;
@@ -9,20 +11,29 @@ interface IHeaderProps {
 }
 
 export const Header: FC<IHeaderProps> = ({ authState, username }) => {
+  const [searchValue, setSearchValue] = useState("");
   const logoutUser = useMutationUserLogout();
 
   return (
-    <header className="header">
+    <header className="container-flex container-child header">
       <h1 className="header__username">
         {authState
           ? `Список дел ${username}`
           : "Начните планировать свой день!)"}
       </h1>
-      <input className="header__input" type="text" placeholder="Поиск" />
+      {authState && (
+        <div className="header__actions">
+          <Input
+            type="text"
+            name="search"
+            value={searchValue}
+            placeholder="Поиск"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
 
-      <button className="header__button" onClick={() => logoutUser.mutate()}>
-        Выйти
-      </button>
+          <Button onClick={() => logoutUser.mutate()}>Выйти</Button>
+        </div>
+      )}
     </header>
   );
 };

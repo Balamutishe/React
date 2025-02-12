@@ -1,7 +1,11 @@
-.note {
+@mixin makeContainerFlex {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+}
+
+.note {
+  @include makeContainerFlex();
+  flex-direction: column;
 
   width: 100%;
   min-height: 300px;
@@ -10,12 +14,11 @@
 
   border-radius: 10px;
 
-  background-color: rgb(122, 255, 122);
+  background-color: rgb(121, 213, 255);
 
   &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include makeContainerFlex();
+    flex-direction: column;
   }
 
   &__desc {
@@ -35,42 +38,52 @@
     font-style: italic;
     word-break: break-all;
 
-    color: #1d1d1d;
+    color: #000000;
     background-color: #ffffff;
   }
 
   &__actions {
-    display: flex;
-    justify-content: space-between;
+    @include makeContainerFlex();
     align-items: center;
   }
 
   &__button {
-    padding: 14px;
+    padding: 0;
+  }
 
-    font-weight: 500;
-    font-size: 1rem;
-
+  &__button > * {
     border-radius: 10px;
-    outline: 1px solid #000000;
+    padding: 16px 48px;
 
-    color: #000000;
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    color: rgb(121, 213, 255);
     background-color: #ffffff;
-
-    cursor: pointer;
   }
 
-  &__button:hover,
-  &__button:focus {
-    color: rgb(0, 199, 7);
-
-    outline: 2px solid rgb(0, 199, 7);
-  }
-
-  &:hover,
-  &:focus {
+  &__button:hover > *,
+  &__button:focus > * {
     color: #ffffff;
-
-    outline: 3px solid rgb(0, 199, 7);
+    background-color: rgb(9, 79, 255);
   }
+
+  &__button:active > * {
+    color: #ffffff;
+    background-color: rgb(121, 152, 255);
+  }
+
+  // &__button:hover,
+  // &__button:focus {
+  //   color: rgb(0, 199, 7);
+
+  //   outline: 2px solid rgb(0, 199, 7);
+  // }
+
+  // &:hover,
+  // &:focus {
+  //   color: #ffffff;
+
+  //   outline: 3px solid rgb(0, 199, 7);
+  // }
 }

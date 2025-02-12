@@ -3,6 +3,8 @@ import { useState, FC } from "react";
 
 import { TNote } from "../../api/Notes";
 import { useMutationNoteCreated } from "../../hooks/useMutationNoteCreated";
+import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 
 import "./FormNoteAdd.scss";
 
@@ -29,24 +31,24 @@ export const FormNoteAdd: FC<IFormProps> = ({ refetch }) => {
       }}
     >
       <div className="form-add__inputs">
-        <input
+        <Input
+          variant="form-auth__input"
           type="text"
           name="title"
+          placeholder="Введите имя"
           value={title}
-          placeholder="Название"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
+        <Input
+          variant="form-auth__input"
           type="text"
           name="description"
-          value={description}
           placeholder="Описание"
+          value={title}
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button className="form-add__button" type="submit">
-        Добавить дело
-      </button>
+      <Button variant="form-add__button">Добавить дело</Button>
     </form>
   );
 };
