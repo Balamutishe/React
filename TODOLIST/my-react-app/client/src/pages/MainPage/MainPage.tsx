@@ -1,11 +1,12 @@
 import { FetchListView } from "../../components/List/FetchListView";
 import { AuthForm } from "../../components/AuthForm/AuthForm";
-import { useQueryUser } from "../../hooks/useQueryUser";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
 
 export const MainPage = () => {
-  const queryUser = useQueryUser();
+  const userData = useSelector((state: RootState) => state.userData);
 
-  switch (queryUser.status) {
+  switch (userData.authStatusUser) {
     case "error":
       return <AuthForm />;
     case "success":

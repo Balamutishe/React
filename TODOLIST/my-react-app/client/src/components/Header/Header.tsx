@@ -1,27 +1,27 @@
-import { FC, useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useMutationUserLogout } from "../../hooks/useMutationUserLogout";
 
-import "./Header.scss";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
+import { RootState } from "../../redux";
 
-interface IHeaderProps {
-  authState: boolean;
-  username?: string;
-}
+import "./Header.scss";
 
-export const Header: FC<IHeaderProps> = ({ authState, username }) => {
+export const Header = () => {
   const [searchValue, setSearchValue] = useState("");
+
+  const userData = useSelector((state: RootState) => state.userData);
   const logoutUser = useMutationUserLogout();
 
   return (
     <header className="container-flex container-child header">
       <h1 className="header__username">
-        {authState
-          ? `Список дел ${username}`
+        {userData.authStatusUser === "success"
+          ? `Список дел ${userData.username}`
           : "Начните планировать свой день!)"}
       </h1>
-      {authState && (
+      {userData.authStatusUser === "success" && (
         <div className="header__actions">
           <Input
             type="text"

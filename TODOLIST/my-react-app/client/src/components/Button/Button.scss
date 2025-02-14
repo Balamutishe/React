@@ -5,17 +5,15 @@
   font-size: 0.85rem;
   font-weight: 700;
 
-  color: rgb(121, 213, 255);
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: rgb(9, 79, 255);
 
   &:hover,
   &:focus {
-    color: #ffffff;
-    background-color: rgb(9, 79, 255);
+    background-color: rgb(43, 103, 255);
   }
 
   &:active {
-    color: #ffffff;
     background-color: rgb(121, 152, 255);
   }
 }
