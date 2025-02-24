@@ -1,4 +1,4 @@
-import "./index.css";
+import "./index.scss";
 
 export const App = () => {
   return (
@@ -6,8 +6,11 @@ export const App = () => {
       <header className="header">
         <h1>TodoList</h1>
       </header>
-      <main></main>
-      <footer></footer>
+      <main className="main">
+        <div className="main__content"></div>
+        <div className="main__content"></div>
+      </main>
+      <footer className="footer"></footer>
     </>
   );
 };
