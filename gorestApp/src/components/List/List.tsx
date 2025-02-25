@@ -1,19 +1,35 @@
 import { FC } from "react";
-import { TBoardsList } from "../../api/Boards";
+import { Link } from "react-router-dom";
+import { TBoardsList, TNoteList } from "../../api/Boards";
 
 import "./List.scss";
+import Card from "../Card/Card";
 
 interface IListProps {
-  data: TBoardsList;
-  variant?: string;
+  boardsList?: TBoardsList;
+  notesList?: TNoteList;
+  variant?: "note" | "board";
 }
 
-const List: FC<IListProps> = ({ data, variant }) => {
+const List: FC<IListProps> = ({ boardsList, notesList, variant }) => {
   return (
-    <ul className={`list ${variant}`}>
-      {data.map((item) => (
-        <li>{item.boardTitle}</li>
-      ))}
+    <ul className="list">
+      {boardsList &&
+        boardsList.map((item) => (
+          <li className="list__item">
+            <Link to={`/board/${item.id}`}>
+              <Card text={item.boardTitle} variant={variant} />
+            </Link>
+          </li>
+        ))}
+      {notesList &&
+        notesList.map((item) => (
+          <li className="list__item">
+            <Link to={`/note/${item.id}`}>
+              <Card text={item.text} variant={variant} />
+            </Link>
+          </li>
+        ))}
     </ul>
   );
 };
