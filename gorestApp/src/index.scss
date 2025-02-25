@@ -7,7 +7,7 @@
   padding: 20px;
 
   color: #ffffff;
-  background-color: aquamarine;
+  background-color: rgb(118, 161, 146);
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -76,8 +76,8 @@ button {
 
   border-radius: 10px;
 
-  color: aquamarine;
-  background-color: #ffffff;
+  color: rgb(78, 82, 208);
+  background-color: rgb(208, 176, 78);
 }
 
 .main {
@@ -89,14 +89,14 @@ button {
   height: 75vh;
   margin-bottom: 20px;
 
-  color: aquamarine;
+  color: rgb(78, 82, 208);
 
   & > * {
     padding: 20px 30px;
 
     border-radius: 10px;
 
-    background-color: #ffffff;
+    background-color: rgb(208, 176, 78);
   }
 
   &__sidebar-left {
@@ -107,6 +107,8 @@ button {
     & > button {
       align-self: center;
       margin-bottom: 20px;
+
+      background-color: rgb(78, 82, 208);
     }
   }
 }
@@ -118,5 +120,5 @@ button {
   border-radius: 10px;
 
   color: aquamarine;
-  background-color: #ffffff;
+  background-color: rgb(208, 176, 78);
 }
