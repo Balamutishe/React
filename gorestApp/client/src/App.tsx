@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Button from "./components/Button/Button";
-import "./index.scss";
 import ListView from "./components/List/ListView";
+import "./index.scss";
 
 export const App = () => {
   return (
@@ -18,7 +18,8 @@ export const App = () => {
           </div>
           <div className="main__sidebar-right">
             <Routes>
-              <Route path="/board/:id" element={<ListView variant="note" />} />
+              <Route path="/" element={<div>Здесь пока нет записей</div>} />
+              <Route path="/boards/:id" element={<ListView variant="note" />} />
             </Routes>
           </div>
         </main>
