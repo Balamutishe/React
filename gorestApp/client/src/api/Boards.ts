@@ -1,20 +1,10 @@
 import { z } from "zod";
-
-const NoteSchema = z.object({
-  id: z.string(),
-  text: z.string(),
-});
-
-export type TNote = z.infer<typeof NoteSchema>;
-
-export const NoteListSchema = z.array(NoteSchema);
-
-export type TNoteList = z.infer<typeof NoteListSchema>;
+import { validateResponse } from "./validateResponse";
 
 const BoardSchema = z.object({
-  id: z.string(),
+  _id: z.string(),
   boardTitle: z.string(),
-  boardNotes: NoteListSchema,
+  created_at: z.number(),
 });
 
 export type TBoard = z.infer<typeof BoardSchema>;
@@ -23,63 +13,59 @@ export const BoardsListSchema = z.array(BoardSchema);
 
 export type TBoardsList = z.infer<typeof BoardsListSchema>;
 
-export const boardsList: TBoardsList = [
-  {
-    id: crypto.randomUUID(),
-    boardTitle: "Игры",
-    boardNotes: [
-      {
-        id: crypto.randomUUID(),
-        text: "Assassins Creeed",
-      },
-      {
-        id: crypto.randomUUID(),
-        text: "Kingdom come deliverance",
-      },
-      {
-        id: crypto.randomUUID(),
-        text: "Alone in the dark",
-      },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    boardTitle: "Покупки",
-    boardNotes: [
-      {
-        id: crypto.randomUUID(),
-        text: "Помидоры",
-      },
-      {
-        id: crypto.randomUUID(),
-        text: "Огурцы",
-      },
-      {
-        id: crypto.randomUUID(),
-        text: "Кетчуп",
-      },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    boardTitle: "Заметки",
-    boardNotes: [
-      {
-        id: crypto.randomUUID(),
-        text: "Сделать приложение с заметками",
-      },
-      {
-        id: crypto.randomUUID(),
-        text: "Устроиться на работу",
-      },
-      {
-        id: crypto.randomUUID(),
-        text: "Дособрать комп",
-      },
-    ],
-  },
-];
+export async function fetchGetBoardsList(): Promise<TBoardsList> {
+  return fetch("/api/boards", {
+    method: "GET",
+  })
+    .then(validateResponse)
+    .then((response) => response.json())
+    .then((data) => BoardsListSchema.parse(data));
+}
 
-export const findBoardNotes = (boardId: string): TBoard | undefined => {
-  return boardsList.find((board) => board.id === boardId);
-};
+export async function fetchGetOneBoard(id: string): Promise<TBoard> {
+  return fetch(`/api/boards/:${id}`, {
+    method: "GET",
+  })
+    .then(validateResponse)
+    .then((response) => response.json())
+    .then((data) => BoardSchema.parse(data));
+}
+
+export async function fetchAddBoard(boardTitle: string): Promise<void> {
+  return fetch("/api/boards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      boardTitle,
+    }),
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
+
+export async function fetchChangeBoard(
+  id: string,
+  boardTitle: string
+): Promise<void> {
+  return fetch(`/api/boards/:${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      boardTitle,
+    }),
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}
+
+export async function fetchDeleteBoard(id: string): Promise<void> {
+  return fetch(`/api/boards/${id}`, {
+    method: "DELETE",
+  })
+    .then(validateResponse)
+    .then(() => undefined);
+}

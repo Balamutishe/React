@@ -1,5 +1,4 @@
 const routerBoard = require("express").Router();
-const pick = require("lodash/pick");
 const bodyParser = require("body-parser");
 const fetchDb = require("../database/mongoClient.js");
 
@@ -37,8 +36,9 @@ routerBoard.post(
 
     if (boardTitle) {
       const countAddBoard = await addBoard(req.db, {
+        _id: crypto.randomUUID(),
         boardTitle: boardTitle,
-        created_at: new Date(),
+        created_at: Date.now(),
       });
 
       if (countAddBoard === 0) {
@@ -57,9 +57,7 @@ routerBoard.get("/boards/:id", async (req, res) => {
     const id = req.params.id;
 
     if (id) {
-      const board = await getOneBoard(req.db, id).then((board) =>
-        pick(board, "_id", "boardTitle", "created_at")
-      );
+      const board = await getOneBoard(req.db, id);
 
       if (board) {
         res.status(200).json(board);

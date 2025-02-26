@@ -1,5 +1,4 @@
 const routerNote = require("express").Router();
-const pick = require("lodash/pick");
 const bodyParser = require("body-parser");
 const fetchDb = require("../database/mongoClient.js");
 
@@ -39,8 +38,9 @@ routerNote.post(
 
     if (boardId && noteText) {
       const countAddNote = await addNote(req.db, {
+        _id: crypto.randomUUID(),
         noteText: noteText,
-        created_at: new Date(),
+        created_at: Date.now(),
         boardId: boardId,
       });
 
@@ -83,7 +83,6 @@ routerNote.patch("/notes/:id", async (req, res) => {
     if (noteText && id) {
       const countChangeNote = await changeNote(req.db, id, {
         noteText: noteText,
-        updated_at: new Date(),
       });
 
       if (countChangeNote === 0) {
