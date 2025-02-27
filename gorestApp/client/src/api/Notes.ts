@@ -15,7 +15,7 @@ export const NoteListSchema = z.array(NoteSchema);
 export type TNotesList = z.infer<typeof NoteListSchema>;
 
 export async function fetchGetNotesList(): Promise<TNotesList> {
-  return fetch("/api/notes", {
+  return fetch(`/api/notes`, {
     method: "GET",
   })
     .then(validateResponse)

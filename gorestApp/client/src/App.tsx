@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { BoardsListView } from "./components/List/BoardsListView";
+import { NotesListView } from "./components/List/NotesListView";
 import Button from "./components/Button/Button";
-import ListView from "./components/List/ListView";
 import "./index.scss";
 
 export const App = () => {
@@ -14,12 +15,12 @@ export const App = () => {
         <main className="main">
           <div className="main__sidebar-left">
             <Button title="Добавить доску" />
-            <ListView variant="board" />
+            <BoardsListView />
           </div>
           <div className="main__sidebar-right">
             <Routes>
               <Route path="/" element={<div>Здесь пока нет записей</div>} />
-              <Route path="/boards/:id" element={<ListView variant="note" />} />
+              <Route path="/boards/:id" element={<NotesListView />} />
             </Routes>
           </div>
         </main>

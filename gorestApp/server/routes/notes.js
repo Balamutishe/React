@@ -16,9 +16,7 @@ routerNote.use(
 
 routerNote.get("/notes", async (req, res) => {
   try {
-    const { boardId } = req.body;
-
-    const notesList = await getNotes(req.db, boardId);
+    const notesList = await getNotes(req.db, req.query);
 
     if (notesList) {
       res.status(200).json(notesList);
@@ -75,51 +73,51 @@ routerNote.get("/notes/:id", async (req, res) => {
   }
 });
 
-routerNote.patch("/notes/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { noteText } = req.body;
-
-    if (noteText && id) {
-      const countChangeNote = await changeNote(req.db, id, {
-        noteText: noteText,
-      });
-
-      if (countChangeNote === 0) {
-        res.status(404).send(`Unknown note ID: ${id}`);
-      } else {
-        res.status(200).send(`Note ${id} changed`);
-      }
-    } else {
-      res.status(400).send("Uncorrect request.body");
-    }
-  } catch (err) {
-    res.status(400).send(err.message);
-  }
-});
-
-routerNote.delete(
+routerNote.patch(
   "/notes/:id",
   bodyParser.urlencoded({ extended: false }),
   async (req, res) => {
     try {
       const id = req.params.id;
+      const { noteText } = req.body;
 
-      if (id) {
-        const countDeleteNote = await deleteNote(req.db, id);
+      if (noteText && id) {
+        const countChangeNote = await changeNote(req.db, id, {
+          noteText: noteText,
+        });
 
-        if (countDeleteNote === 0) {
+        if (countChangeNote === 0) {
           res.status(404).send(`Unknown note ID: ${id}`);
         } else {
-          res.status(200).send(`Note ${id} delete`);
+          res.status(200).send(`Note ${id} changed`);
         }
       } else {
-        res.send(`req.params.id undefined`);
+        res.status(400).send("Uncorrect request.body");
       }
     } catch (err) {
       res.status(400).send(err.message);
     }
   }
 );
+
+routerNote.delete("/notes/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (id) {
+      const countDeleteNote = await deleteNote(req.db, id);
+
+      if (countDeleteNote === 0) {
+        res.status(404).send(`Unknown note ID: ${id}`);
+      } else {
+        res.status(200).send(`Note ${id} delete`);
+      }
+    } else {
+      res.send(`req.params.id undefined`);
+    }
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
 
 module.exports = routerNote;

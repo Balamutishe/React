@@ -1,5 +1,5 @@
-const getNotes = async (db, boardId) => {
-  return await db.collection("notes").find({ boardId }).toArray();
+const getNotes = async (db, data) => {
+  return await db.collection("notes").find(data).toArray();
 };
 
 const getOneNote = async (db, id) => {
