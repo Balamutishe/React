@@ -54,7 +54,7 @@ export async function fetchChangeNote(
   id: string,
   noteText: string
 ): Promise<void> {
-  return fetch(`/api/notes/:${id}`, {
+  return fetch(`/api/notes/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

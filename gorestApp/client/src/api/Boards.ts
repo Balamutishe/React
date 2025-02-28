@@ -23,7 +23,7 @@ export async function fetchGetBoardsList(): Promise<TBoardsList> {
 }
 
 export async function fetchGetOneBoard(id: string): Promise<TBoard> {
-  return fetch(`/api/boards/:${id}`, {
+  return fetch(`/api/boards/${id}`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -49,7 +49,7 @@ export async function fetchChangeBoard(
   id: string,
   boardTitle: string
 ): Promise<void> {
-  return fetch(`/api/boards/:${id}`, {
+  return fetch(`/api/boards/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

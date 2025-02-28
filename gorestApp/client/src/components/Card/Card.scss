@@ -2,35 +2,49 @@
   display: flex;
   justify-content: space-between;
 
+  padding: 20px 20px;
+
   border-radius: 10px;
 
   background-color: green;
 
-  &__board {
-    padding: 8px 12px;
-  }
-
-  &__note {
-    padding: 10px 20px;
-  }
-
   &__text {
     display: flex;
     align-items: center;
+
+    width: 100%;
 
     font-size: 1.2rem;
     font-weight: 500;
     font-style: italic;
 
     color: #ffffff;
+    background-color: inherit;
+
+    &::placeholder {
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #ffffff;
+    }
   }
 
-  &__actions {
+  &__actions-note {
     display: flex;
     flex-direction: column;
 
     & > *:not(:last-child) {
       margin-bottom: 10px;
+    }
+  }
+
+  &__actions-board {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > *:not(:last-child) {
+      margin-right: 10px;
     }
   }
 

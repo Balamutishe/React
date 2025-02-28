@@ -31,7 +31,13 @@ export const NotesListView = () => {
         (note) => note.boardId === boardId
       );
 
-      return <List notesList={boardNotesList} variant="note" />;
+      return (
+        <List
+          notesList={boardNotesList}
+          refetch={() => queryNotesList.refetch()}
+          variant="note"
+        />
+      );
     }
   }
 };
