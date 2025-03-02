@@ -1,7 +1,23 @@
+.container-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .list {
   width: 100%;
 
   &__item {
     margin-bottom: 20px;
+  }
+}
+
+.container-button-card-add {
+  align-self: center;
+  margin-bottom: 20px;
+
+  & > button {
+    background-color: rgb(78, 82, 208);
   }
 }

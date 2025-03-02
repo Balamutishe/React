@@ -1,9 +1,7 @@
 import { FC, useState, createRef } from "react";
-import { useMutation } from "@tanstack/react-query";
 
-import { fetchChangeNote, fetchDeleteNote } from "../../api/Notes";
-import { fetchChangeBoard, fetchDeleteBoard } from "../../api/Boards";
-import { queryClient } from "../../api/queryClient";
+import { useMutateDeleteCard } from "../../hooks/useMutateDeleteCard";
+import { useMutateChangeCard } from "../../hooks/useMutateChangeCard";
 import EditCard from "../../assets/edit-card.svg?react";
 import DeleteCard from "../../assets/delete-card.svg?react";
 
@@ -12,7 +10,7 @@ import "./Card.scss";
 interface ICardProps {
   id: string;
   text: string;
-  variant?: string;
+  variant: string;
 }
 
 const Card: FC<ICardProps> = ({ id, text, variant }) => {
@@ -30,23 +28,8 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
     }
   };
 
-  const useMutateDeleteCard = useMutation(
-    {
-      mutationFn: () =>
-        variant === "note" ? fetchDeleteNote(id) : fetchDeleteBoard(id),
-    },
-    queryClient
-  );
-
-  const useMutateChange = useMutation(
-    {
-      mutationFn: () =>
-        variant === "note"
-          ? fetchChangeNote(id, inputText)
-          : fetchChangeBoard(id, inputText),
-    },
-    queryClient
-  );
+  const deleteCard = useMutateDeleteCard(id, variant);
+  const changeCard = useMutateChangeCard(id, variant, inputText);
 
   return (
     <div className={variant ? `card card__${variant}` : "card"}>
@@ -60,9 +43,8 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
           setInputText(e.target.value);
         }}
         onBlur={() => {
-          useMutateChange.mutate();
+          changeCard.mutate();
         }}
-        style={{ pointerEvents: "none" }}
       />
 
       <div className="card__actions">
@@ -76,7 +58,7 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
         <DeleteCard
           width={20}
           height={20}
-          onClick={() => useMutateDeleteCard.mutate()}
+          onClick={() => deleteCard.mutate()}
         />
       </div>
     </div>
