@@ -1,5 +1,9 @@
 .button {
-  padding: 16px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 28px;
 
   border-radius: 20px;
 
@@ -8,6 +12,18 @@
 
   color: #ffffff;
   background-color: rgb(208, 176, 78);
+
+  & > *:first-child {
+    margin-right: 10px;
+  }
+
+  & > span > svg > path {
+    stroke: #ffffff;
+  }
+
+  & > span > svg > circle {
+    stroke: #ffffff;
+  }
 
   &:hover,
   &:focus {

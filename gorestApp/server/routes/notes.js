@@ -83,7 +83,7 @@ routerNote.patch(
 
       if (noteText && id) {
         const countChangeNote = await changeNote(req.db, id, {
-          noteText: noteText,
+          noteText,
         });
 
         if (countChangeNote === 0) {

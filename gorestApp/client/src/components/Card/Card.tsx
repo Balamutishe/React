@@ -1,13 +1,12 @@
-import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { FC, useState, createRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { fetchChangeNote, fetchDeleteNote } from "../../api/Notes";
 import { fetchChangeBoard, fetchDeleteBoard } from "../../api/Boards";
 import { queryClient } from "../../api/queryClient";
-import Button from "../Button/Button";
 import EditCard from "../../assets/edit-card.svg?react";
 import DeleteCard from "../../assets/delete-card.svg?react";
+
 import "./Card.scss";
 
 interface ICardProps {
@@ -18,6 +17,18 @@ interface ICardProps {
 
 const Card: FC<ICardProps> = ({ id, text, variant }) => {
   const [inputText, setInputText] = useState(text);
+  const inputRef = createRef<HTMLInputElement>();
+
+  const handleInputDisabled = () => {
+    if (inputRef.current !== null) {
+      if (inputRef.current.disabled) {
+        inputRef.current.disabled = false;
+        inputRef.current.focus();
+      } else {
+        inputRef.current.disabled = true;
+      }
+    }
+  };
 
   const useMutateDeleteCard = useMutation(
     {
@@ -40,41 +51,34 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
   return (
     <div className={variant ? `card card__${variant}` : "card"}>
       <input
+        ref={inputRef}
         name="inputText"
         className="card__text"
-        placeholder={inputText}
         value={inputText}
+        disabled
         onChange={(e) => {
           setInputText(e.target.value);
         }}
+        onBlur={() => {
+          useMutateChange.mutate();
+        }}
+        style={{ pointerEvents: "none" }}
       />
 
-      {variant === "board" && (
-        <div className="card__actions-board">
-          <EditCard
-            width={20}
-            height={20}
-            onClick={() => useMutateChange.mutate()}
-          />
-          <DeleteCard
-            width={20}
-            height={20}
-            onClick={() => useMutateDeleteCard.mutate()}
-          />
-        </div>
-      )}
-      {variant === "note" && (
-        <div className="card__actions-note">
-          <Link to={`/notes/${id}`}>
-            <Button title="Подробнее" variant="card__button-about" />
-          </Link>
-          <Button
-            title="Удалить"
-            variant="card__button-delete"
-            onClick={() => useMutateDeleteCard.mutate()}
-          />
-        </div>
-      )}
+      <div className="card__actions">
+        <EditCard
+          width={20}
+          height={20}
+          onClick={() => {
+            handleInputDisabled();
+          }}
+        />
+        <DeleteCard
+          width={20}
+          height={20}
+          onClick={() => useMutateDeleteCard.mutate()}
+        />
+      </div>
     </div>
   );
 };

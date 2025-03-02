@@ -11,9 +11,7 @@ const addNote = async (db, data) => {
 };
 
 const changeNote = async (db, id, data) => {
-  return await db
-    .collection("notes")
-    .findOneAndUpdate({ _id: id }, { $set: data });
+  return await db.collection("notes").updateOne({ _id: id }, { $set: data });
 };
 
 const deleteNote = async (db, id) => {

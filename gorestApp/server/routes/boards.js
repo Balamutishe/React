@@ -72,28 +72,32 @@ routerBoard.get("/boards/:id", async (req, res) => {
   }
 });
 
-routerBoard.patch("/boards/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { boardTitle } = req.body;
+routerBoard.patch(
+  "/boards/:id",
+  bodyParser.urlencoded({ extended: false }),
+  async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { boardTitle } = req.body;
 
-    if (boardTitle && id) {
-      const countChangeBoard = await changeBoard(req.db, id, {
-        boardTitle: boardTitle,
-      });
+      if (boardTitle && id) {
+        const countChangeBoard = await changeBoard(req.db, id, {
+          boardTitle: boardTitle,
+        });
 
-      if (countChangeBoard === 0) {
-        res.status(404).send(`Unknown board ID: ${id}`);
+        if (countChangeBoard === 0) {
+          res.status(404).send(`Unknown board ID: ${id}`);
+        } else {
+          res.status(200).send(`Board ${id} changed`);
+        }
       } else {
-        res.status(200).send(`Board ${id} changed`);
+        res.status(400).send("Uncorrect request.body");
       }
-    } else {
-      res.status(400).send("Uncorrect request.body");
+    } catch (err) {
+      res.status(400).send(err.message);
     }
-  } catch (err) {
-    res.status(400).send(err.message);
   }
-});
+);
 
 routerBoard.delete(
   "/boards/:id",

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
 
-  padding: 20px 20px;
+  padding: 10px 14px;
 
   border-radius: 10px;
 
@@ -13,38 +13,34 @@
     align-items: center;
 
     width: 100%;
+    padding: 4px 0;
 
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     font-style: italic;
 
     color: #ffffff;
     background-color: inherit;
 
+    pointer-events: none;
+
     &::placeholder {
-      font-size: 1.2rem;
-      font-weight: 500;
-      line-height: 1.5;
+      font-size: 1rem;
       color: #ffffff;
     }
   }
 
-  &__actions-note {
-    display: flex;
-    flex-direction: column;
-
-    & > *:not(:last-child) {
-      margin-bottom: 10px;
-    }
-  }
-
-  &__actions-board {
+  &__actions {
     display: flex;
     align-items: center;
     justify-content: center;
 
     & > *:not(:last-child) {
       margin-right: 10px;
+    }
+
+    & > svg > path {
+      stroke: #ffffff;
     }
   }
 
