@@ -1,7 +1,10 @@
-import { FC, useState, createRef } from "react";
+import { FC, useState, createRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { setNoteText } from "../../redux/noteTextSlice";
 import { useMutateDeleteCard } from "../../hooks/useMutateDeleteCard";
 import { useMutateChangeCard } from "../../hooks/useMutateChangeCard";
+import { RootState } from "../../redux";
 import EditCard from "../../assets/edit-card.svg?react";
 import DeleteCard from "../../assets/delete-card.svg?react";
 
@@ -14,6 +17,9 @@ interface ICardProps {
 }
 
 const Card: FC<ICardProps> = ({ id, text, variant }) => {
+  const dispatch = useDispatch();
+  const noteText = useSelector((state: RootState) => state.noteText);
+
   const [inputText, setInputText] = useState(text);
   const inputRef = createRef<HTMLInputElement>();
 
@@ -31,6 +37,12 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
   const deleteCard = useMutateDeleteCard(id, variant);
   const changeCard = useMutateChangeCard(id, variant, inputText);
 
+  useEffect(() => {
+    if (variant === "note" && noteText !== "") {
+      setInputText(noteText);
+    }
+  }, [noteText, variant]);
+
   return (
     <div className={variant ? `card card__${variant}` : "card"}>
       <input
@@ -40,10 +52,13 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
         value={inputText}
         disabled
         onChange={(e) => {
-          setInputText(e.target.value);
+          dispatch(setNoteText(e.target.value));
         }}
         onBlur={() => {
           changeCard.mutate();
+        }}
+        onFocus={(e) => {
+          dispatch(setNoteText(e.target.value));
         }}
       />
 

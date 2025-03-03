@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { useQueryNotesList } from "../../hooks/useQueryNotesList";
+import { NoteDesc } from "../NoteDesc/NoteDesc";
+import { RootState } from "../../redux";
 import List from "./List";
 
 export const NotesListView = () => {
+  const noteText = useSelector((state: RootState) => state.noteText);
+
   const params = useParams();
   const boardId = params.id || "ID not found";
 
@@ -22,7 +27,12 @@ export const NotesListView = () => {
         (note) => note.boardId === boardId
       );
 
-      return <List notesList={boardNotesList} variant="note" />;
+      return (
+        <div className="notes">
+          <List notesList={boardNotesList} variant="note" />
+          <NoteDesc noteText={noteText} />
+        </div>
+      );
     }
   }
 };
