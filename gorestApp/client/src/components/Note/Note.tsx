@@ -1,8 +1,10 @@
-import { FC, useState, createRef } from "react";
+import { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useMutateDeleteCard } from "../../hooks/useMutateDeleteCard";
-import { useMutateChangeCard } from "../../hooks/useMutateChangeCard";
-import EditCard from "../../assets/edit-card.svg?react";
+import { setNoteData } from "../../redux/noteDataSlice";
+import { RootState } from "../../redux";
+
 import DeleteCard from "../../assets/delete-card.svg?react";
 
 import "./Note.scss";
@@ -14,46 +16,26 @@ interface INoteProps {
 
 export const Note: FC<INoteProps> = ({ id, text }) => {
   const [noteText, setNoteText] = useState(text);
-  const inputRef = createRef<HTMLInputElement>();
-
-  const handleInputDisabled = () => {
-    if (inputRef.current !== null) {
-      if (inputRef.current.disabled) {
-        inputRef.current.disabled = false;
-        inputRef.current.focus();
-      } else {
-        inputRef.current.disabled = true;
-      }
-    }
-  };
-
+  const dispatch = useDispatch();
+  const noteData = useSelector((state: RootState) => state.noteData);
   const deleteCard = useMutateDeleteCard(id, "note");
-  const changeCard = useMutateChangeCard(id, "note", noteText);
+
+  useEffect(() => {
+    if (noteData.text !== "" && noteData.id === id) {
+      setNoteText(noteData.text);
+    }
+  }, [noteData.text, noteData.id, id]);
 
   return (
-    <div className="note">
-      <input
-        ref={inputRef}
-        name="noteText"
-        className="note__text"
-        value={noteText}
-        disabled
-        onChange={(e) => {
-          setNoteText(e.target.value);
-        }}
-        onBlur={() => {
-          changeCard.mutate();
-        }}
-      />
+    <div
+      className="note"
+      onClick={() => {
+        dispatch(setNoteData({ id: id, text: text, disableState: false }));
+      }}
+    >
+      <div className="note__text">{noteText}</div>
 
       <div className="note__actions">
-        <EditCard
-          width={20}
-          height={20}
-          onClick={() => {
-            handleInputDisabled();
-          }}
-        />
         <DeleteCard
           width={20}
           height={20}

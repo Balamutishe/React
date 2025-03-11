@@ -32,22 +32,16 @@ routerBoard.post(
   "/boards",
   bodyParser.urlencoded({ extended: false }),
   async (req, res) => {
-    const { boardTitle } = req.body;
+    const countAddBoard = await addBoard(req.db, {
+      _id: crypto.randomUUID(),
+      boardTitle: "",
+      created_at: Date.now(),
+    });
 
-    if (boardTitle) {
-      const countAddBoard = await addBoard(req.db, {
-        _id: crypto.randomUUID(),
-        boardTitle: boardTitle,
-        created_at: Date.now(),
-      });
-
-      if (countAddBoard === 0) {
-        res.status(404).send("Board not created");
-      } else {
-        res.status(201).send("Board created");
-      }
+    if (countAddBoard === 0) {
+      res.status(404).send("Board not created");
     } else {
-      res.send("Uncorrect request.body");
+      res.status(201).send("Board created");
     }
   }
 );

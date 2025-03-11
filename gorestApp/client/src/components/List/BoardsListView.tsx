@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { useQueryBoardsList } from "../../hooks/useQueryBoardsList";
 import List from "./List";
 
 export const BoardsListView = () => {
   const boardsList = useQueryBoardsList();
+
+  useEffect(() => {}, [boardsList.data]);
 
   switch (boardsList.status) {
     case "error":

@@ -10,6 +10,8 @@ import AddNote from "../../assets/add-note.svg?react";
 import AddFolder from "../../assets/add-folder.svg?react";
 
 import "./List.scss";
+import { useMutateAddCard } from "../../hooks/useMutateAddCard";
+import { useQueryBoardsList } from "../../hooks/useQueryBoardsList";
 
 interface IListProps {
   boardsList?: TBoardsList;
@@ -18,6 +20,9 @@ interface IListProps {
 }
 
 const List: FC<IListProps> = ({ boardsList, notesList, variant }) => {
+  const queryBoardList = useQueryBoardsList();
+  const addBoard = useMutateAddCard("board");
+
   return (
     <>
       <div className="container-button-card-add">
@@ -26,7 +31,13 @@ const List: FC<IListProps> = ({ boardsList, notesList, variant }) => {
             <AddNote width={30} height={30} />
           </Button>
         ) : (
-          <Button title={"Добавить папку"}>
+          <Button
+            title={"Добавить папку"}
+            onClick={() => {
+              addBoard.mutate();
+              queryBoardList.refetch();
+            }}
+          >
             <AddFolder width={30} height={30} />
           </Button>
         )}

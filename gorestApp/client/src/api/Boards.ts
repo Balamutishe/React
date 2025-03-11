@@ -31,15 +31,9 @@ export async function fetchGetOneBoard(id: string): Promise<TBoard> {
     .then((data) => BoardSchema.parse(data));
 }
 
-export async function fetchAddBoard(boardTitle: string): Promise<void> {
+export async function fetchAddBoard(): Promise<void> {
   return fetch("/api/boards", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      boardTitle,
-    }),
   })
     .then(validateResponse)
     .then(() => undefined);

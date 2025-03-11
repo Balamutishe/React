@@ -32,10 +32,7 @@ export async function fetchGetOneNote(id: string): Promise<TNote> {
     .then((data) => NoteSchema.parse(data));
 }
 
-export async function fetchAddNote(
-  boardId: string,
-  noteText: string
-): Promise<void> {
+export async function fetchAddNote(boardId: string): Promise<void> {
   return fetch("/api/notes", {
     method: "POST",
     headers: {
@@ -43,7 +40,6 @@ export async function fetchAddNote(
     },
     body: JSON.stringify({
       boardId,
-      noteText,
     }),
   })
     .then(validateResponse)
