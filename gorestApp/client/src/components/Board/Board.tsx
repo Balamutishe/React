@@ -1,26 +1,19 @@
-import { FC, useState, createRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useState, createRef } from "react";
 
-import { setNoteText } from "../../redux/noteTextSlice";
 import { useMutateDeleteCard } from "../../hooks/useMutateDeleteCard";
 import { useMutateChangeCard } from "../../hooks/useMutateChangeCard";
-import { RootState } from "../../redux";
 import EditCard from "../../assets/edit-card.svg?react";
 import DeleteCard from "../../assets/delete-card.svg?react";
 
-import "./Card.scss";
+import "./Board.scss";
 
-interface ICardProps {
+interface IBoardProps {
   id: string;
   text: string;
-  variant: string;
 }
 
-const Card: FC<ICardProps> = ({ id, text, variant }) => {
-  const dispatch = useDispatch();
-  const noteText = useSelector((state: RootState) => state.noteText);
-
-  const [inputText, setInputText] = useState(text);
+export const Board: FC<IBoardProps> = ({ id, text }) => {
+  const [boardText, setBoardText] = useState(text);
   const inputRef = createRef<HTMLInputElement>();
 
   const handleInputDisabled = () => {
@@ -34,35 +27,26 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
     }
   };
 
-  const deleteCard = useMutateDeleteCard(id, variant);
-  const changeCard = useMutateChangeCard(id, variant, inputText);
-
-  useEffect(() => {
-    if (variant === "note" && noteText !== "") {
-      setInputText(noteText);
-    }
-  }, [noteText, variant]);
+  const deleteCard = useMutateDeleteCard(id, "board");
+  const changeCard = useMutateChangeCard(id, "board", boardText);
 
   return (
-    <div className={variant ? `card card__${variant}` : "card"}>
+    <div className="board">
       <input
         ref={inputRef}
-        name="inputText"
-        className="card__text"
-        value={inputText}
+        name="boardText"
+        className="board__text"
+        value={boardText}
         disabled
         onChange={(e) => {
-          dispatch(setNoteText(e.target.value));
+          setBoardText(e.target.value);
         }}
         onBlur={() => {
           changeCard.mutate();
         }}
-        onFocus={(e) => {
-          dispatch(setNoteText(e.target.value));
-        }}
       />
 
-      <div className="card__actions">
+      <div className="board__actions">
         <EditCard
           width={20}
           height={20}
@@ -79,5 +63,3 @@ const Card: FC<ICardProps> = ({ id, text, variant }) => {
     </div>
   );
 };
-
-export default Card;

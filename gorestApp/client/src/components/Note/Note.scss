@@ -1,0 +1,52 @@
+.note {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  background-color: green;
+
+  &__text {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    padding: 4px 0;
+
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: italic;
+
+    color: #ffffff;
+    background-color: inherit;
+
+    &::placeholder {
+      font-size: 1rem;
+      color: #ffffff;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > *:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    & > svg > path {
+      stroke: #ffffff;
+    }
+  }
+
+  &__button-about {
+    background-color: rgb(208, 176, 78);
+  }
+
+  &__button-delete {
+    background-color: rgb(170, 44, 52);
+  }
+}

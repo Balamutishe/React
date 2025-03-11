@@ -10,21 +10,19 @@ interface INoteDescProps {
 
 export const NoteDesc: FC<INoteDescProps> = ({ noteText }) => {
   const dispatch = useDispatch();
-  const [textareaValue, setTextareaValue] = useState("");
+  const [text, setText] = useState("");
 
   useEffect(() => {
-    setTextareaValue(noteText);
+    setText(noteText);
   }, [noteText]);
 
   return (
-    <div className="note-desc">
-      <textarea
-        name="noteDesc"
-        value={textareaValue}
-        onChange={(e) => {
-          dispatch(setNoteText(e.target.value));
-        }}
-      ></textarea>
-    </div>
+    <textarea
+      name="noteDesc"
+      value={text}
+      onChange={(e) => {
+        dispatch(setNoteText(e.target.value));
+      }}
+    ></textarea>
   );
 };
