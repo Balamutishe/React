@@ -10,6 +10,8 @@ const {
   deleteBoard,
 } = require("../database/boards.js");
 
+const { deleteManyNotes } = require("../database/notes.js");
+
 routerBoard.use(
   async (req, res, next) => await fetchDb(req, res, next, "todolist")
 );
@@ -101,6 +103,7 @@ routerBoard.delete(
       const id = req.params.id;
 
       if (id) {
+        await deleteManyNotes(req.db, id);
         const countDeleteBoard = await deleteBoard(req.db, id);
 
         if (countDeleteBoard === 0) {

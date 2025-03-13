@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useMutateDeleteCard } from "../../hooks/useMutateDeleteCard";
+
 import { setNoteData } from "../../redux/noteDataSlice";
 import { RootState } from "../../redux";
 
@@ -24,13 +25,31 @@ export const Note: FC<INoteProps> = ({ id, text }) => {
     if (noteData.text !== "" && noteData.id === id) {
       setNoteText(noteData.text);
     }
-  }, [noteData.text, noteData.id, id]);
+
+    if (noteData.id === "" && id && text === "") {
+      dispatch(
+        setNoteData({
+          ...noteData,
+          id: id,
+          disableState: false,
+          focusState: true,
+        })
+      );
+    }
+  }, [noteData.text, noteData.id, id, text, dispatch, noteData]);
 
   return (
     <div
       className="note"
       onClick={() => {
-        dispatch(setNoteData({ id: id, text: text, disableState: false }));
+        dispatch(
+          setNoteData({
+            id: id,
+            text: text,
+            disableState: false,
+            focusState: true,
+          })
+        );
       }}
     >
       <div className="note__text">{noteText}</div>
@@ -39,7 +58,19 @@ export const Note: FC<INoteProps> = ({ id, text }) => {
         <DeleteCard
           width={20}
           height={20}
-          onClick={() => deleteCard.mutate()}
+          onClick={() => {
+            deleteCard.mutate();
+
+            if (noteData.focusState === false) {
+              dispatch(
+                setNoteData({
+                  ...noteData,
+                  id: "",
+                  text: "",
+                })
+              );
+            }
+          }}
         />
       </div>
     </div>

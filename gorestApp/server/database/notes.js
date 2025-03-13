@@ -18,10 +18,15 @@ const deleteNote = async (db, id) => {
   return await db.collection("notes").deleteOne({ _id: id });
 };
 
+const deleteManyNotes = async (db, id) => {
+  return await db.collection("notes").deleteMany({ boardId: id });
+};
+
 module.exports = {
   getNotes,
   getOneNote,
   addNote,
   changeNote,
   deleteNote,
+  deleteManyNotes,
 };

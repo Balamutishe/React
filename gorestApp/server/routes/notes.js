@@ -32,12 +32,12 @@ routerNote.post(
   "/notes",
   bodyParser.urlencoded({ extended: false }),
   async (req, res) => {
-    const { boardId, noteText } = req.body;
+    const { boardId } = req.body;
 
-    if (boardId && noteText) {
+    if (boardId) {
       const countAddNote = await addNote(req.db, {
         _id: crypto.randomUUID(),
-        noteText: noteText,
+        noteText: "",
         created_at: Date.now(),
         boardId: boardId,
       });

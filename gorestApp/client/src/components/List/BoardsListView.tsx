@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+
 import { useQueryBoardsList } from "../../hooks/useQueryBoardsList";
+import { ListActions } from "./ListActions";
 import List from "./List";
 
 export const BoardsListView = () => {
@@ -16,6 +18,11 @@ export const BoardsListView = () => {
         </div>
       );
     case "success":
-      return <List boardsList={boardsList.data} variant="board" />;
+      return (
+        <>
+          <ListActions variant="board" />
+          <List boardsList={boardsList.data} variant="board" />
+        </>
+      );
   }
 };

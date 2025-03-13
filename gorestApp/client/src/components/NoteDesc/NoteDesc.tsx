@@ -3,23 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setNoteData } from "../../redux/noteDataSlice";
 import { useMutateChangeCard } from "../../hooks/useMutateChangeCard";
+import { useMutateDeleteCard } from "../../hooks/useMutateDeleteCard";
 import { RootState } from "../../redux";
 
 import "./NoteDesc.scss";
 
 export const NoteDesc = () => {
   const dispatch = useDispatch();
+  const [noteText, setNoteText] = useState("");
   const textRef = createRef<HTMLTextAreaElement>();
   const noteData = useSelector((state: RootState) => state.noteData);
-  const [noteText, setNoteText] = useState("");
   const changeCard = useMutateChangeCard(noteData.id, "note", noteText);
+  const deleteCard = useMutateDeleteCard(noteData.id, "note");
 
   useEffect(() => {
-    setNoteText(noteData.text);
-
-    if (noteData.text !== "" && textRef.current !== null)
+    if (textRef.current !== null && noteData.focusState === true) {
       textRef.current.focus();
-  }, [noteData.text, textRef]);
+    }
+
+    setNoteText(noteData.text);
+  }, [noteData.text, textRef, noteData.focusState]);
 
   return (
     <textarea
@@ -30,12 +33,21 @@ export const NoteDesc = () => {
       onChange={(e) => {
         dispatch(setNoteData({ ...noteData, text: e.target.value }));
       }}
-      onBlur={() => {
-        changeCard.mutate();
-
+      onBlur={async () => {
         if (textRef.current !== null) {
-          dispatch(setNoteData({ ...noteData, text: "", disableState: true }));
+          if (textRef.current.value !== "") {
+            changeCard.mutate();
+          } else {
+            deleteCard.mutate();
+          }
         }
+
+        dispatch(
+          setNoteData({
+            ...noteData,
+            focusState: false,
+          })
+        );
       }}
     ></textarea>
   );

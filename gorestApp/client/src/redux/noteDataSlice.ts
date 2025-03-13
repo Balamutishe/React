@@ -6,6 +6,7 @@ const noteDataSlice = createSlice({
     id: "",
     text: "",
     disableState: true,
+    focusState: false,
   },
   reducers: {
     setNoteData: (state, action) => {

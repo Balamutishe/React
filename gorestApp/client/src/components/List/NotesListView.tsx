@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useQueryNotesList } from "../../hooks/useQueryNotesList";
-
+import { ListActions } from "./ListActions";
 import List from "./List";
 
 export const NotesListView = () => {
@@ -9,6 +10,8 @@ export const NotesListView = () => {
   const boardId = params.id || "ID not found";
 
   const notesList = useQueryNotesList();
+
+  useEffect(() => {}, [notesList.data]);
 
   switch (notesList.status) {
     case "error":
@@ -23,7 +26,12 @@ export const NotesListView = () => {
         (note) => note.boardId === boardId
       );
 
-      return <List notesList={filterNotesList} variant="note" />;
+      return (
+        <>
+          <ListActions variant="note" />
+          <List notesList={filterNotesList} variant="note" />
+        </>
+      );
     }
   }
 };
