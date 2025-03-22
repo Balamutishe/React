@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dictionary</title>
+</head>
+
+<body>
+  <div id="root">
+    <div class="dictionary-app">
+      <h1 class="dictionary-app__header">
+        Словарь
+      </h1>
+      <form id="add-description" class="form">
+        <h2 class="form__title">Новый термин</h2>
+        <label class="form-field">
+          <span class="form-field__label">Термин</span>
+          <input name="title" type="text" class="form-field__input" required>
+        </label>
+
+        <label class="form-field">
+          <span class="form-field__label">Значение</span>
+          <input name="description" type="text" class="form-field__input">
+        </label>
+
+        <button class="form-button" type="submit">Запомнить</button>
+      </form>
+
+      <div id="description-list"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

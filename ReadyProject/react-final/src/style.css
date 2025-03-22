@@ -1,0 +1,224 @@
+@font-face {
+  font-family: 'Play';
+  src: local('Play Regular'), local('Play-Regular'),
+    url('./fonts/playregular.woff') format('woff'),
+    url('./fonts/playregular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Play';
+  src: local('Play Bold'), local('Play-Bold'),
+    url('./fonts/playbold.woff') format('woff'),
+    url('./fonts/playbold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::-webkit-input-placeholder {
+  font-family: 'Play', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+::-moz-placeholder {
+  font-family: 'Play', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+:-ms-input-placeholder {
+  font-family: 'Play', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+:-moz-placeholder {
+  font-family: 'Play', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+#root {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+}
+
+html {
+  box-sizing: inherit;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  font-family: 'Play', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 1440px;
+  height: 100vh;
+
+  background-color: #0a0b0b;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+
+  border: none;
+
+  font-weight: 400;
+  font-family: inherit;
+
+  background-color: inherit;
+
+  cursor: pointer;
+}
+
+input {
+  appearance: none;
+  outline: none;
+  border: none;
+}
+
+input:focus-visible {
+  outline: none;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: 96px;
+
+  padding: 24px 80px;
+
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 2;
+}
+
+.main {
+  padding: 0 80px;
+}
+
+.footer {
+  width: 100%;
+
+  margin-top: auto;
+
+  padding: 40px 80px;
+}
+
+.swiper {
+  width: 105%;
+  height: 360px;
+}
+
+.swiper-slide {
+  top: 11px;
+  left: 15px;
+}
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .header {
+    padding: 16px 40px;
+  }
+
+  .main {
+    padding: 0 40px;
+  }
+
+  .footer {
+    padding: 20px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .header {
+    padding: 16px 20px;
+  }
+
+  .main {
+    padding: 0 20px;
+  }
+
+  .footer {
+    padding: 20px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+@media (max-width: 376px) {
+  html {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .header {
+    height: 56px;
+  }
+
+  .footer {
+    padding: 24px 20px;
+  }
+}

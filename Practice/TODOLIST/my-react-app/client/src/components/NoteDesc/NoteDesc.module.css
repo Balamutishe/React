@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  border-radius: 10px;
+
+  padding: 30px;
+
+  background-color: #d6d6d6;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 20px;
+  padding: 10px;
+
+  border-radius: 10px;
+
+  font-size: 28px;
+  font-weight: 600;
+
+  background-color: #ffffff;
+}
+
+.text {
+  min-height: 300px;
+
+  margin-bottom: 20px;
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #ffffff;
+
+  resize: none;
+}
+
+.actions > *:not(:last-child) {
+  margin-right: 10px;
+}

@@ -1,0 +1,11 @@
+.products-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 20px 10px;
+  margin: 0;
+  max-width: 1200px;
+  min-height: 100vh;
+  background-color: #e6e6e6;
+}

@@ -1,0 +1,39 @@
+@mixin makeContainerFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin makeContainerChild {
+  padding: 14px 20px;
+  border-radius: 10px;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+
+  font-style: italic;
+
+  background-color: rgb(121, 213, 255);
+
+  &__actions {
+    @include makeContainerFlex();
+
+    width: 50%;
+
+    & > *:first-child {
+      margin-right: 20px;
+    }
+  }
+
+  &__input {
+    @include makeContainerChild();
+
+    width: 60%;
+  }
+
+  &__input::placeholder {
+    font-style: italic;
+  }
+}

@@ -1,0 +1,42 @@
+.container-list {
+  margin: 40px 0 40px 0;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 32%);
+  grid-auto-rows: 300px;
+  gap: 28px;
+
+  margin-bottom: 20px;
+}
+
+.button--load {
+  padding: 14px;
+
+  font-weight: 500;
+  font-size: 1rem;
+
+  border-radius: 10px;
+  outline: 1px solid #000000;
+
+  color: #000000;
+  background-color: #ffffff;
+
+  cursor: pointer;
+}
+
+.button--load:hover,
+.button--load:focus {
+  color: rgb(0, 199, 7);
+
+  outline: 2px solid rgb(0, 199, 7);
+}
+
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: none;
+}
