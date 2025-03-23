@@ -1,0 +1,47 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+
+    color: #1a1a1a;
+    background-color: #f9f9f9;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    text-align: start;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.img {
+    height: 100px;
+    width: 100px;
+
+    margin-right: 20px;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
