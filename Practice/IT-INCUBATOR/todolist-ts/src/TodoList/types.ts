@@ -3,6 +3,7 @@ export type TTask = {
     title: string;
     done: boolean;
 }
+
 export type TPropsTodoList = {
     title: string;
     tasks: TTask[];
