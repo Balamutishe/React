@@ -1,5 +1,5 @@
 import { Posts } from "../Posts/Posts.tsx";
-import UserImg from '../../../public/149071.png'
+import UserImg from '../../assets/149071.png'
 import c from './Profile.module.css'
 
 export const Profile = () => {
