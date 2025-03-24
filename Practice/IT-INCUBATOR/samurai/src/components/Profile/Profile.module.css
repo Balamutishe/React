@@ -2,15 +2,11 @@
     display: flex;
     flex-direction: column;
 
-    padding: 1rem;
-
-    color: #1a1a1a;
-    background-color: #f9f9f9;
+    margin-bottom: 1rem;
 }
 
 .title {
-    margin: 0;
-    padding: 0;
+    margin-bottom: 1rem;
     text-align: start;
 }
 
@@ -32,16 +28,4 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-}
-
-.list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-
-    text-decoration: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
