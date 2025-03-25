@@ -1,7 +1,7 @@
 import { Header } from "./components/Header/Header.tsx";
 import { Navbar } from "./components/Navbar/Navbar.tsx";
-import { Profile } from "./components/Profile/Profile.tsx";
-import { Dialogs } from "./components/Dialogs/Dialogs.tsx";
+import { UserPage } from "./pages/UserPage/UserPage.tsx";
+import { DialogsPage } from "./pages/DialogsPage/DialogsPage.tsx";
 import { BrowserRouter, Routes, Route } from "react-router";
 import './App.css'
 
@@ -16,8 +16,8 @@ const App = () => {
                         </section>
                         <section className='main__pages-router'>
                             <Routes>
-                                <Route path={ '/' } element={ <Profile/> }/>
-                                <Route path={ '/dialogs' } element={ <Dialogs/> }/>
+                                <Route path={ '/' } element={ <UserPage/> }/>
+                                <Route path={ '/dialogs' } element={ <DialogsPage/> }/>
                             </Routes>
                         </section>
                     </main>

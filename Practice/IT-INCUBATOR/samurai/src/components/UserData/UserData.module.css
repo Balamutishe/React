@@ -1,0 +1,21 @@
+.userData {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    margin-bottom: 1rem;
+}
+
+.userImg {
+    height: 100px;
+    width: 100px;
+
+    margin-right: 20px;
+}
+
+.userDesc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
