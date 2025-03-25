@@ -1,9 +1,6 @@
 .dialogs {
-    border-right: 2px solid lightgrey;
-}
-
-.dialogs {
     padding: 0 1rem;
+    border-right: 2px solid lightgrey;
 }
 
 .title {
@@ -12,7 +9,7 @@
     text-align: start;
 }
 
-.item {
+.listItem {
     padding: 1rem;
 
     border-radius: 0.5rem;
@@ -21,6 +18,18 @@
 
 }
 
-.item:not(:last-child) {
+.listItem:not(:last-child) {
     margin-bottom: 1rem;
+}
+
+.dialog {
+    display: flex;
+    align-items: center;
+}
+
+.dialogImg {
+    width: 20px;
+    height: 20px;
+
+    margin-right: 0.5rem;
 }
