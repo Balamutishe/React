@@ -11,11 +11,8 @@ export const Navbar = () => {
             <section className={ c.section }>
                 <nav className={ c.navbar }>
                     <ul className={ c.list }>
-                        <li><NavLink to={ '/' } className={ setClassActiveLink }>
-                            Profile
-                        </NavLink>
-                        </li>
-                        <li><NavLink to={ '/messages' } className={ setClassActiveLink }>Messages</NavLink></li>
+                        <li><NavLink to={ '/' } className={ setClassActiveLink }>Profile</NavLink></li>
+                        <li><NavLink to={ '/dialogs' } className={ setClassActiveLink }>Dialogs</NavLink></li>
                         <li><NavLink to={ '/news' } className={ setClassActiveLink }>News</NavLink></li>
                         <li><NavLink to={ '/music' } className={ setClassActiveLink }>Music</NavLink></li>
                         <li><NavLink to={ '/settings' } className={ setClassActiveLink }>Settings</NavLink></li>

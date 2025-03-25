@@ -1,7 +1,5 @@
 #root {
     width: 100%;
-    margin: 0 auto;
-    text-align: center;
 }
 
 .app-container {
@@ -14,11 +12,15 @@
 
 .main {
     display: grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 2fr 10fr;
+}
+
+.main__navbar {
+    padding: 1rem;
+    background-color: darkgoldenrod;
 }
 
 .main__pages-router {
-    width: 100%;
     padding: 1rem;
 
     color: #1a1a1a;

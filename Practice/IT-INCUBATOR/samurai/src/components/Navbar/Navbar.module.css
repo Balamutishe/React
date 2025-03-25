@@ -1,9 +1,5 @@
-.section {
-    background-color: darkgoldenrod;
-}
-
 .navbar {
-    padding: 1rem;
+    width: 100%;
 }
 
 .list {
