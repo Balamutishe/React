@@ -1,18 +1,22 @@
-import { DialogItem } from "./DialogItem.tsx";
+import { useParams } from "react-router";
+
+import { users } from "../../data/users.ts";
+import { Chats } from "./Chats/Chats.tsx";
+import { Messages } from "./Messages/Messages.tsx";
 import c from './Dialogs.module.css'
 
 export const Dialogs = () => {
+    const { id } = useParams()
+    const user = users.find( ( user ) => user.id === '1' )
+    const chats = user && user.chats ? user.chats : []
+    const chat = chats.find( ( chat ) => chat.id === id );
+    const messages = chat && chat.messages ? chat.messages : []
+
+
     return (
             <div className={ c.dialogs }>
-                <h2 className={ c.title }>Dialogs</h2>
-                <ul className={ c.list }>
-                    <li className={ c.listItem }><DialogItem id={ '1' } title={ 'UserDialog1' }/></li>
-                    <li className={ c.listItem }><DialogItem id={ '2' } title={ 'UserDialog2' }/></li>
-                    <li className={ c.listItem }><DialogItem id={ '3' } title={ 'UserDialog3' }/></li>
-                    <li className={ c.listItem }><DialogItem id={ '4' } title={ 'UserDialog4' }/></li>
-                    <li className={ c.listItem }><DialogItem id={ '5' } title={ 'UserDialog5' }/></li>
-                </ul>
+                <Chats chats={ chats }/>
+                <Messages messages={ messages }/>
             </div>
-
     )
 }

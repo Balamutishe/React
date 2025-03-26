@@ -1,11 +1,13 @@
 import { Header } from "./components/Header/Header.tsx";
 import { Navbar } from "./components/Navbar/Navbar.tsx";
-import { UserPage } from "./pages/UserPage/UserPage.tsx";
-import { DialogsPage } from "./pages/DialogsPage/DialogsPage.tsx";
+import { Profile } from "./components/Profile/Profile.tsx";
+import { Dialogs } from "./components/Dialogs/Dialogs.tsx";
 import { BrowserRouter, Routes, Route } from "react-router";
 import './App.css'
 
 const App = () => {
+    console.log()
+
     return (
             <BrowserRouter>
                 <div className='app-container'>
@@ -16,8 +18,9 @@ const App = () => {
                         </section>
                         <section className='main__pages-router'>
                             <Routes>
-                                <Route path={ '/' } element={ <UserPage/> }/>
-                                <Route path={ '/dialogs' } element={ <DialogsPage/> }/>
+                                <Route path={ '/' } element={ <Profile/> }/>
+                                <Route path={ '/dialogs' } element={ <Dialogs/> }/>
+                                <Route path={ '/dialogs/:id' } element={ <Dialogs/> }/>
                             </Routes>
                         </section>
                     </main>

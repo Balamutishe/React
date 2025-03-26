@@ -1,11 +1,11 @@
 import { FC } from "react";
 import c from './Messages.module.css'
 
-type MessageProps = {
+type MessageItemProps = {
     message: string;
 }
 
-export const Message: FC<MessageProps> = ( { message } ) => {
+export const MessageItem: FC<MessageItemProps> = ( { message } ) => {
     return (
             <div className={ c.message }>
                 { message }
