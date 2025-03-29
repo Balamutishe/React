@@ -3,28 +3,28 @@ const bodyParser = require("body-parser");
 const fetchDb = require("../database/mongoClient.js");
 
 const {
-	getAllChats,
-	getOneChat,
-	addChat,
-	updateChat,
-	deleteChat,
-} = require("../database/chats.js");
+	getAllPosts,
+	getOnePost,
+	addPost,
+	updatePost,
+	deletePost,
+} = require("../database/posts.js");
 
 router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
 );
 
-router.get("/chats", async (req, res) => {
+router.get("/posts", async (req, res) => {
 	try {
 		const { userId } = req.body;
 		
 		if (userId) {
-			const chatsList = await getAllChats(req.db, userId);
+			const postsList = await getAllPosts(req.db, userId);
 			
-			if (chatsList) {
-				res.status(200).json(chatsList);
+			if (postsList) {
+				res.status(200).json(postsList);
 			} else {
-				res.status(404).send("chatsList not found");
+				res.status(404).send('postsList not found');
 			}
 		} else {
 			res.status(404).send("userId not found");
@@ -36,23 +36,25 @@ router.get("/chats", async (req, res) => {
 });
 
 router.post(
-	"/chats",
+	"/posts",
 	bodyParser.urlencoded({ extended: false }),
 	async (req, res) => {
 		try {
-			const { chatText, userId } = req.body;
+			const { postText, userId, userImg } = req.body;
 			
-			if (userId) {
-				const statusCreate = await addChat(req.db, {
+			if (userId && userImg) {
+				const statusCreate = await addPost(req.db, {
 					_id: crypto.randomUUID(),
-					chatText: chatText,
+					postText: postText,
 					created_at: new Date(),
 					updated_at: new Date(),
 					userId: userId,
+					userImg: userImg,
+					likeCount: 0
 				});
 				
 				if (!statusCreate.acknowledged) {
-					res.status(404).send("chat not created");
+					res.status(404).send("post not created");
 				} else {
 					return res.status(200).json(statusCreate.insertedId);
 				}
@@ -65,17 +67,17 @@ router.post(
 	}
 );
 
-router.get("/chats/:id", async (req, res) => {
+router.get("/posts/:id", async (req, res) => {
 	try {
 		const { id } = req.params;
 		
 		if (id) {
-			const chat = await getOneChat(req.db, id);
+			const post = await getOnePost(req.db, id);
 			
-			if (chat) {
-				res.status(200).json(chat);
+			if (post) {
+				res.status(200).json(post);
 			} else {
-				res.status(404).send(`chat ${ id } not found`);
+				res.status(404).send(`post ${ id } not found`);
 			}
 		} else {
 			res.status(400).send("uncorrected request.body");
@@ -86,18 +88,18 @@ router.get("/chats/:id", async (req, res) => {
 });
 
 router.patch(
-	"/chats/:id",
+	"/posts/:id",
 	bodyParser.urlencoded({ extended: false }),
 	async (req, res) => {
 		try {
 			const { id } = req.params;
-			const { chatText } = req.body;
+			const { postText } = req.body;
 			
-			if (id && chatText) {
-				const statusUpdate = await updateChat(req.db, id, { chatText: chatText });
+			if (id && postText) {
+				const statusUpdate = await updatePost(req.db, id, { postText: postText });
 				
 				if (statusUpdate.modifiedCount === 0) {
-					res.status(404).send(`unknown chat ID: ${ id }`);
+					res.status(404).send(`unknown post ID: ${ id }`);
 				} else {
 					res.status(200).json(id);
 				}
@@ -110,15 +112,15 @@ router.patch(
 	}
 );
 
-router.delete("/chats/:id", async (req, res) => {
+router.delete("/posts/:id", async (req, res) => {
 	try {
 		const { id } = req.params;
 		
 		if (id) {
-			const statusDeleted = await deleteChat(req.db, id);
+			const statusDeleted = await deletePost(req.db, id);
 			
 			if (statusDeleted.deletedCount === 0) {
-				res.status(404).send(`chat ID: ${ id } not found`);
+				res.status(404).send(`post ID: ${ id } not found`);
 			} else {
 				res.status(200).json(id);
 			}

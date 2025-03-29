@@ -2,24 +2,24 @@ import { FC } from "react";
 
 import { MessageItem } from "./MessageItem.tsx";
 import c from './Messages.module.css'
-import { TMessagesList } from "../../../redux/users.ts";
+import { TMessagesList } from "../../../api/users/users.ts";
 
 type TMessagesProps = {
-    messages: TMessagesList | undefined
+	messages: TMessagesList | undefined
 }
 
 export const Messages: FC<TMessagesProps> = ( { messages } ) => {
-    return (
-            <div className={ c.messages }>
-                <h2 className={ c.title }>Messages</h2>
-                <ul className={ c.list }>
-                    { messages && messages.map( ( message ) => (
-                            <li key={ message.id } className={ c.item }>
-                                <MessageItem message={ message.message }/>
-                            </li>
-                    ) ) }
-                </ul>
-                { messages && messages.length === 0 && <div>Сообщений нет</div> }
-            </div>
-    )
+	return (
+			<div className={ c.messages }>
+				<h2 className={ c.title }>Messages</h2 >
+				<ul className={ c.list }>
+					{ messages && messages.map( ( message ) => (
+							<li key={ message.id } className={ c.item }>
+								<MessageItem message={ message.message }/>
+							</li >
+					) ) }
+				</ul >
+				{ messages && messages.length === 0 && <div >Сообщений нет</div > }
+			</div >
+	)
 }

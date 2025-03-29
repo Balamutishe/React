@@ -2,11 +2,12 @@ const express = require( "express" );
 const chats = require( "./routes/chats.js" );
 const users = require( "./routes/users.js" );
 const messages = require( "./routes/messages.js" );
+const posts = require( "./routes/posts.js" );
 
 const app = express();
 app.use( express.json() );
 
-app.use( "/", users, chats, messages );
+app.use( "/", users, chats, messages, posts );
 
 const port = process.env.PORT || 3000;
 
