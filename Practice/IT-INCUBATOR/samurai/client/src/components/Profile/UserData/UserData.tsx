@@ -1,26 +1,24 @@
-import { FC } from "react";
-
-import { TUser } from "../../../api/users/users.ts";
 import UserImg from "../../../assets/149071.png";
 import c from './UserData.module.css'
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux";
 
-type TUserDataProps = {
-	user: TUser | undefined
-}
+export const UserData = () => {
+	const user = useSelector((state: RootState) => state.userData)
 
-export const UserData: FC<TUserDataProps> = ( { user } ) => {
 	return (
-			<div className={ c.userData }>
-				<img src={ UserImg } alt='UserImg' className={ c.userImg }/>
-				<div className={ c.userDesc }>
-					<div >{ user && user.name ? user.name : 'Имя не найдено' }</div >
-					<div >
-						<div >UserDescription</div >
-						<div >UserDescription</div >
-						<div >UserDescription</div >
-						<div >UserDescription</div >
-					</div >
-				</div >
-			</div >
+		<div className={ c.userData }>
+			<img src={ UserImg } alt='UserImg' className={ c.userImg }/>
+			<div className={ c.userDesc }>
+				<div>{ user && user.username !== '' ? user.username :
+					'Выберите пользователя' }</div>
+				{ user && user.username !== '' && <div>
+					<div>UserDescription</div>
+					<div>UserDescription</div>
+					<div>UserDescription</div>
+					<div>UserDescription</div>
+				</div> }
+			</div>
+		</div>
 	)
 }

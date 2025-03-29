@@ -14,9 +14,9 @@ router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
 );
 
-router.get("/posts", async (req, res) => {
+router.get("/:userId/posts", async (req, res) => {
 	try {
-		const { userId } = req.body;
+		const { userId } = req.params;
 		
 		if (userId) {
 			const postsList = await getAllPosts(req.db, userId);

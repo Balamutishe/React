@@ -17,7 +17,7 @@ export async function getUserById(id: string): Promise<TUser> {
 	return fetch(`/api/users/${ id }`, {
 		method: "GET",
 	}).then(validateResponse).then(response => response.json())
-		.then(user => UserSchema.parse(user));
+		.then(user => UserSchema.parse(user))
 }
 
 export async function createUser({
