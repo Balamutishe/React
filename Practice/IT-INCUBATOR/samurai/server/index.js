@@ -1,14 +1,15 @@
-const express = require("express");
-const boards = require("./routes/boards.js");
-const notes = require("./routes/notes.js");
+const express = require( "express" );
+const chats = require( "./routes/chats.js" );
+const users = require( "./routes/users.js" );
+const messages = require( "./routes/messages.js" );
 
 const app = express();
-app.use(express.json());
+app.use( express.json() );
 
-app.use("/", boards, notes);
+app.use( "/", users, chats, messages );
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`   Listening on http://localhost:${port}`);
-});
+app.listen( port, () => {
+	console.log( `   Listening on http://localhost:${ port }` );
+} );
