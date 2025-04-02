@@ -3,8 +3,8 @@ import { z } from "zod";
 export const ChatSchema = z.object({
 	_id: z.string(),
 	chatText: z.string(),
-	created_at: z.date(),
-	updated_at: z.date(),
+	created_at: z.string(),
+	updated_at: z.string(),
 	userId: z.string(),
 })
 

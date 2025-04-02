@@ -14,9 +14,9 @@ router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
 );
 
-router.get("/chats", async (req, res) => {
+router.get("/:userId/chats", async (req, res) => {
 	try {
-		const { userId } = req.body;
+		const { userId } = req.params;
 		
 		if (userId) {
 			const chatsList = await getAllChats(req.db, userId);
@@ -45,7 +45,7 @@ router.post(
 			if (userId) {
 				const statusCreate = await addChat(req.db, {
 					_id: crypto.randomUUID(),
-					chatText: chatText,
+					chatText: chatText === '' ? 'Новый чат' : chatText,
 					created_at: new Date(),
 					updated_at: new Date(),
 					userId: userId,

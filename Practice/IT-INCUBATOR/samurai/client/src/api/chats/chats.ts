@@ -7,8 +7,8 @@ import {
 	ChatsListSchema,
 } from './types.ts'
 
-export async function getAllChats(): Promise<TChatsList> {
-	return fetch("/api/chats", {
+export async function getAllChats(userId: string): Promise<TChatsList> {
+	return fetch(`/api/${ userId }/chats`, {
 		method: "GET"
 	}).then(validateResponse).then(response => response.json())
 		.then(chatsList => ChatsListSchema.parse(chatsList))
