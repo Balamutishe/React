@@ -20,7 +20,7 @@ export const Posts: FC<TPostsProps> = ({ posts, userId, userImg, refetch }) => {
 			<ul className={ c.list }>
 				{ posts.map((post) => (
 					<li key={ post._id } className={ c.listItem }>
-						<Post post={ post }/>
+						<Post post={ post } refetch={ refetch }/>
 					</li>
 				)) }
 			</ul>

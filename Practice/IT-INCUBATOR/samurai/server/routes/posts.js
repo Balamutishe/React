@@ -38,7 +38,7 @@ router.post(
 			if (userId) {
 				const statusCreate = await addPost(req.db, {
 					_id: crypto.randomUUID(),
-					postText: postText,
+					postText: postText === '' ? 'Новый пост' : postText,
 					created_at: new Date(),
 					updated_at: new Date(),
 					userId: userId,

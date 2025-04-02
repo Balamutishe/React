@@ -24,6 +24,7 @@
 }
 
 .listItem {
+    width: 60%;
     padding: 0.5rem;
 
     background-color: lightgray;
@@ -38,14 +39,26 @@
 .post {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
+}
+
+.postContent {
+    display: flex;
+    align-items: center;
+}
+
+.postInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
 }
 
 .postImg {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .postText {
