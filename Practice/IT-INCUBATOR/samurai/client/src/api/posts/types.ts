@@ -3,8 +3,8 @@ import { z } from "zod";
 export const PostSchema = z.object({
 	_id: z.string(),
 	postText: z.string(),
-	created_at: z.date(),
-	updated_at: z.date(),
+	created_at: z.string(),
+	updated_at: z.string(),
 	userId: z.string(),
 	userImg: z.string(),
 	likeCount: z.number(),

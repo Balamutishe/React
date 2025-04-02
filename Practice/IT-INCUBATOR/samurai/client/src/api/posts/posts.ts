@@ -7,9 +7,9 @@ import {
 	PostsListSchema,
 } from './types.ts'
 
-export async function getAllPosts(): Promise<TPostsList> {
-	return fetch("/api/posts", {
-		method: "GET"
+export async function getAllPosts(userId: string): Promise<TPostsList> {
+	return fetch(`/api/${ userId }/posts`, {
+		method: "GET",
 	}).then(validateResponse).then(response => response.json())
 		.then(postsList => PostsListSchema.parse(postsList))
 }

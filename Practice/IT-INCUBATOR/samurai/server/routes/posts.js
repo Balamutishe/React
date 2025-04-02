@@ -16,20 +16,13 @@ router.use(
 
 router.get("/:userId/posts", async (req, res) => {
 	try {
-		const { userId } = req.params;
+		const postsList = await getAllPosts(req.db, req.params.userId);
 		
-		if (userId) {
-			const postsList = await getAllPosts(req.db, userId);
-			
-			if (postsList) {
-				res.status(200).json(postsList);
-			} else {
-				res.status(404).send('postsList not found');
-			}
+		if (postsList) {
+			res.status(200).json(postsList);
 		} else {
-			res.status(404).send("userId not found");
+			res.status(404).send('postsList not found');
 		}
-		
 	} catch (err) {
 		res.status(400).send(err.message);
 	}
@@ -42,7 +35,7 @@ router.post(
 		try {
 			const { postText, userId, userImg } = req.body;
 			
-			if (userId && userImg) {
+			if (userId) {
 				const statusCreate = await addPost(req.db, {
 					_id: crypto.randomUUID(),
 					postText: postText,
@@ -56,7 +49,7 @@ router.post(
 				if (!statusCreate.acknowledged) {
 					res.status(404).send("post not created");
 				} else {
-					return res.status(200).json(statusCreate.insertedId);
+					res.status(200).json(statusCreate.insertedId);
 				}
 			} else {
 				res.status(400).send("uncorrected request.body");

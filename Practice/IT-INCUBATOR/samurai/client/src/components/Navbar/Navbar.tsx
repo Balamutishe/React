@@ -1,36 +1,32 @@
 import { useState } from "react";
 import { NavLinkRenderProps } from "react-router";
 import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux";
-
-import c from './Navbar.module.css'
+import { useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
+
 import { getAllUsers } from "../../api/users/users.ts";
 import { queryClient } from "../../api/queryClient.ts";
 import { setUser } from "../../redux/userDataSlice.ts";
-
+import c from './Navbar.module.css'
 
 export const Navbar = () => {
 	const [variantNav, setVariantNav] = useState('users')
 	const dispatch = useDispatch()
-	const userData = useSelector((state: RootState) => state.userData)
-	const userId = userData._id ? userData._id : ''
 	const setClassActiveLink = (props: NavLinkRenderProps): string => {
 		return props.isActive ? `${ c.active }` : ''
 	}
 
-	const queryUsers = useQuery({
+	const { data, status } = useQuery({
 		queryFn: () => getAllUsers(),
 		queryKey: ["users", "all"]
 	}, queryClient)
 
-	const users = queryUsers.status === 'success' ? queryUsers.data : []
+	const users = status === 'success' ? data : []
 	const navigationList = [
 		{
 			id: "1",
 			title: 'User',
-			to: ''
+			to: '/user'
 		},
 		{
 			id: "2",
@@ -61,7 +57,7 @@ export const Navbar = () => {
 					{ navigationList.map((nav) => (
 						<li key={ nav.id }>
 							<NavLink
-								to={ `/${ userId }${ nav.to }` }
+								to={ `${ nav.to }` }
 								className={ setClassActiveLink }
 							>{ nav.title }</NavLink>
 						</li>
@@ -72,7 +68,7 @@ export const Navbar = () => {
 					{ users.map((user) => (
 						<li key={ user._id }>
 							<NavLink
-								to={ `/${ user._id }` }
+								to={ '/user' }
 								onClick={ () => {
 									dispatch(setUser(user))
 									setVariantNav("navigation")
