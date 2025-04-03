@@ -2,13 +2,11 @@ import { FC } from "react";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	useMutation
 } from "@tanstack/react-query";
 
 import { TPost, TPostsList } from "../../../api/posts/types.ts";
-import { deletePost } from "../../../api/posts/posts.ts";
-import { queryClient } from "../../../api/queryClient.ts";
 import c from './Posts.module.css'
+import { useMutatePostDelete } from "../../../hooks/api/useMutatePostDelete.ts";
 
 type TPostProps = {
 	post: TPost
@@ -16,10 +14,7 @@ type TPostProps = {
 }
 
 export const Post: FC<TPostProps> = ({ post, refetch }) => {
-	const deletePostMutation = useMutation({
-		mutationFn: () => deletePost(post._id),
-		onSuccess: () => refetch()
-	}, queryClient)
+	const deletePost = useMutatePostDelete({ postId: post._id, refetch })
 
 	return (
 		<div className={ c.post }>
@@ -30,7 +25,7 @@ export const Post: FC<TPostProps> = ({ post, refetch }) => {
 					<span>like { post.likeCount }</span>
 				</div>
 			</div>
-			<button onClick={ () => deletePostMutation.mutate() }>X</button>
+			<button onClick={ () => deletePost() }>X</button>
 		</div>
 	)
 }

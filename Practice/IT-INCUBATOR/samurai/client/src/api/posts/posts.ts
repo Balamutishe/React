@@ -21,9 +21,8 @@ export async function getPost(id: string): Promise<TPost> {
 		.then(post => PostSchema.parse(post));
 }
 
-export async function createPost({
-	postText, userId, userImg
-}: { postText: string, userId: string, userImg: string }): Promise<string> {
+export async function createPost(
+	postText: string, userId: string, userImg: string): Promise<string> {
 	return fetch("/api/posts", {
 		method: "POST",
 		headers: {

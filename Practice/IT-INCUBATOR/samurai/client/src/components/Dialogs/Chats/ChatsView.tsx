@@ -1,25 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
-
-import { queryClient } from "../../../api/queryClient.ts";
 import { Chats } from "./Chats.tsx";
-import { RootState } from "../../../redux";
-import { getAllChats } from "../../../api/chats/chats.ts";
+import { useQueryGetAllChats } from "../../../hooks/api";
 
 export const ChatsView = () => {
-	const userId = useSelector(
-		(state: RootState) => state.userData._id)
-
-	const { data, status, refetch } = useQuery({
-		queryFn: () => getAllChats(userId),
-		queryKey: ["chats", "all"]
-	}, queryClient)
-
+	const { data, status, refetch } = useQueryGetAllChats()
 
 	switch (status) {
 		case "success":
 			return (
-				<Chats chats={ data } userId={ userId } refetch={ refetch }/>
+				<Chats chats={ data ? data : [] } refetch={ refetch }/>
 			)
 		case "error":
 			return (

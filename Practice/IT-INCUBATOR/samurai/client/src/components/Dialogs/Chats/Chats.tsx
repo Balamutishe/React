@@ -8,11 +8,10 @@ import c from './Chats.module.css'
 
 type TChatsProps = {
 	chats: TChatsList
-	userId: string
 	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TChatsList, Error>>
 }
 
-export const Chats: FC<TChatsProps> = ({ chats, userId, refetch }) => {
+export const Chats: FC<TChatsProps> = ({ chats, refetch }) => {
 	return (
 		<div className={ c.chats }>
 			<div className={ c.chatsContent }>
@@ -26,7 +25,7 @@ export const Chats: FC<TChatsProps> = ({ chats, userId, refetch }) => {
 				</ul>
 			</div>
 			<div className={ c.formContainer }>
-				<ChatsForm userId={ userId } refetch={ refetch }/>
+				<ChatsForm refetch={ refetch }/>
 			</div>
 		</div>
 	)

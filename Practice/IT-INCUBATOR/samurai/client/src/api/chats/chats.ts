@@ -21,9 +21,8 @@ export async function getChat(id: string): Promise<TChat> {
 		.then(chat => ChatSchema.parse(chat));
 }
 
-export async function createChat({
-	chatText, userId
-}: { chatText: string, userId: string }): Promise<string> {
+export async function createChat(chatText: string,
+	userId: string): Promise<string> {
 	return fetch("/api/chats", {
 		method: "POST",
 		headers: {

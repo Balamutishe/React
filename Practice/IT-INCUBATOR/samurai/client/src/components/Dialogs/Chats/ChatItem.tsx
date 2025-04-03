@@ -3,13 +3,11 @@ import { FC } from "react";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	useMutation
 } from "@tanstack/react-query";
 
+import { useMutateChatDelete } from "../../../hooks/api";
 import { TChat, TChatsList } from "../../../api/chats/types.ts";
 import userImg from '../../../assets/149071.png'
-import { deleteChat } from "../../../api/chats/chats.ts";
-import { queryClient } from "../../../api/queryClient.ts";
 import c from './Chats.module.css'
 
 type ChatItemProps = {
@@ -18,10 +16,7 @@ type ChatItemProps = {
 }
 
 export const ChatItem: FC<ChatItemProps> = ({ chat, refetch }) => {
-	const deleteChatMutate = useMutation({
-		mutationFn: () => deleteChat(chat._id),
-		onSuccess: () => refetch()
-	}, queryClient)
+	const deleteChat = useMutateChatDelete({ chatId: chat._id, refetch })
 
 	return (
 		<div className={ c.chat }>
@@ -29,7 +24,7 @@ export const ChatItem: FC<ChatItemProps> = ({ chat, refetch }) => {
 			<Link
 				to={ `/dialogs/${ chat._id }` } className={ c.chatTitle }
 			>{ chat.chatText }</Link>
-			<button onClick={ () => deleteChatMutate.mutate() }>X</button>
+			<button onClick={ () => deleteChat() }>X</button>
 		</div>
 	)
 }
