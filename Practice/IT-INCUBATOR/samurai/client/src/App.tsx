@@ -24,7 +24,7 @@ const App = () => {
 								element={ <Profile authState={ true }/> }
 							/>
 							<Route path={ '/dialogs' } element={ <Dialogs/> }/>
-							<Route path={ '/dialogs/:id' } element={ <Dialogs/> }/>
+							<Route path={ '/dialogs/:chatId' } element={ <Dialogs/> }/>
 						</Routes>
 					</section>
 				</main>

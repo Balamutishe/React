@@ -15,12 +15,11 @@ export const ChatsView = () => {
 		queryKey: ["chats", "all"]
 	}, queryClient)
 
-	const chats = data ? data : []
 
 	switch (status) {
 		case "success":
 			return (
-				<Chats chats={ chats } userId={ userId } refetch={ refetch }/>
+				<Chats chats={ data } userId={ userId } refetch={ refetch }/>
 			)
 		case "error":
 			return (

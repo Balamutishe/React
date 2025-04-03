@@ -7,8 +7,8 @@ import {
 	MessagesListSchema,
 } from './types.ts'
 
-export async function getAllMessages(): Promise<TMessagesList> {
-	return fetch("/api/messages", {
+export async function getAllMessages(chatId: string): Promise<TMessagesList> {
+	return fetch(`/api/${ chatId }/messages`, {
 		method: "GET"
 	}).then(validateResponse).then(response => response.json())
 		.then(messagesList => MessagesListSchema.parse(messagesList))
@@ -21,14 +21,9 @@ export async function getMessage(id: string): Promise<TMessage> {
 		.then(message => MessageSchema.parse(message));
 }
 
-export async function createMessage({
-	messageText, userImg, chatId, userId
-}: {
-	messageText: string,
-	userImg: string,
-	chatId: string,
-	userId: string
-}): Promise<string> {
+export async function createMessage(
+	messageText: string, userImg: string, chatId: string, userId: string
+): Promise<string> {
 	return fetch("/api/messages", {
 		method: "POST",
 		headers: {

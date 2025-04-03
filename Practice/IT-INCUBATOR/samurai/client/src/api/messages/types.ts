@@ -2,10 +2,12 @@ import { z } from "zod";
 
 export const MessageSchema = z.object({
 	_id: z.string(),
-	chatText: z.string(),
-	created_at: z.date(),
-	updated_at: z.date(),
+	messageText: z.string(),
+	created_at: z.string(),
+	updated_at: z.string(),
+	userImg: z.string(),
 	userId: z.string(),
+	chatId: z.string(),
 })
 
 export type TMessage = z.infer<typeof MessageSchema>;

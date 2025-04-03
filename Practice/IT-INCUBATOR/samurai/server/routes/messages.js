@@ -14,9 +14,9 @@ router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
 );
 
-router.get("/messages", async (req, res) => {
+router.get("/:chatId/messages", async (req, res) => {
 	try {
-		const { chatId } = req.body;
+		const { chatId } = req.params;
 		
 		if (chatId) {
 			const messagesList = await getAllMessages(req.db, chatId);
@@ -47,6 +47,7 @@ router.post(
 					_id: crypto.randomUUID(),
 					messageText: messageText,
 					created_at: new Date(),
+					updated_at: new Date(),
 					userImg: userImg,
 					userId: userId,
 					chatId: chatId,
