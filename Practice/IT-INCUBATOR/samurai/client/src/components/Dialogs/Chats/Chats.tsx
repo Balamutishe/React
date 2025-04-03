@@ -15,15 +15,19 @@ type TChatsProps = {
 export const Chats: FC<TChatsProps> = ({ chats, userId, refetch }) => {
 	return (
 		<div className={ c.chats }>
-			<h2 className={ c.title }>Chats</h2>
-			<ChatsForm userId={ userId } refetch={ refetch }/>
-			<ul className={ c.list }>
-				{ chats.length !== 0 ? chats.map((chat) => (
-					<li className={ c.listItem } key={ chat._id }>
-						<ChatItem chat={ chat } refetch={ refetch }/>
-					</li>
-				)) : (<div>Список пуст</div>) }
-			</ul>
+			<div className={ c.chatsContent }>
+				<h2 className={ c.title }>Chats</h2>
+				<ul className={ c.list }>
+					{ chats.length !== 0 ? chats.map((chat) => (
+						<li className={ c.listItem } key={ chat._id }>
+							<ChatItem chat={ chat } refetch={ refetch }/>
+						</li>
+					)) : (<div>Список пуст</div>) }
+				</ul>
+			</div>
+			<div className={ c.formContainer }>
+				<ChatsForm userId={ userId } refetch={ refetch }/>
+			</div>
 		</div>
 	)
 }
