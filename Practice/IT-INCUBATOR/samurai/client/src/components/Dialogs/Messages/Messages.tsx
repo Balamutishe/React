@@ -34,7 +34,7 @@ export const Messages: FC<TMessagesProps> = ({
 				</ul>
 				{ messages && messages.length === 0 && <div>Сообщений нет</div> }
 			</div>
-			<MessagesForm chatId={ chatId } userId={ userId } refetch={ refetch }/>
+			<MessagesForm chatId={ chatId } refetch={ refetch }/>
 		</div>
 	)
 }

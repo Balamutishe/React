@@ -2,12 +2,10 @@ import { FC } from "react";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	useMutation
 } from "@tanstack/react-query";
 
 import { TMessage, TMessagesList } from "../../../api/messages/types.ts";
-import { deleteMessage } from "../../../api/messages/messages.ts";
-import { queryClient } from "../../../api/queryClient.ts";
+import { useMutateMessageDelete } from "../../../hooks/api";
 import c from './Messages.module.css'
 
 type MessageItemProps = {
@@ -19,10 +17,8 @@ type MessageItemProps = {
 export const MessageItem: FC<MessageItemProps> = ({
 	message, refetch, userId
 }) => {
-	const deleteMessageMutation = useMutation({
-		mutationFn: () => deleteMessage(message._id),
-		onSuccess: () => refetch()
-	}, queryClient)
+	const deleteMessage = useMutateMessageDelete(
+		{ messageId: message._id, refetch })
 
 	return (
 		<div className={ c.message }>
@@ -36,7 +32,7 @@ export const MessageItem: FC<MessageItemProps> = ({
 				</p>
 			</div>
 			{ message.userId === userId && <div className={ c.messageActions }>
-				<button onClick={ () => deleteMessageMutation.mutate() }>X</button>
+				<button onClick={ () => deleteMessage() }>X</button>
 			</div> }
 		</div>
 	)
