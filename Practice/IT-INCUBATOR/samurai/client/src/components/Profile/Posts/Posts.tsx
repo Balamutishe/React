@@ -1,9 +1,10 @@
-import { TPostsList } from "../../../api/posts/types.ts";
-import { Post } from './Post.tsx'
-import { PostsForm } from "./PostsForm.tsx";
-import c from './Posts.module.css'
 import { useSelector } from "react-redux";
+
+import { TPostsList } from "../../../api/posts/types.ts";
+import { PostsForm } from "./PostsForm.tsx";
+import { Post } from './Post.tsx'
 import { RootState } from "../../../redux";
+import c from './Posts.module.css'
 
 
 export const Posts = () => {

@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { RootState } from "../../../redux";
 import { useMutatePostAdd } from "../../../hooks/api";
 import c from "./Posts.module.css";
 
 export const PostsForm = () => {
-	const [postText, setPostText] = useState('')
+	const dispatch = useDispatch()
 
-	const addPost = useMutatePostAdd({ postText, setPostText })
+	const postText = useSelector((state: RootState) => state.userData.postText)
+	const addPost = useMutatePostAdd()
+	const handleChangePostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		dispatch({ type: 'userData/setPostText', payload: e.target.value })
+	}
 
 	return (
 		<form
@@ -15,10 +21,10 @@ export const PostsForm = () => {
 			addPost()
 		} }
 		>
-				<textarea
-					className={ c.textarea } value={ postText }
-					onChange={ (e) => setPostText(e.target.value) }
-				></textarea>
+			<textarea
+				className={ c.textarea } value={ postText }
+				onChange={ handleChangePostText }
+			></textarea>
 			<button>
 				Add Post
 			</button>

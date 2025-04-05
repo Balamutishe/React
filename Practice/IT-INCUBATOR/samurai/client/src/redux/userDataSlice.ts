@@ -11,7 +11,8 @@ const userDataSlice = createSlice({
 				password: '',
 				userImg: ''
 			},
-			posts: []
+			posts: [],
+			postText: '',
 		},
 	reducers: {
 		setUser: (state, action) => {
@@ -29,6 +30,10 @@ const userDataSlice = createSlice({
 		deletePost: (state, action) => {
 			state.posts =
 				state.posts.filter((post: TPost) => post._id !== action.payload);
+			return state;
+		},
+		setPostText: (state, action) => {
+			state.postText = action.payload;
 			return state;
 		}
 	}
