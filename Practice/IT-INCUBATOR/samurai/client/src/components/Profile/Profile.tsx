@@ -1,26 +1,18 @@
-import { useSelector } from "react-redux";
-
-import { RootState } from "../../redux";
 import { UserData } from "./UserData/UserData.tsx";
 import c from './Profile.module.css'
 import { FC } from "react";
-import { PostsView } from "./Posts/PostsView.tsx";
+import { Posts } from "./Posts/Posts.tsx";
 
 type TProfileProps = {
 	authState: boolean
 }
 
 export const Profile: FC<TProfileProps> = ({ authState }) => {
-	const { username, userImg } = useSelector(
-		(state: RootState) => state.userData.user)
-
-	console.log(username)
-
 	return (
 		<div className={ c.profile }>
 			{ authState ? (<>
-				<UserData username={ username } userImg={ userImg }/>
-				<PostsView/>
+				<UserData/>
+				<Posts/>
 			</>) : (
 				<div>Главная страница</div>
 			) }

@@ -6,8 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getAllUsers } from "../../api/users/users.ts";
 import { queryClient } from "../../api/queryClient.ts";
-import { setUser } from "../../redux/userDataSlice.ts";
 import c from './Navbar.module.css'
+import { getAllPosts } from "../../api/posts/posts.ts";
 
 export const Navbar = () => {
 	const [variantNav, setVariantNav] = useState('users')
@@ -69,8 +69,15 @@ export const Navbar = () => {
 						<li key={ user._id }>
 							<NavLink
 								to={ '/user' }
-								onClick={ () => {
-									dispatch(setUser(user))
+								onClick={ async () => {
+									dispatch({
+										payload: { ...user },
+										type: "userData/setUser"
+									})
+									dispatch({
+										type: 'userData/setPosts',
+										payload: await getAllPosts(user._id)
+									})
 									setVariantNav("navigation")
 								} }
 							>

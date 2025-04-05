@@ -22,7 +22,11 @@ export async function getPost(id: string): Promise<TPost> {
 }
 
 export async function createPost(
-	postText: string, userId: string, userImg: string): Promise<string> {
+	{ postText, userId, userImg }: {
+		postText: string,
+		userId: string,
+		userImg: string
+	}): Promise<TPost> {
 	return fetch("/api/posts", {
 		method: "POST",
 		headers: {
@@ -34,7 +38,7 @@ export async function createPost(
 			userImg
 		}),
 	}).then(validateResponse).then((response) => response.json())
-		.then((postId) => postId);
+		.then((post) => post);
 }
 
 export async function updatePost({ postText, id }: {

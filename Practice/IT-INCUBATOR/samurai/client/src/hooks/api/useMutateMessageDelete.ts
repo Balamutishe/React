@@ -7,6 +7,7 @@ import {
 import { queryClient } from "../../api/queryClient.ts";
 import { TMessagesList } from "../../api/messages/types.ts";
 import { deleteMessage } from "../../api/messages/messages.ts";
+import { useQueryGetAllPosts } from "./useQueryGetAllPosts.ts";
 
 type TUseMutateMessageDeleteProps = {
 	messageId: string;
@@ -14,8 +15,10 @@ type TUseMutateMessageDeleteProps = {
 }
 
 export const useMutateMessageDelete = ({
-	messageId, refetch
+	messageId
 }: TUseMutateMessageDeleteProps) => {
+	const { refetch } = useQueryGetAllPosts()
+
 	const { mutate } = useMutation({
 		mutationFn: () => deleteMessage(messageId),
 		onSuccess: () => refetch()

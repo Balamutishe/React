@@ -49,7 +49,9 @@ router.post(
 				if (!statusCreate.acknowledged) {
 					res.status(404).send("post not created");
 				} else {
-					res.status(200).json(statusCreate.insertedId);
+					const createPost = await getOnePost(req.db, statusCreate.insertedId)
+					
+					res.status(200).json(createPost);
 				}
 			} else {
 				res.status(400).send("uncorrected request.body");

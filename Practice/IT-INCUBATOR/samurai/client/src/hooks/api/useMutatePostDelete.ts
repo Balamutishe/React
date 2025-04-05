@@ -1,23 +1,27 @@
 import {
-	QueryObserverResult,
-	RefetchOptions,
 	useMutation
 } from "@tanstack/react-query";
 import { deletePost } from "../../api/posts/posts.ts";
 import { queryClient } from "../../api/queryClient.ts";
-import { TPostsList } from "../../api/posts/types.ts";
+import { useQueryGetAllPosts } from "./useQueryGetAllPosts.ts";
+import { useDispatch } from "react-redux";
 
 type TUseMutatePostDelete = {
 	postId: string;
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TPostsList, Error>>
 }
 
 export const useMutatePostDelete = ({
-	postId, refetch
+	postId
 }: TUseMutatePostDelete) => {
+	const { refetch } = useQueryGetAllPosts()
+	const dispatch = useDispatch()
+
 	const { mutate } = useMutation({
 		mutationFn: () => deletePost(postId),
-		onSuccess: () => refetch()
+		onSuccess: async () => {
+			await refetch()
+			dispatch({ type: 'userData/deletePost', payload: postId })
+		}
 	}, queryClient)
 
 	return mutate

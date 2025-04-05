@@ -1,13 +1,11 @@
-import { FC } from "react";
-
 import c from './UserData.module.css'
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux";
 
-type TUserDataProps = {
-	username: string
-	userImg: string
-}
+export const UserData = () => {
+	const { username, userImg } = useSelector(
+		(state: RootState) => state.userData.user)
 
-export const UserData: FC<TUserDataProps> = ({ username, userImg }) => {
 	return (
 		<div className={ c.userData }>
 			<img src={ userImg } alt='UserImg' className={ c.userImg }/>

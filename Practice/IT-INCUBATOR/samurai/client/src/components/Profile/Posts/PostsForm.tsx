@@ -1,24 +1,12 @@
-import { useState, FC } from "react";
-import {
-	QueryObserverResult,
-	RefetchOptions
-} from "@tanstack/react-query";
+import { useState } from "react";
 
+import { useMutatePostAdd } from "../../../hooks/api";
 import c from "./Posts.module.css";
-import { TPostsList } from "../../../api/posts/types.ts";
-import { useMutatePostAdd } from "../../../hooks/api/useMutatePostAdd.ts";
 
-type TPostsFormProps = {
-	userImg?: string
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TPostsList, Error>>
-}
-
-export const PostsForm: FC<TPostsFormProps> = ({
-	refetch
-}) => {
+export const PostsForm = () => {
 	const [postText, setPostText] = useState('')
 
-	const addPost = useMutatePostAdd({ postText, setPostText, refetch })
+	const addPost = useMutatePostAdd({ postText, setPostText })
 
 	return (
 		<form

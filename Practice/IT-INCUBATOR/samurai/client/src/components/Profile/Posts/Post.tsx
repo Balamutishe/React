@@ -1,20 +1,15 @@
 import { FC } from "react";
-import {
-	QueryObserverResult,
-	RefetchOptions,
-} from "@tanstack/react-query";
 
-import { TPost, TPostsList } from "../../../api/posts/types.ts";
+import { TPost } from "../../../api/posts/types.ts";
 import c from './Posts.module.css'
-import { useMutatePostDelete } from "../../../hooks/api/useMutatePostDelete.ts";
+import { useMutatePostDelete } from "../../../hooks/api";
 
 type TPostProps = {
 	post: TPost
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TPostsList, Error>>
 }
 
-export const Post: FC<TPostProps> = ({ post, refetch }) => {
-	const deletePost = useMutatePostDelete({ postId: post._id, refetch })
+export const Post: FC<TPostProps> = ({ post }) => {
+	const deletePost = useMutatePostDelete({ postId: post._id })
 
 	return (
 		<div className={ c.post }>
