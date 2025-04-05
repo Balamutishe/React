@@ -6,7 +6,7 @@ import { queryClient } from "../../api/queryClient.ts";
 
 export const useQueryGetAllPosts = () => {
 	const userId = useSelector(
-		(state: RootState) => state.userData._id)
+		(state: RootState) => state.userData.user._id)
 
 	const { data, status, refetch } = useQuery({
 		queryFn: () => getAllPosts(userId),

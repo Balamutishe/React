@@ -4,15 +4,17 @@ const userDataSlice = createSlice({
 	name: "userData",
 	initialState:
 		{
-			_id: '',
-			username: '',
-			password: '',
-			userImg: '',
+			user: {
+				_id: '',
+				username: '',
+				password: '',
+				userImg: '',
+			}
 		},
 	reducers: {
 		setUser: (state, action) => {
-			console.log(state);
-			return state = action.payload;
+			state.user = action.payload;
+			return state;
 		}
 	}
 })

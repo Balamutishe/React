@@ -22,7 +22,7 @@ type TUseMutatePostAddProps = {
 export const useMutatePostAdd = ({
 	postText, setPostText, refetch
 }: TUseMutatePostAddProps) => {
-	const userId = useSelector((state: RootState) => state.userData._id)
+	const userId = useSelector((state: RootState) => state.userData.user._id)
 
 	const { mutate } = useMutation({
 		mutationFn: () => createPost(postText, userId, userImg),

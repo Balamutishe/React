@@ -7,12 +7,12 @@ import { RootState } from "../../redux";
 
 export const Dialogs = () => {
 	const { chatId } = useParams();
-	const { _id } = useSelector((state: RootState) => state.userData)
+	const userId = useSelector((state: RootState) => state.userData.user._id)
 
 	return (
 		<div className={ c.dialogs }>
 			<ChatsView/>
-			{ chatId ? <MessagesView chatId={ chatId } userId={ _id }/> :
+			{ chatId ? <MessagesView chatId={ chatId } userId={ userId }/> :
 				<div style={ { "padding": "0.5rem 1rem" } }>Выберите чат для
 					взаимодействия</div> }
 		</div>

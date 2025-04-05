@@ -3,7 +3,7 @@ import UserDataReducer from './userDataSlice.ts'
 
 const store = configureStore({
 	reducer: {
-		userData: await UserDataReducer
+		userData: UserDataReducer
 	}
 })
 

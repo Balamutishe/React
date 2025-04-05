@@ -12,7 +12,9 @@ type TProfileProps = {
 
 export const Profile: FC<TProfileProps> = ({ authState }) => {
 	const { username, userImg } = useSelector(
-		(state: RootState) => state.userData)
+		(state: RootState) => state.userData.user)
+
+	console.log(username)
 
 	return (
 		<div className={ c.profile }>
