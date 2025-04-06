@@ -20,7 +20,7 @@ type TUseMutateAddChatProps = {
 export const useMutateChatAdd = ({
 	chatText, setChatText, refetch
 }: TUseMutateAddChatProps) => {
-	const userId = useSelector((state: RootState) => state.userData.user._id)
+	const userId = useSelector((state: RootState) => state.profileData.user._id)
 
 	const { mutate } = useMutation({
 		mutationFn: () => createChat(chatText, userId),

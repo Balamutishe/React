@@ -9,7 +9,7 @@ import c from './Posts.module.css'
 
 export const Posts = () => {
 	const posts: TPostsList = useSelector(
-		(state: RootState) => state.userData.posts)
+		(state: RootState) => state.profileData.posts)
 
 	return (<div>
 			<h2 className={ c.title }>PostsList</h2>

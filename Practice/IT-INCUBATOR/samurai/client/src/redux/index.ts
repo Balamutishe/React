@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import UserDataReducer from './userDataSlice.ts'
-import PostsDataReducer from './postsDataSlice.ts'
+import ProfileReducer from './ProfileSlice.ts'
 
 const store = configureStore({
 	reducer: {
-		userData: UserDataReducer,
-		postsData: PostsDataReducer
+		profileData: ProfileReducer,
 	}
 })
 

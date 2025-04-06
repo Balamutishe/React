@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux";
 
 export const useQueryGetAllPosts = () => {
-	const userId = useSelector((state: RootState) => state.userData.user._id)
+	const userId = useSelector((state: RootState) => state.profileData.user._id)
 
 	const { data, status, refetch } = useQuery({
 		queryFn: async () => await getAllPosts(userId),

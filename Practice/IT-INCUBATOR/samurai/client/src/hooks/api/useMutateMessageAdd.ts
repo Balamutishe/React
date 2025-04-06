@@ -22,7 +22,7 @@ type TUseMutateMessageAddProps = {
 export const useMutateMessageAdd = ({
 	messageText, setMessageText, chatId, refetch
 }: TUseMutateMessageAddProps) => {
-	const userId = useSelector((state: RootState) => state.userData.user._id)
+	const userId = useSelector((state: RootState) => state.profileData.user._id)
 
 	const { mutate } = useMutation({
 		mutationFn: () => createMessage(messageText, userImg, chatId, userId),

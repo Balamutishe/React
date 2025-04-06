@@ -13,19 +13,19 @@ import { useQueryGetAllPosts } from "./useQueryGetAllPosts.ts";
 export const useMutatePostAdd = () => {
 	const { refetch } = useQueryGetAllPosts()
 	const dispatch = useDispatch();
-	const userId = useSelector((state: RootState) => state.userData.user._id)
-	const postText = useSelector((state: RootState) => state.userData.postText)
+	const userId = useSelector((state: RootState) => state.profileData.user._id)
+	const postText = useSelector((state: RootState) => state.profileData.postText)
 
 	const { mutate } = useMutation({
 		mutationFn: () => createPost({ postText, userId, userImg }),
 		onSuccess: async (data) => {
 			await refetch()
 			dispatch({
-				type: 'userData/addPost',
+				type: 'profileData/addPost',
 				payload: data
 			})
 			dispatch({
-				type: 'userData/setPostText',
+				type: 'profileData/setPostText',
 				payload: ''
 			})
 		}

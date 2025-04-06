@@ -7,7 +7,7 @@ import { queryClient } from "../../api/queryClient.ts";
 
 export const useQueryGetAllChats = () => {
 	const userId = useSelector(
-		(state: RootState) => state.userData.user._id)
+		(state: RootState) => state.profileData.user._id)
 
 	const { data, status, refetch } = useQuery({
 		queryFn: () => getAllChats(userId),

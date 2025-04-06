@@ -72,10 +72,10 @@ export const Navbar = () => {
 								onClick={ async () => {
 									dispatch({
 										payload: { ...user },
-										type: "userData/setUser"
+										type: "profileData/setUser"
 									})
 									dispatch({
-										type: 'userData/setPosts',
+										type: 'profileData/setPosts',
 										payload: await getAllPosts(user._id)
 									})
 									setVariantNav("navigation")

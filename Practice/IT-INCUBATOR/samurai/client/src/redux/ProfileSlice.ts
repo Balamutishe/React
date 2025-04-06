@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { TPost } from "../api/posts/types.ts";
 
-const userDataSlice = createSlice({
-	name: "userData",
+const profileSlice = createSlice({
+	name: "profileData",
 	initialState:
 		{
 			user: {
@@ -39,6 +39,8 @@ const userDataSlice = createSlice({
 	}
 })
 
-export const { setUser, setPosts, addPost, deletePost } = userDataSlice.actions;
+export const {
+	setUser, setPosts, addPost, deletePost, setPostText
+} = profileSlice.actions;
 
-export default userDataSlice.reducer;
+export default profileSlice.reducer;

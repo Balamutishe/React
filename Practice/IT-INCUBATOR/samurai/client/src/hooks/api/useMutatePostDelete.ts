@@ -20,7 +20,7 @@ export const useMutatePostDelete = ({
 		mutationFn: () => deletePost(postId),
 		onSuccess: async () => {
 			await refetch()
-			dispatch({ type: 'userData/deletePost', payload: postId })
+			dispatch({ type: 'profileData/deletePost', payload: postId })
 		}
 	}, queryClient)
 

@@ -8,10 +8,10 @@ import c from "./Posts.module.css";
 export const PostsForm = () => {
 	const dispatch = useDispatch()
 
-	const postText = useSelector((state: RootState) => state.userData.postText)
+	const postText = useSelector((state: RootState) => state.profileData.postText)
 	const addPost = useMutatePostAdd()
 	const handleChangePostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		dispatch({ type: 'userData/setPostText', payload: e.target.value })
+		dispatch({ type: 'profileData/setPostText', payload: e.target.value })
 	}
 
 	return (

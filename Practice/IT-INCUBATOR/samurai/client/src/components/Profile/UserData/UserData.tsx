@@ -1,10 +1,11 @@
-import c from './UserData.module.css'
 import { useSelector } from "react-redux";
+
 import { RootState } from "../../../redux";
+import c from './UserData.module.css'
 
 export const UserData = () => {
 	const { username, userImg } = useSelector(
-		(state: RootState) => state.userData.user)
+		(state: RootState) => state.profileData.user)
 
 	return (
 		<div className={ c.userData }>

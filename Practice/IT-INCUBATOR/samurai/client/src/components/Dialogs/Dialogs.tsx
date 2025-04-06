@@ -7,7 +7,7 @@ import { RootState } from "../../redux";
 
 export const Dialogs = () => {
 	const { chatId } = useParams();
-	const userId = useSelector((state: RootState) => state.userData.user._id)
+	const userId = useSelector((state: RootState) => state.profileData.user._id)
 
 	return (
 		<div className={ c.dialogs }>
