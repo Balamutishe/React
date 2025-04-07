@@ -15,40 +15,35 @@ const dialogsSlice = createSlice({
 	reducers: {
 		setActiveChatId: (state, action) => {
 			state.activeChatId = action.payload
-			return state
 		},
 		setChatText: (state, action) => {
-			state.chatText = action.payload;
-			return state;
+			state.chatText = action.payload
 		},
 		setChats: (state, action) => {
-			state.chats = action.payload;
+			state.chats = action.payload
 		},
 		addChat: (state, action) => {
-			state.chats = state.chats.concat(action.payload);
-			return state;
+			state.chats = state.chats.concat(action.payload)
+			state.chatText = ''
 		},
 		deleteChat: (state, action) => {
 			state.chats =
 				state.chats.filter((chat: TChat) => chat._id !== action.payload)
-			return state;
 		},
 		setMessageText: (state, action) => {
-			state.messageText = action.payload;
-			return state;
+			state.messageText = action.payload
+			return state
 		},
 		setMessages: (state, action) => {
-			state.messages = action.payload;
-			return state;
+			state.messages = action.payload
 		},
 		addMessage: (state, action) => {
-			state.messages = state.messages.concat(action.payload);
-			return state;
+			state.messages = state.messages.concat(action.payload)
+			state.messageText = ''
 		},
 		deleteMessage: (state, action) => {
 			state.messages = state.messages.filter(
 				(message: TMessage) => message._id !== action.payload)
-			return state;
 		}
 	}
 })

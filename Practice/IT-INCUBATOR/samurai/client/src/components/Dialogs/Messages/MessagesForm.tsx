@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { useMutateMessageAdd } from "../../../hooks/api";
-import { RootState } from "../../../redux";
 import c from "./Messages.module.css";
+import { RootState } from "../../../redux";
 
 export const MessagesForm = () => {
 	const dispatch = useDispatch()
 	const messageText = useSelector(
 		(state: RootState) => state.dialogsData.messageText)
-	const addMessage = useMutateMessageAdd(
-		{ messageText })
+	const addMessage = useMutateMessageAdd()
 
 	return (
 		<form

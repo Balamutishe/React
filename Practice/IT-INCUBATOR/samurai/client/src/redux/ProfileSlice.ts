@@ -17,24 +17,20 @@ const profileSlice = createSlice({
 	reducers: {
 		setUser: (state, action) => {
 			state.user = action.payload;
-			return state;
 		},
 		setPosts: (state, action) => {
 			state.posts = action.payload;
-			return state;
 		},
 		addPost: (state, action) => {
 			state.posts = state.posts.concat(action.payload);
-			return state;
+			state.postText = '';
 		},
 		deletePost: (state, action) => {
 			state.posts =
 				state.posts.filter((post: TPost) => post._id !== action.payload);
-			return state;
 		},
 		setPostText: (state, action) => {
 			state.postText = action.payload;
-			return state;
 		}
 	}
 })
