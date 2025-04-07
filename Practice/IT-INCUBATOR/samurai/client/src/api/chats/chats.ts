@@ -22,7 +22,7 @@ export async function getChat(id: string): Promise<TChat> {
 }
 
 export async function createChat(chatText: string,
-	userId: string): Promise<string> {
+	userId: string): Promise<TChat> {
 	return fetch("/api/chats", {
 		method: "POST",
 		headers: {
@@ -33,7 +33,7 @@ export async function createChat(chatText: string,
 			userId
 		}),
 	}).then(validateResponse).then((response) => response.json())
-		.then(newChatId => newChatId);
+		.then(chat => chat);
 }
 
 export async function updateChat({ chatText, id }: {

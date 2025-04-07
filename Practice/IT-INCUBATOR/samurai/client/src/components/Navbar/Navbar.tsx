@@ -5,13 +5,15 @@ import { useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
 import { getAllUsers } from "../../api/users/users.ts";
+import { getAllPosts } from "../../api/posts/posts.ts";
+import { getAllChats } from "../../api/chats/chats.ts";
 import { queryClient } from "../../api/queryClient.ts";
 import c from './Navbar.module.css'
-import { getAllPosts } from "../../api/posts/posts.ts";
 
 export const Navbar = () => {
 	const [variantNav, setVariantNav] = useState('users')
 	const dispatch = useDispatch()
+
 	const setClassActiveLink = (props: NavLinkRenderProps): string => {
 		return props.isActive ? `${ c.active }` : ''
 	}
@@ -77,6 +79,10 @@ export const Navbar = () => {
 									dispatch({
 										type: 'profileData/setPosts',
 										payload: await getAllPosts(user._id)
+									})
+									dispatch({
+										type: 'dialogsData/setChats',
+										payload: await getAllChats(user._id)
 									})
 									setVariantNav("navigation")
 								} }

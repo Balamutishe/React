@@ -1,17 +1,16 @@
-import { FC } from 'react'
-import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
 import { ChatItem } from "./ChatItem.tsx";
 import { ChatsForm } from "./ChatsForm.tsx";
+import { RootState } from "../../../redux";
 import { TChatsList } from "../../../api/chats/types.ts";
 import c from './Chats.module.css'
 
-type TChatsProps = {
-	chats: TChatsList
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TChatsList, Error>>
-}
 
-export const Chats: FC<TChatsProps> = ({ chats, refetch }) => {
+export const Chats = () => {
+	const chats: TChatsList = useSelector(
+		(state: RootState) => state.dialogsData.chats)
+
 	return (
 		<div className={ c.chats }>
 			<div className={ c.chatsContent }>
@@ -19,13 +18,13 @@ export const Chats: FC<TChatsProps> = ({ chats, refetch }) => {
 				<ul className={ c.list }>
 					{ chats.length !== 0 ? chats.map((chat) => (
 						<li className={ c.listItem } key={ chat._id }>
-							<ChatItem chat={ chat } refetch={ refetch }/>
+							<ChatItem chat={ chat }/>
 						</li>
 					)) : (<div>Список пуст</div>) }
 				</ul>
 			</div>
 			<div className={ c.formContainer }>
-				<ChatsForm refetch={ refetch }/>
+				<ChatsForm/>
 			</div>
 		</div>
 	)

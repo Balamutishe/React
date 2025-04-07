@@ -1,23 +1,27 @@
 import {
-	QueryObserverResult,
-	RefetchOptions,
 	useMutation
 } from "@tanstack/react-query";
 import { deleteChat } from "../../api/chats/chats.ts";
 import { queryClient } from "../../api/queryClient.ts";
-import { TChatsList } from "../../api/chats/types.ts";
+import { useQueryGetAllPosts } from "./useQueryGetAllPosts.ts";
+import { useDispatch } from "react-redux";
 
 type TUseMutateChatDelete = {
-	chatId: string;
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TChatsList, Error>>
+	chatId: string
 }
 
 export const useMutateChatDelete = ({
-	chatId, refetch
+	chatId
 }: TUseMutateChatDelete) => {
+	const { refetch } = useQueryGetAllPosts()
+	const dispatch = useDispatch()
+
 	const { mutate } = useMutation({
 		mutationFn: () => deleteChat(chatId),
-		onSuccess: () => refetch()
+		onSuccess: async () => {
+			await refetch()
+			dispatch({ type: 'dialogsData/deleteChat', payload: chatId })
+		}
 	}, queryClient)
 
 	return mutate

@@ -1,23 +1,12 @@
-import { useState, FC } from "react";
-import {
-	QueryObserverResult,
-	RefetchOptions
-} from "@tanstack/react-query";
-
-import { TChatsList } from "../../../api/chats/types.ts";
-import c from "./Chats.module.css";
 import { useMutateChatAdd } from "../../../hooks/api";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux";
+import c from "./Chats.module.css";
 
-type TChatsFormProps = {
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TChatsList, Error>>
-}
-
-export const ChatsForm: FC<TChatsFormProps> = ({
-	refetch
-}) => {
-	const [chatText, setChatText] = useState('')
-
-	const addChat = useMutateChatAdd({ chatText, setChatText, refetch })
+export const ChatsForm = () => {
+	const dispatch = useDispatch();
+	const chatText = useSelector((state: RootState) => state.dialogsData.chatText)
+	const addChat = useMutateChatAdd({ chatText })
 
 	return (
 		<form
@@ -28,7 +17,8 @@ export const ChatsForm: FC<TChatsFormProps> = ({
 		>
 			<textarea
 				className={ c.textarea } value={ chatText }
-				onChange={ (e) => setChatText(e.target.value) }
+				onChange={ (e) => dispatch(
+					{ type: 'dialogsData/setChatText', payload: e.target.value }) }
 			></textarea>
 			<button>
 				Add Chat
