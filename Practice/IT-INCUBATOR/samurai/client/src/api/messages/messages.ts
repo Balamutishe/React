@@ -23,7 +23,7 @@ export async function getMessage(id: string): Promise<TMessage> {
 
 export async function createMessage(
 	messageText: string, userImg: string, chatId: string, userId: string
-): Promise<string> {
+): Promise<TMessage> {
 	return fetch("/api/messages", {
 		method: "POST",
 		headers: {
@@ -36,7 +36,7 @@ export async function createMessage(
 			userId
 		}),
 	}).then(validateResponse).then((response) => response.json())
-		.then(newMessageId => newMessageId);
+		.then(message => message);
 }
 
 export async function updateMessage({ messageText, id }: {

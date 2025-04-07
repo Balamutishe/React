@@ -56,7 +56,9 @@ router.post(
 				if (!statusCreate.acknowledged) {
 					res.status(400).send("message not created");
 				} else {
-					return res.status(200).json(statusCreate.insertedId);
+					const createdMessage = await getOneMessage(req.db, statusCreate.insertedId);
+					
+					return res.status(200).json(createdMessage);
 				}
 			} else {
 				res.status(400).send("uncorrected request.body");

@@ -1,24 +1,19 @@
 import { FC } from "react";
-import {
-	QueryObserverResult,
-	RefetchOptions,
-} from "@tanstack/react-query";
 
-import { TMessage, TMessagesList } from "../../../api/messages/types.ts";
+import { TMessage } from "../../../api/messages/types.ts";
 import { useMutateMessageDelete } from "../../../hooks/api";
 import c from './Messages.module.css'
 
 type MessageItemProps = {
 	message: TMessage;
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TMessagesList, Error>>
 	userId: string
 }
 
 export const MessageItem: FC<MessageItemProps> = ({
-	message, refetch, userId
+	message, userId
 }) => {
 	const deleteMessage = useMutateMessageDelete(
-		{ messageId: message._id, refetch })
+		{ messageId: message._id })
 
 	return (
 		<div className={ c.message }>

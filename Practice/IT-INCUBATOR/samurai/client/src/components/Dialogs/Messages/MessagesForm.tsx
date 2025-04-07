@@ -1,25 +1,15 @@
-import { useState, FC } from "react";
-import {
-	QueryObserverResult,
-	RefetchOptions
-} from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
 
-import { TMessagesList } from "../../../api/messages/types.ts";
 import { useMutateMessageAdd } from "../../../hooks/api";
+import { RootState } from "../../../redux";
 import c from "./Messages.module.css";
 
-type TMessagesFormProps = {
-	chatId: string
-	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TMessagesList, Error>>
-}
-
-export const MessagesForm: FC<TMessagesFormProps> = ({
-	chatId, refetch
-}) => {
-	const [messageText, setMessageText] = useState('')
-
+export const MessagesForm = () => {
+	const dispatch = useDispatch()
+	const messageText = useSelector(
+		(state: RootState) => state.dialogsData.messageText)
 	const addMessage = useMutateMessageAdd(
-		{ messageText, setMessageText, chatId, refetch })
+		{ messageText })
 
 	return (
 		<form
@@ -28,10 +18,11 @@ export const MessagesForm: FC<TMessagesFormProps> = ({
 			addMessage()
 		} }
 		>
-				<textarea
-					className={ c.textarea } value={ messageText }
-					onChange={ (e) => setMessageText(e.target.value) }
-				></textarea>
+			<textarea
+				className={ c.textarea } value={ messageText }
+				onChange={ (e) => dispatch(
+					{ type: 'dialogsData/setMessageText', payload: e.target.value }) }
+			></textarea>
 			<button>
 				Add Message
 			</button>
