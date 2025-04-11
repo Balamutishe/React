@@ -2,15 +2,13 @@ import { FC } from "react";
 
 import { TPost } from "../../../api/posts/types.ts";
 import c from './Posts.module.css'
-import { useMutatePostDelete } from "../../../hooks/api";
 
 type TPostProps = {
 	post: TPost
+	handlePostDelete: (id: string) => void
 }
 
-export const Post: FC<TPostProps> = ({ post }) => {
-	const deletePost = useMutatePostDelete({ postId: post._id })
-
+export const Post: FC<TPostProps> = ({ post, handlePostDelete }) => {
 	return (
 		<div className={ c.post }>
 			<div className={ c.postContent }>
@@ -20,7 +18,7 @@ export const Post: FC<TPostProps> = ({ post }) => {
 					<span>like { post.likeCount }</span>
 				</div>
 			</div>
-			<button onClick={ () => deletePost() }>X</button>
+			<button onClick={ () => handlePostDelete(post._id) }>X</button>
 		</div>
 	)
 }

@@ -9,10 +9,9 @@ import { createPost } from "../../api/posts/posts.ts";
 import { addPost } from "../../redux/ProfileSlice.ts";
 import userImg from '../../assets/149071.png'
 
-export const useMutatePostAdd = () => {
+export const useMutatePostAdd = (postText: string) => {
 	const dispatch = useDispatch();
 	const userId = useSelector((state: RootState) => state.profileData.user._id)
-	const postText = useSelector((state: RootState) => state.profileData.postText)
 
 	const { mutate } = useMutation({
 		mutationFn: () => createPost({ postText, userId, userImg }),

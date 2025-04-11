@@ -1,23 +1,37 @@
-import { useSelector } from "react-redux";
+import { ChangeEvent, FC, FormEvent } from "react";
 
-import { TPostsList } from "../../../api/posts/types.ts";
 import { PostsForm } from "./PostsForm.tsx";
 import { Post } from './Post.tsx'
-import { RootState } from "../../../redux";
+import { TPostsList } from "../../../api/posts/types.ts";
 import c from './Posts.module.css'
 
+type TPostsProps = {
+	postsData: {
+		posts: TPostsList,
+		postText: string,
+	},
+	handlePostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+	handlePostAdd: (e: FormEvent<HTMLFormElement>) => void
+	handlePostDelete: (id: string) => void
+}
 
-export const Posts = () => {
-	const posts: TPostsList = useSelector(
-		(state: RootState) => state.profileData.posts)
-
+export const Posts: FC<TPostsProps> = ({
+	postsData,
+	handlePostChange,
+	handlePostAdd,
+	handlePostDelete
+}) => {
 	return (<div>
 			<h2 className={ c.title }>PostsList</h2>
-			<PostsForm/>
+			<PostsForm
+				postText={ postsData.postText }
+				handlePostChange={ handlePostChange }
+				handlePostAdd={ handlePostAdd }
+			/>
 			<ul className={ c.list }>
-				{ posts.map((post) => (
+				{ postsData.posts.map((post) => (
 					<li key={ post._id } className={ c.listItem }>
-						<Post post={ post }/>
+						<Post post={ post } handlePostDelete={ handlePostDelete }/>
 					</li>
 				)) }
 			</ul>
