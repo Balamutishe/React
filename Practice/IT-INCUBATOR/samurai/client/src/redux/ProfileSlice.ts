@@ -15,11 +15,9 @@ const profileSlice = createSlice({
 			postText: '',
 		},
 	reducers: {
-		setUser: (state, action) => {
-			state.user = action.payload;
-		},
-		setPosts: (state, action) => {
-			state.posts = action.payload;
+		setProfile: (state, action) => {
+			state.user = action.payload.user;
+			state.posts = action.payload.posts;
 		},
 		addPost: (state, action) => {
 			state.posts = state.posts.concat(action.payload);
@@ -36,7 +34,7 @@ const profileSlice = createSlice({
 })
 
 export const {
-	setUser, setPosts, addPost, deletePost, setPostText
+	setProfile, addPost, deletePost, setPostText
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

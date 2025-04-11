@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { queryClient } from "../../api/queryClient.ts";
 import { RootState } from "../../redux";
 import { createPost } from "../../api/posts/posts.ts";
+import { addPost } from "../../redux/ProfileSlice.ts";
 import userImg from '../../assets/149071.png'
-
 
 export const useMutatePostAdd = () => {
 	const dispatch = useDispatch();
@@ -17,10 +17,7 @@ export const useMutatePostAdd = () => {
 	const { mutate } = useMutation({
 		mutationFn: () => createPost({ postText, userId, userImg }),
 		onSuccess: (data) => {
-			dispatch({
-				type: 'profileData/addPost',
-				payload: data
-			})
+			dispatch(addPost(data));
 		}
 	}, queryClient)
 

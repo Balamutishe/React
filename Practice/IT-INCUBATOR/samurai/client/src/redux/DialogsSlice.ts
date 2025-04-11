@@ -32,7 +32,6 @@ const dialogsSlice = createSlice({
 		},
 		setMessageText: (state, action) => {
 			state.messageText = action.payload
-			return state
 		},
 		setMessages: (state, action) => {
 			state.messages = action.payload
@@ -49,3 +48,8 @@ const dialogsSlice = createSlice({
 })
 
 export default dialogsSlice.reducer;
+
+export const {
+	setActiveChatId, setChats, addChat, deleteChat, setChatText, deleteMessage,
+	setMessageText, setMessages, addMessage
+} = dialogsSlice.actions;

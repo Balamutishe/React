@@ -4,6 +4,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { createChat } from "../../api/chats/chats.ts";
+import { addChat } from "../../redux/DialogsSlice.ts";
 import { queryClient } from "../../api/queryClient.ts";
 import { RootState } from "../../redux";
 
@@ -15,10 +16,7 @@ export const useMutateChatAdd = () => {
 	const { mutate } = useMutation({
 		mutationFn: () => createChat(chatText, userId),
 		onSuccess: (data) => {
-			dispatch({
-				type: 'dialogsData/addChat',
-				payload: data
-			})
+			dispatch(addChat(data))
 		}
 	}, queryClient)
 

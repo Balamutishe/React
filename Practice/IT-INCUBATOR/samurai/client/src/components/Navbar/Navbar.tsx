@@ -2,28 +2,22 @@ import { useState } from "react";
 import { NavLinkRenderProps } from "react-router";
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from "react-redux";
-import { useQuery } from "@tanstack/react-query";
 
-import { getAllUsers } from "../../api/users/users.ts";
 import { getAllPosts } from "../../api/posts/posts.ts";
 import { getAllChats } from "../../api/chats/chats.ts";
-import { queryClient } from "../../api/queryClient.ts";
+import { setProfile } from "../../redux/ProfileSlice.ts";
+import { setChats } from "../../redux/DialogsSlice.ts";
+import { useQueryGetAllUsers } from "../../hooks/api/useQueryGetAllUsers.ts";
 import c from './Navbar.module.css'
 
 export const Navbar = () => {
-	const [variantNav, setVariantNav] = useState('users')
+	const users = useQueryGetAllUsers()
 	const dispatch = useDispatch()
+	const [variantNav, setVariantNav] = useState('users')
 
 	const setClassActiveLink = (props: NavLinkRenderProps): string => {
 		return props.isActive ? `${ c.active }` : ''
 	}
-
-	const { data, status } = useQuery({
-		queryFn: () => getAllUsers(),
-		queryKey: ["users", "all"]
-	}, queryClient)
-
-	const users = status === 'success' ? data : []
 	const navigationList = [
 		{
 			id: "1",
@@ -72,18 +66,10 @@ export const Navbar = () => {
 							<NavLink
 								to={ '/user' }
 								onClick={ async () => {
-									dispatch({
-										payload: { ...user },
-										type: "profileData/setUser"
-									})
-									dispatch({
-										type: 'profileData/setPosts',
-										payload: await getAllPosts(user._id)
-									})
-									dispatch({
-										type: 'dialogsData/setChats',
-										payload: await getAllChats(user._id)
-									})
+									dispatch(
+										setProfile(
+											{ user: user, posts: await getAllPosts(user._id) }))
+									dispatch(setChats(await getAllChats(user._id)))
 									setVariantNav("navigation")
 								} }
 							>

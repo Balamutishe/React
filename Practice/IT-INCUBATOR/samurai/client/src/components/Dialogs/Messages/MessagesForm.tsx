@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { useMutateMessageAdd } from "../../../hooks/api";
-import c from "./Messages.module.css";
 import { RootState } from "../../../redux";
+import { setMessageText } from "../../../redux/DialogsSlice.ts";
+import c from "./Messages.module.css";
 
 export const MessagesForm = () => {
 	const dispatch = useDispatch()
@@ -19,8 +20,8 @@ export const MessagesForm = () => {
 		>
 			<textarea
 				className={ c.textarea } value={ messageText }
-				onChange={ (e) => dispatch(
-					{ type: 'dialogsData/setMessageText', payload: e.target.value }) }
+				onChange={ (e) =>
+					dispatch(setMessageText(e.target.value)) }
 			></textarea>
 			<button>
 				Add Message

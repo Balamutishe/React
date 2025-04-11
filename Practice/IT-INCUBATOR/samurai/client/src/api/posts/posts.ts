@@ -57,7 +57,7 @@ export async function updatePost({ postText, id }: {
 		.then(postId => postId);
 }
 
-export async function deletePost(id: string): Promise<string> {
+export async function fetchDeletePost(id: string): Promise<string> {
 	return fetch(`/api/posts/${ id }`, {
 		method: "DELETE",
 	}).then(validateResponse).then(response => response.json())

@@ -6,6 +6,7 @@ import { useMutateChatDelete } from "../../../hooks/api";
 import { TChat } from "../../../api/chats/types.ts";
 import userImg from '../../../assets/149071.png'
 import { getAllMessages } from "../../../api/messages/messages.ts";
+import { setActiveChatId, setMessages } from "../../../redux/DialogsSlice.ts";
 import c from './Chats.module.css'
 
 type ChatItemProps = {
@@ -22,11 +23,8 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
 			<Link
 				to={ `/dialogs/${ chat._id }` } className={ c.chatTitle }
 				onClick={ async () => {
-					dispatch({ type: 'dialogsData/setActiveChatId', payload: chat._id })
-					dispatch({
-						type: 'dialogsData/setMessages',
-						payload: await getAllMessages(chat._id)
-					})
+					dispatch(setActiveChatId(chat._id))
+					dispatch(setMessages(await getAllMessages(chat._id)))
 				}
 				}
 			>{ chat.chatText }</Link>

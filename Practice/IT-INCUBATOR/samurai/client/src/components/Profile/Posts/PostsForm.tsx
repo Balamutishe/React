@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useMutatePostAdd } from "../../../hooks/api";
 import { RootState } from "../../../redux";
+import { setPostText } from "../../../redux/ProfileSlice.ts";
 import c from "./Posts.module.css";
 
 export const PostsForm = () => {
@@ -18,8 +19,8 @@ export const PostsForm = () => {
 		>
 			<textarea
 				className={ c.textarea } value={ postText }
-				onChange={ (e) => dispatch(
-					{ type: 'profileData/setPostText', payload: e.target.value }) }
+				onChange={ (e) =>
+					dispatch(setPostText(e.target.value)) }
 			></textarea>
 			<button>
 				Add Post

@@ -1,7 +1,8 @@
 import {
 	useMutation
 } from "@tanstack/react-query";
-import { deletePost } from "../../api/posts/posts.ts";
+import { fetchDeletePost } from "../../api/posts/posts.ts";
+import { deletePost } from '../../redux/ProfileSlice.ts'
 import { queryClient } from "../../api/queryClient.ts";
 import { useDispatch } from "react-redux";
 
@@ -15,9 +16,9 @@ export const useMutatePostDelete = ({
 	const dispatch = useDispatch()
 
 	const { mutate } = useMutation({
-		mutationFn: () => deletePost(postId),
-		onSuccess: async () => {
-			dispatch({ type: 'profileData/deletePost', payload: postId })
+		mutationFn: () => fetchDeletePost(postId),
+		onSuccess: () => {
+			dispatch(deletePost(postId))
 		}
 	}, queryClient)
 

@@ -2,6 +2,7 @@ import { useMutateChatAdd } from "../../../hooks/api";
 import { useDispatch, useSelector } from "react-redux";
 import c from "./Chats.module.css";
 import { RootState } from "../../../redux";
+import { setChatText } from "../../../redux/DialogsSlice.ts";
 
 export const ChatsForm = () => {
 	const dispatch = useDispatch();
@@ -17,8 +18,8 @@ export const ChatsForm = () => {
 		>
 			<textarea
 				className={ c.textarea } value={ chatText }
-				onChange={ (e) => dispatch(
-					{ type: 'dialogsData/setChatText', payload: e.target.value }) }
+				onChange={ (e) =>
+					dispatch(setChatText(e.target.value)) }
 			></textarea>
 			<button>
 				Add Chat
