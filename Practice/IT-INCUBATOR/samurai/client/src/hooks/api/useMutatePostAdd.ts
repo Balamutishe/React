@@ -1,22 +1,25 @@
 import {
+	QueryObserverResult,
+	RefetchOptions,
 	useMutation
 } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { queryClient } from "../../api/queryClient.ts";
-import { RootState } from "../../redux";
 import { createPost } from "../../api/posts/posts.ts";
-import { addPost } from "../../redux/ProfileSlice.ts";
+import { setPostText } from "../../redux/ProfileSlice.ts";
+import { TPostsList } from "../../api/posts/types.ts";
 import userImg from '../../assets/149071.png'
 
-export const useMutatePostAdd = (postText: string) => {
+export const useMutatePostAdd = (postText: string, userId: string,
+	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TPostsList, Error>>) => {
 	const dispatch = useDispatch();
-	const userId = useSelector((state: RootState) => state.profileData.user._id)
 
 	const { mutate } = useMutation({
-		mutationFn: () => createPost({ postText, userId, userImg }),
-		onSuccess: (data) => {
-			dispatch(addPost(data));
+		mutationFn: async () => createPost({ postText, userId, userImg }),
+		onSuccess: async () => {
+			await refetch()
+			dispatch(setPostText(""));
 		}
 	}, queryClient)
 

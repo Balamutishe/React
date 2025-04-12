@@ -6,42 +6,56 @@ const dialogsSlice = createSlice({
 	name: 'dialogsData',
 	initialState:
 		{
-			activeChatId: '',
-			chatText: '',
-			messageText: '',
-			chats: [],
-			messages: [],
+			chatsData: {
+				chats: [],
+				chatText: '',
+				activeChatId: '',
+				deleteChatId: ''
+			},
+			messagesData: {
+				messages: [],
+				messageText: '',
+				deleteMessageId: ''
+			}
 		},
 	reducers: {
-		setActiveChatId: (state, action) => {
-			state.activeChatId = action.payload
-		},
 		setChatText: (state, action) => {
-			state.chatText = action.payload
+			state.chatsData.chatText = action.payload
 		},
 		setChats: (state, action) => {
-			state.chats = action.payload
+			state.chatsData.chats = action.payload
+		},
+		setDeleteChatId: (state, action) => {
+			state.chatsData.deleteChatId = action.payload
+		},
+		setActiveChatId: (state, action) => {
+			state.chatsData.activeChatId = action.payload
 		},
 		addChat: (state, action) => {
-			state.chats = state.chats.concat(action.payload)
-			state.chatText = ''
+			state.chatsData.chats = state.chatsData.chats.concat(action.payload)
+			state.chatsData.chatText = ''
 		},
 		deleteChat: (state, action) => {
-			state.chats =
-				state.chats.filter((chat: TChat) => chat._id !== action.payload)
+			state.chatsData.chats =
+				state.chatsData.chats.filter(
+					(chat: TChat) => chat._id !== action.payload)
 		},
 		setMessageText: (state, action) => {
-			state.messageText = action.payload
+			state.messagesData.messageText = action.payload
 		},
 		setMessages: (state, action) => {
-			state.messages = action.payload
+			state.messagesData.messages = action.payload
+		},
+		setDeleteMessageId: (state, action) => {
+			state.messagesData.deleteMessageId = action.payload
 		},
 		addMessage: (state, action) => {
-			state.messages = state.messages.concat(action.payload)
-			state.messageText = ''
+			state.messagesData.messages =
+				state.messagesData.messages.concat(action.payload)
+			state.messagesData.messageText = ''
 		},
 		deleteMessage: (state, action) => {
-			state.messages = state.messages.filter(
+			state.messagesData.messages = state.messagesData.messages.filter(
 				(message: TMessage) => message._id !== action.payload)
 		}
 	}
@@ -50,6 +64,7 @@ const dialogsSlice = createSlice({
 export default dialogsSlice.reducer;
 
 export const {
-	setActiveChatId, setChats, addChat, deleteChat, setChatText, deleteMessage,
-	setMessageText, setMessages, addMessage
+	setChats, setDeleteChatId, setActiveChatId, addChat, deleteChat, setChatText,
+	deleteMessage,
+	setMessageText, setMessages, setDeleteMessageId, addMessage
 } = dialogsSlice.actions;

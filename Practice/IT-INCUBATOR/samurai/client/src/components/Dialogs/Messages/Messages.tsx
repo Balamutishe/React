@@ -1,16 +1,22 @@
-import { useSelector } from "react-redux";
-
+import { ChangeEvent, FC, FormEvent } from "react";
 import { MessagesForm } from "./MessagesForm.tsx";
 import { MessageItem } from "./MessageItem.tsx";
 import { TMessagesList } from "../../../api/messages/types.ts";
-import { RootState } from "../../../redux";
 import c from './Messages.module.css'
 
-export const Messages = () => {
-	const userId = useSelector((state: RootState) => state.profileData.user._id);
-	const messages: TMessagesList = useSelector(
-		(state: RootState) => state.dialogsData.messages)
+type TMessagesProps = {
+	messages: TMessagesList,
+	messageText: string,
+	userId: string,
+	handleMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+	handleMessageAdd: (e: FormEvent<HTMLFormElement>) => void
+	handleMessageDelete: (id: string) => void
+}
 
+export const Messages: FC<TMessagesProps> = ({
+	messages, messageText, userId, handleMessageChange, handleMessageDelete,
+	handleMessageAdd
+}) => {
 	return (
 		<div className={ c.messages }>
 			<div>
@@ -23,13 +29,17 @@ export const Messages = () => {
 						>
 							<MessageItem
 								message={ message } userId={ userId }
+								handleMessageDelete={ handleMessageDelete }
 							/>
 						</li>
 					)) }
 				</ul>
 				{ messages.length === 0 && <div>Сообщений нет</div> }
 			</div>
-			<MessagesForm/>
+			<MessagesForm
+				messageText={ messageText } handleMessageAdd={ handleMessageAdd }
+				handleMessageChange={ handleMessageChange }
+			/>
 		</div>
 	)
 }

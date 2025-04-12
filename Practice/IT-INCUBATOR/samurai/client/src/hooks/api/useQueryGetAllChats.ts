@@ -1,21 +1,18 @@
-import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
-import { RootState } from "../../redux";
 import { getAllChats } from "../../api/chats/chats.ts";
 import { queryClient } from "../../api/queryClient.ts";
 
-export const useQueryGetAllChats = () => {
-	const userId = useSelector(
-		(state: RootState) => state.profileData.user._id)
-
+export const useQueryGetAllChats = (userId: string) => {
 	const { data, status, refetch } = useQuery({
 		queryFn: () => getAllChats(userId),
 		queryKey: ["chats", "all"]
 	}, queryClient)
 
+	const chats = data ? data : []
+
 	return {
-		data,
+		chats,
 		status,
 		refetch,
 	}

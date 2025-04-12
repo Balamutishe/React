@@ -55,7 +55,7 @@ export async function updateMessage({ messageText, id }: {
 		.then(updateMessageId => updateMessageId);
 }
 
-export async function deleteMessage(id: string): Promise<string> {
+export async function fetchDeleteMessage(id: string): Promise<string> {
 	return fetch(`/api/messages/${ id }`, {
 		method: "DELETE",
 	}).then(validateResponse).then(response => response.json())

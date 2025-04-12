@@ -4,9 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 
 import { getAllPosts } from "../../api/posts/posts.ts";
-import { getAllChats } from "../../api/chats/chats.ts";
 import { setProfile } from "../../redux/ProfileSlice.ts";
-import { setChats } from "../../redux/DialogsSlice.ts";
 import { useQueryGetAllUsers } from "../../hooks/api/useQueryGetAllUsers.ts";
 import c from './Navbar.module.css'
 
@@ -69,7 +67,6 @@ export const Navbar = () => {
 									dispatch(
 										setProfile(
 											{ user: user, posts: await getAllPosts(user._id) }))
-									dispatch(setChats(await getAllChats(user._id)))
 									setVariantNav("navigation")
 								} }
 							>

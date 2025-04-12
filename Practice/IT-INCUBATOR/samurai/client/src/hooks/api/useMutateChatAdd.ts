@@ -1,22 +1,24 @@
 import {
+	QueryObserverResult,
+	RefetchOptions,
 	useMutation
 } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { createChat } from "../../api/chats/chats.ts";
-import { addChat } from "../../redux/DialogsSlice.ts";
 import { queryClient } from "../../api/queryClient.ts";
-import { RootState } from "../../redux";
+import { TChatsList } from "../../api/chats/types.ts";
+import { setChatText } from "../../redux/DialogsSlice.ts";
 
-export const useMutateChatAdd = () => {
-	const dispatch = useDispatch()
-	const userId = useSelector((state: RootState) => state.profileData.user._id)
-	const chatText = useSelector((state: RootState) => state.dialogsData.chatText)
+export const useMutateChatAdd = (chatText: string, userId: string,
+	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TChatsList, Error>>) => {
+	const dispatch = useDispatch();
 
 	const { mutate } = useMutation({
 		mutationFn: () => createChat(chatText, userId),
-		onSuccess: (data) => {
-			dispatch(addChat(data))
+		onSuccess: async () => {
+			await refetch()
+			dispatch(setChatText(""))
 		}
 	}, queryClient)
 

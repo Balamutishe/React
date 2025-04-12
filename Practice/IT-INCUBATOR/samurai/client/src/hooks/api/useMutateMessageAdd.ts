@@ -1,27 +1,22 @@
-import { useDispatch, useSelector } from "react-redux";
 import {
+	QueryObserverResult,
+	RefetchOptions,
 	useMutation
 } from "@tanstack/react-query";
 
 import { queryClient } from "../../api/queryClient.ts";
 import { createMessage } from "../../api/messages/messages.ts";
-import { RootState } from "../../redux";
+import { TMessagesList } from "../../api/messages/types.ts";
 import userImg from "../../assets/149071.png";
 
 
-export const useMutateMessageAdd = () => {
-	const dispatch = useDispatch();
-	const userId = useSelector((state: RootState) => state.profileData.user._id)
-	const messageText = useSelector(
-		(state: RootState) => state.dialogsData.messageText)
-	const chatId = useSelector(
-		(state: RootState) => state.dialogsData.activeChatId)
-
+export const useMutateMessageAdd = (messageText: string, chatId: string,
+	userId: string,
+	refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<TMessagesList, Error>>) => {
 	const { mutate } = useMutation({
 		mutationFn: () => createMessage(messageText, userImg, chatId, userId),
-		onSuccess: async (data) => {
-			dispatch({ type: 'dialogsData/addMessage', payload: data })
-			dispatch({ type: 'dialogsData/setMessageText', payload: '' })
+		onSuccess: async () => {
+			await refetch()
 		}
 	}, queryClient)
 

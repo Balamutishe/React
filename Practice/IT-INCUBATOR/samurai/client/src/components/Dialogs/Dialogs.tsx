@@ -1,19 +1,16 @@
-import { Chats } from "./Chats/Chats.tsx";
-import { Messages } from "./Messages/Messages.tsx";
-import { RootState } from "../../redux";
-import { useSelector } from "react-redux";
+import { ChatsView } from "./Chats/ChatsView.tsx";
+import { MessagesView } from "./Messages/MessagesView.tsx";
 import c from './Dialogs.module.css'
+import { useParams } from "react-router";
 
 export const Dialogs = () => {
-	const activeChatId = useSelector(
-		(state: RootState) => state.dialogsData.activeChatId);
+	const params = useParams()
+	const chatId = params.chatId ? params.chatId : ''
 
 	return (
 		<div className={ c.dialogs }>
-			<Chats/>
-			{ activeChatId !== '' ? <Messages/> :
-				<div style={ { "padding": "0.5rem 1rem" } }>Выберите чат для
-					взаимодействия</div> }
+			<ChatsView/>
+			{ chatId && <MessagesView/> }
 		</div>
 	)
 }

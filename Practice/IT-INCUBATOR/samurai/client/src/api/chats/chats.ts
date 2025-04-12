@@ -52,7 +52,7 @@ export async function updateChat({ chatText, id }: {
 		.then(updateChatId => updateChatId);
 }
 
-export async function deleteChat(id: string): Promise<string> {
+export async function fetchDeleteChat(id: string): Promise<string> {
 	return fetch(`/api/chats/${ id }`, {
 		method: "DELETE",
 	}).then(validateResponse).then(response => response.json())

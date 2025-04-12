@@ -6,17 +6,16 @@ import { TPostsList } from "../../../api/posts/types.ts";
 import c from './Posts.module.css'
 
 type TPostsProps = {
-	postsData: {
-		posts: TPostsList,
-		postText: string,
-	},
+	posts: TPostsList,
+	postText: string,
 	handlePostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 	handlePostAdd: (e: FormEvent<HTMLFormElement>) => void
 	handlePostDelete: (id: string) => void
 }
 
 export const Posts: FC<TPostsProps> = ({
-	postsData,
+	posts,
+	postText,
 	handlePostChange,
 	handlePostAdd,
 	handlePostDelete
@@ -24,12 +23,12 @@ export const Posts: FC<TPostsProps> = ({
 	return (<div>
 			<h2 className={ c.title }>PostsList</h2>
 			<PostsForm
-				postText={ postsData.postText }
+				postText={ postText }
 				handlePostChange={ handlePostChange }
 				handlePostAdd={ handlePostAdd }
 			/>
 			<ul className={ c.list }>
-				{ postsData.posts.map((post) => (
+				{ posts.map((post) => (
 					<li key={ post._id } className={ c.listItem }>
 						<Post post={ post } handlePostDelete={ handlePostDelete }/>
 					</li>
