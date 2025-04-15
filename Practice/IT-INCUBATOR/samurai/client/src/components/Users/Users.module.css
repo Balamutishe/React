@@ -1,0 +1,59 @@
+.users {
+    height: 100%;
+}
+
+.usersTitle {
+    margin-bottom: 2rem;
+}
+
+.item {
+    height: 100px;
+}
+
+.item:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.userContainer {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+}
+
+.userImgContainer {
+    height: 100%;
+    width: 15%;
+
+    overflow: hidden;
+}
+
+.userImg {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.userContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+    width: 83%;
+
+    border: 0.1rem solid #747bff;
+    border-radius: 0.5rem;
+
+    padding: 1rem;
+}
+
+.userData {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100%;
+}

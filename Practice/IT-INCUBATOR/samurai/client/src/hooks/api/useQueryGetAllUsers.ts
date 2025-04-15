@@ -3,10 +3,16 @@ import { getAllUsers } from "../../api/users/users.ts";
 import { queryClient } from "../../api/queryClient.ts";
 
 export const useQueryGetAllUsers = () => {
-	const { data } = useQuery({
+	const { data, status, refetch } = useQuery({
 		queryFn: () => getAllUsers(),
 		queryKey: ["users", "all"]
 	}, queryClient)
 
-	return data ? data : []
+	const users = data ? data : []
+
+	return {
+		users,
+		status,
+		refetch
+	}
 }

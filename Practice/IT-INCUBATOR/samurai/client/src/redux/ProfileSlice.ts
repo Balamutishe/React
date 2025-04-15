@@ -6,10 +6,10 @@ const profileSlice = createSlice({
 	initialState:
 		{
 			user: {
-				_id: '',
-				username: '',
-				password: '',
-				userImg: '',
+				_id: 'ea397cb1-6282-4e0b-b319-585c348a590f',
+				username: 'Alex',
+				password: 'qweasd',
+				userImg: '/src/assets/149071.png',
 			},
 			postsData: {
 				posts: [],

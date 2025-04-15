@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEvent } from "react";
 
 import { PostsForm } from "./PostsForm.tsx";
 import { Post } from './Post.tsx'
-import { TPostsList } from "../../../api/posts/types.ts";
+import { TPost, TPostsList } from "../../../api/posts/types.ts";
 import c from './Posts.module.css'
 
 type TPostsProps = {
@@ -28,7 +28,7 @@ export const Posts: FC<TPostsProps> = ({
 				handlePostAdd={ handlePostAdd }
 			/>
 			<ul className={ c.list }>
-				{ posts.map((post) => (
+				{ posts.map((post: TPost) => (
 					<li key={ post._id } className={ c.listItem }>
 						<Post post={ post } handlePostDelete={ handlePostDelete }/>
 					</li>

@@ -1,26 +1,17 @@
-import { useState } from "react";
 import { NavLinkRenderProps } from "react-router";
 import { NavLink } from 'react-router-dom'
-import { useDispatch } from "react-redux";
 
-import { getAllPosts } from "../../api/posts/posts.ts";
-import { setProfile } from "../../redux/ProfileSlice.ts";
-import { useQueryGetAllUsers } from "../../hooks/api/useQueryGetAllUsers.ts";
 import c from './Navbar.module.css'
 
 export const Navbar = () => {
-	const users = useQueryGetAllUsers()
-	const dispatch = useDispatch()
-	const [variantNav, setVariantNav] = useState('users')
-
 	const setClassActiveLink = (props: NavLinkRenderProps): string => {
 		return props.isActive ? `${ c.active }` : ''
 	}
 	const navigationList = [
 		{
 			id: "1",
-			title: 'User',
-			to: '/user'
+			title: 'Profile',
+			to: '/profile'
 		},
 		{
 			id: "2",
@@ -41,42 +32,26 @@ export const Navbar = () => {
 			id: "5",
 			title: 'Settings',
 			to: '/settings'
+		},
+		{
+			id: "6",
+			title: 'Find users',
+			to: '/users'
 		}
 	]
 
 	return (
 		<nav className={ c.navbar }>
-			{ variantNav === "navigation" ? (
-				<ul className={ c.list }>
-					{ navigationList.map((nav) => (
-						<li key={ nav.id }>
-							<NavLink
-								to={ `${ nav.to }` }
-								className={ setClassActiveLink }
-							>{ nav.title }</NavLink>
-						</li>
-					)) }
-				</ul>
-			) : (
-				<ul className={ c.list }>
-					{ users.map((user) => (
-						<li key={ user._id }>
-							<NavLink
-								to={ '/user' }
-								onClick={ async () => {
-									dispatch(
-										setProfile(
-											{ user: user, posts: await getAllPosts(user._id) }))
-									setVariantNav("navigation")
-								} }
-							>
-								{ user.username }
-							</NavLink>
-						</li>
-					)) }
-				</ul>
-			) }
-
+			<ul className={ c.list }>
+				{ navigationList.map((nav) => (
+					<li key={ nav.id }>
+						<NavLink
+							to={ `${ nav.to }` }
+							className={ setClassActiveLink }
+						>{ nav.title }</NavLink>
+					</li>
+				)) }
+			</ul>
 		</nav>
 	)
 }

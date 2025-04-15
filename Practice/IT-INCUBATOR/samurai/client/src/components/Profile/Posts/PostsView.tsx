@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
+import { ChangeEvent, FormEvent } from "react";
+
 import { RootState } from "../../../redux";
 import {
 	useMutatePostAdd,
 	useMutatePostDelete,
 	useQueryGetAllPosts
 } from "../../../hooks/api";
-import { ChangeEvent, FormEvent } from "react";
 import { setDeletePostId, setPostText } from "../../../redux/ProfileSlice.ts";
 import { Posts } from "./Posts.tsx";
 
