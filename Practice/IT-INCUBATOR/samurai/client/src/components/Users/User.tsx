@@ -1,14 +1,24 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react"
 
+import { TUser } from "../../api/users/types.ts"
 import UserImg from '../../assets/149071.png'
-import { TUser } from "../../api/users/types.ts";
 import c from './Users.module.css'
 
 type TUserProps = {
-	user: TUser
+	user: TUser,
+	handleDefineUserSubscription: (id: string) => boolean,
+	handleUserSubscriptionUpdate: (subscriptionId: string) => void,
 }
 
-export const User: FC<TUserProps> = ({ user }) => {
+export const User: FC<TUserProps> = ({
+	user, handleDefineUserSubscription, handleUserSubscriptionUpdate
+}) => {
+	const [followState, setFollowState] = useState(false)
+
+	useEffect(() => {
+		setFollowState(handleDefineUserSubscription(user._id))
+	}, [handleDefineUserSubscription, user._id])
+
 	return (
 		<div className={ c.userContainer }>
 			<div className={ c.userImgContainer }>
@@ -20,7 +30,10 @@ export const User: FC<TUserProps> = ({ user }) => {
 					<p>User status</p>
 				</div>
 				<div className={ c.userActions }>
-					<button>Follow</button>
+					<button
+						onClick={ () => handleUserSubscriptionUpdate(user._id) }
+					> { followState ? 'Follow' : 'Unfollow' }
+					</button>
 				</div>
 			</div>
 		</div>

@@ -8,7 +8,7 @@ export const useQueryGetAllPosts = (userId: string) => {
 		queryKey: ["posts", "all"]
 	}, queryClient)
 
-	const posts = data ? data : [];
+	const posts = data ? data : []
 
 	return {
 		posts,

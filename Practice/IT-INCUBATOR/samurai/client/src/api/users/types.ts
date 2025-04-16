@@ -5,6 +5,7 @@ export const UserSchema = z.object({
 	username: z.string(),
 	password: z.string(),
 	userImg: z.string(),
+	subscriptions: z.array(z.string()),
 })
 
 export type TUser = z.infer<typeof UserSchema>

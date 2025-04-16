@@ -49,7 +49,8 @@ router.post('/users', async (req, res) => {
 				_id: crypto.randomUUID(),
 				username: username,
 				password: password,
-				userImg: userImg
+				userImg: userImg,
+				subscriptions: []
 			});
 			
 			if (!statusCreate.acknowledged) {
@@ -65,13 +66,14 @@ router.post('/users', async (req, res) => {
 	}
 });
 
-router.patch('/users/:userId/', async (req, res) => {
+router.patch('/users/:userId', async (req, res) => {
 	try {
 		const { userId } = req.params;
-		const { username, password } = req.body;
+		const user = req.body;
 		
-		if (userId && username && password) {
-			const statusUpdate = await updateUser(req.db, userId, { username: username, password: password });
+		if (userId) {
+			const statusUpdate = await updateUser(req.db, userId,
+				{ username: user.username, password: user.password, subscriptions: user.subscriptions });
 			
 			if (statusUpdate.modifiedCount === 0) {
 				res.status(400).send(`user ${ userId } not updated`);
@@ -86,7 +88,7 @@ router.patch('/users/:userId/', async (req, res) => {
 	}
 });
 
-router.delete('/users/:userId/', async (req, res) => {
+router.delete('/users/:userId', async (req, res) => {
 	try {
 		const { userId } = req.params;
 		

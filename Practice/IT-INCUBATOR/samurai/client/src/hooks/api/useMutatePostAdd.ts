@@ -16,10 +16,10 @@ export const useMutatePostAdd = (postText: string, userId: string,
 	const dispatch = useDispatch();
 
 	const { mutate } = useMutation({
-		mutationFn: async () => createPost({ postText, userId, userImg }),
+		mutationFn: () => createPost({ postText, userId, userImg }),
 		onSuccess: async () => {
 			await refetch()
-			dispatch(setPostText(""));
+			dispatch(setPostText(''))
 		}
 	}, queryClient)
 

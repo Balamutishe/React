@@ -10,7 +10,9 @@ const profileSlice = createSlice({
 				username: 'Alex',
 				password: 'qweasd',
 				userImg: '/src/assets/149071.png',
+				subscriptions: [],
 			},
+			subscriptionIdUpdate: '',
 			postsData: {
 				posts: [],
 				postText: '',
@@ -19,8 +21,13 @@ const profileSlice = createSlice({
 		},
 	reducers: {
 		setProfile: (state, action) => {
-			state.user = action.payload.user;
-			state.postsData.posts = action.payload.posts;
+			state.user = action.payload;
+		},
+		setSubscriptionIdUpdate: (state, action) => {
+			state.subscriptionIdUpdate = action.payload;
+		},
+		setPostsData: (state, action) => {
+			state.postsData.posts = action.payload;
 		},
 		addPost: (state, action) => {
 			state.postsData.posts = state.postsData.posts.concat(action.payload);
@@ -41,7 +48,9 @@ const profileSlice = createSlice({
 })
 
 export const {
-	setProfile, addPost, deletePost, setPostText, setDeletePostId
+	setProfile, setSubscriptionIdUpdate, addPost, deletePost, setPostsData,
+	setPostText,
+	setDeletePostId
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

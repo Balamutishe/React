@@ -23,7 +23,7 @@ export async function getUserById(id: string): Promise<TUser> {
 export async function createUser({
 	username, password, userImg
 }: TUser): Promise<string> {
-	return fetch("/api/users/create", {
+	return fetch("/api/users", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -37,17 +37,14 @@ export async function createUser({
 		.then(userId => userId);
 }
 
-export async function updateUser(id: string, username: string,
-	password: string): Promise<string> {
+export async function updateUser(id: string,
+	updateUserData: Partial<TUser>): Promise<string> {
 	return fetch(`/api/users/${ id }`, {
 		method: "PATCH",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({
-			username,
-			password,
-		}),
+		body: JSON.stringify(updateUserData),
 	}).then(validateResponse).then(response => response.json())
 		.then(userId => userId);
 }
