@@ -1,9 +1,10 @@
-import { useQueryGetAllUsers } from "../../hooks/api/useQueryGetAllUsers.ts";
-import { Users } from "./Users.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux";
+
+import { useQueryGetAllUsers } from "../../hooks/api/useQueryGetAllUsers.ts";
 import { useMutateUserUpdate } from "../../hooks/api/useMutateUserUpdate.ts";
+import { RootState } from "../../redux";
 import { setSubscriptionIdUpdate } from "../../redux/ProfileSlice.ts";
+import { Users } from "./Users.tsx";
 
 export const UsersView = () => {
 	const dispatch = useDispatch();

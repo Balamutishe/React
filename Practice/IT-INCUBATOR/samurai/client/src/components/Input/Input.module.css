@@ -1,0 +1,25 @@
+.input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+
+    border: none;
+    border-radius: 0.5rem;
+    outline: 1.6px solid rgb(9, 79, 255);
+
+
+    color: rgb(9, 79, 255);
+    background-color: #ffffff;
+
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+
+    cursor: pointer;
+}
+
+.input:hover,
+.input:focus {
+    outline: 1.6px solid rgb(9, 79, 255);
+
+    box-shadow: 0 0 40px 0 rgba(9, 79, 255, 0.33);
+}
