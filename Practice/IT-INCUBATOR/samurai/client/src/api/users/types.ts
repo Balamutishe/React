@@ -3,7 +3,6 @@ import { z } from 'zod'
 export const UserSchema = z.object({
 	_id: z.string(),
 	username: z.string(),
-	password: z.string(),
 	userImg: z.string(),
 	subscriptions: z.array(z.string()),
 })

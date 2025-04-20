@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/users/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserLogin.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserLogout.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserRegister.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryMe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/samurai.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/users/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/users/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/users.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Auth/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Auth/AuthForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/UserData/UserData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/UserData/UserData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/useMutateUserUpdate.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/useQueryGetAllUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/useQueryUserGet.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/AuthSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/AuthSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/database/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/database/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Balamutishe&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Balamutishe/React.git&quot;,
+    &quot;accountId&quot;: &quot;64fc282c-432e-4ce8-84c9-a03096ad8d28&quot;
+  }
+}</component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2ui0rtRiKqic3k90KpML4UBjIOw" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;22.13.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.13.17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/src/hooks/api/users&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.npm dev client.executor&quot;: &quot;Run&quot;,
+    &quot;npm.npm dev server.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.TypeScript&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/hooks/api/users" />
+      <recent name="$PROJECT_DIR$/client/src/hooks/api" />
+      <recent name="$PROJECT_DIR$/client/src/components/Dialogs/Messages" />
+      <recent name="$PROJECT_DIR$/client/src/components/Dialogs/Chats" />
+      <recent name="$PROJECT_DIR$/client/src/components/Profile/Posts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/hooks/api/users" />
+      <recent name="$PROJECT_DIR$/client/src/hooks/api" />
+      <recent name="$PROJECT_DIR$/server/routes" />
+      <recent name="$PROJECT_DIR$/client/src/api/users" />
+      <recent name="$PROJECT_DIR$/src/components/Dialogs" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.npm dev server">
+    <configuration name="npm dev client" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="npm dev server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/server/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.npm dev client" />
+      <item itemvalue="npm.npm dev server" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="" />
+      <created>1742716289170</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742716289170</updated>
+      <workItem from="1742716290194" duration="14450000" />
+      <workItem from="1742819216949" duration="12266000" />
+      <workItem from="1742906303973" duration="9688000" />
+      <workItem from="1742981303814" duration="17567000" />
+      <workItem from="1743081737677" duration="7667000" />
+      <workItem from="1743157317937" duration="16150000" />
+      <workItem from="1743226401995" duration="34271000" />
+      <workItem from="1743427332686" duration="10103000" />
+      <workItem from="1743511372670" duration="9792000" />
+      <workItem from="1743602526057" duration="5996000" />
+      <workItem from="1743672888550" duration="15564000" />
+      <workItem from="1743700213430" duration="700000" />
+      <workItem from="1743774984586" duration="4545000" />
+      <workItem from="1743834258219" duration="35632000" />
+      <workItem from="1743946233921" duration="696000" />
+      <workItem from="1743946963391" duration="1288000" />
+      <workItem from="1744003251062" duration="21981000" />
+      <workItem from="1744117941045" duration="5256000" />
+      <workItem from="1744195184797" duration="8004000" />
+      <workItem from="1744367317213" duration="10348000" />
+      <workItem from="1744438790396" duration="20929000" />
+      <workItem from="1744636620849" duration="6858000" />
+      <workItem from="1744718418020" duration="9933000" />
+      <workItem from="1744801527765" duration="19912000" />
+      <workItem from="1744863240583" duration="3997000" />
+      <workItem from="1744976578268" duration="16204000" />
+      <workItem from="1745062008838" duration="19621000" />
+      <workItem from="1745086056152" duration="48000" />
+      <workItem from="1745151155127" duration="12113000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,111 +1,141 @@
 const router = require("express").Router();
 const fetchDb = require("../database/mongoClient.js");
-const { getUsers, getUserById, createUser, updateUser, deleteUser } = require('../database/users.js');
+const {
+		getUsers, createUser, updateUser, deleteUser, findUserByUsername, createSession, deleteSession, hash,
+} = require(
+	"../database/users.js");
+const { auth } = require("../database/users");
+const { pick } = require("lodash");
+const { urlencoded } = require("body-parser");
 
 router.use(
-	async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
+	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
 );
 
-router.get("/users", async (req, res) => {
-	try {
-		const usersList = await getUsers(req.db, req.query);
-		
-		if (usersList) {
-			res.status(200).json(usersList);
-		} else {
-			res.status(404).send("users not found");
-		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
-});
-
-router.get("/users/:userId", async (req, res) => {
-	try {
-		const { userId } = req.params;
-		
-		if (userId) {
-			const user = await getUserById(req.db, userId);
-			
-			if (user) {
+router.get("/", auth(), async (req, res) => {
+		try {
+				if (!req.user) {
+						return res.status(401).send("Unauthorized");
+				}
+				
+				const user = pick(req.user, ["_id", "username", "userImg", "subscriptions"]);
+				
 				res.status(200).json(user);
-			} else {
-				res.status(404).send(`user ${ userId } not found`);
-			}
-		} else {
-			res.status(400).send("uncorrected request.body");
+		} catch (err) {
+				res.status(400).send(err.message);
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
 });
 
-router.post('/users', async (req, res) => {
-	try {
-		const { username, password, userImg } = req.body;
-		
-		if (username && password) {
-			const statusCreate = await createUser(req.db, {
-				_id: crypto.randomUUID(),
-				username: username,
-				password: password,
-				userImg: userImg,
-				subscriptions: []
-			});
-			
-			if (!statusCreate.acknowledged) {
-				res.status(404).send("user not created");
-			} else {
-				return res.status(200).json(statusCreate.insertedId);
-			}
-		} else {
-			res.status(400).send('invalid username or password');
+router.post("/signup", urlencoded({ extended: false }), async (req, res) => {
+		try {
+				const { username, password } = req.body;
+				
+				if (username && password) {
+						const statusCreate = await createUser(req.db, {
+								_id: crypto.randomUUID(),
+								username: username,
+								password: hash(password),
+								userImg: "/src/assets/149071.png",
+								subscriptions: [],
+						});
+						
+						if (!statusCreate.acknowledged) {
+								res.status(404).send("user not created");
+						} else {
+								res.status(200).send(`user ID:${ statusCreate.insertedId } registered`);
+						}
+				} else {
+						res.status(400).send("invalid username or password");
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
 });
 
-router.patch('/users/:userId', async (req, res) => {
-	try {
-		const { userId } = req.params;
-		const user = req.body;
-		
-		if (userId) {
-			const statusUpdate = await updateUser(req.db, userId,
-				{ username: user.username, password: user.password, subscriptions: user.subscriptions });
-			
-			if (statusUpdate.modifiedCount === 0) {
-				res.status(400).send(`user ${ userId } not updated`);
-			} else {
-				return res.status(200).json(userId);
+router.post(
+	"/login",
+	urlencoded({ extended: false }),
+	async (req, res) => {
+			try {
+					const { username, password } = req.body;
+					
+					const user = await findUserByUsername(req.db, username);
+					
+					if (!user || user.password !== hash(password)) {
+							res.redirect("/?authError=true");
+					} else {
+							const sessionId = await createSession(req.db, user._id);
+							res.cookie("sessionId", sessionId, { httpOnly: true }).json("Successfully logged in");
+					}
+			} catch (err) {
+					res.status(400).send(err.message);
 			}
-		} else {
-			res.status(404).send('userId not found');
+	},
+);
+
+router.get("/logout", auth(), async (req, res) => {
+		if (!req.user) {
+				res.redirect("/");
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
+		
+		await deleteSession(req.db, req.sessionId);
+		res.clearCookie("sessionId");
+		res.status(401).json("Logout successful");
 });
 
-router.delete('/users/:userId', async (req, res) => {
-	try {
-		const { userId } = req.params;
-		
-		if (userId) {
-			const deletedStatus = await deleteUser(req.db, userId);
-			
-			if (deletedStatus.deletedCount === 0) {
-				res.status(404).send(`user ${ userId } not deleted`);
-			} else {
-				return res.status(200).json(userId);
-			}
-		} else {
-			res.status(400).send('userId not found');
+router.get("/users", async (req, res) => {
+		try {
+				const usersList = await getUsers(req.db, req.query);
+				const updateUsersList = usersList.map((user) => {
+						return pick(user, ["_id", "username", "userImg", "subscriptions"]);
+				});
+				
+				if (usersList) {
+						res.status(200).json(updateUsersList);
+				} else {
+						res.status(404).send("users not found");
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
-})
+});
+
+router.patch("/users", auth(), async (req, res) => {
+		try {
+				const userData = req.body;
+				
+				if (req.user) {
+						const statusUpdate = await updateUser(req.db, req.user._id, userData);
+						
+						if (statusUpdate.modifiedCount === 0) {
+								res.status(400).send(`user ${ req.user._id } not updated`);
+						} else {
+								return res.status(200).json(req.user._id);
+						}
+				} else {
+						res.status(404).send("userId not found");
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
+		}
+});
+
+router.delete("/users", auth(), async (req, res) => {
+		try {
+				if (req.user) {
+						const deletedStatus = await deleteUser(req.db, req.user._id);
+						
+						if (deletedStatus.deletedCount === 0) {
+								res.status(404).send(`user ${ req.user._id } not deleted`);
+						} else {
+								return res.status(200).json(req.user._id);
+						}
+				} else {
+						res.status(400).send("userId not found");
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
+		}
+});
 
 module.exports = router;
