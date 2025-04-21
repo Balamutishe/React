@@ -4,7 +4,5 @@ export * from "./useQueryGetAllChats.ts";
 export * from "./useQueryGetAllMessages.ts";
 export * from "./useMutateMessageAdd.ts";
 export * from "./useMutateMessageDelete.ts";
-export * from "./useQueryGetAllPosts.ts";
-export * from "./useMutatePostAdd.ts";
-export * from "./useMutatePostDelete.ts";
 export * from "./users";
+export * from "./posts";

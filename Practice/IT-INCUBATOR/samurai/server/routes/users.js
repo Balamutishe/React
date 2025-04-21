@@ -75,12 +75,12 @@ router.post(
 
 router.get("/logout", auth(), async (req, res) => {
 		if (!req.user) {
-				res.redirect("/");
+				res.json("Unauthorized");
 		}
 		
 		await deleteSession(req.db, req.sessionId);
 		res.clearCookie("sessionId");
-		res.status(401).json("Logout successful");
+		res.status(201).json("Logout successful");
 });
 
 router.get("/users", async (req, res) => {

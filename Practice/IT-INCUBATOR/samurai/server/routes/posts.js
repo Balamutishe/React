@@ -3,128 +3,132 @@ const bodyParser = require("body-parser");
 const fetchDb = require("../database/mongoClient.js");
 
 const {
-	getAllPosts,
-	getOnePost,
-	addPost,
-	updatePost,
-	deletePost,
+		getAllPosts,
+		getOnePost,
+		addPost,
+		updatePost,
+		deletePost,
 } = require("../database/posts.js");
+const { auth } = require("../database/users.js");
 
 router.use(
-	async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
+	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
 );
 
-router.get("/:userId/posts", async (req, res) => {
-	try {
-		const postsList = await getAllPosts(req.db, req.params.userId);
-		
-		if (postsList) {
-			res.status(200).json(postsList);
-		} else {
-			res.status(404).send('postsList not found');
+router.get("/posts", auth(), async (req, res) => {
+		try {
+				const userId = req.user._id;
+				const postsList = await getAllPosts(req.db, userId);
+				
+				if (postsList) {
+						res.status(200).json(postsList);
+				} else {
+						res.status(404).send("postsList not found");
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
 });
 
 router.post(
 	"/posts",
 	bodyParser.urlencoded({ extended: false }),
+	auth(),
 	async (req, res) => {
-		try {
-			const { postText, userId, userImg } = req.body;
-			
-			if (userId) {
-				const statusCreate = await addPost(req.db, {
-					_id: crypto.randomUUID(),
-					postText: postText === '' ? 'Новый пост' : postText,
-					created_at: new Date(),
-					updated_at: new Date(),
-					userId: userId,
-					userImg: userImg,
-					likeCount: 0
-				});
-				
-				if (!statusCreate.acknowledged) {
-					res.status(404).send("post not created");
-				} else {
-					const createPost = await getOnePost(req.db, statusCreate.insertedId)
+			try {
+					const { postText } = req.body;
+					const user = req.user;
 					
-					res.status(200).json(createPost);
-				}
-			} else {
-				res.status(400).send("uncorrected request.body");
+					if (user) {
+							const statusCreate = await addPost(req.db, {
+									_id: crypto.randomUUID(),
+									postText: !postText || postText === "" ? "Новый пост" : postText,
+									created_at: new Date(),
+									updated_at: new Date(),
+									userId: user._id,
+									userImg: user.userImg,
+									likeCount: 0,
+							});
+							
+							if (!statusCreate.acknowledged) {
+									res.status(404).send("post not created");
+							} else {
+									const createPost = await getOnePost(req.db, statusCreate.insertedId);
+									
+									res.status(200).json(createPost);
+							}
+					} else {
+							res.status(400).send("uncorrected request.body");
+					}
+			} catch (err) {
+					res.status(400).send(err.message);
 			}
-		} catch (err) {
-			res.status(400).send(err.message);
-		}
-	}
+	},
 );
 
 router.get("/posts/:id", async (req, res) => {
-	try {
-		const { id } = req.params;
-		
-		if (id) {
-			const post = await getOnePost(req.db, id);
-			
-			if (post) {
-				res.status(200).json(post);
-			} else {
-				res.status(404).send(`post ${ id } not found`);
-			}
-		} else {
-			res.status(400).send("uncorrected request.body");
+		try {
+				const { id } = req.params;
+				
+				if (id) {
+						const post = await getOnePost(req.db, id);
+						
+						if (post) {
+								res.status(200).json(post);
+						} else {
+								res.status(404).send(`post ${ id } not found`);
+						}
+				} else {
+						res.status(400).send("uncorrected request.body");
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
 });
 
 router.patch(
 	"/posts/:id",
 	bodyParser.urlencoded({ extended: false }),
 	async (req, res) => {
-		try {
-			const { id } = req.params;
-			const { postText } = req.body;
-			
-			if (id && postText) {
-				const statusUpdate = await updatePost(req.db, id, { postText: postText });
-				
-				if (statusUpdate.modifiedCount === 0) {
-					res.status(404).send(`unknown post ID: ${ id }`);
-				} else {
-					res.status(200).json(id);
-				}
-			} else {
-				res.status(400).send("uncorrected request.body");
+			try {
+					const { id } = req.params;
+					const { postText } = req.body;
+					
+					if (id && postText) {
+							const statusUpdate = await updatePost(req.db, id, { postText: postText });
+							
+							if (statusUpdate.modifiedCount === 0) {
+									res.status(404).send(`unknown post ID: ${ id }`);
+							} else {
+									res.status(200).json(id);
+							}
+					} else {
+							res.status(400).send("uncorrected request.body");
+					}
+			} catch (err) {
+					res.status(400).send(err.message);
 			}
-		} catch (err) {
-			res.status(400).send(err.message);
-		}
-	}
+	},
 );
 
 router.delete("/posts/:id", async (req, res) => {
-	try {
-		const { id } = req.params;
-		
-		if (id) {
-			const statusDeleted = await deletePost(req.db, id);
-			
-			if (statusDeleted.deletedCount === 0) {
-				res.status(404).send(`post ID: ${ id } not found`);
-			} else {
-				res.status(200).json(id);
-			}
-		} else {
-			res.send({ message: "uncorrected request.body" });
+		try {
+				const { id } = req.params;
+				
+				if (id) {
+						const statusDeleted = await deletePost(req.db, id);
+						
+						if (statusDeleted.deletedCount === 0) {
+								res.status(404).send(`post ID: ${ id } not found`);
+						} else {
+								res.status(200).json(id);
+						}
+				} else {
+						res.send({ message: "uncorrected request.body" });
+				}
+		} catch (err) {
+				res.status(400).send(err.message);
 		}
-	} catch (err) {
-		res.status(400).send(err.message);
-	}
 });
 
 module.exports = router;
