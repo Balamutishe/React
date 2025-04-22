@@ -3,7 +3,7 @@ import { login } from "../../../api/users/users.ts";
 
 export const useMutateUserLogin = (loginUserData: { username: string, password: string }) => {
 		const queryClient = useQueryClient();
-		return useMutation({
+		const { mutate } = useMutation({
 				mutationFn: async () => await login(loginUserData),
 				onSuccess: async () => {
 						await queryClient.invalidateQueries({ queryKey: ["users", "me"] });
@@ -12,4 +12,6 @@ export const useMutateUserLogin = (loginUserData: { username: string, password: 
 						console.log(error);
 				},
 		}, queryClient);
+		
+		return mutate;
 };

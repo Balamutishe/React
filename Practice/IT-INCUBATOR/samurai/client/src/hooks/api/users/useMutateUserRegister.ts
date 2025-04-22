@@ -3,7 +3,8 @@ import { userRegister } from "../../../api/users/users.ts";
 
 export const useMutateUserRegister = (newUserData: { username: string, password: string }) => {
 		const queryClient = useQueryClient();
-		return useMutation({
+		const { mutate } = useMutation({
 				mutationFn: async () => await userRegister(newUserData),
 		}, queryClient);
+		return mutate;
 };

@@ -17,7 +17,7 @@ export const AuthForm = () => {
 		
 		const handleFormSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 				e.preventDefault();
-				return authState === "login" ? userLogin.mutate() : userRegister.mutate();
+				return authState === "login" ? userLogin() : userRegister();
 		};
 		const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) =>
 			dispatch(setFormData({ ...formData, [e.target.name]: e.target.value }));
