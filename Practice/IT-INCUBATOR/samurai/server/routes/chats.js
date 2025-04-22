@@ -130,9 +130,9 @@ router.delete("/chats/:id", async (req, res) => {
 								
 								if (statusChatMessagesDeleted.deletedCount === 0) {
 										res.status(200).json(`messages in chat ID: ${ id } not found`);
+								} else {
+										res.status(200).json(id);
 								}
-								
-								res.status(200).json(id);
 						}
 				} else {
 						res.send({ message: "uncorrected request.body" });

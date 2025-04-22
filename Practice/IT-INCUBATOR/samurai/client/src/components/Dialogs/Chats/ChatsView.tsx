@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMutateChatAdd, useMutateChatDelete, useQueryGetAllChats } from "../../../hooks/api";
 import { Chats } from "./Chats.tsx";
 import { RootState } from "../../../redux";
-import { setChatText, setDeleteChatId } from "../../../redux/DialogsSlice.ts";
+import { setActiveChatId, setChatText, setDeleteChatId } from "../../../redux/DialogsSlice.ts";
 
 export const ChatsView = () => {
 		const dispatch = useDispatch();
@@ -26,6 +26,9 @@ export const ChatsView = () => {
 				dispatch(setDeleteChatId(id));
 				deleteChat();
 		};
+		const handleSetChatActiveId = async (id: string) => {
+				dispatch(setActiveChatId(id));
+		};
 		
 		switch (queryChats.status) {
 				case "error":
@@ -37,7 +40,9 @@ export const ChatsView = () => {
 						return <Chats
 							chats={ queryChats.data } chatText={ chatText }
 							handleChatChange={ handleChatChange }
-							handleChatAdd={ handleChatAdd } handleChatDelete={ handleChatDelete }
+							handleChatAdd={ handleChatAdd }
+							handleChatDelete={ handleChatDelete }
+							handleSetChatActiveId={ handleSetChatActiveId }
 						/>;
 		}
 };
