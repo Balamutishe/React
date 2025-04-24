@@ -1,15 +1,21 @@
 import { validateResponse } from "../validateResponse.ts";
 
-import { MessageSchema, MessagesListSchema, TMessage, TMessagesList } from "./types.ts";
+import {
+		MessageSchema,
+		MessagesResponseDataSchema,
+		TMessage,
+		TMessagesResponseData,
+} from "./types.ts";
 
-export async function getAllMessages(chatId: string): Promise<TMessagesList> {
-		return fetch(`/api/${ chatId }/messages`, {
+export async function getAllMessages(chatId: string,
+	page: number): Promise<TMessagesResponseData> {
+		return fetch(`/api/${ chatId }/messages/${ page }`, {
 				method: "GET",
 				headers: {
 						"Content-Type": "application/json",
 				},
 		}).then(validateResponse).then(response => response.json())
-		.then(messagesList => MessagesListSchema.parse(messagesList));
+		.then(messagesData => MessagesResponseDataSchema.parse(messagesData));
 }
 
 export async function getMessage(id: string): Promise<TMessage> {

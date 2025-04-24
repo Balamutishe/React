@@ -62,10 +62,11 @@ router.post(
 					const user = await findUserByUsername(req.db, username);
 					
 					if (!user || user.password !== hash(password)) {
-							res.redirect("/?authError=true");
+							res.status(400).json("Invalid username or password");
 					} else {
 							const sessionId = await createSession(req.db, user._id);
-							res.cookie("sessionId", sessionId, { httpOnly: true }).json("Successfully logged in");
+							res.cookie("sessionId", sessionId, { httpOnly: true })
+							.json(pick(user, ["_id", "username", "userImg", "subscriptions"]));
 					}
 			} catch (err) {
 					res.status(400).send(err.message);
@@ -83,15 +84,20 @@ router.get("/logout", auth(), async (req, res) => {
 		res.status(201).json("Logout successful");
 });
 
-router.get("/users", async (req, res) => {
+router.get("/users/:page", async (req, res) => {
 		try {
-				const usersList = await getUsers(req.db, req.query);
-				const updateUsersList = usersList.map((user) => {
-						return pick(user, ["_id", "username", "userImg", "subscriptions"]);
-				});
+				const { page } = req.params;
+				const pageSize = 5;
 				
-				if (usersList) {
-						res.status(200).json(updateUsersList);
+				const usersListData = await getUsers(req.db, req.query);
+				const updateUsersList = usersListData.map((user) => {
+						return pick(user, ["_id", "username", "userImg", "subscriptions"]);
+				}).slice((page - 1) * pageSize, page * pageSize);
+				
+				const pageCount = Math.ceil(usersListData.length / pageSize);
+				
+				if (usersListData) {
+						res.status(200).json({ usersList: updateUsersList, pageCount: pageCount });
 				} else {
 						res.status(404).send("users not found");
 				}
@@ -110,7 +116,7 @@ router.patch("/users", auth(), async (req, res) => {
 						if (statusUpdate.modifiedCount === 0) {
 								res.status(400).send(`user ${ req.user._id } not updated`);
 						} else {
-								return res.status(200).json(req.user._id);
+								return res.status(200).json(pick(req.user, ["_id", "username", "userImg", "subscriptions"]));
 						}
 				} else {
 						res.status(404).send("userId not found");

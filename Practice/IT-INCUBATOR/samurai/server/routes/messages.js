@@ -15,15 +15,18 @@ router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
 );
 
-router.get("/:chatId/messages", auth(), async (req, res) => {
+router.get("/:chatId/messages/:page", auth(), async (req, res) => {
 		try {
-				const { chatId } = req.params;
+				const { chatId, page } = req.params;
+				const pageSize = 5;
 				
 				if (chatId) {
-						const messagesList = await getAllMessages(req.db, chatId);
+						const messagesData = await getAllMessages(req.db, chatId);
+						const pageCount = Math.ceil(messagesData.length / pageSize);
+						const messagesList = messagesData.slice((page - 1) * pageSize, page * pageSize);
 						
 						if (messagesList) {
-								res.status(200).json(messagesList);
+								res.status(200).json({ messagesList: messagesList, pageCount: pageCount });
 						} else {
 								res.status(404).send({ message: "messagesList not found" });
 						}

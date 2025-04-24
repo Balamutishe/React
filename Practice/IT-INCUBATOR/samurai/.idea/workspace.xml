@@ -5,20 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/Chats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/Chats.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/messages/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/users/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/users/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/users.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/useMutateMessageAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/chats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +45,9 @@
     &quot;accountId&quot;: &quot;64fc282c-432e-4ce8-84c9-a03096ad8d28&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/server/routes/messages.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
@@ -106,7 +111,7 @@
       <recent name="$PROJECT_DIR$/client/src/hooks/api" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm dev server">
+  <component name="RunManager" selected="npm.npm dev client">
     <configuration name="npm dev client" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -135,7 +140,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-WS-251.23774.424" />
       </set>
     </attachedChunks>
   </component>
@@ -177,7 +182,12 @@
       <workItem from="1745086056152" duration="48000" />
       <workItem from="1745151155127" duration="12455000" />
       <workItem from="1745242485169" duration="4515000" />
-      <workItem from="1745318498262" duration="11150000" />
+      <workItem from="1745318498262" duration="17021000" />
+      <workItem from="1745343644429" duration="46000" />
+      <workItem from="1745416685365" duration="722000" />
+      <workItem from="1745417441586" duration="3754000" />
+      <workItem from="1745421993395" duration="1953000" />
+      <workItem from="1745496817582" duration="8012000" />
     </task>
     <servers />
   </component>

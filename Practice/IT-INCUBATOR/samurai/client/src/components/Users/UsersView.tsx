@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { useQueryGetAllUsers } from "../../hooks/api/users/useQueryGetAllUsers.ts";
-import { useMutateUserUpdate } from "../../hooks/api/users/useMutateUserUpdate.ts";
+import { useMutateUserUpdate, useQueryGetAllUsers } from "../../hooks/api";
 import { setSubscriptionIdUpdate } from "../../redux/ProfileSlice.ts";
 import { RootState } from "../../redux";
 import { Users } from "./Users.tsx";
@@ -21,7 +20,7 @@ export const UsersView = () => {
 				userUpdate();
 		};
 		
-		const { users, status, refetch } = useQueryGetAllUsers();
+		const queryUsersGet = useQueryGetAllUsers();
 		const userUpdate = useMutateUserUpdate(
 			{
 					...userMe,
@@ -30,18 +29,19 @@ export const UsersView = () => {
 							(subscriptionId) => subscriptionId !== subscriptionIdUpdate) :
 						[...userMe.subscriptions, ...[subscriptionIdUpdate]],
 					
-			}, refetch);
+			});
 		
-		switch (status) {
+		switch (queryUsersGet.status) {
 				case "error":
 						return <div>
 								Произошла ошибка при запросе
-								<button onClick={ () => refetch() }>Повторить запрос</button>
+								<button onClick={ () => queryUsersGet.refetch() }>Повторить
+										запрос</button>
 						</div>;
 				case "success":
 						return <div>
 								<Users
-									users={ users }
+									users={ queryUsersGet.data.usersList }
 									handleDefineUserSubscription={ handleDefineUserSubscription }
 									handleUserSubscriptionUpdate={ handleUserSubscriptionUpdate }
 								/>

@@ -1,18 +1,14 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllUsers } from "../../../api/users/users.ts";
+import { useParams } from "react-router";
 
 export const useQueryGetAllUsers = () => {
 		const queryClient = useQueryClient();
-		const { data, status, refetch } = useQuery({
-				queryFn: () => getAllUsers(),
+		const params = useParams();
+		const page = Number(params.page) || 1;
+		
+		return useQuery({
+				queryFn: () => getAllUsers(page),
 				queryKey: ["users", "all"],
 		}, queryClient);
-		
-		const users = data ? data : [];
-		
-		return {
-				users,
-				status,
-				refetch,
-		};
 };

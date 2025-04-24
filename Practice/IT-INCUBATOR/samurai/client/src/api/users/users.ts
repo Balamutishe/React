@@ -1,9 +1,14 @@
 import { validateResponse } from "../validateResponse.ts";
-import { TUser, TUsersList, UserSchema, UsersListSchema } from "./types.ts";
+import {
+		TUser,
+		TUsersResponseData,
+		UserSchema,
+		UsersResponseDataSchema,
+} from "./types.ts";
 
 export function login({
 		username, password,
-}: { username: string, password: string }): Promise<void> {
+}: { username: string, password: string }): Promise<TUser> {
 		return fetch("/api/login", {
 				method: "POST",
 				headers: {
@@ -13,7 +18,8 @@ export function login({
 						username,
 						password,
 				}),
-		}).then(validateResponse).then(response => response.json()).then(() => undefined);
+		}).then(validateResponse).then(response => response.json())
+		.then((user) => UserSchema.parse(user));
 }
 
 export function logout(): Promise<void> {
@@ -28,14 +34,15 @@ export function getUserMe(): Promise<TUser> {
 				method: "GET",
 		}).then(validateResponse)
 		.then((response) => response.json())
-		.then((data) => UserSchema.parse(data));
+		.then((user) => UserSchema.parse(user));
 }
 
-export function getAllUsers(): Promise<TUsersList> {
-		return fetch("/api/users", {
+export function getAllUsers(page: number): Promise<TUsersResponseData> {
+		return fetch(`/api/users/${ page }`, {
 				method: "GET",
 		}).then(validateResponse).then(response => response.json())
-		.then(usersList => UsersListSchema.parse(usersList));
+		.then(
+			usersResponseData => UsersResponseDataSchema.parse(usersResponseData));
 }
 
 export function userRegister({
@@ -54,7 +61,7 @@ export function userRegister({
 		.then(() => undefined);
 }
 
-export function updateUser(updateUserData: Partial<TUser>): Promise<string> {
+export function updateUser(updateUserData: Partial<TUser>): Promise<TUser> {
 		return fetch(`/api/users`, {
 				method: "PATCH",
 				headers: {
@@ -62,7 +69,7 @@ export function updateUser(updateUserData: Partial<TUser>): Promise<string> {
 				},
 				body: JSON.stringify(updateUserData),
 		}).then(validateResponse).then(response => response.json())
-		.then(userId => userId);
+		.then((user) => UserSchema.parse(user));
 }
 
 export function deleteUser(): Promise<void> {
