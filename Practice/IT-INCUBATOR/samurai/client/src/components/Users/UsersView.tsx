@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 
+import { Users } from "./Users.tsx";
 import { useMutateUserUpdate, useQueryGetAllUsers } from "../../hooks/api";
 import { setSubscriptionIdUpdate } from "../../redux/ProfileSlice.ts";
 import { RootState } from "../../redux";
-import { Users } from "./Users.tsx";
+import { useParams } from "react-router";
+import { useEffect } from "react";
 
 export const UsersView = () => {
 		const dispatch = useDispatch();
 		const userMe = useSelector((state: RootState) => state.profileData.user);
 		const subscriptionIdUpdate = useSelector(
 			(state: RootState) => state.profileData.subscriptionIdUpdate);
+		
+		const pageNumber = useParams().page || 1;
 		
 		const handleDefineUserSubscription = (id: string) => {
 				return !!userMe.subscriptions.find(
@@ -18,6 +22,13 @@ export const UsersView = () => {
 		const handleUserSubscriptionUpdate = (subscriptionId: string) => {
 				dispatch(setSubscriptionIdUpdate(subscriptionId));
 				userUpdate();
+		};
+		const handleSetPaginationCount = (pageCount: number) => {
+				const arrPage = [];
+				for (let i = 1; i <= pageCount; i++) {
+						arrPage.push(i);
+				}
+				return arrPage;
 		};
 		
 		const queryUsersGet = useQueryGetAllUsers();
@@ -31,6 +42,10 @@ export const UsersView = () => {
 					
 			});
 		
+		useEffect(() => {
+				queryUsersGet.refetch();
+		}, [pageNumber]);
+		
 		switch (queryUsersGet.status) {
 				case "error":
 						return <div>
@@ -42,6 +57,8 @@ export const UsersView = () => {
 						return <div>
 								<Users
 									users={ queryUsersGet.data.usersList }
+									pageCount={ queryUsersGet.data.pageCount }
+									handleSetPaginationCount={ handleSetPaginationCount }
 									handleDefineUserSubscription={ handleDefineUserSubscription }
 									handleUserSubscriptionUpdate={ handleUserSubscriptionUpdate }
 								/>

@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/messages/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/users/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/users/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/users.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Users/Users.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/Users.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/Users.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserLogin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/messages.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,7 +177,7 @@
       <workItem from="1745416685365" duration="722000" />
       <workItem from="1745417441586" duration="3754000" />
       <workItem from="1745421993395" duration="1953000" />
-      <workItem from="1745496817582" duration="8012000" />
+      <workItem from="1745496817582" duration="17201000" />
     </task>
     <servers />
   </component>

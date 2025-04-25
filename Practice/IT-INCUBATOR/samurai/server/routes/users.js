@@ -84,15 +84,16 @@ router.get("/logout", auth(), async (req, res) => {
 		res.status(201).json("Logout successful");
 });
 
-router.get("/users/:page", async (req, res) => {
+router.get("/users/:page", auth(), async (req, res) => {
 		try {
 				const { page } = req.params;
 				const pageSize = 5;
 				
 				const usersListData = await getUsers(req.db, req.query);
-				const updateUsersList = usersListData.map((user) => {
-						return pick(user, ["_id", "username", "userImg", "subscriptions"]);
-				}).slice((page - 1) * pageSize, page * pageSize);
+				const updateUsersList = usersListData.map((user) =>
+					pick(user, ["_id", "username", "userImg", "subscriptions"]))
+				.filter((user) => user._id !== req.user._id)
+				.slice((page - 1) * pageSize, page * pageSize);
 				
 				const pageCount = Math.ceil(usersListData.length / pageSize);
 				

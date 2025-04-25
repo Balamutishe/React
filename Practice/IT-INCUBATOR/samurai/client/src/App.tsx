@@ -27,9 +27,20 @@ const App = () => {
 													<section className="main__pages-router">
 															<Routes>
 																	<Route path={ "/" } element={ <Profile/> }/>
-																	<Route path={ "/dialogs" } element={ <Dialogs/> }/>
-																	<Route path={ "/dialogs/:chatId" } element={ <Dialogs/> }/>
-																	<Route path={ "/users" } element={ <UsersView/> }/>
+																	<Route
+																		path={ "/dialogs" } element={ <Dialogs/> }
+																	/>
+																	<Route
+																		path={ "/dialogs/:chatId" }
+																		element={ <Dialogs/> }
+																	/>
+																	<Route
+																		path={ "/users" } element={ <UsersView/> }
+																	/>
+																	<Route
+																		path={ "/users/:page" }
+																		element={ <UsersView/> }
+																	/>
 															</Routes>
 													</section>
 											</main>
