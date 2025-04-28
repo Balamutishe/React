@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/components/Main/Main.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Users/Users.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/Users.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/Users.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useQueryGetAllPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useQueryGetAllPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryGetAllUsers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +110,7 @@
       <recent name="$PROJECT_DIR$/client/src/hooks/api" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm dev client">
+  <component name="RunManager" selected="npm.npm dev server">
     <configuration name="npm dev client" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -177,7 +186,11 @@
       <workItem from="1745416685365" duration="722000" />
       <workItem from="1745417441586" duration="3754000" />
       <workItem from="1745421993395" duration="1953000" />
-      <workItem from="1745496817582" duration="17201000" />
+      <workItem from="1745496817582" duration="22506000" />
+      <workItem from="1745661505239" duration="2108000" />
+      <workItem from="1745679911809" duration="4783000" />
+      <workItem from="1745764297630" duration="4305000" />
+      <workItem from="1745843211870" duration="421000" />
     </task>
     <servers />
   </component>

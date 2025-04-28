@@ -1,10 +1,18 @@
 import { ChangeEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useMutateChatAdd, useMutateChatDelete, useQueryGetAllChats } from "../../../hooks/api";
+import {
+		useMutateChatAdd,
+		useMutateChatDelete,
+		useQueryGetAllChats,
+} from "../../../hooks/api";
 import { Chats } from "./Chats.tsx";
 import { RootState } from "../../../redux";
-import { setActiveChatId, setChatText, setDeleteChatId } from "../../../redux/DialogsSlice.ts";
+import {
+		setActiveChatId,
+		setChatText,
+		setDeleteChatId,
+} from "../../../redux/DialogsSlice.ts";
 
 export const ChatsView = () => {
 		const dispatch = useDispatch();
@@ -34,7 +42,8 @@ export const ChatsView = () => {
 				case "error":
 						return <div>
 								Ошибка при получении данных
-								<button onClick={ () => queryChats.refetch() }>Повторить запрос</button>
+								<button onClick={ () => queryChats.refetch() }>Повторить
+										запрос</button>
 						</div>;
 				case "success":
 						return <Chats

@@ -6,5 +6,6 @@ export const useQueryGetAllPosts = () => {
 		return useQuery({
 				queryFn: async () => await getAllPosts(),
 				queryKey: ["posts", "all"],
+				retry: false,
 		}, queryClient);
 };

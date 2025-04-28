@@ -22,8 +22,9 @@ export const MessagesView = () => {
 			(state: RootState) => state.profileData.user._id);
 		const chatId = useSelector(
 			(state: RootState) => state.dialogsData.chatsData.activeChatId);
+		// const chatId = useParams().chatId;
 		
-		const queryMessages = useQueryGetAllMessages();
+		const queryMessages = useQueryGetAllMessages(chatId);
 		const addMessage = useMutateMessageAdd(messageText);
 		const deleteMessage = useMutateMessageDelete();
 		
@@ -41,7 +42,7 @@ export const MessagesView = () => {
 		
 		useEffect(() => {
 				queryMessages.refetch();
-		}, [chatId, queryMessages.refetch]);
+		}, [chatId]);
 		
 		switch (queryMessages.status) {
 				case "error":

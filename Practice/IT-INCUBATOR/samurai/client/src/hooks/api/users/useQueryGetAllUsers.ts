@@ -4,8 +4,7 @@ import { useParams } from "react-router";
 
 export const useQueryGetAllUsers = () => {
 		const queryClient = useQueryClient();
-		const params = useParams();
-		const page = Number(params.page) || 1;
+		const page = Number(useParams().page) || 1;
 		
 		return useQuery({
 				queryFn: () => getAllUsers(page),

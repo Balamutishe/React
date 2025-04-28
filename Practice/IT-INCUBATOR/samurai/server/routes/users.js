@@ -86,7 +86,7 @@ router.get("/logout", auth(), async (req, res) => {
 
 router.get("/users/:page", auth(), async (req, res) => {
 		try {
-				const { page } = req.params;
+				const page = Number(req.params.page) || 1;
 				const pageSize = 5;
 				
 				const usersListData = await getUsers(req.db, req.query);
