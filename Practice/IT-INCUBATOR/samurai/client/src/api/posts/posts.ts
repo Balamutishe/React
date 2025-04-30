@@ -26,7 +26,7 @@ export async function createPost(postText: string): Promise<TPost> {
 						postText,
 				}),
 		}).then(validateResponse).then((response) => response.json())
-		.then((post) => post);
+		.then(post => PostSchema.parse(post));
 }
 
 export async function updatePost({ postText, id }: {

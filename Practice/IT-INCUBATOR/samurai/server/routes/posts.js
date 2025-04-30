@@ -10,6 +10,7 @@ const {
 		deletePost,
 } = require("../database/posts.js");
 const { auth } = require("../database/users.js");
+const { updateUser } = require("../database/users");
 
 router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
@@ -17,8 +18,8 @@ router.use(
 
 router.get("/posts", auth(), async (req, res) => {
 		try {
-				const userId = req.user._id;
-				const postsList = await getAllPosts(req.db, userId);
+				const postsId = req.user.posts_ids;
+				const postsList = await getAllPosts(req.db, postsId);
 				
 				if (postsList) {
 						res.status(200).json(postsList);
@@ -53,9 +54,15 @@ router.post(
 							if (!statusCreate.acknowledged) {
 									res.status(404).send("post not created");
 							} else {
-									const createPost = await getOnePost(req.db, statusCreate.insertedId);
+									const newPost = await getOnePost(req.db, statusCreate.insertedId);
 									
-									res.status(200).json(createPost);
+									if (newPost) {
+											await updateUser(req.db, user._id, { $push: { posts_ids: newPost._id } });
+									} else {
+											res.status(404).json("postId not added to user posts_ids");
+									}
+									
+									res.status(200).json(newPost);
 							}
 					} else {
 							res.status(400).send("uncorrected request.body");

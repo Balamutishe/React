@@ -5,6 +5,8 @@ export const UserSchema = z.object({
 		username: z.string(),
 		userImg: z.string(),
 		subscriptions: z.array(z.string()),
+		posts_ids: z.array(z.string()),
+		chats_ids: z.array(z.string()),
 });
 
 export type TUser = z.infer<typeof UserSchema>

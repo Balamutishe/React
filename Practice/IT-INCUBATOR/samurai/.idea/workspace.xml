@@ -6,23 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/Chats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/Chats.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessageItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessageItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/Messages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessagesView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatDelete.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/DialogsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/DialogsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/posts/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/posts/posts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/users/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Posts/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Posts/Post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Posts/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Posts/Posts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Posts/PostsForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Posts/PostsForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Posts/PostsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Posts/PostsView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostAdd.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useQueryGetAllPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useQueryGetAllPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/database/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/database/posts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/database/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/database/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/posts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +192,7 @@
       <workItem from="1745843211870" duration="12749000" />
       <workItem from="1745936208269" duration="895000" />
       <workItem from="1746020127249" duration="1580000" />
-      <workItem from="1746023706017" duration="2252000" />
+      <workItem from="1746023706017" duration="9567000" />
     </task>
     <servers />
   </component>

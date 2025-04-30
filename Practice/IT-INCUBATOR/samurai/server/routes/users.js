@@ -18,7 +18,7 @@ router.get("/", auth(), async (req, res) => {
 						return res.status(401).send("Unauthorized");
 				}
 				
-				const user = pick(req.user, ["_id", "username", "userImg", "subscriptions"]);
+				const user = pick(req.user, ["_id", "username", "userImg", "subscriptions", "chats_ids", "posts_ids"]);
 				
 				res.status(200).json(user);
 		} catch (err) {
@@ -66,7 +66,7 @@ router.post(
 					} else {
 							const sessionId = await createSession(req.db, user._id);
 							res.cookie("sessionId", sessionId, { httpOnly: true })
-							.json(pick(user, ["_id", "username", "userImg", "subscriptions"]));
+							.json(pick(user, ["_id", "username", "userImg", "subscriptions", "chats_ids", "posts_ids"]));
 					}
 			} catch (err) {
 					res.status(400).send(err.message);
@@ -91,7 +91,7 @@ router.get("/users/:page", auth(), async (req, res) => {
 				
 				const usersListData = await getUsers(req.db, req.query);
 				const updateUsersList = usersListData.map((user) =>
-					pick(user, ["_id", "username", "userImg", "subscriptions"]))
+					pick(user, ["_id", "username", "userImg", "subscriptions", "chats_ids", "posts_ids"]))
 				.filter((user) => user._id !== req.user._id)
 				.slice((page - 1) * pageSize, page * pageSize);
 				
@@ -117,7 +117,8 @@ router.patch("/users", auth(), async (req, res) => {
 						if (statusUpdate.modifiedCount === 0) {
 								res.status(400).send(`user ${ req.user._id } not updated`);
 						} else {
-								return res.status(200).json(pick(req.user, ["_id", "username", "userImg", "subscriptions"]));
+								return res.status(200)
+								.json(pick(req.user, ["_id", "username", "userImg", "subscriptions", "chats_ids", "posts_ids"]));
 						}
 				} else {
 						res.status(404).send("userId not found");

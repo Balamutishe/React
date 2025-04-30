@@ -1,21 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { fetchDeletePost } from "../../../api/posts/posts.ts";
-import { setDeletePostId } from "../../../redux/PostsSlice.ts";
-import { RootState } from "../../../redux";
+import { deletePost } from "../../../redux/PostsSlice.ts";
 
-export const useMutatePostDelete = () => {
+export const useMutatePostDelete = (postId: string) => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
-		const deletePostId = useSelector(
-			(state: RootState) => state.postsData.deletePostId);
 		
 		const { mutate } = useMutation({
-				mutationFn: () => fetchDeletePost(deletePostId),
+				mutationFn: () => fetchDeletePost(postId),
 				onSuccess: async () => {
-						dispatch(setDeletePostId(""));
-						await queryClient.invalidateQueries({ queryKey: ["posts", "all"] });
+						dispatch(deletePost(postId));
+						await queryClient.invalidateQueries({ queryKey: ["posts"] });
 				},
 		}, queryClient);
 		
