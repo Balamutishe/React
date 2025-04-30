@@ -38,7 +38,7 @@ export async function createMessage(
 						chatId,
 				}),
 		}).then(validateResponse).then((response) => response.json())
-		.then(message => message);
+		.then((message) => MessageSchema.parse(message));
 }
 
 export async function updateMessage({ messageText, id }: {

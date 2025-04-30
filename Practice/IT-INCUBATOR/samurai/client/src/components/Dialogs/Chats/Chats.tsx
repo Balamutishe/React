@@ -1,23 +1,14 @@
-import { ChangeEvent, FC, FormEvent } from "react";
+import { useSelector } from "react-redux";
 
 import { ChatItem } from "./ChatItem.tsx";
 import { ChatsForm } from "./ChatsForm.tsx";
-import { TChatsList } from "../../../api/chats/types.ts";
+import { RootState } from "../../../redux";
 import c from "./Chats.module.css";
 
-type TChatsProps = {
-		chats: TChatsList
-		chatText: string
-		handleChatChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-		handleChatAdd: (e: FormEvent<HTMLFormElement>) => void
-		handleChatDelete: (id: string) => void
-		handleSetChatActiveId: (id: string) => void,
-}
-
-export const Chats: FC<TChatsProps> = ({
-		chats, chatText, handleChatChange, handleChatAdd,
-		handleChatDelete, handleSetChatActiveId,
-}) => {
+export const Chats = () => {
+		const chats = useSelector(
+			(state: RootState) => state.dialogsData.chatsData.chats);
+		
 		return (
 			<div className={ c.chats }>
 					<div className={ c.chatsContent }>
@@ -25,21 +16,13 @@ export const Chats: FC<TChatsProps> = ({
 							<ul className={ c.list }>
 									{ chats.length !== 0 ? chats.map((chat) => (
 										<li className={ c.listItem } key={ chat._id }>
-												<ChatItem
-													chat={ chat }
-													handleChatDelete={ handleChatDelete }
-													handleSetChatActiveId={ handleSetChatActiveId }
-												/>
+												<ChatItem chat={ chat }/>
 										</li>
 									)) : (<div>Список пуст</div>) }
 							</ul>
 					</div>
 					<div className={ c.formContainer }>
-							<ChatsForm
-								chatText={ chatText }
-								handleChatChange={ handleChatChange }
-								handleChatAdd={ handleChatAdd }
-							/>
+							<ChatsForm/>
 					</div>
 			</div>
 		);

@@ -1,48 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import { ChangeEvent, FormEvent, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { Messages } from "./Messages.tsx";
 import { RootState } from "../../../redux";
-import {
-		useMutateMessageAdd,
-		useMutateMessageDelete,
-		useQueryGetAllMessages,
-} from "../../../hooks/api";
-import {
-		setDeleteMessageId,
-		setMessageText,
-} from "../../../redux/DialogsSlice.ts";
+import { useQueryGetAllMessages } from "../../../hooks/api";
 
 export const MessagesView = () => {
-		const dispatch = useDispatch();
-		
-		const messageText = useSelector(
-			(state: RootState) => state.dialogsData.messagesData.messageText);
 		const userId = useSelector(
 			(state: RootState) => state.profileData.user._id);
 		const chatId = useSelector(
 			(state: RootState) => state.dialogsData.chatsData.activeChatId);
-		// const chatId = useParams().chatId;
 		
 		const queryMessages = useQueryGetAllMessages(chatId);
-		const addMessage = useMutateMessageAdd(messageText);
-		const deleteMessage = useMutateMessageDelete();
 		
-		const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-				dispatch(setMessageText(e.target.value));
-		};
-		const handleMessageAdd = (e: FormEvent<HTMLFormElement>) => {
-				e.preventDefault();
-				addMessage();
-		};
-		const handleMessageDelete = async (id: string) => {
-				dispatch(setDeleteMessageId(id));
-				deleteMessage();
-		};
-		
-		useEffect(() => {
-				queryMessages.refetch();
-		}, [chatId]);
+		const messagesList = useSelector(
+			(state: RootState) => state.dialogsData.messagesData.messages.messagesList);
 		
 		switch (queryMessages.status) {
 				case "error":
@@ -52,12 +23,6 @@ export const MessagesView = () => {
 										запрос</button>
 						</div>;
 				case "success":
-						return <Messages
-							messages={ queryMessages.data.messagesList } userId={ userId }
-							messageText={ messageText }
-							handleMessageChange={ handleMessageChange }
-							handleMessageAdd={ handleMessageAdd }
-							handleMessageDelete={ handleMessageDelete }
-						/>;
+						return <Messages messages={ messagesList } userId={ userId }/>;
 		}
 };

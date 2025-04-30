@@ -1,20 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { fetchDeleteMessage } from "../../../api/messages/messages.ts";
-import { setDeleteMessageId } from "../../../redux/DialogsSlice.ts";
-import { RootState } from "../../../redux";
+import { deleteMessage } from "../../../redux/DialogsSlice.ts";
 
-export const useMutateMessageDelete = () => {
+export const useMutateMessageDelete = (messageId: string) => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
-		const deleteMessageId = useSelector(
-			(state: RootState) => state.dialogsData.messagesData.deleteMessageId);
 		
 		const { mutate } = useMutation({
-				mutationFn: () => fetchDeleteMessage(deleteMessageId),
+				mutationFn: () => fetchDeleteMessage(messageId),
 				onSuccess: async () => {
-						dispatch(setDeleteMessageId(""));
+						dispatch(deleteMessage(messageId));
 						await queryClient.invalidateQueries({ queryKey: ["messages"] });
 				},
 		}, queryClient);
