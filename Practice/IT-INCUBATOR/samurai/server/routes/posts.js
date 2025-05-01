@@ -118,9 +118,10 @@ router.patch(
 	},
 );
 
-router.delete("/posts/:id", async (req, res) => {
+router.delete("/posts/:id", auth(), async (req, res) => {
 		try {
 				const { id } = req.params;
+				const userId = req.user._id;
 				
 				if (id) {
 						const statusDeleted = await deletePost(req.db, id);
@@ -128,6 +129,7 @@ router.delete("/posts/:id", async (req, res) => {
 						if (statusDeleted.deletedCount === 0) {
 								res.status(404).send(`post ID: ${ id } not found`);
 						} else {
+								await updateUser(req.db, userId, { $pull: { posts_ids: id } });
 								res.status(200).json(id);
 						}
 				} else {

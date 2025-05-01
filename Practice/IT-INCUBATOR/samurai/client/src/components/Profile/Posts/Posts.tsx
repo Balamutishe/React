@@ -1,19 +1,19 @@
 import { useSelector } from "react-redux";
 
-import { PostsForm } from "./PostsForm.tsx";
-import { Post } from "./Post.tsx";
 import { TPost } from "../../../api/posts/types.ts";
 import { RootState } from "../../../redux";
+import { Post } from "./Post.tsx";
 import c from "./Posts.module.css";
+import { PostsForm } from "./PostsForm.tsx";
 
 export const Posts = () => {
-		const posts = useSelector((state: RootState) => state.postsData.posts);
+		const postsData = useSelector((state: RootState) => state.postsData);
 		
 		return (<div>
 					<h2 className={ c.title }>PostsList</h2>
-					<PostsForm/>
+					<PostsForm postText={ postsData.postText }/>
 					<ul className={ c.list }>
-							{ posts.map((post: TPost) => (
+							{ postsData.posts.map((post: TPost) => (
 								<li key={ post._id } className={ c.listItem }>
 										<Post post={ post }/>
 								</li>
