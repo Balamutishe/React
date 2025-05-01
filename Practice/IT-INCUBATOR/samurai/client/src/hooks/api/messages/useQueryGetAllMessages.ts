@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 
 import { getAllMessages } from "../../../api/messages/messages.ts";
-import { useDispatch } from "react-redux";
 import { setMessages } from "../../../redux/DialogsSlice.ts";
 
 export const useQueryGetAllMessages = (chatId: string) => {

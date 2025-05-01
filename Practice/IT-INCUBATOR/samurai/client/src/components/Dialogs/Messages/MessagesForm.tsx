@@ -1,15 +1,16 @@
-import { ChangeEvent, FormEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { ChangeEvent, FC, FormEvent } from "react";
+import { useDispatch } from "react-redux";
+import { useMutateMessageAdd } from "../../../hooks/api";
 
 import { setMessageText } from "../../../redux/DialogsSlice.ts";
-import { useMutateMessageAdd } from "../../../hooks/api";
-import { RootState } from "../../../redux";
 import c from "./Messages.module.css";
 
-export const MessagesForm = () => {
+type TMessagesFormProps = {
+		messageText: string;
+}
+
+export const MessagesForm: FC<TMessagesFormProps> = ({ messageText }) => {
 		const dispatch = useDispatch();
-		const messageText = useSelector(
-			(state: RootState) => state.dialogsData.messagesData.messageText);
 		const addMessage = useMutateMessageAdd(messageText);
 		
 		const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

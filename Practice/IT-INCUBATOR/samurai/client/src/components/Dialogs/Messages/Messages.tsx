@@ -1,24 +1,22 @@
-import { FC } from "react";
+import { useSelector } from "react-redux";
 
-import { MessagesForm } from "./MessagesForm.tsx";
+import { RootState } from "../../../redux";
 import { MessageItem } from "./MessageItem.tsx";
-import { TMessagesList } from "../../../api/messages/types.ts";
 import c from "./Messages.module.css";
+import { MessagesForm } from "./MessagesForm.tsx";
 
-type TMessagesProps = {
-		messages: TMessagesList,
-		userId: string,
-}
-
-export const Messages: FC<TMessagesProps> = ({
-		messages, userId,
-}) => {
+export const Messages = () => {
+		const userId = useSelector(
+			(state: RootState) => state.profileData.user._id);
+		const messagesData = useSelector(
+			(state: RootState) => state.dialogsData.messagesData);
+		
 		return (
 			<div className={ c.messages }>
 					<div>
 							<h2 className={ c.title }>Messages</h2>
 							<ul className={ c.list }>
-									{ messages.map((message) => (
+									{ messagesData.messages.messagesList.map((message) => (
 										<li
 											key={ message._id }
 											className={ userId === message.userId ?
@@ -29,9 +27,10 @@ export const Messages: FC<TMessagesProps> = ({
 										</li>
 									)) }
 							</ul>
-							{ messages.length === 0 && <div>Сообщений нет</div> }
+							{ messagesData.messages.messagesList.length === 0 &&
+								<div>Сообщений нет</div> }
 					</div>
-					<MessagesForm/>
+					<MessagesForm messageText={ messagesData.messageText }/>
 			</div>
 		);
 };

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import c from "./UserData.module.css";
 import { useMutateUserLogout } from "../../../hooks/api";
+import c from "./UserData.module.css";
 
 type TUserData = {
 		username: string,
@@ -10,9 +10,6 @@ type TUserData = {
 export const UserData: FC<TUserData> = ({ username, userImg }) => {
 		const userLogout = useMutateUserLogout();
 		
-		const handleLogout = () => {
-				userLogout.mutate();
-		};
 		return (
 			<div className={ c.userData }>
 					<img src={ userImg } alt="UserImg" className={ c.userImg }/>
@@ -24,7 +21,7 @@ export const UserData: FC<TUserData> = ({ username, userImg }) => {
 									<div>UserDescription</div>
 									<div>UserDescription</div>
 							</div>
-							<button onClick={ handleLogout }>Выйти</button>
+							<button onClick={ () => userLogout.mutate() }>Выйти</button>
 					</div>
 			</div>
 		);

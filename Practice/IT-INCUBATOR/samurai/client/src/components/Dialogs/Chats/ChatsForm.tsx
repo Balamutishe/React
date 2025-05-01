@@ -1,16 +1,16 @@
-import { ChangeEvent, FormEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { ChangeEvent, FC, FormEvent } from "react";
+import { useDispatch } from "react-redux";
 
 import { useMutateChatAdd } from "../../../hooks/api";
 import { setChatText } from "../../../redux/DialogsSlice.ts";
-import { RootState } from "../../../redux";
 import c from "./Chats.module.css";
 
+type TChatsFormProps = {
+		chatText: string;
+}
 
-export const ChatsForm = () => {
+export const ChatsForm: FC<TChatsFormProps> = ({ chatText }) => {
 		const dispatch = useDispatch();
-		const chatText = useSelector(
-			(state: RootState) => state.dialogsData.chatsData.chatText);
 		const addChat = useMutateChatAdd(chatText);
 		
 		const handleChatChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

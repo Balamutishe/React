@@ -1,28 +1,29 @@
 import { useSelector } from "react-redux";
+import { RootState } from "../../../redux";
 
 import { ChatItem } from "./ChatItem.tsx";
-import { ChatsForm } from "./ChatsForm.tsx";
-import { RootState } from "../../../redux";
 import c from "./Chats.module.css";
+import { ChatsForm } from "./ChatsForm.tsx";
 
 export const Chats = () => {
-		const chats = useSelector(
-			(state: RootState) => state.dialogsData.chatsData.chats);
+		const chatsData = useSelector(
+			(state: RootState) => state.dialogsData.chatsData);
 		
 		return (
 			<div className={ c.chats }>
 					<div className={ c.chatsContent }>
 							<h2 className={ c.title }>Chats</h2>
 							<ul className={ c.list }>
-									{ chats.length !== 0 ? chats.map((chat) => (
-										<li className={ c.listItem } key={ chat._id }>
-												<ChatItem chat={ chat }/>
-										</li>
-									)) : (<div>Список пуст</div>) }
+									{ chatsData.chats.length !== 0 ?
+										chatsData.chats.map((chat) => (
+											<li className={ c.listItem } key={ chat._id }>
+													<ChatItem chat={ chat }/>
+											</li>
+										)) : (<div>Список пуст</div>) }
 							</ul>
 					</div>
 					<div className={ c.formContainer }>
-							<ChatsForm/>
+							<ChatsForm chatText={ chatsData.chatText }/>
 					</div>
 			</div>
 		);
