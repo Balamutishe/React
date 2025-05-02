@@ -1,14 +1,17 @@
-import { Route, Routes } from "react-router";
+import { lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router";
 
-import { Navbar } from "../Navbar/Navbar.tsx";
-import { Profile } from "../Profile/Profile.tsx";
-import { Dialogs } from "../Dialogs/Dialogs.tsx";
-import { UsersView } from "../Users/UsersView.tsx";
 import { useQueryMe } from "../../hooks/api";
 import { setProfile } from "../../redux/ProfileSlice.ts";
-import c from "./Main.module.css";
 import { AuthForm } from "../Auth/AuthForm.tsx";
+import { Loader } from "../Loader/Loader.tsx";
+import { Navbar } from "../Navbar/Navbar.tsx";
+import c from "./Main.module.css";
+
+const LazyProfile = lazy(() => import("../Profile/Profile"));
+const LazyDialogs = lazy(() => import("../Dialogs/Dialogs"));
+const LazyUsersView = lazy(() => import("../Users/UsersView.tsx"));
 
 
 export const Main = () => {
@@ -26,17 +29,25 @@ export const Main = () => {
 											<Navbar/>
 									</section>
 									<section className={ c.routes }>
-											<Routes>
-													<Route path={ "/" } element={ <Profile/> }/>
-													<Route path={ "/dialogs" } element={ <Dialogs/> }/>
-													<Route
-														path={ "/dialogs/:chatId" } element={ <Dialogs/> }
-													/>
-													<Route path={ "/users" } element={ <UsersView/> }/>
-													<Route
-														path={ "/users/:page" } element={ <UsersView/> }
-													/>
-											</Routes>
+											<Suspense fallback={ <Loader/> }>
+													<Routes>
+															<Route path={ "/" } element={ <LazyProfile/> }/>
+															<Route
+																path={ "/dialogs" } element={ <LazyDialogs/> }
+															/>
+															<Route
+																path={ "/dialogs/:chatId" }
+																element={ <LazyDialogs/> }
+															/>
+															<Route
+																path={ "/users" } element={ <LazyUsersView/> }
+															/>
+															<Route
+																path={ "/users/:page" }
+																element={ <LazyUsersView/> }
+															/>
+													</Routes>
+											</Suspense>
 									</section>
 							</main>
 						);

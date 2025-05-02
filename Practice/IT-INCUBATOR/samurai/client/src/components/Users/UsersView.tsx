@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useMutateUserUpdate, useQueryGetAllUsers } from "../../hooks/api";
+import { RootState } from "../../redux";
+import { setSubscriptionIdUpdate } from "../../redux/ProfileSlice.ts";
 
 import { Users } from "./Users.tsx";
-import { useMutateUserUpdate, useQueryGetAllUsers } from "../../hooks/api";
-import { setSubscriptionIdUpdate } from "../../redux/ProfileSlice.ts";
-import { RootState } from "../../redux";
 
-export const UsersView = () => {
+const UsersView = () => {
 		const dispatch = useDispatch();
 		const userMe = useSelector((state: RootState) => state.profileData.user);
 		const subscriptionIdUpdate = useSelector(
@@ -58,3 +58,5 @@ export const UsersView = () => {
 						</div>;
 		}
 };
+
+export default UsersView;

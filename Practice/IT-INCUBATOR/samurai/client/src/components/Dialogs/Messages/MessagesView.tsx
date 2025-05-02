@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useQueryGetAllMessages } from "../../../hooks/api";
 import { RootState } from "../../../redux";
+import { Loader } from "../../Loader/Loader.tsx";
 
 import { Messages } from "./Messages.tsx";
 
@@ -16,6 +17,8 @@ export const MessagesView = () => {
 								<button onClick={ () => queryMessages.refetch() }>Повторить
 										запрос</button>
 						</div>;
+				case "pending":
+						return <Loader/>;
 				case "success":
 						return <Messages/>;
 		}

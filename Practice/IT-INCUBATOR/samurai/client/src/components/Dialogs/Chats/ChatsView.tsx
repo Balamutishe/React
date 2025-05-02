@@ -1,4 +1,5 @@
 import { useQueryGetAllChats } from "../../../hooks/api";
+import { Loader } from "../../Loader/Loader.tsx";
 import { Chats } from "./Chats.tsx";
 
 export const ChatsView = () => {
@@ -11,6 +12,8 @@ export const ChatsView = () => {
 								<button onClick={ () => queryChats.refetch() }>Повторить
 										запрос</button>
 						</div>;
+				case "pending":
+						return <Loader/>;
 				case "success":
 						return <Chats/>;
 		}

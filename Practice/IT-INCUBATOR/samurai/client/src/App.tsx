@@ -1,11 +1,11 @@
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient.ts";
 
 import { Header } from "./components/Header/Header.tsx";
 import { Main } from "./components/Main/Main.tsx";
-import { queryClient } from "./api/queryClient.ts";
 import store from "./redux";
 import "./App.css";
 

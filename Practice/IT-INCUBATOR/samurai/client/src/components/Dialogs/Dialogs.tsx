@@ -1,8 +1,8 @@
 import { ChatsView } from "./Chats/ChatsView.tsx";
-import { MessagesView } from "./Messages/MessagesView.tsx";
 import c from "./Dialogs.module.css";
+import { MessagesView } from "./Messages/MessagesView.tsx";
 
-export const Dialogs = () => {
+const Dialogs = () => {
 		return (
 			<div className={ c.dialogs }>
 					<ChatsView/>
@@ -10,3 +10,5 @@ export const Dialogs = () => {
 			</div>
 		);
 };
+
+export default Dialogs;
