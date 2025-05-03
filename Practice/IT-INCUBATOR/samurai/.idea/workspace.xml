@@ -5,15 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/Loader/Loader.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Loader/Loader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetOneChat.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/chats/chats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/chats/chats.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/chats/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/chats/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Chats/ChatsView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Posts/PostsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Posts/PostsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessageItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/MessageItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dialogs/Messages/Messages.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/database/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/database/chats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/chats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/messages.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +73,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;22.13.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.13.17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/src/hooks/api/users&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/src/hooks/api/chats&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -90,11 +96,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/hooks/api/chats" />
       <recent name="$PROJECT_DIR$/client/src/hooks/api/users" />
       <recent name="$PROJECT_DIR$/client/src/hooks/api" />
       <recent name="$PROJECT_DIR$/client/src/components/Dialogs/Messages" />
       <recent name="$PROJECT_DIR$/client/src/components/Dialogs/Chats" />
-      <recent name="$PROJECT_DIR$/client/src/components/Profile/Posts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/src/hooks/api/messages" />
@@ -104,7 +110,7 @@
       <recent name="$PROJECT_DIR$/client/src/hooks/api" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm dev client">
+  <component name="RunManager" selected="npm.npm dev server">
     <configuration name="npm dev client" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -189,7 +195,8 @@
       <workItem from="1746020127249" duration="1580000" />
       <workItem from="1746023706017" duration="10361000" />
       <workItem from="1746110747323" duration="5905000" />
-      <workItem from="1746181457133" duration="5499000" />
+      <workItem from="1746181457133" duration="13640000" />
+      <workItem from="1746253057866" duration="1378000" />
     </task>
     <servers />
   </component>

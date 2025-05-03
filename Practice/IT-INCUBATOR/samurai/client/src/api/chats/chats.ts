@@ -1,6 +1,12 @@
 import { validateResponse } from "../validateResponse.ts";
 
-import { ChatSchema, ChatsListSchema, TChat, TChatsList } from "./types.ts";
+import {
+		ChatsListSchema,
+		ResponseResultGetOneChatSchema,
+		TChat,
+		TChatsList,
+		TResponseGetOneChat,
+} from "./types.ts";
 
 export async function getAllChats(): Promise<TChatsList> {
 		return fetch(`/api/chats`, {
@@ -9,11 +15,12 @@ export async function getAllChats(): Promise<TChatsList> {
 		.then(chatsList => ChatsListSchema.parse(chatsList));
 }
 
-export async function getChat(id: string): Promise<TChat> {
-		return fetch(`/api/chats/${ id }`, {
+export async function getOneChat(id: string,
+	page: string): Promise<TResponseGetOneChat> {
+		return fetch(`/api/chats/${ id }/${ page }`, {
 				method: "GET",
 		}).then(validateResponse).then(response => response.json())
-		.then(chat => ChatSchema.parse(chat));
+		.then(chatData => ResponseResultGetOneChatSchema.parse(chatData));
 }
 
 export async function createChat(chatText: string): Promise<TChat> {
@@ -29,7 +36,8 @@ export async function createChat(chatText: string): Promise<TChat> {
 		.then(chat => chat);
 }
 
-export async function updateChat(chatText: string, id: string): Promise<string> {
+export async function updateChat(chatText: string,
+	id: string): Promise<string> {
 		return fetch(`/api/chats/${ id }`, {
 				method: "PATCH",
 				headers: {

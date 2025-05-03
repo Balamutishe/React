@@ -10,6 +10,8 @@ const {
 		deleteMessage,
 } = require("../database/messages.js");
 const { auth } = require("../database/users.js");
+const { updateUser } = require("../database/users");
+const { updateChat } = require("../database/chats");
 
 router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
@@ -62,9 +64,15 @@ router.post(
 							if (!statusCreate.acknowledged) {
 									res.status(400).send("message not created");
 							} else {
-									const createdMessage = await getOneMessage(req.db, statusCreate.insertedId);
+									const newMessage = await getOneMessage(req.db, statusCreate.insertedId);
 									
-									return res.status(200).json(createdMessage);
+									if (newMessage) {
+											await updateChat(req.db, chatId, { $push: { messages_ids: newMessage._id } });
+									} else {
+											res.status(404).json("messageId not added to chats messages_ids");
+									}
+									
+									res.status(200).json(newMessage);
 							}
 					} else {
 							res.status(400).send("uncorrected request.body");
@@ -120,17 +128,19 @@ router.patch(
 	},
 );
 
-router.delete("/messages/:id", async (req, res) => {
+router.delete("/:chatId/messages/:messageId", async (req, res) => {
 		try {
-				const { id } = req.params;
+				const { messageId, chatId } = req.params;
 				
-				if (id) {
-						const statusDeleted = await deleteMessage(req.db, id);
+				if (messageId && chatId) {
+						const statusDeleted = await deleteMessage(req.db, messageId);
 						
 						if (statusDeleted.deletedCount === 0) {
-								res.status(404).send(`message ID: ${ id } not found`);
+								res.status(404).send(`message ID: ${ messageId } not found`);
 						} else {
-								return res.status(200).json(id);
+								await updateChat(req.db, chatId, { $pull: { messages_ids: messageId } });
+								
+								return res.status(200).json(messageId);
 						}
 				} else {
 						res.send({ message: "uncorrected request.params" });

@@ -15,7 +15,7 @@ export const Messages = () => {
 			<div className={ c.messages }>
 					<div>
 							<h2 className={ c.title }>Messages</h2>
-							<ul className={ c.list }>
+							{ messagesData.messages.messagesList && <ul className={ c.list }>
 									{ messagesData.messages.messagesList.map((message) => (
 										<li
 											key={ message._id }
@@ -26,7 +26,7 @@ export const Messages = () => {
 												<MessageItem message={ message } userId={ userId }/>
 										</li>
 									)) }
-							</ul>
+							</ul> }
 							{ messagesData.messages.messagesList.length === 0 &&
 								<div>Сообщений нет</div> }
 					</div>

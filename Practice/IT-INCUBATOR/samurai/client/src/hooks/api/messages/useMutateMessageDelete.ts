@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 import { fetchDeleteMessage } from "../../../api/messages/messages.ts";
 import { deleteMessage } from "../../../redux/DialogsSlice.ts";
 
-export const useMutateMessageDelete = (messageId: string) => {
+export const useMutateMessageDelete = (messageId: string, chatId: string) => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
 		
 		const { mutate } = useMutation({
-				mutationFn: () => fetchDeleteMessage(messageId),
+				mutationFn: () => fetchDeleteMessage(messageId, chatId),
 				onSuccess: async () => {
 						dispatch(deleteMessage(messageId));
 						await queryClient.invalidateQueries({ queryKey: ["messages"] });

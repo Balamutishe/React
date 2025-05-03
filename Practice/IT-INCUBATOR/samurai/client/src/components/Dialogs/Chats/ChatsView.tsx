@@ -1,5 +1,6 @@
 import { useQueryGetAllChats } from "../../../hooks/api";
 import { Loader } from "../../Loader/Loader.tsx";
+import { Messages } from "../Messages/Messages.tsx";
 import { Chats } from "./Chats.tsx";
 
 export const ChatsView = () => {
@@ -15,6 +16,9 @@ export const ChatsView = () => {
 				case "pending":
 						return <Loader/>;
 				case "success":
-						return <Chats/>;
+						return <>
+								<Chats/>
+								<Messages/>
+						</>;
 		}
 };

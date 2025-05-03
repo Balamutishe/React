@@ -4,10 +4,10 @@ import { Link } from "react-router";
 
 import { TChat } from "../../../api/chats/types.ts";
 import userImg from "../../../assets/149071.png";
+import { useMutateChatDelete } from "../../../hooks/api";
 import {
-		useMutateChatDelete,
-		useQueryGetAllMessages,
-} from "../../../hooks/api";
+		useQueryGetOneChat,
+} from "../../../hooks/api/chats/useQueryGetOneChat.ts";
 import { setActiveChatId } from "../../../redux/DialogsSlice.ts";
 import c from "./Chats.module.css";
 
@@ -17,12 +17,12 @@ type ChatItemProps = {
 
 export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
 		const dispatch = useDispatch();
-		const queryMessages = useQueryGetAllMessages(chat._id);
 		const deleteChat = useMutateChatDelete(chat._id);
+		const queryGetOneChat = useQueryGetOneChat(chat._id);
 		
 		const handleSetChatActive = async () => {
 				dispatch(setActiveChatId(chat._id));
-				await queryMessages.refetch();
+				await queryGetOneChat.refetch();
 		};
 		const handleChatDelete = () => {
 				deleteChat();
