@@ -8,7 +8,7 @@ import { useMutateChatDelete } from "../../../hooks/api";
 import {
 		useQueryGetOneChat,
 } from "../../../hooks/api/chats/useQueryGetOneChat.ts";
-import { setActiveChatId } from "../../../redux/DialogsSlice.ts";
+import { setActiveMessagePage } from "../../../redux/DialogsSlice.ts";
 import c from "./Chats.module.css";
 
 type ChatItemProps = {
@@ -18,11 +18,11 @@ type ChatItemProps = {
 export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
 		const dispatch = useDispatch();
 		const deleteChat = useMutateChatDelete(chat._id);
-		const queryGetOneChat = useQueryGetOneChat(chat._id);
+		const queryGetOneChat = useQueryGetOneChat(chat._id, "1");
 		
 		const handleSetChatActive = async () => {
-				dispatch(setActiveChatId(chat._id));
 				await queryGetOneChat.refetch();
+				dispatch(setActiveMessagePage(1));
 		};
 		const handleChatDelete = () => {
 				deleteChat();

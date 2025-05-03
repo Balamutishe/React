@@ -15,7 +15,7 @@ interface IInitialState {
 						pageCount: number,
 				},
 				messageText: string,
-				deleteMessageId: string,
+				messagePage: number,
 		}
 }
 
@@ -32,7 +32,7 @@ const initialState: IInitialState = {
 						pageCount: 0,
 				},
 				messageText: "",
-				deleteMessageId: "",
+				messagePage: 1,
 		},
 };
 
@@ -40,6 +40,9 @@ const dialogsSlice = createSlice({
 		name: "dialogsData",
 		initialState: initialState,
 		reducers: {
+				setActiveMessagePage: (state, action) => {
+						state.messagesData.messagePage = action.payload;
+				},
 				setChatText: (state, action) => {
 						state.chatsData.chatText = action.payload;
 				},
@@ -81,6 +84,7 @@ const dialogsSlice = createSlice({
 export default dialogsSlice.reducer;
 
 export const {
+		setActiveMessagePage,
 		setChats, setActiveChatId, addChat, deleteChat,
 		setChatText,
 		deleteMessage,

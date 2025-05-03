@@ -15,6 +15,7 @@ export const useMutateMessageAdd = (messageText: string) => {
 				mutationFn: () => createMessage(messageText, chatId),
 				onSuccess: async (data) => {
 						dispatch(addMessage(data));
+						await queryClient.invalidateQueries({ queryKey: ["chat", "one"] });
 						await queryClient.invalidateQueries({ queryKey: ["messages"] });
 				},
 		}, queryClient);

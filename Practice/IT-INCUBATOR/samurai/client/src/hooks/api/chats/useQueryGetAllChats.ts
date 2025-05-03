@@ -12,11 +12,6 @@ export const useQueryGetAllChats = () => {
 				queryFn: async () => await getAllChats()
 				.then((data) => {
 						dispatch(setChats(data));
-						
-						// if (activeChatId === "") {
-						// 		dispatch(setActiveChatId(data[0]._id));
-						// }
-						
 						return data;
 				}),
 				queryKey: ["chats", "all"],

@@ -8,11 +8,10 @@ import c from "./Messages.module.css";
 
 type MessageItemProps = {
 		message: TMessage;
-		userId: string
 }
 
 export const MessageItem: FC<MessageItemProps> = ({
-		message, userId,
+		message,
 }) => {
 		const chatId = useSelector(
 			(state: RootState) => state.dialogsData.chatsData.activeChatId);
@@ -29,7 +28,7 @@ export const MessageItem: FC<MessageItemProps> = ({
 									{ message.messageText }
 							</p>
 					</div>
-					{ message.userId === userId && <div className={ c.messageActions }>
+					{ <div className={ c.messageActions }>
 							<button onClick={ () => deleteMessage() }>
 									X
 							</button>

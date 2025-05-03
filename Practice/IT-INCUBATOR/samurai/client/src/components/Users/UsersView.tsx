@@ -1,46 +1,52 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useMutateUserUpdate, useQueryGetAllUsers } from "../../hooks/api";
-import { RootState } from "../../redux";
-import { setSubscriptionIdUpdate } from "../../redux/ProfileSlice.ts";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
+import { useQueryGetAllUsers } from "../../hooks/api";
+import { RootState } from "../../redux";
 import { Users } from "./Users.tsx";
 
+
 const UsersView = () => {
-		const dispatch = useDispatch();
-		const userMe = useSelector((state: RootState) => state.profileData.user);
-		const subscriptionIdUpdate = useSelector(
-			(state: RootState) => state.profileData.subscriptionIdUpdate);
+		const usersData = useSelector(
+			(state: RootState) => state.usersData.usersData);
+		const queryUsersGet = useQueryGetAllUsers(usersData.usersPage);
 		
-		const handlersUsersAction = {
-				defineUserSubscription: (id: string) => {
-						return !!userMe.subscriptions.find(
-							(subscriptionId: string) => subscriptionId === id);
-				},
-				userSubscriptionUpdate: (id: string) => {
-						dispatch(setSubscriptionIdUpdate(id));
-						
-						userUpdate();
-				},
-				setPaginationCount: (pageCount: number) => {
-						const arrPage = [];
-						for (let i = 1; i <= pageCount; i++) {
-								arrPage.push(i);
-						}
-						return arrPage;
-				},
-		};
+		// const subscriptionIdUpdate = useSelector(
+		// 	(state: RootState) => state.profileData.subscriptionIdUpdate);
 		
-		const queryUsersGet = useQueryGetAllUsers();
-		const userUpdate = useMutateUserUpdate(
-			{
-					...userMe,
-					subscriptions: handlersUsersAction.defineUserSubscription(
-						subscriptionIdUpdate) ?
-						userMe.subscriptions.filter(
-							(subscriptionId) => subscriptionId !== subscriptionIdUpdate) :
-						[...userMe.subscriptions, ...[subscriptionIdUpdate]],
-					
-			});
+		// const handlersUsersAction = {
+		// 		defineUserSubscription: (id: string) => {
+		// 				return !!userMe.subscriptions.find(
+		// 					(subscriptionId: string) => subscriptionId === id);
+		// 		},
+		// 		userSubscriptionUpdate: (id: string) => {
+		// 				dispatch(setSubscriptionIdUpdate(id));
+		//
+		// 				userUpdate();
+		// 		},
+		// 		setPaginationCount: (pageCount: number) => {
+		// 				const arrPage = [];
+		// 				for (let i = 1; i <= pageCount; i++) {
+		// 						arrPage.push(i);
+		// 				}
+		// 				return arrPage;
+		// 		},
+		// };
+		
+		// const userUpdate = useMutateUserUpdate(
+		// 	{
+		// 			...userMe,
+		// 			subscriptions: handlersUsersAction.defineUserSubscription(
+		// 				subscriptionIdUpdate) ?
+		// 				userMe.subscriptions.filter(
+		// 					(subscriptionId) => subscriptionId !== subscriptionIdUpdate) :
+		// 				[...userMe.subscriptions, ...[subscriptionIdUpdate]],
+		//
+		// 	});
+		
+		useEffect(() => {
+				queryUsersGet.refetch();
+		}, [usersData.usersPage]);
 		
 		switch (queryUsersGet.status) {
 				case "error":
@@ -51,10 +57,7 @@ const UsersView = () => {
 						</div>;
 				case "success":
 						return <div>
-								<Users
-									usersData={ queryUsersGet.data }
-									handlersUsersActions={ handlersUsersAction }
-								/>
+								<Users users={ usersData.users }/>
 						</div>;
 		}
 };

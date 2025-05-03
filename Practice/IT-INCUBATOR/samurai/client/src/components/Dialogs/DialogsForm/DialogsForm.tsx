@@ -15,7 +15,7 @@ export const DialogsForm: FC<TDialogsFormProps> = ({ variant, formText }) => {
 		const addChat = useMutateChatAdd(formText);
 		const addMessage = useMutateMessageAdd(formText);
 		
-		const handleChatChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const handleFormTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 				switch (variant) {
 						case "chatsForm":
 								return dispatch(setChatText(e.target.value));
@@ -24,7 +24,7 @@ export const DialogsForm: FC<TDialogsFormProps> = ({ variant, formText }) => {
 				}
 				
 		};
-		const handleChatAdd = (e: FormEvent<HTMLFormElement>) => {
+		const handleItemAdd = (e: FormEvent<HTMLFormElement>) => {
 				e.preventDefault();
 				
 				const addItem = () => {
@@ -40,11 +40,11 @@ export const DialogsForm: FC<TDialogsFormProps> = ({ variant, formText }) => {
 		};
 		
 		return (
-			<form className={ c.form } onSubmit={ handleChatAdd }>
+			<form className={ c.form } onSubmit={ handleItemAdd }>
 			<textarea
 				className={ c.textarea }
 				value={ formText }
-				onChange={ handleChatChange }
+				onChange={ handleFormTextChange }
 			></textarea>
 					<button>{ variant === "chatsForm" ? "Add chat" :
 						"Add message" }</button>

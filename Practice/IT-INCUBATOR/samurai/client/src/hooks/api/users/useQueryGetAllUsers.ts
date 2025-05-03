@@ -1,13 +1,17 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 import { getAllUsers } from "../../../api/users/users.ts";
-import { useParams } from "react-router";
+import { setUsers } from "../../../redux/UsersSlice.ts";
 
-export const useQueryGetAllUsers = () => {
+export const useQueryGetAllUsers = (activePage: number) => {
 		const queryClient = useQueryClient();
-		const page = Number(useParams().page) || 1;
+		const dispatch = useDispatch();
 		
 		return useQuery({
-				queryFn: () => getAllUsers(page),
+				queryFn: () => getAllUsers(activePage).then((data) => {
+						dispatch(setUsers(data));
+						return data;
+				}),
 				queryKey: ["users", "all"],
 		}, queryClient);
 };

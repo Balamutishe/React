@@ -40,6 +40,10 @@ export const Main = () => {
 																element={ <LazyDialogs/> }
 															/>
 															<Route
+																path={ "/dialogs/:chatId/:page" }
+																element={ <LazyDialogs/> }
+															/>
+															<Route
 																path={ "/users" } element={ <LazyUsersView/> }
 															/>
 															<Route

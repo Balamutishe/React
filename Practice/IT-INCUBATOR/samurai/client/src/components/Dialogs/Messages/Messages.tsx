@@ -1,29 +1,44 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import {
+		useQueryGetOneChat,
+} from "../../../hooks/api/chats/useQueryGetOneChat.ts";
 
 import { RootState } from "../../../redux";
+import { Pagination } from "../../Pagination/Pagination.tsx";
 import { DialogsForm } from "../DialogsForm/DialogsForm.tsx";
 import { MessageItem } from "./MessageItem.tsx";
 import c from "./Messages.module.css";
 
 export const Messages = () => {
-		const userId = useSelector(
-			(state: RootState) => state.profileData.user._id);
+		const activeChatId = useSelector(
+			(state: RootState) => state.dialogsData.chatsData.activeChatId);
 		const messagesData = useSelector(
 			(state: RootState) => state.dialogsData.messagesData);
+		const queryChat = useQueryGetOneChat(activeChatId,
+			messagesData.messagePage.toString());
+		
+		useEffect(() => {
+				queryChat.refetch();
+		}, [messagesData.messagePage]);
 		
 		return (
 			<div className={ c.messages }>
 					<div>
-							<h2 className={ c.title }>Messages</h2>
+							<div className={ c.header }>
+									<h2 className={ c.title }>Messages</h2>
+									<Pagination
+										pageCount={ messagesData.messages.pageCount }
+										variant={ "messages" }
+									/>
+							</div>
 							{ messagesData.messages.messagesList && <ul className={ c.list }>
 									{ messagesData.messages.messagesList.map((message) => (
 										<li
 											key={ message._id }
-											className={ userId === message.userId ?
-												`${ c.item } ${ c.itemMy }` :
-												`${ c.item } ${ c.itemOpponent }` }
+											className={ `${ c.item } ${ c.itemMy }` }
 										>
-												<MessageItem message={ message } userId={ userId }/>
+												<MessageItem message={ message }/>
 										</li>
 									)) }
 							</ul> }
