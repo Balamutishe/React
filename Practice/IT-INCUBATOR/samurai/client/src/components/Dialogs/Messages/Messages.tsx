@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 
 import { RootState } from "../../../redux";
+import { DialogsForm } from "../DialogsForm/DialogsForm.tsx";
 import { MessageItem } from "./MessageItem.tsx";
 import c from "./Messages.module.css";
-import { MessagesForm } from "./MessagesForm.tsx";
 
 export const Messages = () => {
 		const userId = useSelector(
@@ -30,7 +30,9 @@ export const Messages = () => {
 							{ messagesData.messages.messagesList.length === 0 &&
 								<div>Сообщений нет</div> }
 					</div>
-					<MessagesForm messageText={ messagesData.messageText }/>
+					<DialogsForm
+						variant={ "messagesForm" } formText={ messagesData.messageText }
+					/>
 			</div>
 		);
 };

@@ -5,7 +5,6 @@ const Dialogs = () => {
 		return (
 			<div className={ c.dialogs }>
 					<ChatsView/>
-					{/*<MessagesView/>*/ }
 			</div>
 		);
 };

@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux";
+import { DialogsForm } from "../DialogsForm/DialogsForm.tsx";
 
 import { ChatItem } from "./ChatItem.tsx";
 import c from "./Chats.module.css";
-import { ChatsForm } from "./ChatsForm.tsx";
 
 export const Chats = () => {
 		const chatsData = useSelector(
@@ -23,7 +23,9 @@ export const Chats = () => {
 							</ul>
 					</div>
 					<div className={ c.formContainer }>
-							<ChatsForm chatText={ chatsData.chatText }/>
+							<DialogsForm
+								variant={ "chatsForm" } formText={ chatsData.chatText }
+							/>
 					</div>
 			</div>
 		);

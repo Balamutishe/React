@@ -9,21 +9,6 @@
     border-right: 2px solid lightgrey;
 }
 
-.form {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-
-    margin-bottom: 1rem;
-}
-
-.textarea {
-    resize: none;
-    margin-right: 10px;
-
-    border-radius: 5px;
-}
-
 .title {
     margin-bottom: 1rem;
 

@@ -6,25 +6,6 @@
     padding: 0 1rem;
 }
 
-.form {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-
-    width: 100%;
-
-    margin-bottom: 1rem;
-}
-
-.textarea {
-    width: 72%;
-
-    margin-right: 10px;
-    resize: none;
-
-    border-radius: 5px;
-}
-
 .title {
     margin-bottom: 1rem;
 
