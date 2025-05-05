@@ -11,9 +11,7 @@ type TUsersProps = {
 		}
 }
 
-export const Users: FC<TUsersProps> = ({
-		users,
-}) => {
+export const Users: FC<TUsersProps> = ({ users }) => {
 		return (
 			<div className={ c.users }>
 					<h2 className={ c.usersTitle }>Users</h2>
@@ -24,9 +22,7 @@ export const Users: FC<TUsersProps> = ({
 								</li>
 							)) }
 					</ul>
-					<Pagination
-						pageCount={ users.pageCount } variant={ "users" }
-					/>
+					<Pagination pageCount={ users.pageCount } variant={ "users" }/>
 			</div>
 		);
 };

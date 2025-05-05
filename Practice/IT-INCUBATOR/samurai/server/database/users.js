@@ -19,7 +19,7 @@ async function deleteUser(db, id) {
 }
 
 async function updateUser(db, id, data) {
-		return await db.collection("users").updateOne({ _id: id }, data);
+		return await db.collection("users").updateOne({ _id: id }, { $set: data });
 }
 
 async function findUserByUsername(db, username) {

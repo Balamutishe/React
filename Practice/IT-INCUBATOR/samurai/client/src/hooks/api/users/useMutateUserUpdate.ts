@@ -2,10 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { TUser } from "../../../api/users/types.ts";
 import { updateUser } from "../../../api/users/users.ts";
-import {
-		setProfile,
-		setSubscriptionIdUpdate,
-} from "../../../redux/ProfileSlice.ts";
+import { setProfile } from "../../../redux/ProfileSlice.ts";
 
 export const useMutateUserUpdate = (
 	updateUserData: Partial<TUser>) => {
@@ -17,7 +14,6 @@ export const useMutateUserUpdate = (
 				onSuccess: async () => {
 						await queryClient.invalidateQueries({ queryKey: ["users", "me"] });
 						dispatch(setProfile(updateUserData));
-						dispatch(setSubscriptionIdUpdate(""));
 				},
 		}, queryClient);
 		
