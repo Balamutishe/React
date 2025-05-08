@@ -16,7 +16,6 @@ export const User: FC<TUserProps> = ({
 		user,
 }) => {
 		const userMe = useSelector((state: RootState) => state.profileData.user);
-		
 		const userUpdate = useMutateUserUpdate(
 			updateUserSubscriptions(userMe, user._id).updateUserData);
 		

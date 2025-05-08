@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { TMessage } from "../../../api/messages/types.ts";
-import { useMutateMessageDelete } from "../../../hooks/api";
-import { RootState } from "../../../redux";
+import { TMessage } from "../../api/messages/types.ts";
+import { useMutateMessageDelete } from "../../hooks/api";
+import { RootState } from "../../redux";
 import c from "./Messages.module.css";
 
 type MessageItemProps = {

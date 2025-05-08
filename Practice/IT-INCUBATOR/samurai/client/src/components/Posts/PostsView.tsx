@@ -1,5 +1,5 @@
-import { useQueryGetAllPosts } from "../../../hooks/api";
-import { Loader } from "../../Loader/Loader.tsx";
+import { useQueryGetAllPosts } from "../../hooks/api";
+import { Loader } from "../Loader/Loader.tsx";
 import { Posts } from "./Posts.tsx";
 
 export const PostsView = () => {

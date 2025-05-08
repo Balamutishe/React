@@ -1,6 +1,6 @@
-import { useQueryGetAllChats } from "../../../hooks/api";
-import { Loader } from "../../Loader/Loader.tsx";
-import { Messages } from "../Messages/Messages.tsx";
+import { useQueryGetAllChats } from "../../hooks/api";
+import { Loader } from "../Loader/Loader.tsx";
+import { MessagesView } from "../Messages/MessagesView.tsx";
 import { Chats } from "./Chats.tsx";
 
 export const ChatsView = () => {
@@ -18,7 +18,7 @@ export const ChatsView = () => {
 				case "success":
 						return <>
 								<Chats/>
-								<Messages/>
+								<MessagesView/>
 						</>;
 		}
 };

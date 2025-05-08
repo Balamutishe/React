@@ -1,8 +1,9 @@
 import { FC } from "react";
 
-import { TPost } from "../../../api/posts/types.ts";
+import { TPost } from "../../api/posts/types.ts";
+import { useMutatePostDelete } from "../../hooks/api";
+import { dateTimeUpdate } from "../../utils/dateTimeUpdate.ts";
 import c from "./Posts.module.css";
-import { useMutatePostDelete } from "../../../hooks/api";
 
 type TPostProps = {
 		post: TPost
@@ -18,6 +19,7 @@ export const Post: FC<TPostProps> = ({ post }) => {
 							<div className={ c.postInfo }>
 									<p className={ c.postText }>{ post.postText }</p>
 									<span>like { post.likeCount }</span>
+									<span>Created at: { dateTimeUpdate(post.created_at) }</span>
 							</div>
 					</div>
 					<button onClick={ () => deletePost() }>X</button>

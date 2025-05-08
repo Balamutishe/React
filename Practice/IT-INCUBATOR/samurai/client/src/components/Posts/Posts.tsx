@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux";
-import { List } from "../../List/List.tsx";
+import { RootState } from "../../redux";
+import { List } from "../List/List.tsx";
 import c from "./Posts.module.css";
 import { PostsForm } from "./PostsForm.tsx";
 

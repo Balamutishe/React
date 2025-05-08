@@ -11,31 +11,12 @@
     justify-content: space-between;
     align-items: center;
 
+    height: 3rem;
     margin-bottom: 1rem;
 }
 
 .title {
     text-align: start;
-}
-
-.item {
-    padding: 1rem;
-
-    border-radius: 0.5rem;
-    text-align: start;
-    background-color: lightgrey;
-}
-
-.itemMy {
-    margin-right: 6rem;
-}
-
-.itemOpponent {
-    margin-left: 6rem;
-}
-
-.item:not(:last-child) {
-    margin-bottom: 1rem;
 }
 
 .message {

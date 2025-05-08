@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useMutateUserLogout } from "../../../hooks/api";
+import { useMutateUserLogout } from "../../hooks/api";
 import c from "./UserData.module.css";
 
 type TUserData = {

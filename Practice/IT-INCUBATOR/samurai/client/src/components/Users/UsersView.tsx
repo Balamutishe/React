@@ -23,9 +23,8 @@ const UsersView = () => {
 										запрос</button>
 						</div>;
 				case "success":
-						return <div>
-								<Users users={ usersData.users }/>
-						</div>;
+						return <Users users={ usersData.users }/>;
+				
 		}
 };
 

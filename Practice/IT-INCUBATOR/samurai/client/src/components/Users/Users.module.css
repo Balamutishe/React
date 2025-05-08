@@ -2,19 +2,12 @@
     height: 100%;
 }
 
-.usersTitle {
-    margin-bottom: 2rem;
-}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.list {
-    margin-bottom: 2rem;
-}
-
-.item {
-    height: 100px;
-}
-
-.item:not(:last-child) {
+    height: 3rem;
     margin-bottom: 1rem;
 }
 
@@ -24,12 +17,12 @@
     justify-content: space-between;
     align-items: center;
 
-    height: 100%;
+    height: 6rem;
 }
 
 .userImgContainer {
     height: 100%;
-    width: 15%;
+    width: 10%;
 
     overflow: hidden;
 }
@@ -46,10 +39,7 @@
     align-items: center;
 
     height: 100%;
-    width: 83%;
-
-    border: 0.1rem solid #747bff;
-    border-radius: 0.5rem;
+    width: 88%;
 
     padding: 1rem;
 }

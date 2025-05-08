@@ -2,13 +2,13 @@ import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router";
 
-import { TChat } from "../../../api/chats/types.ts";
-import userImg from "../../../assets/149071.png";
-import { useMutateChatDelete } from "../../../hooks/api";
+import { TChat } from "../../api/chats/types.ts";
+import userImg from "../../assets/149071.png";
+import { useMutateChatDelete } from "../../hooks/api";
 import {
 		useQueryGetOneChat,
-} from "../../../hooks/api/chats/useQueryGetOneChat.ts";
-import { setActiveMessagePage } from "../../../redux/DialogsSlice.ts";
+} from "../../hooks/api/chats/useQueryGetOneChat.ts";
+import { setActiveMessagePage } from "../../redux/DialogsSlice.ts";
 import c from "./Chats.module.css";
 
 type ChatItemProps = {

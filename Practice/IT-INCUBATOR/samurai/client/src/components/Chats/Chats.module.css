@@ -9,21 +9,12 @@
     border-right: 2px solid lightgrey;
 }
 
-.title {
-    margin-bottom: 1rem;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    text-align: start;
-}
-
-.listItem {
-    padding: 1rem;
-
-    border-radius: 0.5rem;
-    text-align: start;
-    background-color: lightgrey;
-}
-
-.listItem:not(:last-child) {
+    height: 3rem;
     margin-bottom: 1rem;
 }
 

@@ -3,11 +3,11 @@ import { TChat, TChatsList } from "../../api/chats/types.ts";
 import { TMessage, TMessagesList } from "../../api/messages/types.ts";
 import { TPost, TPostsList } from "../../api/posts/types.ts";
 import { TUser, TUsersList } from "../../api/users/types.ts";
-import { ChatItem } from "../Dialogs/Chats/ChatItem.tsx";
-import c from "../Dialogs/Chats/Chats.module.css";
-import { MessageItem } from "../Dialogs/Messages/MessageItem.tsx";
-import { Post } from "../Profile/Posts/Post.tsx";
+import { ChatItem } from "../Chats/ChatItem.tsx";
+import { MessageItem } from "../Messages/MessageItem.tsx";
+import { Post } from "../Posts/Post.tsx";
 import { User } from "../Users/User.tsx";
+import c from "./List.module.css";
 
 type TListProps = {
 		list: TPostsList | TMessagesList | TChatsList | TUsersList;

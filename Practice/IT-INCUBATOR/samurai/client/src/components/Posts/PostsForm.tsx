@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 
-import { useMutatePostAdd } from "../../../hooks/api";
-import { setPostText } from "../../../redux/PostsSlice.ts";
+import { useMutatePostAdd } from "../../hooks/api";
+import { setPostText } from "../../redux/PostsSlice.ts";
 import c from "./Posts.module.css";
 
 type TPostsFormProps = {

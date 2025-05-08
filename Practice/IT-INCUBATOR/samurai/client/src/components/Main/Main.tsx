@@ -7,15 +7,18 @@ import { Loader } from "../Loader/Loader.tsx";
 import { Navbar } from "../Navbar/Navbar.tsx";
 import c from "./Main.module.css";
 
-const LazyProfile = lazy(() => import("../Profile/Profile"));
-const LazyDialogs = lazy(() => import("../Dialogs/Dialogs"));
-const LazyUsersView = lazy(() => import("../Users/UsersView.tsx"));
-
+const LazyProfile = lazy(
+	() => import("../../pages/ProfilePage/ProfilePage.tsx"));
+const LazyDialogs = lazy(
+	() => import("../../pages/DialogsPage/DialogsPage.tsx"));
+const LazyUsersView = lazy(() => import("../../pages/UsersPage/UsersPage.tsx"));
 
 export const Main = () => {
 		const queryUser = useQueryMe();
 		
 		switch (queryUser.status) {
+				case "pending":
+						return <Loader/>;
 				case "success":
 						return (
 							<main className={ c.main }>

@@ -1,16 +1,16 @@
 import { ChangeEvent, FC, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 
-import { useMutateChatAdd, useMutateMessageAdd } from "../../../hooks/api";
-import { setChatText, setMessageText } from "../../../redux/DialogsSlice.ts";
-import c from "./DialogsForm.module.css";
+import { useMutateChatAdd, useMutateMessageAdd } from "../../hooks/api";
+import { setChatText, setMessageText } from "../../redux/DialogsSlice.ts";
+import c from "./Form.module.css";
 
-type TDialogsFormProps = {
+type TFormProps = {
 		variant: "chatsForm" | "messagesForm";
 		formText: string;
 }
 
-export const DialogsForm: FC<TDialogsFormProps> = ({ variant, formText }) => {
+export const Form: FC<TFormProps> = ({ variant, formText }) => {
 		const dispatch = useDispatch();
 		const addChat = useMutateChatAdd(formText);
 		const addMessage = useMutateMessageAdd(formText);
