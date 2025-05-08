@@ -1,9 +1,7 @@
 import { lazy, Suspense } from "react";
-import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router";
 
 import { useQueryMe } from "../../hooks/api";
-import { setProfile } from "../../redux/ProfileSlice.ts";
 import { AuthForm } from "../Auth/AuthForm.tsx";
 import { Loader } from "../Loader/Loader.tsx";
 import { Navbar } from "../Navbar/Navbar.tsx";
@@ -15,11 +13,7 @@ const LazyUsersView = lazy(() => import("../Users/UsersView.tsx"));
 
 
 export const Main = () => {
-		const dispatch = useDispatch();
 		const queryUser = useQueryMe();
-		if (queryUser.status === "success") {
-				dispatch(setProfile(queryUser.data));
-		}
 		
 		switch (queryUser.status) {
 				case "success":

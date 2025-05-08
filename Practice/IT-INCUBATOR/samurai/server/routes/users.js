@@ -112,7 +112,7 @@ router.patch("/users", auth(), async (req, res) => {
 				const userData = req.body;
 				
 				if (req.user) {
-						const statusUpdate = await updateUser(req.db, req.user._id, userData);
+						const statusUpdate = await updateUser(req.db, req.user._id, { $set: userData });
 						
 						if (statusUpdate.modifiedCount === 0) {
 								res.status(400).send(`user ${ req.user._id } not updated`);

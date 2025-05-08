@@ -5,9 +5,9 @@ import {
 } from "../../../hooks/api/chats/useQueryGetOneChat.ts";
 
 import { RootState } from "../../../redux";
+import { List } from "../../List/List.tsx";
 import { Pagination } from "../../Pagination/Pagination.tsx";
 import { DialogsForm } from "../DialogsForm/DialogsForm.tsx";
-import { MessageItem } from "./MessageItem.tsx";
 import c from "./Messages.module.css";
 
 export const Messages = () => {
@@ -32,18 +32,7 @@ export const Messages = () => {
 										variant={ "messages" }
 									/>
 							</div>
-							{ messagesData.messages.messagesList && <ul className={ c.list }>
-									{ messagesData.messages.messagesList.map((message) => (
-										<li
-											key={ message._id }
-											className={ `${ c.item } ${ c.itemMy }` }
-										>
-												<MessageItem message={ message }/>
-										</li>
-									)) }
-							</ul> }
-							{ messagesData.messages.messagesList.length === 0 &&
-								<div>Сообщений нет</div> }
+							<List list={ messagesData.messages.messagesList }/>
 					</div>
 					<DialogsForm
 						variant={ "messagesForm" } formText={ messagesData.messageText }
