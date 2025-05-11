@@ -16,7 +16,9 @@ type TMessagesProps = {
 		}
 }
 
-export const Messages: FC<TMessagesProps> = ({ messagesData }) => {
+export const Messages: FC<TMessagesProps> = ({
+		messagesData,
+}) => {
 		return (
 			<div className={ c.messages }>
 					<div>

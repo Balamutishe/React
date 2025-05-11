@@ -6,8 +6,6 @@ interface IInitialState {
 		chatsData: {
 				chats: TChatsList,
 				chatText: string,
-				activeChatId: string,
-				deleteChatId: string,
 		},
 		messagesData: {
 				messages: {
@@ -23,8 +21,6 @@ const initialState: IInitialState = {
 		chatsData: {
 				chats: [],
 				chatText: "",
-				activeChatId: "",
-				deleteChatId: "",
 		},
 		messagesData: {
 				messages: {
@@ -48,9 +44,19 @@ const dialogsSlice = createSlice({
 				},
 				setChats: (state, action) => {
 						state.chatsData.chats = action.payload;
+						state.chatsData.chats.sort(
+							(a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
 				},
 				setActiveChatId: (state, action) => {
-						state.chatsData.activeChatId = action.payload;
+						const activeChat = state.chatsData.chats.find(
+							(chat) => chat._id === action.payload);
+						
+						if (activeChat) {
+								state.messagesData.messages.messagesList =
+									activeChat.messagesList;
+						} else {
+								state.messagesData.messages.messagesList = [];
+						}
 				},
 				addChat: (state, action) => {
 						state.chatsData.chats =
@@ -67,6 +73,8 @@ const dialogsSlice = createSlice({
 				},
 				setMessages: (state, action) => {
 						state.messagesData.messages = action.payload;
+						state.messagesData.messages.messagesList.sort(
+							(a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
 				},
 				addMessage: (state, action) => {
 						state.messagesData.messages.messagesList =

@@ -7,9 +7,10 @@ import { setChats } from "../../../redux/DialogsSlice.ts";
 export const useQueryGetAllChats = () => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
+		const currentPage = 1;
 		
 		return useQuery({
-				queryFn: async () => await getAllChats()
+				queryFn: async () => await getAllChats(currentPage)
 				.then((data) => {
 						dispatch(setChats(data));
 						return data;

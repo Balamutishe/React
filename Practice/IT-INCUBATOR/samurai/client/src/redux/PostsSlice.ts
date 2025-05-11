@@ -4,13 +4,11 @@ import { TPost, TPostsList } from "../api/posts/types.ts";
 interface IInitialState {
 		posts: TPostsList,
 		postText: string,
-		deletePostId: string
 }
 
 const initialState: IInitialState = {
 		posts: [],
 		postText: "",
-		deletePostId: "",
 };
 
 const postsSlice = createSlice({
@@ -19,6 +17,8 @@ const postsSlice = createSlice({
 		reducers: {
 				setPostsData: (state, action) => {
 						state.posts = action.payload;
+						state.posts.sort(
+							(a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
 				},
 				addPost: (state, action) => {
 						state.posts = state.posts.concat(action.payload);
@@ -32,16 +32,12 @@ const postsSlice = createSlice({
 				setPostText: (state, action) => {
 						state.postText = action.payload;
 				},
-				setDeletePostId: (state, action) => {
-						state.deletePostId = action.payload;
-				},
 		},
 });
 
 export const {
 		addPost, deletePost, setPostsData,
 		setPostText,
-		setDeletePostId,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
