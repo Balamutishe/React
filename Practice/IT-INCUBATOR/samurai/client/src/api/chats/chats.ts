@@ -3,7 +3,6 @@ import { validateResponse } from "../validateResponse.ts";
 import {
 		ChatsListSchema,
 		ResponseResultGetOneChatSchema,
-		TChat,
 		TChatsList,
 		TResponseGetOneChat,
 } from "./types.ts";
@@ -23,7 +22,7 @@ export async function getOneChat(id: string,
 		.then(chatData => ResponseResultGetOneChatSchema.parse(chatData));
 }
 
-export async function createChat(chatText: string): Promise<TChat> {
+export async function createChat(chatText: string): Promise<string> {
 		return fetch("/api/chats", {
 				method: "POST",
 				headers: {
@@ -33,7 +32,7 @@ export async function createChat(chatText: string): Promise<TChat> {
 						chatText,
 				}),
 		}).then(validateResponse).then((response) => response.json())
-		.then(chat => chat);
+		.then((createChatId: string) => createChatId);
 }
 
 export async function updateChat(chatText: string,

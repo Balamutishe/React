@@ -10,7 +10,6 @@ export const ChatSchema = z.object({
 		created_at: z.string(),
 		updated_at: z.string(),
 		userId: z.string(),
-		messages_ids: z.array(z.string()),
 		messagesList: MessagesListSchema || z.array(z.string()),
 		messagesPageCount: z.number(),
 });

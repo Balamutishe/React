@@ -8,14 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/api/chats/chats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/chats/chats.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/api/chats/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/chats/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Chats/ChatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/Chats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/Chats.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetOneChat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetOneChat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/DialogsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/DialogsSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/PostsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/PostsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/MessageItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/MessageItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/chats.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +107,7 @@
       <recent name="$PROJECT_DIR$/client/src/hooks/api/posts" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm dev server">
+  <component name="RunManager" selected="npm.npm dev client">
     <configuration name="npm dev client" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -205,7 +204,8 @@
       <workItem from="1746709332203" duration="1702000" />
       <workItem from="1746782696084" duration="990000" />
       <workItem from="1746789604222" duration="210000" />
-      <workItem from="1746965271073" duration="11730000" />
+      <workItem from="1746965271073" duration="12025000" />
+      <workItem from="1747064186118" duration="1967000" />
     </task>
     <servers />
   </component>

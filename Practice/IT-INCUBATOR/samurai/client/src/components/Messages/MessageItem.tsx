@@ -1,9 +1,7 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
 
 import { TMessage } from "../../api/messages/types.ts";
 import { useMutateMessageDelete } from "../../hooks/api";
-import { RootState } from "../../redux";
 import c from "./Messages.module.css";
 
 type MessageItemProps = {
@@ -13,9 +11,7 @@ type MessageItemProps = {
 export const MessageItem: FC<MessageItemProps> = ({
 		message,
 }) => {
-		const chatId = useSelector(
-			(state: RootState) => state.dialogsData.chatsData.activeChatId);
-		const deleteMessage = useMutateMessageDelete(message._id, chatId);
+		const deleteMessage = useMutateMessageDelete(message._id);
 		
 		return (
 			<div className={ c.message }>

@@ -15,10 +15,8 @@ type ChatItemProps = {
 export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
 		const dispatch = useDispatch();
 		const deleteChat = useMutateChatDelete(chat._id);
-		// const queryGetOneChat = useQueryGetOneChat(chat._id,
-		// activePage.toString());
 		
-		const handleSetChatActive = async () => {
+		const handleSetChatActive = () => {
 				dispatch(setActiveChatId(chat._id));
 		};
 		const handleChatDelete = () => {

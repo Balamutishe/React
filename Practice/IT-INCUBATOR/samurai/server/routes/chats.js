@@ -71,15 +71,12 @@ router.post(
 									created_at: new Date(),
 									updated_at: new Date(),
 									userId: userId,
-									messages_ids: [],
 							});
 							
 							if (!statusCreate.acknowledged) {
 									res.status(404).send("chat not created");
 							} else {
-									const createdChat = await getOneChat(req.db, statusCreate.insertedId);
-									
-									return res.status(200).json(createdChat);
+									return res.status(200).json(statusCreate.insertedId);
 							}
 					} else {
 							res.status(400).send("uncorrected request.body");

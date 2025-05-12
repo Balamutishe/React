@@ -7,10 +7,7 @@ import { Chats } from "./Chats.tsx";
 
 export const ChatsView = () => {
 		const queryChats = useQueryGetAllChats();
-		const chatsData = useSelector(
-			(state: RootState) => state.dialogsData.chatsData);
-		const messagesData = useSelector(
-			(state: RootState) => state.dialogsData.messagesData);
+		const dialogsData = useSelector((state: RootState) => state.dialogsData);
 		
 		switch (queryChats.status) {
 				case "error":
@@ -24,10 +21,11 @@ export const ChatsView = () => {
 				case "success":
 						return <>
 								<Chats
-									chats={ chatsData.chats } chatText={ chatsData.chatText }
+									chats={ dialogsData.chatsData.chats }
+									chatText={ dialogsData.chatsData.chatText }
 								/>
 								<Messages
-									messagesData={ messagesData }
+									messagesData={ dialogsData.messagesData }
 								/>
 						</>;
 		}

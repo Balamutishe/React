@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TChat, TChatsList } from "../api/chats/types.ts";
+import { TChatsList } from "../api/chats/types.ts";
 import { TMessage, TMessagesList } from "../api/messages/types.ts";
 
 interface IInitialState {
@@ -58,16 +58,6 @@ const dialogsSlice = createSlice({
 								state.messagesData.messages.messagesList = [];
 						}
 				},
-				addChat: (state, action) => {
-						state.chatsData.chats =
-							state.chatsData.chats.concat(action.payload);
-						state.chatsData.chatText = "";
-				},
-				deleteChat: (state, action) => {
-						state.chatsData.chats =
-							state.chatsData.chats.filter(
-								(chat: TChat) => chat._id !== action.payload);
-				},
 				setMessageText: (state, action) => {
 						state.messagesData.messageText = action.payload;
 				},
@@ -93,7 +83,7 @@ export default dialogsSlice.reducer;
 
 export const {
 		setActiveMessagePage,
-		setChats, setActiveChatId, addChat, deleteChat,
+		setChats, setActiveChatId,
 		setChatText,
 		deleteMessage,
 		setMessageText, setMessages, addMessage,
