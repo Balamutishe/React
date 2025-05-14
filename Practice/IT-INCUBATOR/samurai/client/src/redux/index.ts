@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./AuthSlice.ts";
-import DialogsReducer from "./DialogsSlice.ts";
+import ChatsReducer from "./ChatsSlice.ts";
+import MessagesReducer from "./MessagesSlice.ts";
 import PostsReducer from "./PostsSlice.ts";
 import ProfileReducer from "./ProfileSlice.ts";
 import UsersReducer from "./UsersSlice.ts";
@@ -10,7 +11,8 @@ const store = configureStore({
 				authData: AuthReducer,
 				profileData: ProfileReducer,
 				postsData: PostsReducer,
-				dialogsData: DialogsReducer,
+				chatsData: ChatsReducer,
+				messagesData: MessagesReducer,
 				usersData: UsersReducer,
 		},
 });

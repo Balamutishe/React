@@ -17,32 +17,15 @@ router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
 );
 
-router.get("/chats/:page", auth(), async (req, res) => {
+router.get("/chats", auth(), async (req, res) => {
 		try {
 				const userId = req.user._id;
-				const pageSize = 5;
-				const currentPage = Number(req.params.page) || 1;
 				
 				if (userId) {
 						const chatsList = await getAllChats(req.db, userId);
 						
-						const updateChats = chatsList.map(async (chat) => {
-								const chatMessages = await getAllMessages(req.db, chat._id);
-								const pageCount = Math.ceil(chatMessages.length / 5);
-								const messagesList = chatMessages.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-								const updatedChat = {
-										...chat,
-										messagesList: messagesList,
-										messagesPageCount: pageCount,
-								};
-								
-								return updatedChat;
-						});
-						
-						const responseChats = await Promise.all(updateChats);
-						
-						if (updateChats) {
-								res.status(200).json(responseChats);
+						if (chatsList) {
+								res.status(200).json(chatsList);
 						} else {
 								res.status(404).send("chatsList not found");
 						}

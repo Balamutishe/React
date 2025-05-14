@@ -1,8 +1,5 @@
 import { z } from "zod";
-import {
-		MessagesListSchema,
-		MessagesResponseDataSchema,
-} from "../messages/types.ts";
+import { MessagesResponseDataSchema } from "../messages/types.ts";
 
 export const ChatSchema = z.object({
 		_id: z.string(),
@@ -10,8 +7,6 @@ export const ChatSchema = z.object({
 		created_at: z.string(),
 		updated_at: z.string(),
 		userId: z.string(),
-		messagesList: MessagesListSchema || z.array(z.string()),
-		messagesPageCount: z.number(),
 });
 
 export type TChat = z.infer<typeof ChatSchema>;

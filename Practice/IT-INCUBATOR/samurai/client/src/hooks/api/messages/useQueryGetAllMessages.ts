@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 
 import { getAllMessages } from "../../../api/messages/messages.ts";
-import { setMessages } from "../../../redux/DialogsSlice.ts";
+import { setMessages } from "../../../redux/MessagesSlice.ts";
 
 export const useQueryGetAllMessages = (chatId: string) => {
 		const queryClient = useQueryClient();

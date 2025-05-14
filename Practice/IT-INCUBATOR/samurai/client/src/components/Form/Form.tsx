@@ -2,7 +2,9 @@ import { ChangeEvent, FC, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 
 import { useMutateChatAdd, useMutateMessageAdd } from "../../hooks/api";
-import { setChatText, setMessageText } from "../../redux/DialogsSlice.ts";
+import { setChatText } from "../../redux/ChatsSlice.ts";
+import { setMessageText } from "../../redux/MessagesSlice.ts";
+
 import c from "./Form.module.css";
 
 type TFormProps = {

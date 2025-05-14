@@ -2,12 +2,11 @@ import { useSelector } from "react-redux";
 import { useQueryGetAllChats } from "../../hooks/api";
 import { RootState } from "../../redux";
 import { Loader } from "../Loader/Loader.tsx";
-import { Messages } from "../Messages/Messages.tsx";
 import { Chats } from "./Chats.tsx";
 
 export const ChatsView = () => {
 		const queryChats = useQueryGetAllChats();
-		const dialogsData = useSelector((state: RootState) => state.dialogsData);
+		const chatsData = useSelector((state: RootState) => state.chatsData);
 		
 		switch (queryChats.status) {
 				case "error":
@@ -21,11 +20,8 @@ export const ChatsView = () => {
 				case "success":
 						return <>
 								<Chats
-									chats={ dialogsData.chatsData.chats }
-									chatText={ dialogsData.chatsData.chatText }
-								/>
-								<Messages
-									messagesData={ dialogsData.messagesData }
+									chats={ chatsData.chats }
+									chatText={ chatsData.chatText }
 								/>
 						</>;
 		}

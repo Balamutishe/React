@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useDispatch } from "react-redux";
 
-import { setActiveMessagePage } from "../../redux/DialogsSlice.ts";
+import { setActiveMessagePage } from "../../redux/MessagesSlice.ts";
 import { setUsersPage } from "../../redux/UsersSlice.ts";
 import c from "./Pagination.module.css";
 

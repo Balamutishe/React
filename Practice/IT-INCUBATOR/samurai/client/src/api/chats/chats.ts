@@ -7,8 +7,8 @@ import {
 		TResponseGetOneChat,
 } from "./types.ts";
 
-export async function getAllChats(page: number): Promise<TChatsList> {
-		return fetch(`/api/chats/${ page }`, {
+export async function getAllChats(): Promise<TChatsList> {
+		return fetch(`/api/chats`, {
 				method: "GET",
 		}).then(validateResponse).then(response => response.json())
 		.then(chatsList => ChatsListSchema.parse(chatsList));

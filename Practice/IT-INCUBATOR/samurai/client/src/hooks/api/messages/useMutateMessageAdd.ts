@@ -1,22 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 import { createMessage } from "../../../api/messages/messages.ts";
-import { RootState } from "../../../redux";
-import { addMessage } from "../../../redux/DialogsSlice.ts";
 
 export const useMutateMessageAdd = (messageText: string) => {
 		const queryClient = useQueryClient();
-		const dispatch = useDispatch();
-		const chatId = useSelector(
-			(state: RootState) => state.dialogsData.chatsData.activeChatId);
+		const chatId = useParams().chatId || "";
 		
 		const { mutate } = useMutation({
 				mutationFn: () => createMessage(messageText, chatId),
-				onSuccess: async (data) => {
-						dispatch(addMessage(data));
+				onSuccess: async () => {
 						await queryClient.invalidateQueries({ queryKey: ["chat", "one"] });
-						await queryClient.invalidateQueries({ queryKey: ["messages"] });
 				},
 		}, queryClient);
 		

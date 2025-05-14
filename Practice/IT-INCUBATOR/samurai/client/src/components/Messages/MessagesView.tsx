@@ -8,16 +8,16 @@ import { RootState } from "../../redux";
 import { Messages } from "./Messages.tsx";
 
 export const MessagesView = () => {
-		const activeChatId = useSelector(
-			(state: RootState) => state.dialogsData.chatsData.activeChatId);
 		const messagesData = useSelector(
-			(state: RootState) => state.dialogsData.messagesData);
+			(state: RootState) => state.messagesData);
+		const activeChatId = useSelector(
+			(state: RootState) => state.chatsData.activeChatId);
 		const queryChat = useQueryGetOneChat(activeChatId,
 			messagesData.messagePage.toString());
 		
 		useEffect(() => {
 				queryChat.refetch();
-		}, [messagesData.messagePage]);
+		}, [activeChatId]);
 		
 		return <Messages messagesData={ messagesData }/>;
 };

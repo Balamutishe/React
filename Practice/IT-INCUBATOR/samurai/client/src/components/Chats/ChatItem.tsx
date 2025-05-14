@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { TChat } from "../../api/chats/types.ts";
 import userImg from "../../assets/149071.png";
 import { useMutateChatDelete } from "../../hooks/api";
-import { setActiveChatId } from "../../redux/DialogsSlice.ts";
+import { setActiveChatId } from "../../redux/ChatsSlice.ts";
 import c from "./Chats.module.css";
 
 type ChatItemProps = {
