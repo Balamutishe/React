@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import {
 		useQueryGetOneChat,
 } from "../../hooks/api/chats/useQueryGetOneChat.ts";
@@ -10,14 +11,14 @@ import { Messages } from "./Messages.tsx";
 export const MessagesView = () => {
 		const messagesData = useSelector(
 			(state: RootState) => state.messagesData);
-		const activeChatId = useSelector(
-			(state: RootState) => state.chatsData.activeChatId);
+		const activeChatId = useParams().chatId || "";
+		const activePage = useParams().page || "1";
 		const queryChat = useQueryGetOneChat(activeChatId,
-			messagesData.messagePage.toString());
+			activePage);
 		
 		useEffect(() => {
 				queryChat.refetch();
-		}, [activeChatId]);
+		}, [activeChatId, activePage]);
 		
 		return <Messages messagesData={ messagesData }/>;
 };

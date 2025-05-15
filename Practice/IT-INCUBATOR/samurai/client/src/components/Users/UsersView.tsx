@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 import { useQueryGetAllUsers } from "../../hooks/api";
 import { RootState } from "../../redux";
@@ -9,11 +10,12 @@ import { Users } from "./Users.tsx";
 const UsersView = () => {
 		const usersData = useSelector(
 			(state: RootState) => state.usersData.usersData);
-		const queryUsersGet = useQueryGetAllUsers(usersData.usersPage);
+		const activePage = useParams().page || "";
+		const queryUsersGet = useQueryGetAllUsers(Number(activePage));
 		
 		useEffect(() => {
 				queryUsersGet.refetch();
-		}, [usersData.usersPage]);
+		}, [activePage]);
 		
 		switch (queryUsersGet.status) {
 				case "error":

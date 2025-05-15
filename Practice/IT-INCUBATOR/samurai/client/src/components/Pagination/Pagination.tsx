@@ -1,8 +1,5 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
-
-import { setActiveMessagePage } from "../../redux/MessagesSlice.ts";
-import { setUsersPage } from "../../redux/UsersSlice.ts";
+import { Link, useParams } from "react-router";
 import c from "./Pagination.module.css";
 
 type TPaginationProps = {
@@ -11,7 +8,7 @@ type TPaginationProps = {
 }
 
 export const Pagination: FC<TPaginationProps> = ({ pageCount, variant }) => {
-		const dispatch = useDispatch();
+		const activeChatId = useParams().chatId || "";
 		
 		const setPaginationCount = (pageCount: number) => {
 				const arrPage = [];
@@ -21,21 +18,21 @@ export const Pagination: FC<TPaginationProps> = ({ pageCount, variant }) => {
 				return arrPage;
 		};
 		
-		const togglePage = (pageNumber: number) => {
+		const togglePath = (pageNumber: number) => {
 				switch (variant) {
 						case "messages":
-								return dispatch(setActiveMessagePage(pageNumber));
+								return `/dialogs/${ activeChatId }/${ pageNumber }`;
 						case "users":
-								return dispatch(setUsersPage(pageNumber));
+								return `/users/${ pageNumber }`;
+						default:
+								return "/";
 				}
 		};
 		
 		return <div className={ c.paginationContainer }>
 				{ pageCount !== 1 && setPaginationCount(
 					pageCount).map((pageNumber) => (
-					<button
-						key={ crypto.randomUUID() } onClick={ () => togglePage(pageNumber) }
-					>{ pageNumber }</button>
+					<Link to={ togglePath(pageNumber) }>{ pageNumber }</Link>
 				)) }
 		</div>;
 };

@@ -30,21 +30,11 @@ export const Main = () => {
 													<Routes>
 															<Route path={ "/" } element={ <LazyProfile/> }/>
 															<Route
-																path={ "/dialogs" } element={ <LazyDialogs/> }
-															/>
-															<Route
-																path={ "/dialogs/:chatId" }
+																path={ "/dialogs/:chatId?/:page?" }
 																element={ <LazyDialogs/> }
 															/>
 															<Route
-																path={ "/dialogs/:chatId/:page" }
-																element={ <LazyDialogs/> }
-															/>
-															<Route
-																path={ "/users" } element={ <LazyUsersView/> }
-															/>
-															<Route
-																path={ "/users/:page" }
+																path={ "/users/:page?" }
 																element={ <LazyUsersView/> }
 															/>
 													</Routes>

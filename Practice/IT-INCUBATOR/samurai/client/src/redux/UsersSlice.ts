@@ -7,7 +7,6 @@ interface IInitialState {
 						usersList: TUsersList,
 						pageCount: number,
 				}
-				usersPage: number,
 		},
 }
 
@@ -17,7 +16,6 @@ const initialState: IInitialState = {
 						usersList: [],
 						pageCount: 1,
 				},
-				usersPage: 1,
 		},
 };
 
@@ -28,14 +26,11 @@ const usersSlice = createSlice({
 				setUsers: (state, action) => {
 						state.usersData.users = action.payload;
 				},
-				setUsersPage: (state, action) => {
-						state.usersData.usersPage = action.payload;
-				},
 		},
 });
 
 export const {
-		setUsers, setUsersPage,
+		setUsers,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;
