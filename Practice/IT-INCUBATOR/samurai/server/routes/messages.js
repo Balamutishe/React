@@ -17,7 +17,7 @@ router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),
 );
 
-router.get("/:chatId/messages/:page", auth(), async (req, res) => {
+router.get("/messages/:chatId/:page", auth(), async (req, res) => {
 		try {
 				const { chatId, page } = req.params;
 				const pageSize = 5;
@@ -128,18 +128,16 @@ router.patch(
 	},
 );
 
-router.delete("/:chatId/messages/:messageId", async (req, res) => {
+router.delete("/messages/:messageId", async (req, res) => {
 		try {
-				const { messageId, chatId } = req.params;
+				const { messageId } = req.params;
 				
-				if (messageId && chatId) {
+				if (messageId) {
 						const statusDeleted = await deleteMessage(req.db, messageId);
 						
 						if (statusDeleted.deletedCount === 0) {
 								res.status(404).send(`message ID: ${ messageId } not found`);
 						} else {
-								await updateChat(req.db, chatId, { $pull: { messages_ids: messageId } });
-								
 								return res.status(200).json(messageId);
 						}
 				} else {

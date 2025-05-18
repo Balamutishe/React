@@ -7,7 +7,6 @@ interface IInitialState {
 				pageCount: number,
 		},
 		messageText: string,
-		messagePage: number,
 }
 
 const initialState: IInitialState = {
@@ -16,16 +15,12 @@ const initialState: IInitialState = {
 				pageCount: 0,
 		},
 		messageText: "",
-		messagePage: 1,
 };
 
 const messagesSlice = createSlice({
 		name: "messagesData",
 		initialState: initialState,
 		reducers: {
-				setActiveMessagePage: (state, action) => {
-						state.messagePage = action.payload;
-				},
 				setMessageText: (state, action) => {
 						state.messageText = action.payload;
 				},
@@ -40,6 +35,5 @@ const messagesSlice = createSlice({
 export default messagesSlice.reducer;
 
 export const {
-		setActiveMessagePage,
 		setMessageText, setMessages,
 } = messagesSlice.actions;

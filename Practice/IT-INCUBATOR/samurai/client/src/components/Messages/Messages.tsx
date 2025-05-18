@@ -12,7 +12,6 @@ type TMessagesProps = {
 						pageCount: number,
 				}
 				messageText: string,
-				messagePage: number,
 		}
 }
 

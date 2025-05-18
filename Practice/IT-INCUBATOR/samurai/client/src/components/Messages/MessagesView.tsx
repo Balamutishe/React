@@ -11,14 +11,13 @@ import { Messages } from "./Messages.tsx";
 export const MessagesView = () => {
 		const messagesData = useSelector(
 			(state: RootState) => state.messagesData);
-		const activeChatId = useParams().chatId || "";
-		const activePage = useParams().page || "1";
-		const queryChat = useQueryGetOneChat(activeChatId,
-			activePage);
+		const { chatId, page } = useParams();
+		const queryChat = useQueryGetOneChat(chatId || "",
+			page || "1");
 		
 		useEffect(() => {
 				queryChat.refetch();
-		}, [activeChatId, activePage]);
+		}, [chatId, page]);
 		
 		return <Messages messagesData={ messagesData }/>;
 };

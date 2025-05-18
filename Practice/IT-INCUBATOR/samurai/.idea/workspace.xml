@@ -6,13 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/MessagesView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Pagination/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Pagination/Pagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/UsersView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryMe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryMe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/UsersSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/UsersSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/MessagesSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/MessagesSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/chats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/messages.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +205,8 @@
       <workItem from="1747064186118" duration="2367000" />
       <workItem from="1747225615377" duration="4361000" />
       <workItem from="1747230128872" duration="5545000" />
-      <workItem from="1747314718463" duration="5112000" />
+      <workItem from="1747314718463" duration="6763000" />
+      <workItem from="1747394319431" duration="5357000" />
     </task>
     <servers />
   </component>

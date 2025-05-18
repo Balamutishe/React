@@ -32,7 +32,9 @@ export const Pagination: FC<TPaginationProps> = ({ pageCount, variant }) => {
 		return <div className={ c.paginationContainer }>
 				{ pageCount !== 1 && setPaginationCount(
 					pageCount).map((pageNumber) => (
-					<Link to={ togglePath(pageNumber) }>{ pageNumber }</Link>
+					<Link
+						to={ togglePath(pageNumber) } key={ crypto.randomUUID() }
+					>{ pageNumber }</Link>
 				)) }
 		</div>;
 };

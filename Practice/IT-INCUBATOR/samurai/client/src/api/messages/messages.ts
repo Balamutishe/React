@@ -9,7 +9,7 @@ import {
 
 export async function getAllMessages(chatId: string,
 	page: number): Promise<TMessagesResponseData> {
-		return fetch(`/api/${ chatId }/messages/${ page }`, {
+		return fetch(`/api/messages/${ chatId }/${ page }`, {
 				method: "GET",
 				headers: {
 						"Content-Type": "application/json",
