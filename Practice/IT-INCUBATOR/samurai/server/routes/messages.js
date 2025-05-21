@@ -66,12 +66,6 @@ router.post(
 							} else {
 									const newMessage = await getOneMessage(req.db, statusCreate.insertedId);
 									
-									if (newMessage) {
-											await updateChat(req.db, chatId, { $push: { messages_ids: newMessage._id } });
-									} else {
-											res.status(404).json("messageId not added to chats messages_ids");
-									}
-									
 									res.status(200).json(newMessage);
 							}
 					} else {

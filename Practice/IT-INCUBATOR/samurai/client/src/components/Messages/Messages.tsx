@@ -7,16 +7,14 @@ import c from "./Messages.module.css";
 
 type TMessagesProps = {
 		messagesData: {
-				messages: {
-						messagesList: TMessagesList,
-						pageCount: number,
-				}
-				messageText: string,
+				messagesList: TMessagesList,
+				pageCount: number,
 		}
+		messageText: string,
 }
 
 export const Messages: FC<TMessagesProps> = ({
-		messagesData,
+		messagesData, messageText,
 }) => {
 		return (
 			<div className={ c.messages }>
@@ -24,14 +22,14 @@ export const Messages: FC<TMessagesProps> = ({
 							<div className={ c.header }>
 									<h2 className={ c.title }>Messages</h2>
 									<Pagination
-										pageCount={ messagesData.messages.pageCount }
+										pageCount={ messagesData.pageCount }
 										variant={ "messages" }
 									/>
 							</div>
-							<List list={ messagesData.messages.messagesList }/>
+							<List list={ messagesData.messagesList }/>
 					</div>
 					<Form
-						variant={ "messagesForm" } formText={ messagesData.messageText }
+						variant={ "messagesForm" } formText={ messageText }
 					/>
 			</div>
 		);

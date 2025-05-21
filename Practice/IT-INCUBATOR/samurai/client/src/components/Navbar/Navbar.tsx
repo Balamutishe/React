@@ -1,8 +1,11 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router";
 
 import c from "./Navbar.module.css";
 
 export const Navbar = () => {
+		const queryClient = useQueryClient();
+		
 		const navigationList = [
 				{
 						id: "1",
@@ -36,12 +39,21 @@ export const Navbar = () => {
 				},
 		];
 		
+		const handlerNavigateRefetchData = async (textLink: string) => {
+				if (textLink === "Dialogs") {
+						await queryClient.invalidateQueries({ queryKey: ["chats", "all"] });
+				}
+				
+				return;
+		};
+		
 		return (
 			<nav className={ c.navbar }>
 					<ul className={ c.list }>
 							{ navigationList.map((nav) => (
 								<li key={ nav.id }>
 										<Link
+											onClick={ () => handlerNavigateRefetchData(nav.title) }
 											to={ `${ nav.to }` }
 										>{ nav.title }</Link>
 								</li>

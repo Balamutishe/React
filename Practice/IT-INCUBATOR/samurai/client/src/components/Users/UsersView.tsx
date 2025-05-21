@@ -10,7 +10,7 @@ import { Users } from "./Users.tsx";
 const UsersView = () => {
 		const usersData = useSelector(
 			(state: RootState) => state.usersData.usersData);
-		const activePage = useParams().page || "";
+		const activePage = useParams().page || "1";
 		const queryUsersGet = useQueryGetAllUsers(Number(activePage));
 		
 		useEffect(() => {

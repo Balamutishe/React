@@ -4,7 +4,6 @@ const authSlice = createSlice({
 		name: "authData",
 		initialState: {
 				authState: "login",
-				queryUserStatus: "error",
 				formData: {
 						username: "",
 						password: "",
@@ -14,9 +13,6 @@ const authSlice = createSlice({
 				setAuthState: (state, action) => {
 						state.authState = action.payload;
 				},
-				setQueryUserStatus: (state, action) => {
-						state.queryUserStatus = action.payload;
-				},
 				setFormData: (state, action) => {
 						state.formData = action.payload;
 				},
@@ -25,4 +21,6 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 
-export const { setAuthState, setQueryUserStatus, setFormData } = authSlice.actions;
+export const {
+		setAuthState, setFormData,
+} = authSlice.actions;

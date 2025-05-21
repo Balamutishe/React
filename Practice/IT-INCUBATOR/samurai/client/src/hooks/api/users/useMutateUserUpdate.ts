@@ -12,7 +12,8 @@ export const useMutateUserUpdate = (
 		const { mutate } = useMutation({
 				mutationFn: () => updateUser(updateUserData),
 				onSuccess: async () => {
-						await queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+						// await queryClient.invalidateQueries({ queryKey: ["users", "me"]
+						// });
 						dispatch(setProfile(updateUserData));
 				},
 		}, queryClient);

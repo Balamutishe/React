@@ -16,7 +16,7 @@ export const ChatsListSchema = z.array(ChatSchema);
 export type TChatsList = z.infer<typeof ChatsListSchema>;
 
 export const ResponseResultGetOneChatSchema = z.object({
-		chat: ChatSchema,
+		chatData: ChatSchema,
 		chatMessages: MessagesResponseDataSchema,
 });
 

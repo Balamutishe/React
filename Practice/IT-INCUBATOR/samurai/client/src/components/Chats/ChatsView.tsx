@@ -20,7 +20,7 @@ export const ChatsView = () => {
 				case "success":
 						return <>
 								<Chats
-									chats={ chatsData.chats }
+									chats={ queryChats.data }
 									chatText={ chatsData.chatText }
 								/>
 						</>;

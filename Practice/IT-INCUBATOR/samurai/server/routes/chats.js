@@ -75,13 +75,13 @@ router.get("/chats/:id/:page", async (req, res) => {
 				const pageSize = 5;
 				
 				if (id) {
-						const chat = await getOneChat(req.db, id);
+						const chatData = await getOneChat(req.db, id);
 						const chatMessages = await getAllMessages(req.db, id);
 						const pageCount = Math.ceil(chatMessages.length / pageSize);
 						const messagesList = chatMessages.slice((page - 1) * pageSize, page * pageSize);
 						
-						if (chat && chatMessages) {
-								res.status(200).json({ chat, chatMessages: { messagesList, pageCount } });
+						if (chatData && chatMessages) {
+								res.status(200).json({ chatData, chatMessages: { messagesList, pageCount } });
 						} else {
 								res.status(404).send(`chat ${ id } not found`);
 						}
