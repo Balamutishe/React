@@ -24,11 +24,11 @@ export const MessageItem: FC<MessageItemProps> = ({
 									{ message.messageText }
 							</p>
 					</div>
-					{ <div className={ c.messageActions }>
+					<div className={ c.messageActions }>
 							<button onClick={ () => deleteMessage() }>
 									X
 							</button>
-					</div> }
+					</div>
 			</div>
 		);
 };
