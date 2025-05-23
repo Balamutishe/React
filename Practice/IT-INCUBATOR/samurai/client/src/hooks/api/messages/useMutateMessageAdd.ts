@@ -13,7 +13,8 @@ export const useMutateMessageAdd = (messageText: string) => {
 		const { mutate } = useMutation({
 				mutationFn: () => createMessage(messageText, chatId),
 				onSuccess: async () => {
-						await queryClient.invalidateQueries({ queryKey: ["chat", chatId] });
+						await queryClient.invalidateQueries(
+							{ queryKey: ["messages", chatId] });
 						dispatch(setMessageText(""));
 				},
 		}, queryClient);

@@ -10,7 +10,8 @@ export const useMutateMessageDelete = (messageId: string) => {
 		const { mutate } = useMutation({
 				mutationFn: () => fetchDeleteMessage(messageId),
 				onSuccess: async () => {
-						await queryClient.invalidateQueries({ queryKey: ["chat", chatId] });
+						await queryClient.invalidateQueries(
+							{ queryKey: ["messages", chatId] });
 				},
 		}, queryClient);
 		

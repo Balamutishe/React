@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/MessageItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/MessageItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/messages/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/messages/messages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/ChatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/MessagesView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/messages.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +209,7 @@
       <workItem from="1747745312954" duration="9866000" />
       <workItem from="1747759288510" duration="2803000" />
       <workItem from="1747834918777" duration="10454000" />
+      <workItem from="1748003347031" duration="4085000" />
     </task>
     <servers />
   </component>

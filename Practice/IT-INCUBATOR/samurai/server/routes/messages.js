@@ -10,8 +10,6 @@ const {
 		deleteMessage,
 } = require("../database/messages.js");
 const { auth } = require("../database/users.js");
-const { updateUser } = require("../database/users");
-const { updateChat } = require("../database/chats");
 
 router.use(
 	async (req, res, next) => await fetchDb(req, res, next, "Social_Network"),

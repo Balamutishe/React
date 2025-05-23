@@ -8,7 +8,7 @@ import {
 } from "./types.ts";
 
 export async function getAllMessages(chatId: string,
-	page: number): Promise<TMessagesResponseData> {
+	page: string): Promise<TMessagesResponseData> {
 		return fetch(`/api/messages/${ chatId }/${ page }`, {
 				method: "GET",
 				headers: {
