@@ -6,10 +6,9 @@ import c from "./Chats.module.css";
 
 type TChatsProps = {
 		chats: TChatsList
-		chatText: string
 }
 
-export const Chats: FC<TChatsProps> = ({ chats, chatText }) => {
+export const Chats: FC<TChatsProps> = ({ chats }) => {
 		return (
 			<div className={ c.chats }>
 					<div className={ c.chatsContent }>
@@ -19,9 +18,7 @@ export const Chats: FC<TChatsProps> = ({ chats, chatText }) => {
 							<List list={ chats }/>
 					</div>
 					<div className={ c.formContainer }>
-							<Form
-								variant={ "chatsForm" } formText={ chatText }
-							/>
+							<Form variant={ "chatsForm" }/>
 					</div>
 			</div>
 		);

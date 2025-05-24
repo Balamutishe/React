@@ -1,16 +1,14 @@
 .userData {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
 
     margin-bottom: 1rem;
 }
 
 .userImg {
-    height: 100px;
-    width: 100px;
-
-    margin-right: 20px;
+    height: 10rem;
+    width: 15%;
 }
 
 .userDesc {
@@ -18,4 +16,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
+
+    width: 80%;
+}
+
+.userDescHeader > :first-child {
+    margin-right: 1rem;
 }

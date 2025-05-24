@@ -3,7 +3,7 @@ import { TUser } from "../api/users/types.ts";
 
 interface IInitialState {
 		user: TUser,
-		subscriptionIdUpdate: string,
+		authState: boolean
 }
 
 const initialState: IInitialState = {
@@ -15,7 +15,7 @@ const initialState: IInitialState = {
 				posts_ids: [],
 				chats_ids: [],
 		},
-		subscriptionIdUpdate: "",
+		authState: false,
 };
 
 const profileSlice = createSlice({
@@ -25,14 +25,14 @@ const profileSlice = createSlice({
 				setProfile: (state, action) => {
 						state.user = action.payload;
 				},
-				setSubscriptionIdUpdate: (state, action) => {
-						state.subscriptionIdUpdate = action.payload;
+				setAuthState: (state, action) => {
+						state.authState = action.payload;
 				},
 		},
 });
 
 export const {
-		setProfile, setSubscriptionIdUpdate,
+		setProfile, setAuthState,
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

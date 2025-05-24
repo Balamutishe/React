@@ -10,11 +10,10 @@ type TMessagesProps = {
 				messagesList: TMessagesList,
 				pageCount: number,
 		}
-		messageText: string,
 }
 
 export const Messages: FC<TMessagesProps> = ({
-		messagesData, messageText,
+		messagesData,
 }) => {
 		return (
 			<div className={ c.messages }>
@@ -28,9 +27,7 @@ export const Messages: FC<TMessagesProps> = ({
 							</div>
 							<List list={ messagesData.messagesList }/>
 					</div>
-					<Form
-						variant={ "messagesForm" } formText={ messageText }
-					/>
+					<Form variant={ "messagesForm" }/>
 			</div>
 		);
 };

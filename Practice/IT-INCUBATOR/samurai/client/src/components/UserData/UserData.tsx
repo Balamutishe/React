@@ -5,16 +5,20 @@ import c from "./UserData.module.css";
 type TUserData = {
 		username: string,
 		userImg: string,
+		authState: boolean
 }
 
-export const UserData: FC<TUserData> = ({ username, userImg }) => {
+export const UserData: FC<TUserData> = ({ username, userImg, authState }) => {
 		const userLogout = useMutateUserLogout();
 		
 		return (
 			<div className={ c.userData }>
 					<img src={ userImg } alt="UserImg" className={ c.userImg }/>
 					<div className={ c.userDesc }>
-							<div>{ username }</div>
+							<div className={ c.userDescHeader }>
+									<span>{ username }</span>
+									<span>{ authState ? "Online" : "Offline" }</span>
+							</div>
 							<div style={ { marginBottom: "10px" } }>
 									<div>UserDescription</div>
 									<div>UserDescription</div>

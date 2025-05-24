@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TMessagesList } from "../api/messages/types.ts";
 
 interface IInitialState {
+		queryStatus: string
 		messages: {
 				messagesList: TMessagesList,
 				pageCount: number,
@@ -10,6 +11,7 @@ interface IInitialState {
 }
 
 const initialState: IInitialState = {
+		queryStatus: "",
 		messages: {
 				messagesList: [],
 				pageCount: 0,
@@ -21,6 +23,9 @@ const messagesSlice = createSlice({
 		name: "messagesData",
 		initialState: initialState,
 		reducers: {
+				setQueryStatus(state, action) {
+						state.queryStatus = action.payload;
+				},
 				setMessageText: (state, action) => {
 						state.messageText = action.payload;
 				},
@@ -35,5 +40,5 @@ const messagesSlice = createSlice({
 export default messagesSlice.reducer;
 
 export const {
-		setMessageText, setMessages,
+		setMessageText, setMessages, setQueryStatus,
 } = messagesSlice.actions;
