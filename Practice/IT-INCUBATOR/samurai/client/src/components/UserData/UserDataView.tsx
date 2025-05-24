@@ -7,7 +7,7 @@ export const UserDataView = () => {
 			(state: RootState) => state.profileData);
 		
 		return <UserData
-			username={ user.username } userImg={ user.userImg }
+			userData={ user }
 			authState={ authState }
 		/>;
 };

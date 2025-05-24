@@ -14,6 +14,7 @@ const initialState: IInitialState = {
 				subscriptions: [],
 				posts_ids: [],
 				chats_ids: [],
+				status: "",
 		},
 		authState: false,
 };

@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/components/UserData/UserStatus.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/Chats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/Chats.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Form/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Form/Form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/MessagesView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/MessagesView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserData/UserData.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserData/UserData.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/users/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/users/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/UserData/UserData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserData/UserData.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/UserData/UserDataView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserData/UserDataView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryMe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useQueryMe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/MessagesSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/MessagesSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Users/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Users/User.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/users/useMutateUserUpdate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/ProfileSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/updateUserSubscription.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/updateUserSubscription.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +46,7 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -111,7 +107,7 @@
       <recent name="$PROJECT_DIR$/client/src/hooks/api/posts" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm dev client">
+  <component name="RunManager" selected="npm.npm dev server">
     <configuration name="npm dev client" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -217,7 +213,7 @@
       <workItem from="1747745312954" duration="9866000" />
       <workItem from="1747759288510" duration="2803000" />
       <workItem from="1747834918777" duration="10454000" />
-      <workItem from="1748003347031" duration="21047000" />
+      <workItem from="1748003347031" duration="28432000" />
     </task>
     <servers />
   </component>

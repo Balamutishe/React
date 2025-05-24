@@ -15,9 +15,11 @@ type TUserProps = {
 export const User: FC<TUserProps> = ({
 		user,
 }) => {
-		const userMe = useSelector((state: RootState) => state.profileData.user);
-		const userUpdate = useMutateUserUpdate(
-			updateUserSubscriptions(userMe, user._id).updateUserData);
+		const userSubscriptions = useSelector(
+			(state: RootState) => state.profileData.user.subscriptions);
+		const { updateDescriptions, updateStatus } = updateUserSubscriptions(
+			userSubscriptions, user._id);
+		const userUpdate = useMutateUserUpdate(updateDescriptions);
 		
 		return (
 			<div className={ c.userContainer }>
@@ -31,9 +33,8 @@ export const User: FC<TUserProps> = ({
 							</div>
 							<div className={ c.userActions }>
 									<button
-										onClick={ () => userUpdate() }
-									>{ updateUserSubscriptions(
-										userMe, user._id).updateStatus ? "Unfollow" :
+										onClick={ () => userUpdate.mutate() }
+									>{ updateStatus ? "Unfollow" :
 										"Follow" }</button>
 							</div>
 					</div>

@@ -1,16 +1,15 @@
-import { TUser } from "../api/users/types.ts";
-
-export const updateUserSubscriptions = (userData: TUser, id: string) => {
-		const defineSubscription = !!userData.subscriptions.find(
+export const updateUserSubscriptions = (subscriptions: string[],
+	id: string) => {
+		const defineSubscription = !!subscriptions.find(
 			(subscriptionId: string) => subscriptionId === id);
 		
 		const updateSubscriptions = defineSubscription ?
-			userData.subscriptions.filter(
+			subscriptions.filter(
 				(subscriptionId) => subscriptionId !== id)
-			: [...userData.subscriptions, ...[id]];
+			: [...subscriptions, ...[id]];
 		
 		return {
-				updateUserData: { ...userData, subscriptions: updateSubscriptions },
+				updateDescriptions: { subscriptions: updateSubscriptions },
 				updateStatus: defineSubscription,
 		};
 };
