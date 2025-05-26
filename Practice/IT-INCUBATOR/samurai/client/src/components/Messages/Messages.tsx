@@ -1,5 +1,8 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
 import { TMessagesList } from "../../api/messages/types.ts";
+import { useMutateMessageAdd } from "../../hooks/api";
+import { RootState } from "../../redux";
 import { Form } from "../Form/Form.tsx";
 import { List } from "../List/List.tsx";
 import { Pagination } from "../Pagination/Pagination.tsx";
@@ -15,6 +18,10 @@ type TMessagesProps = {
 export const Messages: FC<TMessagesProps> = ({
 		messagesData,
 }) => {
+		const messageText = useSelector(
+			(state: RootState) => state.formData.formText.messageText);
+		const addMessage = useMutateMessageAdd(messageText);
+		
 		return (
 			<div className={ c.messages }>
 					<div>
@@ -27,7 +34,10 @@ export const Messages: FC<TMessagesProps> = ({
 							</div>
 							<List list={ messagesData.messagesList }/>
 					</div>
-					<Form variant={ "messagesForm" }/>
+					<Form
+						variant={ "message" } formText={ messageText }
+						addItemFunc={ () => addMessage.mutate() }
+					/>
 			</div>
 		);
 };

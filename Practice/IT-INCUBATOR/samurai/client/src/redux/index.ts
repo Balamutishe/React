@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./AuthSlice.ts";
 import ChatsReducer from "./ChatsSlice.ts";
+import FormDataReducer from "./FormDataSlice.ts";
 import MessagesReducer from "./MessagesSlice.ts";
 import PostsReducer from "./PostsSlice.ts";
 import ProfileReducer from "./ProfileSlice.ts";
@@ -14,6 +15,7 @@ const store = configureStore({
 				chatsData: ChatsReducer,
 				messagesData: MessagesReducer,
 				usersData: UsersReducer,
+				formData: FormDataReducer,
 		},
 });
 

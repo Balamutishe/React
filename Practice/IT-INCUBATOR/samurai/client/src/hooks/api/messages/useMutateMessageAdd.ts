@@ -10,7 +10,7 @@ export const useMutateMessageAdd = (messageText: string) => {
 		const dispatch = useDispatch();
 		const chatId = useParams().chatId || "";
 		
-		const { mutate } = useMutation({
+		return useMutation({
 				mutationFn: () => createMessage(messageText, chatId),
 				onSuccess: async () => {
 						await queryClient.invalidateQueries(
@@ -19,5 +19,4 @@ export const useMutateMessageAdd = (messageText: string) => {
 				},
 		}, queryClient);
 		
-		return mutate;
 };

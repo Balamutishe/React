@@ -1,61 +1,41 @@
 import { ChangeEvent, FC, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useMutateChatAdd, useMutateMessageAdd } from "../../hooks/api";
 import { RootState } from "../../redux";
-import { setChatText } from "../../redux/ChatsSlice.ts";
-import { setMessageText } from "../../redux/MessagesSlice.ts";
+import { setFormText } from "../../redux/FormDataSlice.ts";
 
 import c from "./Form.module.css";
 
 type TFormProps = {
-		variant: "chatsForm" | "messagesForm";
+		variant: "chat" | "message" | "post";
+		formText: string;
+		addItemFunc: () => void;
 }
 
-export const Form: FC<TFormProps> = ({ variant }) => {
+export const Form: FC<TFormProps> = ({
+		variant, formText, addItemFunc,
+}) => {
 		const dispatch = useDispatch();
+		const formData = useSelector((state: RootState) => state.formData.formText);
 		
-		const messageText = useSelector(
-			(state: RootState) => state.messagesData.messageText);
-		const chatText = useSelector(
-			(state: RootState) => state.chatsData.chatText);
+		const handleFormTextChange = (e: ChangeEvent<HTMLInputElement>) => dispatch(
+			setFormText({ ...formData, [e.target.name]: e.target.value }));
 		
-		const addChat = useMutateChatAdd(chatText);
-		const addMessage = useMutateMessageAdd(messageText);
 		
-		const handleFormTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-				switch (variant) {
-						case "chatsForm":
-								return dispatch(setChatText(e.target.value));
-						case "messagesForm":
-								return dispatch(setMessageText(e.target.value));
-				}
-				
-		};
 		const handleItemAdd = (e: FormEvent<HTMLFormElement>) => {
 				e.preventDefault();
-				
-				const addItem = () => {
-						switch (variant) {
-								case "chatsForm":
-										return addChat();
-								case "messagesForm":
-										return addMessage();
-						}
-				};
-				
-				addItem();
+				addItemFunc();
 		};
 		
 		return (
 			<form className={ c.form } onSubmit={ handleItemAdd }>
-			<textarea
-				className={ c.textarea }
-				value={ variant === "chatsForm" ? chatText : messageText }
-				onChange={ handleFormTextChange }
-			></textarea>
-					<button>{ variant === "chatsForm" ? "Add chat" :
-						"Add message" }</button>
+					<input
+						className={ c.input }
+						name={ `${ variant }Text` } placeholder={ `Add new ${ variant }` }
+						type={ "text" }
+						value={ formText }
+						onChange={ handleFormTextChange }
+					/>
+					<button className={ c.button }>+</button>
 			</form>
 		);
 };

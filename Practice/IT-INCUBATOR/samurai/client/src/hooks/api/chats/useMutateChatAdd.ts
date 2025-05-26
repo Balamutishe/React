@@ -8,7 +8,7 @@ export const useMutateChatAdd = (chatText: string) => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
 		
-		const { mutate } = useMutation({
+		return useMutation({
 				mutationFn: () => createChat(chatText),
 				onSuccess: async () => {
 						await queryClient.invalidateQueries(
@@ -16,6 +16,4 @@ export const useMutateChatAdd = (chatText: string) => {
 						dispatch(setChatText(""));
 				},
 		}, queryClient);
-		
-		return mutate;
 };

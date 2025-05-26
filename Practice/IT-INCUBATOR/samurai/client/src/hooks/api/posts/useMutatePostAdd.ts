@@ -8,13 +8,11 @@ export const useMutatePostAdd = (postText: string) => {
 		const dispatch = useDispatch();
 		const queryClient = useQueryClient();
 		
-		const { mutate } = useMutation({
+		return useMutation({
 				mutationFn: () => createPost(postText),
 				onSuccess: async (data) => {
 						dispatch(addPost(data));
 						await queryClient.invalidateQueries({ queryKey: ["posts"] });
 				},
 		}, queryClient);
-		
-		return mutate;
 };

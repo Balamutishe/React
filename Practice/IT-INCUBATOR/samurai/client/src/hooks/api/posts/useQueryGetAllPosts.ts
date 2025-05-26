@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllPosts } from "../../../api/posts/posts.ts";
 import { useDispatch } from "react-redux";
+import { getAllPosts } from "../../../api/posts/posts.ts";
 import { setPostsData } from "../../../redux/PostsSlice.ts";
 
 export const useQueryGetAllPosts = () => {
@@ -8,7 +8,7 @@ export const useQueryGetAllPosts = () => {
 		const dispatch = useDispatch();
 		
 		return useQuery({
-				queryFn: async () => await getAllPosts()
+				queryFn: () => getAllPosts()
 				.then((data) => {
 						dispatch(setPostsData(data));
 						return data;
