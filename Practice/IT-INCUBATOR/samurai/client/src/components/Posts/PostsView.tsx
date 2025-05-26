@@ -1,13 +1,13 @@
 import { useQueryGetAllPosts } from "../../hooks/api";
 import { Loader } from "../Loader/Loader.tsx";
-import { Posts } from "./Posts.tsx";
+import PostsContainer from "./PostsContainer.tsx";
 
 export const PostsView = () => {
 		const queryPosts = useQueryGetAllPosts();
 		
 		switch (queryPosts.status) {
 				case "success":
-						return <Posts posts={ queryPosts.data }/>;
+						return <PostsContainer/>;
 				case "pending":
 						return <Loader/>;
 				case "error":

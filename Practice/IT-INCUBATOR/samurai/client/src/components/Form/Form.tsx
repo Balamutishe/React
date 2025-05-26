@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, FormEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { setFormText } from "../../redux/FormDataSlice.ts";
 
 import c from "./Form.module.css";
 
@@ -9,17 +8,20 @@ type TFormProps = {
 		variant: "chat" | "message" | "post";
 		formText: string;
 		addItemFunc: () => void;
+		setFormText: (formData: {
+				postText: string
+				messageText: string
+				chatText: string
+		}, nameField: string, text: string) => any
 }
 
 export const Form: FC<TFormProps> = ({
-		variant, formText, addItemFunc,
+		variant, formText, addItemFunc, setFormText,
 }) => {
-		const dispatch = useDispatch();
 		const formData = useSelector((state: RootState) => state.formData.formText);
 		
-		const handleFormTextChange = (e: ChangeEvent<HTMLInputElement>) => dispatch(
-			setFormText({ ...formData, [e.target.name]: e.target.value }));
-		
+		const handleFormTextChange = (e: ChangeEvent<HTMLInputElement>) => setFormText(
+			formData, e.target.name, e.target.value);
 		
 		const handleItemAdd = (e: FormEvent<HTMLFormElement>) => {
 				e.preventDefault();

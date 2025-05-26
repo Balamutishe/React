@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/redux/FormDataSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Posts/PostsContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Form/Form.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Form/Form.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Form/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Form/Form.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Posts/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Posts/Posts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Posts/PostsForm.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Posts/PostsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Posts/PostsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostAdd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useQueryGetAllPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useQueryGetAllPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/FormDataSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/FormDataSlice.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -219,7 +215,7 @@
       <workItem from="1748108920295" duration="588000" />
       <workItem from="1748175667940" duration="104000" />
       <workItem from="1748176094438" duration="233000" />
-      <workItem from="1748176465134" duration="11697000" />
+      <workItem from="1748176465134" duration="17185000" />
     </task>
     <servers />
   </component>

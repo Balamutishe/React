@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface IInitialState {
+export interface IInitialStateFormData {
 		formText: {
 				postText: string,
 				messageText: string,
@@ -8,7 +8,7 @@ interface IInitialState {
 		};
 }
 
-const initialState: IInitialState = {
+const initialState: IInitialStateFormData = {
 		formText: {
 				postText: "",
 				messageText: "",
