@@ -1,8 +1,10 @@
 import { validateResponse } from "../validateResponse.ts";
 
 import {
+		ChatSchema,
 		ChatsListSchema,
 		ResponseResultGetOneChatSchema,
+		TChat,
 		TChatsList,
 		TResponseGetOneChat,
 } from "./types.ts";
@@ -22,7 +24,7 @@ export async function getOneChat(id: string,
 		.then(chatData => ResponseResultGetOneChatSchema.parse(chatData));
 }
 
-export async function createChat(chatText: string): Promise<string> {
+export async function createChat(chatText: string): Promise<TChat> {
 		return fetch("/api/chats", {
 				method: "POST",
 				headers: {
@@ -32,7 +34,7 @@ export async function createChat(chatText: string): Promise<string> {
 						chatText,
 				}),
 		}).then(validateResponse).then((response) => response.json())
-		.then((createChatId: string) => createChatId);
+		.then((newChatData: string) => ChatSchema.parse(newChatData));
 }
 
 export async function updateChat(chatText: string,

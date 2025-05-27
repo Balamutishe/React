@@ -4,13 +4,11 @@ import { TChatsList } from "../api/chats/types.ts";
 interface IInitialState {
 		chats: TChatsList,
 		chatText: string,
-		activeChatId: string,
 }
 
 const initialState: IInitialState = {
 		chats: [],
 		chatText: "",
-		activeChatId: "",
 };
 
 const chatsSlice = createSlice({
@@ -25,13 +23,15 @@ const chatsSlice = createSlice({
 						state.chats.sort(
 							(a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
 						state.chatText = "";
-						
-						if (state.activeChatId === "") {
-								state.activeChatId = state.chats[0]._id;
-						}
 				},
-				setActiveChatId: (state, action) => {
-						state.activeChatId = action.payload;
+				addChat: (state, action) => {
+						state.chats = state.chats.concat(action.payload);
+						state.chatText = "";
+				},
+				deleteChat: (state, action) => {
+						state.chats =
+							state.chats.filter(
+								(chat) => chat._id !== action.payload);
 				},
 		},
 });
@@ -41,5 +41,5 @@ export default chatsSlice.reducer;
 export const {
 		setChats,
 		setChatText,
-		setActiveChatId,
+		addChat, deleteChat,
 } = chatsSlice.actions;

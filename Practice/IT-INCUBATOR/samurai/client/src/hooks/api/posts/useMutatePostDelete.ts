@@ -8,13 +8,10 @@ export const useMutatePostDelete = (postId: string) => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
 		
-		const { mutate } = useMutation({
+		return useMutation({
 				mutationFn: () => fetchDeletePost(postId),
-				onSuccess: async () => {
+				onSuccess: () => {
 						dispatch(deletePost(postId));
-						await queryClient.invalidateQueries({ queryKey: ["posts"] });
 				},
 		}, queryClient);
-		
-		return mutate;
 };

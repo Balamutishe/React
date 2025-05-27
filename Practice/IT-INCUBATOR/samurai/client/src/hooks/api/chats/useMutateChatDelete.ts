@@ -1,16 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 
 import { fetchDeleteChat } from "../../../api/chats/chats.ts";
+import { deleteChat } from "../../../redux/ChatsSlice.ts";
 
 export const useMutateChatDelete = (chatId: string) => {
 		const queryClient = useQueryClient();
+		const dispatch = useDispatch();
 		
-		const { mutate } = useMutation({
+		return useMutation({
 				mutationFn: () => fetchDeleteChat(chatId),
-				onSuccess: async () => {
-						await queryClient.invalidateQueries({ queryKey: ["chats", "all"] });
+				onSuccess: () => {
+						dispatch(deleteChat(chatId));
 				},
 		}, queryClient);
-		
-		return mutate;
 };

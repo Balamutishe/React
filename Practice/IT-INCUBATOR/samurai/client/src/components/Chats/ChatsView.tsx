@@ -1,15 +1,13 @@
 import { useQueryGetAllChats } from "../../hooks/api";
 import { Loader } from "../Loader/Loader.tsx";
-import { Chats } from "./Chats.tsx";
+import ChatsContainer from "./ChatsContainer.tsx";
 
 export const ChatsView = () => {
 		const queryChats = useQueryGetAllChats();
 		
 		switch (queryChats.status) {
 				case "success":
-						return <>
-								<Chats chats={ queryChats.data }/>
-						</>;
+						return <ChatsContainer/>;
 				case "pending":
 						return <Loader/>;
 				case "error":

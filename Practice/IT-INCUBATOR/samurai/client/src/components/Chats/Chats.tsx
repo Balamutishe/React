@@ -1,19 +1,11 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
-import { TChatsList } from "../../api/chats/types.ts";
 import { useMutateChatAdd } from "../../hooks/api";
-import { RootState } from "../../redux";
 import { Form } from "../Form/Form.tsx";
 import { List } from "../List/List.tsx";
 import c from "./Chats.module.css";
+import { TChatsProps } from "./ChatsContainer.tsx";
 
-type TChatsProps = {
-		chats: TChatsList
-}
-
-export const Chats: FC<TChatsProps> = ({ chats }) => {
-		const chatText = useSelector(
-			(state: RootState) => state.formData.formText.chatText);
+export const Chats: FC<TChatsProps> = ({ chats, chatText, setChatText }) => {
 		const addChat = useMutateChatAdd(chatText);
 		
 		return (
@@ -27,7 +19,7 @@ export const Chats: FC<TChatsProps> = ({ chats }) => {
 					<div className={ c.formContainer }>
 							<Form
 								variant={ "chat" } formText={ chatText }
-								addItemFunc={ () => addChat.mutate() }
+								addItemFunc={ addChat } setFormText={ setChatText }
 							/>
 					</div>
 			</div>

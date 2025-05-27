@@ -19,7 +19,11 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
 					<Link
 						to={ `/dialogs/${ chat._id }` } className={ c.chatTitle }
 					>{ chat.chatText }</Link>
-					<button onClick={ () => deleteChat() }>X</button>
+					<button
+						onClick={ () => deleteChat.mutate() }
+						disabled={ deleteChat.isPending }
+					>X
+					</button>
 			</div>
 		);
 };

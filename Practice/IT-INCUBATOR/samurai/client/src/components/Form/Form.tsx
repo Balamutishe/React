@@ -1,31 +1,27 @@
+import { UseMutationResult } from "@tanstack/react-query";
 import { ChangeEvent, FC, FormEvent } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux";
+import { TChat } from "../../api/chats/types.ts";
+import { TMessage } from "../../api/messages/types.ts";
+import { TPost } from "../../api/posts/types.ts";
 
 import c from "./Form.module.css";
 
 type TFormProps = {
 		variant: "chat" | "message" | "post";
 		formText: string;
-		addItemFunc: () => void;
-		setFormText: (formData: {
-				postText: string
-				messageText: string
-				chatText: string
-		}, nameField: string, text: string) => any
+		addItemFunc: UseMutationResult<TPost | TChat | TMessage, Error, void, unknown>;
+		setFormText: (text: string) => void;
 }
 
 export const Form: FC<TFormProps> = ({
 		variant, formText, addItemFunc, setFormText,
 }) => {
-		const formData = useSelector((state: RootState) => state.formData.formText);
-		
-		const handleFormTextChange = (e: ChangeEvent<HTMLInputElement>) => setFormText(
-			formData, e.target.name, e.target.value);
+		const handleFormTextChange =
+			(e: ChangeEvent<HTMLInputElement>) => setFormText(e.target.value);
 		
 		const handleItemAdd = (e: FormEvent<HTMLFormElement>) => {
 				e.preventDefault();
-				addItemFunc();
+				addItemFunc.mutate();
 		};
 		
 		return (
@@ -37,7 +33,10 @@ export const Form: FC<TFormProps> = ({
 						value={ formText }
 						onChange={ handleFormTextChange }
 					/>
-					<button className={ c.button }>+</button>
+					<button
+						className={ c.button } disabled={ addItemFunc.isPending }
+					>+
+					</button>
 			</form>
 		);
 };

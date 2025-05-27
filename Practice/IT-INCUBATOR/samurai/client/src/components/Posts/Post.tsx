@@ -22,7 +22,7 @@ export const Post: FC<TPostProps> = ({ post }) => {
 									<span>Created at: { dateTimeUpdate(post.created_at) }</span>
 							</div>
 					</div>
-					<button onClick={ () => deletePost() }>X</button>
+					<button onClick={ () => deletePost.mutate() }>X</button>
 			</div>
 		);
 };

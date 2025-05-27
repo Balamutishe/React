@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 
 import { createChat } from "../../../api/chats/chats.ts";
-import { setChatText } from "../../../redux/ChatsSlice.ts";
+import { addChat } from "../../../redux/ChatsSlice.ts";
 
 export const useMutateChatAdd = (chatText: string) => {
 		const queryClient = useQueryClient();
@@ -10,10 +10,8 @@ export const useMutateChatAdd = (chatText: string) => {
 		
 		return useMutation({
 				mutationFn: () => createChat(chatText),
-				onSuccess: async () => {
-						await queryClient.invalidateQueries(
-							{ queryKey: ["chats", "all"] });
-						dispatch(setChatText(""));
+				onSuccess: (data) => {
+						dispatch(addChat(data));
 				},
 		}, queryClient);
 };

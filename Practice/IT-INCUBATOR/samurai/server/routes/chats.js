@@ -58,7 +58,8 @@ router.post(
 							if (!statusCreate.acknowledged) {
 									res.status(404).send("chat not created");
 							} else {
-									return res.status(200).json(statusCreate.insertedId);
+									const chatData = await getOneChat(req.db, statusCreate.insertedId);
+									return res.status(200).json(chatData);
 							}
 					} else {
 							res.status(400).send("uncorrected request.body");

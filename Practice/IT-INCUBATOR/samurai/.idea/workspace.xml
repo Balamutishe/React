@@ -5,14 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/Posts/PostsContainer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatsContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/chats/chats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/chats/chats.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/ChatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/Chats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/Chats.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Chats/ChatsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chats/ChatsView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Form/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Form/Form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Posts/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Posts/Post.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Posts/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Posts/Posts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Posts/PostsForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Posts/PostsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Posts/PostsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/FormDataSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/FormDataSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Posts/PostsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Posts/PostsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatAdd.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useMutateChatDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/chats/useQueryGetAllChats.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostAdd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostAdd.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/posts/useMutatePostDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/ChatsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/ChatsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/chats.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,45 +66,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;22.13.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.13.17&quot;,
-    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/src/redux&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.npm dev client.executor&quot;: &quot;Run&quot;,
-    &quot;npm.npm dev server.executor&quot;: &quot;Run&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.tslint&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "javascript.nodejs.core.library.configured.version": "22.13.1",
+    "javascript.nodejs.core.library.typings.version": "22.13.17",
+    "js.last.introduce.type": "CONST",
+    "last_opened_file_path": "/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/src/components/Chats",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.npm dev client.executor": "Run",
+    "npm.npm dev server.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.javascript.linters.tslint",
+    "ts.external.directory.path": "/Users/alex/WORK/GITHUB/React/Practice/IT-INCUBATOR/samurai/client/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mongo&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/components/Chats" />
       <recent name="$PROJECT_DIR$/client/src/redux" />
       <recent name="$PROJECT_DIR$/client/src/pages" />
       <recent name="$PROJECT_DIR$/client/src/components/Dialogs/DialogsForm" />
       <recent name="$PROJECT_DIR$/client/src/hooks/api/chats" />
-      <recent name="$PROJECT_DIR$/client/src/hooks/api/users" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/src/pages/DialogsPage" />
@@ -105,7 +114,7 @@
       <recent name="$PROJECT_DIR$/client/src/hooks/api/posts" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm dev server">
+  <component name="RunManager" selected="npm.npm dev client">
     <configuration name="npm dev client" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -215,7 +224,8 @@
       <workItem from="1748108920295" duration="588000" />
       <workItem from="1748175667940" duration="104000" />
       <workItem from="1748176094438" duration="233000" />
-      <workItem from="1748176465134" duration="17185000" />
+      <workItem from="1748176465134" duration="17974000" />
+      <workItem from="1748351815925" duration="5811000" />
     </task>
     <servers />
   </component>
