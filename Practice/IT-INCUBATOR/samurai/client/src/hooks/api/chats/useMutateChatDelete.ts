@@ -10,8 +10,6 @@ export const useMutateChatDelete = (chatId: string) => {
 		
 		return useMutation({
 				mutationFn: () => fetchDeleteChat(chatId),
-				onSuccess: () => {
-						dispatch(deleteChat(chatId));
-				},
+				onSuccess: () => dispatch(deleteChat(chatId)),
 		}, queryClient);
 };

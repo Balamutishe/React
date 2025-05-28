@@ -25,7 +25,10 @@ export const MessageItem: FC<MessageItemProps> = ({
 							</p>
 					</div>
 					<div className={ c.messageActions }>
-							<button onClick={ () => deleteMessage() }>
+							<button
+								onClick={ () => deleteMessage.mutate() }
+								disabled={ deleteMessage.isPending }
+							>
 									X
 							</button>
 					</div>

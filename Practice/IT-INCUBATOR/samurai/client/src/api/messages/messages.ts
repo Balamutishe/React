@@ -7,7 +7,7 @@ import {
 		TMessagesResponseData,
 } from "./types.ts";
 
-export async function getAllMessages(chatId: string,
+export async function getAllMessages(chatId: string | undefined,
 	page: string): Promise<TMessagesResponseData> {
 		return fetch(`/api/messages/${ chatId }/${ page }`, {
 				method: "GET",
@@ -38,7 +38,7 @@ export async function createMessage(
 						chatId,
 				}),
 		}).then(validateResponse).then((response) => response.json())
-		.then((message) => MessageSchema.parse(message));
+		.then((newMessage) => MessageSchema.parse(newMessage));
 }
 
 export async function updateMessage({ messageText, id }: {

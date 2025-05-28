@@ -1,26 +1,15 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
-import { TMessagesList } from "../../api/messages/types.ts";
 import { useMutateMessageAdd } from "../../hooks/api";
-import { RootState } from "../../redux";
 import { Form } from "../Form/Form.tsx";
 import { List } from "../List/List.tsx";
 import { Pagination } from "../Pagination/Pagination.tsx";
 import c from "./Messages.module.css";
-
-type TMessagesProps = {
-		messagesData: {
-				messagesList: TMessagesList,
-				pageCount: number,
-		}
-}
+import { TMessagesProps } from "./MessagesContainer.tsx";
 
 export const Messages: FC<TMessagesProps> = ({
-		messagesData,
+		messagesData, messageText, setMessageText, activeChatId,
 }) => {
-		const messageText = useSelector(
-			(state: RootState) => state.formData.formText.messageText);
-		const addMessage = useMutateMessageAdd(messageText);
+		const addMessage = useMutateMessageAdd(messageText, activeChatId);
 		
 		return (
 			<div className={ c.messages }>
@@ -36,7 +25,7 @@ export const Messages: FC<TMessagesProps> = ({
 					</div>
 					<Form
 						variant={ "message" } formText={ messageText }
-						addItemFunc={ () => addMessage.mutate() }
+						addItemFunc={ addMessage } setFormText={ setMessageText }
 					/>
 			</div>
 		);

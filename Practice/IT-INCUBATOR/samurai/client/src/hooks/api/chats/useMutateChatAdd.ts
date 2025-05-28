@@ -10,8 +10,6 @@ export const useMutateChatAdd = (chatText: string) => {
 		
 		return useMutation({
 				mutationFn: () => createChat(chatText),
-				onSuccess: (data) => {
-						dispatch(addChat(data));
-				},
+				onSuccess: (data) => dispatch(addChat(data)),
 		}, queryClient);
 };

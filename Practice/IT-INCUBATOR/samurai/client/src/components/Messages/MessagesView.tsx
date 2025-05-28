@@ -1,8 +1,7 @@
 import { useParams } from "react-router";
 import { useQueryGetAllMessages } from "../../hooks/api";
 import { Loader } from "../Loader/Loader.tsx";
-
-import { Messages } from "./Messages.tsx";
+import MessagesContainer from "./MessagesContainer.tsx";
 
 export const MessagesView = () => {
 		const { chatId, page } = useParams();
@@ -10,7 +9,7 @@ export const MessagesView = () => {
 		
 		switch (queryMessages.status) {
 				case "success":
-						return <Messages messagesData={ queryMessages.data }/>;
+						return <MessagesContainer/>;
 				case "pending":
 						return <Loader/>;
 				case "error":
