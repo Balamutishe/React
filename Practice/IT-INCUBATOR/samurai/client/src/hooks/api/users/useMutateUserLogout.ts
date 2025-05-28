@@ -4,7 +4,7 @@ import { logout } from "../../../api/users/users.ts";
 export const useMutateUserLogout = () => {
 		const queryClient = useQueryClient();
 		return useMutation({
-				mutationFn: async () => await logout(),
+				mutationFn: () => logout(),
 				onSuccess: async () => {
 						await queryClient.invalidateQueries({ queryKey: ["users", "me"] });
 				},
