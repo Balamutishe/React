@@ -1,54 +1,54 @@
-import { ChangeEvent, FormEventHandler, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { useMutateUserLogin, useMutateUserRegister } from "../../hooks/api";
-
-import { Input } from "../Input/Input.tsx";
 import c from "./AuthForm.module.css";
 
+const AuthFormSchema = z.object({
+		username: z.string().min(3, "Введите не менее 3 символов"),
+		password: z.string().min(5, "Введите не менее 5 символов"),
+});
+
 export const AuthForm = () => {
-		const [formData, setFormData] = useState({ username: "", password: "" });
 		const [authState, setAuthState] = useState("login");
 		
-		const userRegister = useMutateUserRegister(formData);
-		const userLogin = useMutateUserLogin(formData);
+		const { register, handleSubmit, formState: { errors } } = useForm(
+			{ resolver: zodResolver(AuthFormSchema) });
 		
-		const handleFormSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-				e.preventDefault();
-				return authState === "login" ? userLogin.mutate() :
-					userRegister.mutate();
-		};
-		const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) =>
-			setFormData(
-				{ ...formData, [e.target.name]: e.target.value });
+		const userRegister = useMutateUserRegister();
+		const userLogin = useMutateUserLogin();
 		
-		const handleAuthStateChange = () => {
-				setAuthState(
-					(authState) => authState === "login" ? "register" : "login");
-		};
+		const handleAuthStateChange = () => setAuthState(
+			(authState) => authState === "login" ? "register" : "login");
 		
 		return (
 			<div className={ c.formContainer }>
-					<form className={ c.form } onSubmit={ handleFormSubmit }>
+					<form
+						className={ c.form }
+						onSubmit={ handleSubmit((authData) => {
+								return authState === "login" ?
+									userLogin.mutate(authData) :
+									userRegister.mutate(authData);
+						}) }
+					>
 							<h2 className={ c.title }>
 									{ authState === "register" ? "Регистрация" :
 										"Войдите чтобы начать" }
 							</h2>
 							<div className={ c.inputs }>
-									<Input
-										variant={ c.inputAuth }
-										type="text"
-										name="username"
-										placeholder="Введите имя"
-										value={ formData.username }
-										onChange={ handleFormDataChange }
-									/>
-									<Input
-										variant={ c.inputAuth }
-										type="password"
-										name="password"
-										placeholder="Введите пароль"
-										value={ formData.password }
-										onChange={ handleFormDataChange }
-									/>
+									{ errors.username?.message &&
+										<div style={ { color: "red" } }>Errors
+												username: { errors.username?.message }</div> }
+									{ errors.password?.message &&
+										<div style={ { color: "red" } }>Errors
+												password: { errors.password?.message }</div> }
+									<input
+										className={ `${ c.input } ${ c.inputAuth }` } { ...register(
+										"username") } />
+									<input
+										className={ `${ c.input } ${ c.inputAuth }` } { ...register(
+										"password") } />
 							</div>
 							<button>
 									{ authState === "login" ? "Войти" : "Зарегистрироваться" }
