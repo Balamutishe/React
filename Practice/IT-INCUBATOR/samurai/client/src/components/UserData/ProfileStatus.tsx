@@ -29,7 +29,7 @@ export const ProfileStatus: FC<TUserStatusProps> = ({
 						name={ "status" }
 						value={ profileStatus }
 						onChange={ (e) =>
-							profileUpdate({ status: e.target.value }) }
+							profileUpdate({ [e.target.name]: e.target.value }) }
 						onBlur={ () => {
 								profileMutate.mutate();
 								setStateRedactorStatus(false);
