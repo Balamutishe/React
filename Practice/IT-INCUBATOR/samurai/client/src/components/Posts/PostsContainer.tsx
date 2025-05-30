@@ -1,6 +1,6 @@
 import { connect, ConnectedProps } from "react-redux";
-import { AppDispatch, RootState } from "../../redux";
-import { setPostText } from "../../redux/PostsSlice.ts";
+import { useMutatePostAdd, useMutatePostDelete } from "../../hooks/api";
+import { RootState } from "../../redux";
 import { Posts } from "./Posts.tsx";
 
 
@@ -10,8 +10,9 @@ const mapStateToProps = (state: RootState) =>
 			postText: state.postsData.postText,
 	});
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-		setPostText: (text: string) => dispatch(setPostText(text)),
+const mapDispatchToProps = () => ({
+		postAddMutate: useMutatePostAdd,
+		postDeleteMutate: useMutatePostDelete,
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

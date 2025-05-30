@@ -1,16 +1,17 @@
+import { UseMutationResult } from "@tanstack/react-query";
 import { FC } from "react";
 
 import { TPost } from "../../api/posts/types.ts";
-import { useMutatePostDelete } from "../../hooks/api";
 import { dateTimeUpdate } from "../../utils/dateTimeUpdate.ts";
 import c from "./Posts.module.css";
 
 type TPostProps = {
 		post: TPost
+		postDeleteMutate: () => UseMutationResult<string, Error, string, unknown>
 }
 
-export const Post: FC<TPostProps> = ({ post }) => {
-		const deletePost = useMutatePostDelete(post._id);
+export const Post: FC<TPostProps> = ({ post, postDeleteMutate }) => {
+		const { mutate } = postDeleteMutate();
 		
 		return (
 			<div className={ c.post }>
@@ -22,7 +23,10 @@ export const Post: FC<TPostProps> = ({ post }) => {
 									<span>Created at: { dateTimeUpdate(post.created_at) }</span>
 							</div>
 					</div>
-					<button onClick={ () => deletePost.mutate() }>X</button>
+					<button
+						onClick={ () => mutate(post._id) }
+					>X
+					</button>
 			</div>
 		);
 };

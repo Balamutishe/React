@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useMutateMessageAdd } from "../../hooks/api";
-import { Form } from "../Form/Form.tsx";
+import { Form } from "../Form/PostForm.tsx";
 import { List } from "../List/List.tsx";
 import { Pagination } from "../Pagination/Pagination.tsx";
 import c from "./Messages.module.css";

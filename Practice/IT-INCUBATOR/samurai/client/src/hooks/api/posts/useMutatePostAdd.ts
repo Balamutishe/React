@@ -4,14 +4,12 @@ import { useDispatch } from "react-redux";
 import { createPost } from "../../../api/posts/posts.ts";
 import { addPost } from "../../../redux/PostsSlice.ts";
 
-export const useMutatePostAdd = (postText: string) => {
-		const dispatch = useDispatch();
+export const useMutatePostAdd = () => {
 		const queryClient = useQueryClient();
+		const dispatch = useDispatch();
 		
 		return useMutation({
-				mutationFn: () => createPost(postText),
-				onSuccess: (data) => {
-						dispatch(addPost(data));
-				},
+				mutationFn: createPost,
+				onSuccess: (data) => dispatch(addPost(data)),
 		}, queryClient);
 };
