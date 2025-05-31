@@ -4,41 +4,43 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { TPost } from "../../api/posts/types.ts";
-import c from "./Form.module.css";
+import c from "./Posts.module.css";
 
 type TPostFormProps = {
-		postAddMutate: () => UseMutationResult<TPost, Error, string, unknown>;
+		postAdd: () => UseMutationResult<TPost, Error, string, unknown>;
 }
 
 const FormPostCreateSchema = z.object({
 		postText: z.string()
-		.min(10, "Длинна поста должна быть не менее 10 символов"),
+		.min(5, "Длинна чата должна быть не менее 5 символов"),
+		chatText: z.string(),
 });
 
 export const PostForm: FC<TPostFormProps> = ({
-		postAddMutate,
+		postAdd,
 }) => {
 		const { register, handleSubmit, formState: { errors } } = useForm({
 				resolver: zodResolver(FormPostCreateSchema),
 		});
 		
-		const { mutate } = postAddMutate();
+		const { mutate, isPending } = postAdd();
 		
 		return (<>
 					{ errors.postText?.message && <div
 						style={ { color: "red" } }
 					>Errors: { errors.postText.message }</div> }
 					<form
-						className={ c.form } onSubmit={ handleSubmit(({ postText }) => {
-							mutate(postText);
-					}) }
+						className={ c.form }
+						onSubmit={ handleSubmit(({ postText }) => {
+								mutate(postText);
+						}) }
 					>
 							<input
 								className={ c.input }
 								placeholder={ "Введите текст поста" }
 								{ ...register("postText") }
 							/>
-							<button className={ c.button }>
+							<button className={ c.button } disabled={ isPending }>
 									+
 							</button>
 					</form>

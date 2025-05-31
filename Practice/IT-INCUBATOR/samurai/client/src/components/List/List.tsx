@@ -1,3 +1,4 @@
+import { UseMutationResult } from "@tanstack/react-query";
 import { FC } from "react";
 import { TChat, TChatsList } from "../../api/chats/types.ts";
 import { TMessage, TMessagesList } from "../../api/messages/types.ts";
@@ -11,12 +12,13 @@ import c from "./List.module.css";
 
 type TListProps = {
 		list: TPostsList | TMessagesList | TChatsList | TUsersList;
+		itemDelete: () => UseMutationResult<string, Error, string, unknown>
 }
 
-export const List: FC<TListProps> = ({ list }) => {
+export const List: FC<TListProps> = ({ list, itemDelete }) => {
 		const handlerListItemView = (data: TChat | TMessage | TPost | TUser) => {
 				if ("postText" in data) {
-						return <Post post={ data }/>;
+						return <Post post={ data } postDelete={ itemDelete }/>;
 				} else if ("chatText" in data) {
 						return <ChatItem chat={ data }/>;
 				} else if ("messageText" in data) {

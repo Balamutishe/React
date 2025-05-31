@@ -1,12 +1,12 @@
-import { ChatsView } from "../../components/Chats/ChatsView.tsx";
-import { MessagesView } from "../../components/Messages/MessagesView.tsx";
+import ChatsContainer from "../../components/Chats/ChatsContainer.tsx";
+import MessagesContainer from "../../components/Messages/MessagesContainer.tsx";
 import c from "./DialogsPage.module.css";
 
 const DialogsPage = () => {
 		return (
 			<div className={ c.dialogs }>
-					<ChatsView/>
-					<MessagesView/>
+					<ChatsContainer/>
+					<MessagesContainer/>
 			</div>
 		);
 };

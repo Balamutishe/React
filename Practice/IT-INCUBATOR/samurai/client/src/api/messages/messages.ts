@@ -25,9 +25,9 @@ export async function getMessage(id: string): Promise<TMessage> {
 		.then(message => MessageSchema.parse(message));
 }
 
-export async function createMessage(
-	messageText: string, chatId: string,
-): Promise<TMessage> {
+export async function createMessage({
+		messageText, chatId,
+}): Promise<TMessage> {
 		return fetch("/api/messages", {
 				method: "POST",
 				headers: {

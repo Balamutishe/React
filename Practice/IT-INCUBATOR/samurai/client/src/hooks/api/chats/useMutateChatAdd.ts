@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 import { createChat } from "../../../api/chats/chats.ts";
 import { addChat } from "../../../redux/ChatsSlice.ts";
 
-export const useMutateChatAdd = (chatText: string) => {
+export const useMutateChatAdd = () => {
 		const queryClient = useQueryClient();
 		const dispatch = useDispatch();
 		
 		return useMutation({
-				mutationFn: () => createChat(chatText),
+				mutationFn: createChat,
 				onSuccess: (data) => dispatch(addChat(data)),
 		}, queryClient);
 };

@@ -7,11 +7,11 @@ import c from "./Posts.module.css";
 
 type TPostProps = {
 		post: TPost
-		postDeleteMutate: () => UseMutationResult<string, Error, string, unknown>
+		postDelete: () => UseMutationResult<string, Error, string, unknown>
 }
 
-export const Post: FC<TPostProps> = ({ post, postDeleteMutate }) => {
-		const { mutate } = postDeleteMutate();
+export const Post: FC<TPostProps> = ({ post, postDelete }) => {
+		const { mutate } = postDelete();
 		
 		return (
 			<div className={ c.post }>
