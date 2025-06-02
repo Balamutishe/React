@@ -26,15 +26,15 @@ export async function getMessage(id: string): Promise<TMessage> {
 }
 
 export async function createMessage({
-		messageText, chatId,
-}): Promise<TMessage> {
+		formText, chatId,
+}: { formText: string, chatId?: string }): Promise<TMessage> {
 		return fetch("/api/messages", {
 				method: "POST",
 				headers: {
 						"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-						messageText,
+						formText,
 						chatId,
 				}),
 		}).then(validateResponse).then((response) => response.json())

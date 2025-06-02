@@ -24,14 +24,16 @@ export async function getOneChat(id: string,
 		.then(chatData => ResponseResultGetOneChatSchema.parse(chatData));
 }
 
-export async function createChat(chatText: string): Promise<TChat> {
+export async function createChat({ formText }: {
+		formText: string
+}): Promise<TChat> {
 		return fetch("/api/chats", {
 				method: "POST",
 				headers: {
 						"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-						chatText,
+						formText,
 				}),
 		}).then(validateResponse).then((response) => response.json())
 		.then((newChatData: string) => ChatSchema.parse(newChatData));

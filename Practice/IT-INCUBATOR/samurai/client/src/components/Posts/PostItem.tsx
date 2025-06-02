@@ -5,14 +5,12 @@ import { TPost } from "../../api/posts/types.ts";
 import { dateTimeUpdate } from "../../utils/dateTimeUpdate.ts";
 import c from "./Posts.module.css";
 
-type TPostProps = {
+export type TPostProps = {
 		post: TPost
-		postDelete: () => UseMutationResult<string, Error, string, unknown>
+		deletePost: UseMutationResult<string, Error, string, unknown>
 }
 
-export const Post: FC<TPostProps> = ({ post, postDelete }) => {
-		const { mutate } = postDelete();
-		
+export const PostItem: FC<TPostProps> = ({ post, deletePost }) => {
 		return (
 			<div className={ c.post }>
 					<div className={ c.postContent }>
@@ -24,7 +22,8 @@ export const Post: FC<TPostProps> = ({ post, postDelete }) => {
 							</div>
 					</div>
 					<button
-						onClick={ () => mutate(post._id) }
+						onClick={ () => deletePost.mutate(post._id) }
+						disabled={ deletePost.isPending }
 					>X
 					</button>
 			</div>

@@ -6,23 +6,25 @@ import { TPost, TPostsList } from "../../api/posts/types.ts";
 import { TUser, TUsersList } from "../../api/users/types.ts";
 import { ChatItem } from "../Chats/ChatItem.tsx";
 import { MessageItem } from "../Messages/MessageItem.tsx";
-import { Post } from "../Posts/Post.tsx";
+import { PostItem } from "../Posts/PostItem.tsx";
 import { User } from "../Users/User.tsx";
 import c from "./List.module.css";
 
 type TListProps = {
-		list: TPostsList | TMessagesList | TChatsList | TUsersList;
-		itemDelete: () => UseMutationResult<string, Error, string, unknown>
+		list: TPostsList | TMessagesList | TChatsList | TUsersList
+		itemDelete: UseMutationResult<string, Error, string, unknown>
 }
 
-export const List: FC<TListProps> = ({ list, itemDelete }) => {
+export const List: FC<TListProps> = ({
+		list, itemDelete,
+}) => {
 		const handlerListItemView = (data: TChat | TMessage | TPost | TUser) => {
 				if ("postText" in data) {
-						return <Post post={ data } postDelete={ itemDelete }/>;
+						return <PostItem post={ data } deletePost={ itemDelete }/>;
 				} else if ("chatText" in data) {
-						return <ChatItem chat={ data }/>;
+						return <ChatItem chat={ data } deleteChat={ itemDelete }/>;
 				} else if ("messageText" in data) {
-						return <MessageItem message={ data }/>;
+						return <MessageItem message={ data } deleteMessage={ itemDelete }/>;
 				} else if ("username" in data) {
 						return <User user={ data }/>;
 				}
@@ -31,10 +33,11 @@ export const List: FC<TListProps> = ({ list, itemDelete }) => {
 		return (
 			<div className={ c.listContainer }>
 					<ul className={ c.list }>
-							{ list.length !== 0 ? list.map((item) => (
-								<li className={ c.listItem } key={ crypto.randomUUID() }>
-										{ handlerListItemView(item) }
-								</li>)) : (<div>Список пуст</div>) }
+							{ list && list.length !== 0 ?
+								list.map((item) => (
+									<li className={ c.listItem } key={ crypto.randomUUID() }>
+											{ handlerListItemView(item) }
+									</li>)) : (<div>Список пуст</div>) }
 					</ul>
 			</div>
 		);

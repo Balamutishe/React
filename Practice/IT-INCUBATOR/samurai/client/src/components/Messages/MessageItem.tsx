@@ -1,18 +1,17 @@
+import { UseMutationResult } from "@tanstack/react-query";
 import { FC } from "react";
 
 import { TMessage } from "../../api/messages/types.ts";
-import { useMutateMessageDelete } from "../../hooks/api";
 import c from "./Messages.module.css";
 
-type MessageItemProps = {
+export type TMessageItemProps = {
 		message: TMessage;
+		deleteMessage: UseMutationResult<string, Error, string, unknown>
 }
 
-export const MessageItem: FC<MessageItemProps> = ({
-		message,
+export const MessageItem: FC<TMessageItemProps> = ({
+		message, deleteMessage,
 }) => {
-		const deleteMessage = useMutateMessageDelete(message._id);
-		
 		return (
 			<div className={ c.message }>
 					<div className={ c.messageContent }>
@@ -26,7 +25,7 @@ export const MessageItem: FC<MessageItemProps> = ({
 					</div>
 					<div className={ c.messageActions }>
 							<button
-								onClick={ () => deleteMessage.mutate() }
+								onClick={ () => deleteMessage.mutate(message._id) }
 								disabled={ deleteMessage.isPending }
 							>
 									X

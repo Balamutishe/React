@@ -33,16 +33,21 @@
 
 .form {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
 
     margin-bottom: 1rem;
-    padding: 0.6rem 1.6rem;
+    padding: 0.6rem 1rem;
 
     border-radius: 0.6rem;
     border: 1px solid #1a1a1a;
 
     background-color: #242424;
+}
+
+.formErrors {
+    font-size: 0.8rem;
+    color: red;
 }
 
 .button {
