@@ -3,10 +3,11 @@ import { FC } from "react";
 import { TChat, TChatsList } from "../../api/chats/types.ts";
 import AddChatForm from "../AddItemForm/AddItemForm.tsx";
 import { List } from "../List/List.tsx";
+import { ChatItem } from "./ChatItem.tsx";
 import c from "./Chats.module.css";
 
 type TChatsProps = {
-		chats: TChatsList | undefined,
+		chats: TChatsList,
 		createChat: UseMutationResult<TChat, Error, {
 				formText: string
 		}, unknown>
@@ -21,7 +22,13 @@ export const Chats: FC<TChatsProps> = ({ chats, createChat, deleteChat }) => {
 									<h2 className={ c.title }>Chats</h2>
 							</div>
 							<List
-								list={ chats } itemDelete={ deleteChat }
+								listItems={
+										chats.map((chat) => (
+											<li key={ crypto.randomUUID() }>
+													<ChatItem deleteChat={ deleteChat } chat={ chat }/>
+											</li>))
+								}
+								listLength={ chats.length }
 							/>
 					</div>
 					<div className={ c.formContainer }>

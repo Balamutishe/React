@@ -5,6 +5,11 @@ import { z } from "zod";
 import { useMutateUserLogin, useMutateUserRegister } from "../../hooks/api";
 import c from "./AuthForm.module.css";
 
+type TAuthFormData = {
+		username: string;
+		password: string;
+}
+
 const AuthFormSchema = z.object({
 		username: z.string().min(3, "Введите не менее 3 символов"),
 		password: z.string().min(5, "Введите не менее 5 символов"),
@@ -13,7 +18,9 @@ const AuthFormSchema = z.object({
 export const AuthForm = () => {
 		const [authState, setAuthState] = useState("login");
 		
-		const { register, handleSubmit, formState: { errors } } = useForm(
+		const {
+				register, handleSubmit, formState: { errors },
+		} = useForm<TAuthFormData>(
 			{ resolver: zodResolver(AuthFormSchema) });
 		
 		const userRegister = useMutateUserRegister();

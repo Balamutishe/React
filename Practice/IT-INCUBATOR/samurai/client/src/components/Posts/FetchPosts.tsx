@@ -15,7 +15,7 @@ export const FetchPosts = () => {
 			Element={ <Posts
 				createPost={ createPost }
 				deletePost={ deletePost }
-				posts={ queryPosts.data }
+				posts={ queryPosts.data ? queryPosts.data : [] }
 			/> }
 			queryStatus={ queryPosts.status }
 			refetchFn={ queryPosts.refetch }

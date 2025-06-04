@@ -19,7 +19,7 @@ export const FetchMessages = () => {
 				chatId={ chatId }
 				createMessage={ createMessage }
 				deleteMessage={ deleteMessage }
-				messages={ queryMessages.data }
+				messages={ queryMessages.data ? queryMessages.data : [] }
 			/> }
 			queryStatus={ queryMessages.status }
 			refetchFn={ queryMessages.refetch }

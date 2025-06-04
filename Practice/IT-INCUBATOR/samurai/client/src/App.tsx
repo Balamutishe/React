@@ -22,8 +22,6 @@ const App = () => {
 							</BrowserRouter>
 					</Provider>
 			</QueryClientProvider>
-		
-		
 		);
 };
 
