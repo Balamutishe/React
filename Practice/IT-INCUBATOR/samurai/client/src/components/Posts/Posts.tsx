@@ -6,7 +6,7 @@ import { List } from "../List/List.tsx";
 import c from "./Posts.module.css";
 
 type TPostsProps = {
-		posts: TPostsList,
+		posts: TPostsList | undefined,
 		createPost: UseMutationResult<TPost, Error, {
 				formText: string
 		}, unknown>

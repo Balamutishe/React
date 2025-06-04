@@ -13,8 +13,11 @@ export const FetchPosts = () => {
 		
 		return <RenderElement
 			Element={ <Posts
-				createPost={ createPost } deletePost={ deletePost }
-				posts={ queryPosts.data ? queryPosts.data : [] }
-			/> } queryStatus={ queryPosts.status } refetchFn={ queryPosts.refetch }
+				createPost={ createPost }
+				deletePost={ deletePost }
+				posts={ queryPosts.data }
+			/> }
+			queryStatus={ queryPosts.status }
+			refetchFn={ queryPosts.refetch }
 		/>;
 };

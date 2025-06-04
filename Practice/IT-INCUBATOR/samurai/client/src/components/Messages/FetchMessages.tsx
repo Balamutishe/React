@@ -16,9 +16,10 @@ export const FetchMessages = () => {
 		
 		return <RenderElement
 			Element={ <Messages
-				chatId={ chatId } createMessage={ createMessage }
+				chatId={ chatId }
+				createMessage={ createMessage }
 				deleteMessage={ deleteMessage }
-				messages={ queryMessages.data ? queryMessages.data : [] }
+				messages={ queryMessages.data }
 			/> }
 			queryStatus={ queryMessages.status }
 			refetchFn={ queryMessages.refetch }

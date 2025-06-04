@@ -1,15 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 import { createChat } from "../../../api/chats/chats.ts";
-import { addChat } from "../../../redux/ChatsSlice.ts";
 
 export const useMutateChatAdd = () => {
 		const queryClient = useQueryClient();
-		const dispatch = useDispatch();
+		const navigate = useNavigate();
+		
 		
 		return useMutation({
 				mutationFn: createChat,
-				onSuccess: (data) => dispatch(addChat(data)),
+				onSuccess: async (data) => {
+						await queryClient.invalidateQueries({ queryKey: ["chats"] });
+						navigate(`/dialogs/${ data._id }`);
+				},
 		}, queryClient);
 };

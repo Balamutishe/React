@@ -11,7 +11,7 @@ import { User } from "../Users/User.tsx";
 import c from "./List.module.css";
 
 type TListProps = {
-		list: TPostsList | TMessagesList | TChatsList | TUsersList
+		list: TPostsList | TMessagesList | TChatsList | TUsersList | undefined
 		itemDelete: UseMutationResult<string, Error, string, unknown>
 }
 

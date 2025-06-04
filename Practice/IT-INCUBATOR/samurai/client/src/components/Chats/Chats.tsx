@@ -6,7 +6,7 @@ import { List } from "../List/List.tsx";
 import c from "./Chats.module.css";
 
 type TChatsProps = {
-		chats: TChatsList,
+		chats: TChatsList | undefined,
 		createChat: UseMutationResult<TChat, Error, {
 				formText: string
 		}, unknown>

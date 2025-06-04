@@ -13,9 +13,11 @@ export const FetchChats = () => {
 		
 		return <RenderElement
 			Element={ <Chats
-				chats={ queryChats.data ? queryChats.data : [] }
+				chats={ queryChats.data }
 				createChat={ createChat }
 				deleteChat={ deleteChat }
-			/> } queryStatus={ queryChats.status } refetchFn={ queryChats.refetch }
+			/> }
+			queryStatus={ queryChats.status }
+			refetchFn={ queryChats.refetch }
 		/>;
 };
