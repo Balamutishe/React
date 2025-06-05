@@ -44,12 +44,12 @@ router.post(
 	async (req, res) => {
 			try {
 					const userId = req.user._id;
-					const { chatText } = req.body;
+					const { formText } = req.body;
 					
 					if (userId) {
 							const statusCreate = await addChat(req.db, {
 									_id: crypto.randomUUID(),
-									chatText: !chatText || chatText === "" ? "Новый чат" : chatText,
+									chatText: !formText || formText === "" ? "Новый чат" : formText,
 									created_at: new Date(),
 									updated_at: new Date(),
 									userId: userId,

@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UseMutationResult } from "@tanstack/react-query";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router";
 import { z } from "zod";
 import { TChat } from "../../api/chats/types.ts";
 import { TMessage } from "../../api/messages/types.ts";
@@ -14,7 +15,6 @@ type TAddItemFormProps = {
 				chatId?: string
 		}, unknown>;
 		inputPlaceholder?: string;
-		chatId?: string;
 }
 
 const AddItemFormSchema = z.object({
@@ -23,11 +23,13 @@ const AddItemFormSchema = z.object({
 });
 
 const AddItemForm: FC<TAddItemFormProps> = ({
-		createItem, inputPlaceholder, chatId,
+		createItem, inputPlaceholder,
 }) => {
 		const {
 				register, handleSubmit, formState: { errors }, resetField,
 		} = useForm({ resolver: zodResolver(AddItemFormSchema) });
+		
+		const { chatId } = useParams();
 		
 		return (<>
 					{ errors.formText?.message && <span

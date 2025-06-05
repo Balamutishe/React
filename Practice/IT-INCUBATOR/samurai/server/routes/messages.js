@@ -46,12 +46,12 @@ router.post(
 	async (req, res) => {
 			try {
 					const user = req.user;
-					const { messageText, chatId } = req.body;
+					const { formText, chatId } = req.body;
 					
 					if (chatId && user) {
 							const statusCreate = await addMessage(req.db, {
 									_id: crypto.randomUUID(),
-									messageText: !messageText || messageText === "" ? "Новое сообщение" : messageText,
+									messageText: !formText || formText === "" ? "Новое сообщение" : formText,
 									created_at: new Date(),
 									updated_at: new Date(),
 									userImg: user.userImg,

@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import {
 		useMutateMessageAdd,
 		useMutateMessageDelete,
@@ -9,14 +8,12 @@ import { Messages } from "./Messages.tsx";
 
 
 export const FetchMessages = () => {
-		const { chatId, page } = useParams();
-		const queryMessages = useQueryGetAllMessages(chatId, page || "1");
-		const deleteMessage = useMutateMessageDelete(chatId);
+		const queryMessages = useQueryGetAllMessages();
+		const deleteMessage = useMutateMessageDelete();
 		const createMessage = useMutateMessageAdd();
 		
 		return <RenderElement
 			Element={ <Messages
-				chatId={ chatId }
 				createMessage={ createMessage }
 				deleteMessage={ deleteMessage }
 				messages={ queryMessages.data ? queryMessages.data : [] }

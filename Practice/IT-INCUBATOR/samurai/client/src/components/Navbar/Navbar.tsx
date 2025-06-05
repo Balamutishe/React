@@ -41,7 +41,7 @@ export const Navbar = () => {
 		
 		const handlerNavigateRefetchData = async (textLink: string) => {
 				if (textLink === "Dialogs") {
-						await queryClient.invalidateQueries({ queryKey: ["chats", "all"] });
+						await queryClient.invalidateQueries({ queryKey: ["chats"] });
 				}
 				
 				return;

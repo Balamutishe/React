@@ -37,13 +37,13 @@ router.post(
 	auth(),
 	async (req, res) => {
 			try {
-					const { postText } = req.body;
+					const { formText } = req.body;
 					const user = req.user;
 					
 					if (user) {
 							const statusCreate = await addPost(req.db, {
 									_id: crypto.randomUUID(),
-									postText: !postText || postText === "" ? "Новый пост" : postText,
+									postText: !formText || formText === "" ? "Новый пост" : formText,
 									created_at: new Date(),
 									updated_at: new Date(),
 									userId: user._id,
