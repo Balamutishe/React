@@ -1,21 +1,21 @@
 .list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .list > li {
-    width: 100%;
-    padding: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
 
-    background-color: lightgray;
+  background-color: lightgray;
 
-    border-radius: 5px;
+  border-radius: 5px;
 
-    text-align: start;
+  text-align: start;
 }
 
 .list > li:not(:last-child) {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }

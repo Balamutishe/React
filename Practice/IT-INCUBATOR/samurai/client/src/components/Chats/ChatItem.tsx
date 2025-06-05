@@ -7,22 +7,23 @@ import userImg from "../../assets/149071.png";
 import c from "./Chats.module.css";
 
 export type TChatItemProps = {
-		chat: TChat
-		deleteChat: UseMutationResult<string, Error, string, unknown>
-}
+  chat: TChat;
+  deleteChat: UseMutationResult<string, Error, string, unknown>;
+};
 
 export const ChatItem: FC<TChatItemProps> = ({ chat, deleteChat }) => {
-		return (
-			<div className={ c.chat }>
-					<img src={ userImg } alt={ userImg } className={ c.chatImg }/>
-					<Link
-						to={ `/dialogs/${ chat._id }` } className={ c.chatTitle }
-					>{ chat.chatText }</Link>
-					<button
-						onClick={ () => deleteChat.mutate(chat._id) }
-						disabled={ deleteChat.isPending }
-					>X
-					</button>
-			</div>
-		);
+  return (
+    <div className={c.chat}>
+      <img src={userImg} alt={userImg} className={c.chatImg} />
+      <Link to={`/dialogs/${chat._id}`} className={c.chatTitle}>
+        {chat.chatText}
+      </Link>
+      <button
+        onClick={() => deleteChat.mutate(chat._id)}
+        disabled={deleteChat.isPending}
+      >
+        X
+      </button>
+    </div>
+  );
 };

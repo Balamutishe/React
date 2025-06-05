@@ -1,16 +1,16 @@
 .main {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
 }
 
 .navbar {
-    padding: 1rem;
-    background-color: darkgoldenrod;
+  padding: 1rem;
+  background-color: darkgoldenrod;
 }
 
 .routes {
-    padding: 1rem;
+  padding: 1rem;
 
-    color: #1a1a1a;
-    background-color: #f9f9f9;
+  color: #1a1a1a;
+  background-color: #f9f9f9;
 }

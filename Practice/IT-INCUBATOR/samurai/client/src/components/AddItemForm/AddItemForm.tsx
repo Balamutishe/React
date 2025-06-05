@@ -10,53 +10,61 @@ import { TPost } from "../../api/posts/types.ts";
 import c from "./AddItemForm.module.css";
 
 type TAddItemFormProps = {
-		createItem: UseMutationResult<TChat | TPost | TMessage, Error, {
-				formText: string
-				chatId?: string
-		}, unknown>;
-		inputPlaceholder?: string;
-}
+  createItem: UseMutationResult<
+    TChat | TPost | TMessage,
+    Error,
+    {
+      formText: string;
+      chatId?: string;
+    },
+    unknown
+  >;
+  inputPlaceholder?: string;
+};
 
 const AddItemFormSchema = z.object({
-		formText: z.string()
-		.min(5, "Введите не менее 5 символов"),
+  formText: z.string().min(5, "Введите не менее 5 символов"),
 });
 
 const AddItemForm: FC<TAddItemFormProps> = ({
-		createItem, inputPlaceholder,
+  createItem,
+  inputPlaceholder,
 }) => {
-		const {
-				register, handleSubmit, formState: { errors }, resetField,
-		} = useForm({ resolver: zodResolver(AddItemFormSchema) });
-		
-		const { chatId } = useParams();
-		
-		return (<>
-					{ errors.formText?.message && <span
-						className={ c.formErrors }
-					>{ errors.formText.message }</span> }
-					<form
-						className={ c.form } onSubmit={ handleSubmit(({ formText }) => {
-							if (chatId) {
-									createItem.mutate({ formText, chatId });
-							} else {
-									createItem.mutate({ formText });
-							}
-							
-							resetField("formText");
-					}) }
-					>
-							<input
-								className={ c.input }
-								placeholder={ inputPlaceholder }
-								{ ...register("formText") }
-							/>
-							<button className={ c.button }>
-									+
-							</button>
-					</form>
-			</>
-		);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    resetField,
+  } = useForm({ resolver: zodResolver(AddItemFormSchema) });
+
+  const { chatId } = useParams();
+
+  return (
+    <>
+      {errors.formText?.message && (
+        <span className={c.formErrors}>{errors.formText.message}</span>
+      )}
+      <form
+        className={c.form}
+        onSubmit={handleSubmit(({ formText }) => {
+          if (chatId) {
+            createItem.mutate({ formText, chatId });
+          } else {
+            createItem.mutate({ formText });
+          }
+
+          resetField("formText");
+        })}
+      >
+        <input
+          className={c.input}
+          placeholder={inputPlaceholder}
+          {...register("formText")}
+        />
+        <button className={c.button}>+</button>
+      </form>
+    </>
+  );
 };
 
 export default AddItemForm;

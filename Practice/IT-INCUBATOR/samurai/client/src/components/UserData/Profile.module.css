@@ -1,25 +1,25 @@
 .userData {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .userImg {
-    height: 10rem;
-    width: 15%;
+  height: 10rem;
+  width: 15%;
 }
 
 .userDesc {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 
-    width: 80%;
+  width: 80%;
 }
 
 .userDescHeader > :first-child {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }

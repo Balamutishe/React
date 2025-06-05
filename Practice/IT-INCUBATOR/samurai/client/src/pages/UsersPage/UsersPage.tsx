@@ -1,11 +1,11 @@
-import UsersView from "../../components/Users/UsersView.tsx";
+import { FetchUsers } from "../../components/Users/FetchUsers.tsx";
 
 const UsersPage = () => {
-		return (
-			<div>
-					<UsersView/>
-			</div>
-		);
+  return (
+    <div>
+      <FetchUsers />
+    </div>
+  );
 };
 
 export default UsersPage;
