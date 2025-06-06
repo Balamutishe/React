@@ -7,7 +7,7 @@ import { RenderElement } from "../RenderElement/RenderElement.tsx";
 import { Posts } from "./Posts.tsx";
 
 export const FetchPosts = () => {
-  const queryPosts = useQueryGetAllPosts();
+  const { data, status, refetch } = useQueryGetAllPosts();
   const createPost = useMutatePostAdd();
   const deletePost = useMutatePostDelete();
 
@@ -17,11 +17,11 @@ export const FetchPosts = () => {
         <Posts
           createPost={createPost}
           deletePost={deletePost}
-          posts={queryPosts.data ? queryPosts.data : []}
+          posts={data ? data : []}
         />
       }
-      queryStatus={queryPosts.status}
-      refetchFn={queryPosts.refetch}
+      queryStatus={status}
+      refetchFn={refetch}
     />
   );
 };

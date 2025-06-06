@@ -6,26 +6,24 @@ import c from "./Users.module.css";
 import { User } from "./User.tsx";
 
 type TUsersProps = {
-  users: {
-    usersList: TUsersList;
-    pageCount: number;
-  };
+  usersList: TUsersList;
+  pageCount: number;
 };
 
-export const Users: FC<TUsersProps> = ({ users }) => {
+export const Users: FC<TUsersProps> = ({ usersList, pageCount }) => {
   return (
     <div className={c.users}>
       <div className={c.header}>
         <h2 className={c.title}>Users</h2>
-        <Pagination pageCount={users.pageCount} variant={"users"} />
+        <Pagination pageCount={pageCount} variant={"users"} />
       </div>
       <List
-        listItems={users.usersList.map((user) => (
+        listItems={usersList.map((user) => (
           <li key={crypto.randomUUID()}>
             <User user={user} />
           </li>
         ))}
-        listLength={users.usersList.length}
+        listLength={usersList.length}
       />
     </div>
   );

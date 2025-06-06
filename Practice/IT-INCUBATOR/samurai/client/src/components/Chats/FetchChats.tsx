@@ -7,7 +7,7 @@ import { RenderElement } from "../RenderElement/RenderElement.tsx";
 import { Chats } from "./Chats.tsx";
 
 export const FetchChats = () => {
-  const queryChats = useQueryGetAllChats();
+  const { data, status, refetch } = useQueryGetAllChats();
   const createChat = useMutateChatAdd();
   const deleteChat = useMutateChatDelete();
 
@@ -15,13 +15,13 @@ export const FetchChats = () => {
     <RenderElement
       Element={
         <Chats
-          chats={queryChats.data ? queryChats.data : []}
+          chats={data ? data : []}
           createChat={createChat}
           deleteChat={deleteChat}
         />
       }
-      queryStatus={queryChats.status}
-      refetchFn={queryChats.refetch}
+      queryStatus={status}
+      refetchFn={refetch}
     />
   );
 };

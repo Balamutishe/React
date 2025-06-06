@@ -28,7 +28,7 @@ export const Chats: FC<TChatsProps> = ({ chats, createChat, deleteChat }) => {
         </div>
         <List
           listItems={chats.map((chat) => (
-            <li key={crypto.randomUUID()}>
+            <li key={chat._id}>
               <ChatItem deleteChat={deleteChat} chat={chat} />
             </li>
           ))}

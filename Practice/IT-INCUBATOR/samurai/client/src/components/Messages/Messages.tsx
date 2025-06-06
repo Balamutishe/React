@@ -8,10 +8,8 @@ import { MessageItem } from "./MessageItem.tsx";
 import c from "./Messages.module.css";
 
 type TMessagesProps = {
-  messages: {
-    messagesList: TMessagesList;
-    pageCount: number;
-  };
+  messagesList: TMessagesList;
+  pageCount: number;
   createMessage: UseMutationResult<
     TMessage,
     Error,
@@ -25,7 +23,8 @@ type TMessagesProps = {
 };
 
 export const Messages: FC<TMessagesProps> = ({
-  messages,
+  messagesList,
+  pageCount,
   deleteMessage,
   createMessage,
 }) => {
@@ -34,15 +33,15 @@ export const Messages: FC<TMessagesProps> = ({
       <div>
         <div className={c.header}>
           <h2 className={c.title}>Messages</h2>
-          <Pagination pageCount={messages.pageCount} variant={"messages"} />
+          <Pagination pageCount={pageCount} variant={"messages"} />
         </div>
         <List
-          listItems={messages.messagesList.map((message) => (
+          listItems={messagesList.map((message) => (
             <li key={crypto.randomUUID()}>
               <MessageItem deleteMessage={deleteMessage} message={message} />
             </li>
           ))}
-          listLength={messages.messagesList.length}
+          listLength={messagesList.length}
         />
       </div>
       <AddMessageForm

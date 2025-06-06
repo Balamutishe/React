@@ -3,13 +3,18 @@ import { Users } from "./Users.tsx";
 import { RenderElement } from "../RenderElement/RenderElement.tsx";
 
 export const FetchUsers = () => {
-  const queryUsersGet = useQueryGetAllUsers();
+  const { data, status, refetch } = useQueryGetAllUsers();
 
   return (
     <RenderElement
-      Element={<Users users={queryUsersGet.data ? queryUsersGet.data : []} />}
-      queryStatus={queryUsersGet.status}
-      refetchFn={queryUsersGet.refetch}
+      Element={
+        <Users
+          usersList={data?.usersList ? data.usersList : []}
+          pageCount={data?.pageCount ? data.pageCount : 1}
+        />
+      }
+      queryStatus={status}
+      refetchFn={refetch}
     />
   );
 };

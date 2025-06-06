@@ -7,7 +7,7 @@ import { RenderElement } from "../RenderElement/RenderElement.tsx";
 import { Messages } from "./Messages.tsx";
 
 export const FetchMessages = () => {
-  const queryMessages = useQueryGetAllMessages();
+  const { status, data, refetch } = useQueryGetAllMessages();
   const deleteMessage = useMutateMessageDelete();
   const createMessage = useMutateMessageAdd();
 
@@ -17,11 +17,12 @@ export const FetchMessages = () => {
         <Messages
           createMessage={createMessage}
           deleteMessage={deleteMessage}
-          messages={queryMessages.data ? queryMessages.data : []}
+          messagesList={data?.messagesList ? data.messagesList : []}
+          pageCount={data?.pageCount ? data.pageCount : 1}
         />
       }
-      queryStatus={queryMessages.status}
-      refetchFn={queryMessages.refetch}
+      queryStatus={status}
+      refetchFn={refetch}
     />
   );
 };
