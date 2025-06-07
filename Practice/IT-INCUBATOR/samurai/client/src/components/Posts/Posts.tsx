@@ -8,14 +8,7 @@ import c from "./Posts.module.css";
 
 type TPostsProps = {
   posts: TPostsList;
-  createPost: UseMutationResult<
-    TPost,
-    Error,
-    {
-      formText: string;
-    },
-    unknown
-  >;
+  createPost: UseMutationResult<TPost, Error, { formText: string }, unknown>;
   deletePost: UseMutationResult<string, Error, string, unknown>;
 };
 

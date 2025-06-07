@@ -10,19 +10,19 @@ import store from "./redux";
 import "./App.css";
 
 const App = () => {
-		return (
-			<QueryClientProvider client={ queryClient }>
-					<ReactQueryDevtools initialIsOpen={ true }></ReactQueryDevtools>
-					<Provider store={ store }>
-							<BrowserRouter>
-									<div className="app-container">
-											<Header/>
-											<Main/>
-									</div>
-							</BrowserRouter>
-					</Provider>
-			</QueryClientProvider>
-		);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="app-container">
+            <Header />
+            <Main />
+          </div>
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
+  );
 };
 
 export default App;

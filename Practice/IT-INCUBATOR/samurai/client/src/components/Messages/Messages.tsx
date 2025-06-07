@@ -13,10 +13,7 @@ type TMessagesProps = {
   createMessage: UseMutationResult<
     TMessage,
     Error,
-    {
-      formText: string;
-      chatId?: string;
-    },
+    { formText: string; chatId?: string },
     unknown
   >;
   deleteMessage: UseMutationResult<string, Error, string, unknown>;

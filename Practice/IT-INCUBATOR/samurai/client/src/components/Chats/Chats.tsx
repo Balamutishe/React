@@ -8,14 +8,7 @@ import c from "./Chats.module.css";
 
 type TChatsProps = {
   chats: TChatsList;
-  createChat: UseMutationResult<
-    TChat,
-    Error,
-    {
-      formText: string;
-    },
-    unknown
-  >;
+  createChat: UseMutationResult<TChat, Error, { formText: string }, unknown>;
   deleteChat: UseMutationResult<string, Error, string, unknown>;
 };
 
