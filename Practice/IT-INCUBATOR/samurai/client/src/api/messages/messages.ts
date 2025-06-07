@@ -9,9 +9,9 @@ import {
 
 export async function getAllMessages(
   chatId: string,
-  page: string
+  page?: string
 ): Promise<TMessagesResponseData> {
-  return fetch(`/api/messages/${chatId}/${page}`, {
+  return fetch(`/api/messages/${chatId}?page=${page}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

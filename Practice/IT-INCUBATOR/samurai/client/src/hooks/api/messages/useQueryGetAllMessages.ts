@@ -1,16 +1,18 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 
 import { getAllMessages } from "../../../api/messages/messages.ts";
 
 export const useQueryGetAllMessages = () => {
   const queryClient = useQueryClient();
-  const { chatId, page } = useParams();
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get("page") || "1";
+  const { chatId } = useParams();
 
   return useQuery(
     {
-      queryFn: () => getAllMessages(chatId || "", page || "1"),
-      queryKey: ["messages", chatId],
+      queryFn: () => getAllMessages(chatId || "", page),
+      queryKey: ["messages", chatId, page],
       enabled: !!chatId,
     },
     queryClient

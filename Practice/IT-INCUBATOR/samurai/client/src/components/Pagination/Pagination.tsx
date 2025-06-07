@@ -21,9 +21,9 @@ export const Pagination: FC<TPaginationProps> = ({ pageCount, variant }) => {
   const togglePath = (pageNumber: number) => {
     switch (variant) {
       case "messages":
-        return `/dialogs/${activeChatId}/${pageNumber}`;
+        return `/dialogs/${activeChatId}?page=${pageNumber}`;
       case "users":
-        return `/users/${pageNumber}`;
+        return `/users?page=${pageNumber}`;
       default:
         return "/";
     }

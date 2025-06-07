@@ -15,9 +15,10 @@ router.use(
   async (req, res, next) => await fetchDb(req, res, next, "Social_Network")
 );
 
-router.get("/messages/:chatId/:page", auth(), async (req, res) => {
+router.get("/messages/:chatId", auth(), async (req, res) => {
   try {
-    const { chatId, page } = req.params;
+    const { chatId } = req.params;
+    const page = Number(req.query.page) || 1;
     const pageSize = 5;
 
     if (chatId) {
