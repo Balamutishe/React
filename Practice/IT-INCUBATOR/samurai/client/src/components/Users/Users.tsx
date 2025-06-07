@@ -15,7 +15,7 @@ export const Users: FC<TUsersProps> = ({ usersList, pageCount }) => {
     <div className={c.users}>
       <div className={c.header}>
         <h2 className={c.title}>Users</h2>
-        <Pagination pageCount={pageCount} variant={"users"} />
+        <Pagination pageCount={pageCount} path={`/users`} />
       </div>
       <List
         listItems={usersList.map((user) => (

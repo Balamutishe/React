@@ -4,16 +4,20 @@ import { getUserMe } from "../../../api/users/users.ts";
 import { setAuthState, setProfile } from "../../../redux/ProfileSlice.ts";
 
 export const useQueryMe = () => {
-		const queryClient = useQueryClient();
-		const dispatch = useDispatch();
-		
-		return useQuery({
-				queryFn: () => getUserMe().then((data) => {
-						dispatch(setProfile(data));
-						dispatch(setAuthState(true));
-						return data;
-				}),
-				queryKey: ["users", "me"],
-				retry: false,
-		}, queryClient);
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+
+  return useQuery(
+    {
+      queryFn: () =>
+        getUserMe().then((data) => {
+          dispatch(setProfile(data));
+          dispatch(setAuthState(true));
+          return data;
+        }),
+      queryKey: ["users", "me"],
+      retry: false,
+    },
+    queryClient
+  );
 };
