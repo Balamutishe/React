@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import {
   useMutateMessageAdd,
   useMutateMessageDelete,
@@ -10,6 +11,7 @@ export const FetchMessages = () => {
   const { status, data, refetch } = useQueryGetAllMessages();
   const deleteMessage = useMutateMessageDelete();
   const createMessage = useMutateMessageAdd();
+  const activeChatId = useParams().chatId || "";
 
   return (
     <RenderElement
@@ -19,6 +21,7 @@ export const FetchMessages = () => {
           deleteMessage={deleteMessage}
           messagesList={data?.messagesList ? data.messagesList : []}
           pageCount={data?.pageCount ? data.pageCount : 1}
+          activeChatId={activeChatId}
         />
       }
       queryStatus={status}

@@ -17,6 +17,7 @@ type TMessagesProps = {
     unknown
   >;
   deleteMessage: UseMutationResult<string, Error, string, unknown>;
+  activeChatId: string;
 };
 
 export const Messages: FC<TMessagesProps> = ({
@@ -24,13 +25,14 @@ export const Messages: FC<TMessagesProps> = ({
   pageCount,
   deleteMessage,
   createMessage,
+  activeChatId,
 }) => {
   return (
     <div className={c.messages}>
       <div>
         <div className={c.header}>
           <h2 className={c.title}>Messages</h2>
-          <Pagination pageCount={pageCount} variant={"messages"} />
+          <Pagination pageCount={pageCount} path={`/dialogs/${activeChatId}`} />
         </div>
         <List
           listItems={messagesList.map((message) => (
