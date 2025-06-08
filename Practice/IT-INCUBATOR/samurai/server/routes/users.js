@@ -124,7 +124,7 @@ router.patch("/users", auth(), async (req, res) => {
       if (statusUpdate.modifiedCount === 0) {
         res.status(400).send(`user ${req.user._id} not updated`);
       } else {
-        return res.status(200).json(omit(user, ["password"]));
+        return res.status(200).json(omit(req.user, ["password"]));
       }
     } else {
       res.status(404).send("userId not found");

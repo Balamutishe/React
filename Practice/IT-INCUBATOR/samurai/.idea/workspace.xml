@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddItemForm/AddItemForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddItemForm/AddItemForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/FetchMessages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/FetchMessages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Messages/Messages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useMutateMessageDelete.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/api/messages/useQueryGetAllMessages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/chats.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/posts.js" afterDir="false" />
-    </list>
+    <list default="true" id="e8946edc-981c-47b7-8703-1954117955b0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -229,6 +218,7 @@
       <workItem from="1749027653332" duration="14341000" />
       <workItem from="1749115979451" duration="5854000" />
       <workItem from="1749128685806" duration="604000" />
+      <workItem from="1749304080673" duration="32000" />
     </task>
     <servers />
   </component>
