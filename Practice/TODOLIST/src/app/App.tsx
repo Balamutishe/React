@@ -1,7 +1,14 @@
+import { Header } from "@widgets/Header/Header";
+import { Main } from "@widgets/Main/Main";
 import "./App.css";
+import { Navigation } from "@widgets/Navigation/Navigation";
 
-function App() {
-  return <></>;
-}
-
-export default App;
+export const App = () => {
+  return (
+    <div className="app-container">
+      <Navigation />
+      <Header />
+      <Main />
+    </div>
+  );
+};

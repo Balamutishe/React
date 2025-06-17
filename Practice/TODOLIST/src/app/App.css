@@ -1,6 +1,15 @@
 #root {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+}
+
+.app-container {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 1fr 11fr;
+  grid-template-areas:
+    "navigation header"
+    "navigation main";
+
+  height: 100vh;
 }
