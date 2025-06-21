@@ -23,8 +23,51 @@
   padding: 0.2rem;
 }
 
-.list > li > svg {
+.navIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   margin-right: 0.5rem;
+}
+
+.arrowIcon {
+  margin-left: 0.5rem;
+}
+
+.arrowIconUp {
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(180deg);
+}
+
+.navTasks {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  margin-bottom: 0.5rem;
+}
+
+.navTasksList {
+  margin-left: 2rem;
+}
+
+.navTasksList > ul {
+  border-left: 0.1rem solid rgba(255, 255, 255, 0.87);
+}
+
+.navTasksList > ul > li {
+  padding: 0.5rem;
+  margin-bottom: 0.3rem;
+
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.87);
+
+  line-height: normal;
+}
+
+.navTasksListInvisible {
+  display: none;
 }
 
 .navLink {

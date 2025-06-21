@@ -1,27 +1,33 @@
-import DashBoardIcon from "@shared/icons/dashboard.svg?react";
+import DashboardIcon from "@shared/icons/dashboard.svg?react";
 import TasksIcon from "@shared/icons/tasks.svg?react";
 import GoalsIcon from "@shared/icons/goals.svg?react";
 import TimeIcon from "@shared/icons/time.svg?react";
 import CalendarIcon from "@shared/icons/calendar.svg?react";
 import SettingsIcon from "@shared/icons/settings.svg?react";
 import LogoutIcon from "@shared/icons/logout.svg?react";
+import ArrowDownIcon from "@shared/icons/arrow_down.svg?react";
+import ArrowUpIcon from "@shared/icons/arrow_up.svg?react";
 
-export const handleSwitchIcon = (text: string) => {
+export const handleSwitchIcon = (text: string, className?: string) => {
   switch (text) {
-    case "DashBoard":
-      return <DashBoardIcon />;
+    case "Dashboard":
+      return <DashboardIcon className={className} />;
     case "Tasks":
-      return <TasksIcon />;
+      return <TasksIcon className={className} />;
     case "Goals":
-      return <GoalsIcon />;
+      return <GoalsIcon className={className} />;
     case "Time":
-      return <TimeIcon />;
+      return <TimeIcon className={className} />;
     case "Calendar":
-      return <CalendarIcon />;
+      return <CalendarIcon className={className} />;
     case "Settings":
-      return <SettingsIcon />;
+      return <SettingsIcon className={className} />;
     case "Logout":
-      return <LogoutIcon />;
+      return <LogoutIcon className={className} />;
+    case "ArrowDown":
+      return <ArrowDownIcon className={className} />;
+    case "ArrowUp":
+      return <ArrowUpIcon className={className} />;
     default:
       break;
   }
