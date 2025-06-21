@@ -21,6 +21,15 @@
   margin-right: 0.5rem;
 }
 
+.secondary {
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.5rem;
+
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgba(220, 220, 220, 0.87);
+}
+
 .primary {
   padding: 0.5rem 1rem;
 

@@ -1,7 +1,16 @@
+import { TasksTypeSwitcher } from "./TasksTypeSwitch";
+
 export const TasksPageContent = () => {
   return (
     <div>
-      <p>This is the content of the Tasks page.</p>
+      <TasksTypeSwitcher />
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
     </div>
   );
 };
