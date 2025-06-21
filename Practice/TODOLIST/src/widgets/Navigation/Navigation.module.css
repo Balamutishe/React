@@ -1,5 +1,42 @@
 .navigation {
   grid-area: navigation;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 1rem;
+
+  color: rgba(255, 255, 255, 0.87);
   background-color: rgba(35, 35, 35, 0.87);
+}
+
+.title {
+  margin-bottom: 2rem;
+}
+
+.list > li {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 0.3rem;
+  padding: 0.2rem;
+}
+
+.list > li > svg {
+  margin-right: 0.5rem;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.navSettings {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.navSettings > button:not(:last-child) {
+  margin-bottom: 0.3rem;
 }
