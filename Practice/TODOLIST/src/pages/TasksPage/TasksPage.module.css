@@ -1,0 +1,21 @@
+.tasksPage {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  border-radius: 0.5rem;
+
+  padding: 1rem;
+
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgba(255, 255, 255);
+}
+
+.tasksPageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+}

@@ -7,6 +7,8 @@ import SettingsIcon from "@shared/icons/settings.svg?react";
 import LogoutIcon from "@shared/icons/logout.svg?react";
 import ArrowDownIcon from "@shared/icons/arrow_down.svg?react";
 import ArrowUpIcon from "@shared/icons/arrow_up.svg?react";
+import AddIcon from "@shared/icons/add.svg?react";
+import SearchIcom from "@shared/icons/search.svg?react";
 
 export const handleSwitchIcon = (text: string, className?: string) => {
   switch (text) {
@@ -28,6 +30,10 @@ export const handleSwitchIcon = (text: string, className?: string) => {
       return <ArrowDownIcon className={className} />;
     case "ArrowUp":
       return <ArrowUpIcon className={className} />;
+    case "Add":
+      return <AddIcon className={className} />;
+    case "Search":
+      return <SearchIcom className={className} />;
     default:
       break;
   }

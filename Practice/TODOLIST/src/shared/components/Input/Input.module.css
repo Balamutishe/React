@@ -1,0 +1,39 @@
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  outline: 0.1rem solid rgb(209, 209, 209);
+  border-radius: 0.5rem;
+
+  padding: 0.25rem 0.5rem;
+
+  background-color: inherit;
+}
+
+.inputContainer > svg {
+  fill: rgb(209, 209, 209);
+}
+
+.inputContainer:focus-within {
+  outline-color: rgb(40, 60, 240, 0.8);
+}
+
+.inputContainer:focus-within > svg {
+  fill: rgb(40, 60, 240, 0.8);
+}
+
+.input {
+  width: 100%;
+
+  padding: 0.25rem 0.5rem;
+
+  color: rgba(0, 0, 0, 0.8);
+  background-color: inherit;
+
+  font-size: 1rem;
+}
+
+.input:hover {
+  cursor: pointer;
+}
