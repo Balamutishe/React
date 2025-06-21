@@ -2,17 +2,13 @@ import { Input } from "@shared/components/Input/Input";
 import c from "./TasksPage.module.css";
 import { Button } from "@shared/components/Button/Button";
 import { handleSwitchIcon } from "@shared/utils/handleSwitchIcon";
-import { useSelector } from "react-redux";
-import type { RootState } from "@entities/redux/store";
-import { useDispatch } from "react-redux";
 import { setSearchValue } from "@entities/redux/SearchValueSlice";
+import { useAppSelector, useAppDispatch } from "@entities/redux/store";
 
 export const TasksPageHeader = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const searchValue = useSelector(
-    (state: RootState) => state.searchValue.searchValue
-  );
+  const searchValue = useAppSelector((state) => state.searchValue.searchValue);
 
   const setSearchValueHandler = (value: string) => {
     dispatch(setSearchValue(value));
