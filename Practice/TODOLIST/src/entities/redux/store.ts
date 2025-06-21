@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchTasksReducer from "./SearchTasksSlice";
+import searchValueReducer from "./SearchValueSlice";
 
 const store = configureStore({
   reducer: {
-    searchTasks: searchTasksReducer,
+    searchValue: searchValueReducer,
   },
 });
 
