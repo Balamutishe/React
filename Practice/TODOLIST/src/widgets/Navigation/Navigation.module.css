@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  padding: 1rem;
+  padding: 1.5rem 1rem;
 
   color: rgba(255, 255, 255, 0.87);
   background-color: rgba(35, 35, 35, 0.87);
@@ -45,8 +45,6 @@
   display: flex;
   align-items: center;
   justify-content: start;
-
-  margin-bottom: 0.5rem;
 }
 
 .navTasksList {
@@ -84,4 +82,8 @@
 
 .navSettings > button:not(:last-child) {
   margin-bottom: 0.3rem;
+}
+
+.navSettings > button > span {
+  margin-right: 0.5rem;
 }
