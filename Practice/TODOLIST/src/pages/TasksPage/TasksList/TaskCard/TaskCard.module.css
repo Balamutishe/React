@@ -1,0 +1,58 @@
+.taskCard {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(206, 256, 250, 0.8);
+}
+
+.taskCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  position: relative;
+}
+
+.taskCardContent {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.taskCardActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskCardActionsList {
+  position: absolute;
+  right: 0;
+}
+
+.taskCardActionsListInvisible {
+  display: none;
+}
+
+.taskCardActionsList > li > button {
+  width: 100%;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+}
+
+.taskCardActionsList > li > button {
+  margin-bottom: 0.5rem;
+}
+
+.priorityHigh {
+  background-color: brown;
+}
+
+.priorityMedium {
+  background-color: darkgoldenrod;
+}
+
+.priorityLow {
+  background-color: rgba(206, 256, 250, 0.8);
+}

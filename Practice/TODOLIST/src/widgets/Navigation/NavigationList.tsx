@@ -2,7 +2,7 @@ import { useState } from "react";
 import c from "./Navigation.module.css";
 import { NavigationTasksList } from "./NavigationTasksList";
 import { NavigationLink } from "./NavLink";
-import { handleSwitchIcon } from "@shared/utils/handleSwitchIcon";
+import { handlerSwitchIcon } from "@shared/utils/handlerSwitchIcon";
 
 export const NavigationList = () => {
   const [isTasksListVisible, setIsTasksListVisible] = useState(false);
@@ -14,7 +14,7 @@ export const NavigationList = () => {
   return (
     <ul className={c.list}>
       <li key={crypto.randomUUID()} className={c.listItem}>
-        {handleSwitchIcon("Dashboard", c.navIcon)}
+        {handlerSwitchIcon("Dashboard", c.navIcon)}
         <NavigationLink to={"/dashboard"} textLink={"Dashboard"} />
       </li>
       <li
@@ -24,9 +24,9 @@ export const NavigationList = () => {
       >
         <div>
           <div className={c.navTasks}>
-            {handleSwitchIcon("Tasks", c.navIcon)}
+            {handlerSwitchIcon("Tasks", c.navIcon)}
             <NavigationLink to={"/tasks"} textLink={"Tasks"} />
-            {handleSwitchIcon(
+            {handlerSwitchIcon(
               "ArrowDown",
               !isTasksListVisible ? c.arrowIcon : c.arrowIconUp
             )}
@@ -35,7 +35,7 @@ export const NavigationList = () => {
         </div>
       </li>
       <li key={crypto.randomUUID()} className={c.listItem}>
-        {handleSwitchIcon("Calendar", c.navIcon)}
+        {handlerSwitchIcon("Calendar", c.navIcon)}
         <NavigationLink to={"/calendar"} textLink={"Calendar"} />
       </li>
     </ul>

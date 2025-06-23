@@ -4,7 +4,7 @@ import c from "./Button.module.css";
 interface IButtonProps {
   text?: string;
   children?: ReactNode;
-  variant?: "default" | "primary" | "secondary" | "danger";
+  variant?: "default" | "primary" | "secondary" | "danger" | "icon";
   onClick?: () => void;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";

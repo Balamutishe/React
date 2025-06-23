@@ -1,7 +1,7 @@
 import { Input } from "@shared/components/Input/Input";
 import c from "./TasksPage.module.css";
 import { Button } from "@shared/components/Button/Button";
-import { handleSwitchIcon } from "@shared/utils/handleSwitchIcon";
+import { handlerSwitchIcon } from "@shared/utils/handlerSwitchIcon";
 import { setSearchValue } from "@entities/redux/SearchValueSlice";
 import { useAppSelector, useAppDispatch } from "@entities/redux/store";
 
@@ -21,12 +21,12 @@ export const TasksPageHeader = () => {
         type="text"
         placeholder="Search tasks..."
         onChange={(e) => setSearchValueHandler(e.target.value)}
-        children={handleSwitchIcon("Search")}
+        children={handlerSwitchIcon("Search")}
       />
       <Button
         text="Add new tasks list"
         variant="primary"
-        children={handleSwitchIcon("Add")}
+        children={handlerSwitchIcon("Add")}
       />
     </div>
   );

@@ -8,9 +8,9 @@ import LogoutIcon from "@shared/icons/logout.svg?react";
 import ArrowDownIcon from "@shared/icons/arrow_down.svg?react";
 import ArrowUpIcon from "@shared/icons/arrow_up.svg?react";
 import AddIcon from "@shared/icons/add.svg?react";
-import SearchIcom from "@shared/icons/search.svg?react";
+import SearchIcon from "@shared/icons/search.svg?react";
 
-export const handleSwitchIcon = (text: string, className?: string) => {
+export const handlerSwitchIcon = (text: string, className?: string) => {
   switch (text) {
     case "Dashboard":
       return <DashboardIcon className={className} />;
@@ -33,7 +33,7 @@ export const handleSwitchIcon = (text: string, className?: string) => {
     case "Add":
       return <AddIcon className={className} />;
     case "Search":
-      return <SearchIcom className={className} />;
+      return <SearchIcon className={className} />;
     default:
       break;
   }
