@@ -23,20 +23,23 @@ export const fetchUserChange = (userData: Partial<TUser>): Promise<TUser> => {
     .then((data) => UserSchema.parse(data));
 };
 
-export const fetchUserDelete = (id: Pick<TUser, "id">): Promise<string> => {
+export const fetchUserDelete = (id: string): Promise<string> => {
   return fetch(`/api/users/${id}`, { method: "DELETE" })
     .then(validateResponse)
     .then((response) => response.json());
 };
 
-export const fetchUserLogin = (userData: Omit<TUser, "id">): Promise<void> => {
+export const fetchUserLogin = (userDataLogin: {
+  username: string;
+  password: string;
+}): Promise<void> => {
   return fetch("/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userData,
+      userDataLogin,
     }),
   })
     .then(validateResponse)
@@ -44,7 +47,9 @@ export const fetchUserLogin = (userData: Omit<TUser, "id">): Promise<void> => {
     .then(() => undefined);
 };
 
-export const fetchUserRegister = (registerData: {
+export const fetchUserRegister = (userDataRegister: {
+  name: string;
+  surname: string;
   email: string;
   password: string;
 }): Promise<TUser> => {
@@ -54,7 +59,7 @@ export const fetchUserRegister = (registerData: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      registerData,
+      userDataRegister,
     }),
   })
     .then(validateResponse)
