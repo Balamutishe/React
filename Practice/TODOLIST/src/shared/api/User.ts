@@ -43,15 +43,14 @@ export const fetchUserLogin = (userDataLogin: {
     }),
   })
     .then(validateResponse)
-    .then((response) => response.json)
+    .then((response) => response.json())
     .then((data) => UserSchema.parse(data));
 };
 
-export const fetchUserLogout = () => {
+export const fetchUserLogout = (): Promise<string> => {
   return fetch("/api/users/logout", { method: "DELETE" })
     .then(validateResponse)
-    .then((response) => response.json)
-    .then(() => undefined);
+    .then((response) => response.json());
 };
 
 export const fetchUserRegister = (userDataRegister: {
@@ -70,6 +69,6 @@ export const fetchUserRegister = (userDataRegister: {
     }),
   })
     .then(validateResponse)
-    .then((response) => response.json)
+    .then((response) => response.json())
     .then((data) => UserSchema.parse(data));
 };
