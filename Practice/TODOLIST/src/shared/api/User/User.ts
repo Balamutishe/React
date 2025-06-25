@@ -8,7 +8,7 @@ export const fetchUserMe = (): Promise<TUser> => {
     .then((data) => UserSchema.parse(data));
 };
 
-export const fetchUserChange = (userData: Partial<TUser>): Promise<void> => {
+export const fetchUserChange = (userData: Partial<TUser>): Promise<TUser> => {
   return fetch(`/api/users/${userData.id}`, {
     method: "PATCH",
     headers: {
@@ -20,14 +20,13 @@ export const fetchUserChange = (userData: Partial<TUser>): Promise<void> => {
   })
     .then(validateResponse)
     .then((response) => response.json())
-    .then(() => undefined);
+    .then((data) => UserSchema.parse(data));
 };
 
-export const fetchUserDelete = (id: Pick<TUser, "id">): Promise<void> => {
+export const fetchUserDelete = (id: Pick<TUser, "id">): Promise<string> => {
   return fetch(`/api/users/${id}`, { method: "DELETE" })
     .then(validateResponse)
-    .then((response) => response.json())
-    .then(() => undefined);
+    .then((response) => response.json());
 };
 
 export const fetchUserLogin = (userData: Omit<TUser, "id">): Promise<void> => {
