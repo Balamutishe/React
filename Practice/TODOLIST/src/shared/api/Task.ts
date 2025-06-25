@@ -45,7 +45,7 @@ export const fetchTaskChange = (taskData: Partial<TTask>): Promise<TTask> => {
     .then((data) => TaskSchema.parse(data));
 };
 
-export const fetchTaskDelete = (id: Pick<TTask, "id">): Promise<string> => {
+export const fetchTaskDelete = (id: string): Promise<string> => {
   return fetch(`/api/tasks/${id}`, { method: "DELETE" })
     .then(validateResponse)
     .then((response) => response.json());
