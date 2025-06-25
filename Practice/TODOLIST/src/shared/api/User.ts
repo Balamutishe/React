@@ -2,7 +2,7 @@ import { UserSchema, type TUser } from "@entities/types/User";
 import { validateResponse } from "@shared/utils/validateResponse";
 
 export const fetchUserMe = (): Promise<TUser> => {
-  return fetch("/api/me", { method: "GET" })
+  return fetch("/api/users/me", { method: "GET" })
     .then(validateResponse)
     .then((response) => response.json())
     .then((data) => UserSchema.parse(data));
@@ -32,8 +32,8 @@ export const fetchUserDelete = (id: string): Promise<string> => {
 export const fetchUserLogin = (userDataLogin: {
   username: string;
   password: string;
-}): Promise<void> => {
-  return fetch("/api/users", {
+}): Promise<TUser> => {
+  return fetch("/api/users/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,6 +42,13 @@ export const fetchUserLogin = (userDataLogin: {
       userDataLogin,
     }),
   })
+    .then(validateResponse)
+    .then((response) => response.json)
+    .then((data) => UserSchema.parse(data));
+};
+
+export const fetchUserLogout = () => {
+  return fetch("/api/users/logout", { method: "DELETE" })
     .then(validateResponse)
     .then((response) => response.json)
     .then(() => undefined);
@@ -53,7 +60,7 @@ export const fetchUserRegister = (userDataRegister: {
   email: string;
   password: string;
 }): Promise<TUser> => {
-  return fetch("/api/users", {
+  return fetch("/api/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
