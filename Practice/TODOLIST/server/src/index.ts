@@ -4,6 +4,14 @@ import { randomUUID } from "crypto";
 const app = express();
 const port = process.env.PORT || 3000;
 
+const HTTP_STATUSES = {
+  OK_200: 200,
+  CREATED_201: 201,
+  NO_CONTENT_204: 204,
+  BAD_REQUEST_400: 400,
+  NOT_FOUND_404: 404,
+};
+
 const jsonBodyMiddleware = express.json();
 app.use(jsonBodyMiddleware);
 
@@ -57,25 +65,25 @@ app.get("/tasks", (req, res) => {
 
 app.get("/tasks/:id", (req, res) => {
   if (!req.params.id) {
-    res.sendStatus(400);
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
   const task = db.tasks.find((c) => c.id === req.params.id);
 
   if (!task) {
-    res.sendStatus(404);
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
     return;
   }
 
-  res.status(200).json(task);
+  res.status(HTTP_STATUSES.OK_200).json(task);
 });
 
 app.post("/tasks", (req, res) => {
   const tasks = [...db.tasks];
 
   if (!req.body.title) {
-    res.sendStatus(400);
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
@@ -93,10 +101,12 @@ app.post("/tasks", (req, res) => {
   tasks.push(newTask);
 
   if (tasks.length === db.tasks.length) {
-    res.status(404).json({ message: "task not created" });
+    res
+      .status(HTTP_STATUSES.NOT_FOUND_404)
+      .json({ message: "task not created" });
   } else {
     res
-      .status(201)
+      .status(HTTP_STATUSES.CREATED_201)
       .json({ message: "task successfully created", data: newTask });
   }
 });
@@ -105,7 +115,7 @@ app.patch("/tasks/:id", (req, res) => {
   let tasks = [...db.tasks];
 
   if (!req.params.id) {
-    res.sendStatus(400);
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
@@ -121,7 +131,7 @@ app.patch("/tasks/:id", (req, res) => {
   });
 
   res
-    .status(201)
+    .status(HTTP_STATUSES.OK_200)
     .json({ message: "Array modified successfully", data: updateTasks });
 });
 
@@ -129,16 +139,20 @@ app.delete("/tasks/:id", (req, res) => {
   let tasks = [...db.tasks];
 
   if (!req.params.id) {
-    res.sendStatus(404);
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
   tasks = tasks.filter((c) => c.id === req.params.id);
 
   if (tasks.length === db.tasks.length) {
-    res.status(404).json({ message: "task not deleted" });
+    res
+      .status(HTTP_STATUSES.NOT_FOUND_404)
+      .json({ message: "task not deleted" });
   } else {
-    res.status(200).json({ message: "task successfully delete" });
+    res
+      .status(HTTP_STATUSES.NO_CONTENT_204)
+      .json({ message: "task successfully delete" });
   }
 });
 
