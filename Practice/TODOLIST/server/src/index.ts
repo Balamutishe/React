@@ -10,7 +10,7 @@ app.use(jsonBodyMiddleware);
 const db = {
   tasks: [
     {
-      id: randomUUID(),
+      id: "1",
       title: "Task1",
       status: "success",
       description: "Task description",
@@ -18,7 +18,7 @@ const db = {
       due_date: new Date(),
     },
     {
-      id: randomUUID(),
+      id: "2",
       title: "Task2",
       status: "success",
       description: "Task description",
@@ -26,7 +26,7 @@ const db = {
       due_date: new Date(),
     },
     {
-      id: randomUUID(),
+      id: "3",
       title: "Task3",
       status: "not completed",
       description: "Task description",
@@ -34,7 +34,7 @@ const db = {
       due_date: new Date(),
     },
     {
-      id: randomUUID(),
+      id: "4",
       title: "Task4",
       status: "not completed",
       description: "Task description",
@@ -45,15 +45,14 @@ const db = {
 };
 
 app.get("/tasks", (req, res) => {
-  let foundTasks = db.tasks;
+  let tasks = db.tasks;
 
   if (req.query.title) {
-    foundTasks = foundTasks.filter((c) =>
-      c.title.includes(req.query.title as string)
-    );
+    const searchString = req.query.title.toString();
+    tasks = tasks.filter((c) => c.title.includes(searchString));
   }
 
-  res.json(foundTasks);
+  res.json(tasks);
 });
 
 app.get("/tasks/:id", (req, res) => {
@@ -62,17 +61,19 @@ app.get("/tasks/:id", (req, res) => {
     return;
   }
 
-  const foundTasks = db.tasks.find((c) => c.id === req.params.id);
+  const task = db.tasks.find((c) => c.id === req.params.id);
 
-  if (!foundTasks) {
+  if (!task) {
     res.sendStatus(404);
     return;
   }
 
-  res.json(foundTasks);
+  res.status(200).json(task);
 });
 
 app.post("/tasks", (req, res) => {
+  const tasks = [...db.tasks];
+
   if (!req.body.title) {
     res.sendStatus(400);
     return;
@@ -89,33 +90,35 @@ app.post("/tasks", (req, res) => {
     due_date: new Date(),
   };
 
-  db.tasks.push(newTask);
+  tasks.push(newTask);
 
-  res.status(201).json(newTask);
+  if (tasks.length === db.tasks.length) {
+    res.status(404).json({ message: "task not created" });
+  } else {
+    res
+      .status(201)
+      .json({ message: "task successfully created", data: newTask });
+  }
 });
 
 app.patch("/tasks/:id", (req, res) => {
+  let tasks = [...db.tasks];
+
   if (!req.params.id) {
     res.sendStatus(400);
     return;
   }
 
-  const updateTasks = db.tasks.map((c) => {
-    if (c.id === req.params.id && req.body.title) {
+  const updateTasks = tasks.map((c) => {
+    if (c.id === req.params.id && req.body) {
       return {
         ...c,
-        title: req.body.title,
+        ...req.body,
       };
     }
 
     return c;
   });
-
-  if (db.tasks.toString() === updateTasks.toString()) {
-    res
-      .status(204)
-      .json({ message: "The array is not modified", data: updateTasks });
-  }
 
   res
     .status(201)
@@ -123,18 +126,20 @@ app.patch("/tasks/:id", (req, res) => {
 });
 
 app.delete("/tasks/:id", (req, res) => {
+  let tasks = [...db.tasks];
+
   if (!req.params.id) {
     res.sendStatus(404);
     return;
   }
 
-  db.tasks = db.tasks.filter((c) => c.id === req.params.id);
+  tasks = tasks.filter((c) => c.id === req.params.id);
 
-  if (db.tasks.find((c) => c.id === req.params.id)) {
-    res.status(404).json({ errorMessage: "Course not deleted" });
+  if (tasks.length === db.tasks.length) {
+    res.status(404).json({ message: "task not deleted" });
+  } else {
+    res.status(200).json({ message: "task successfully delete" });
   }
-
-  res.sendStatus(204);
 });
 
 app.listen(port, () => {
