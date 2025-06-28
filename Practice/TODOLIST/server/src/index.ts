@@ -1,5 +1,6 @@
 import express from "express";
 import { randomUUID } from "crypto";
+import { TTaskBodyModel, TTaskParamsModel, TTaskQueryModel } from "./models";
 import {
   TRequestWithBody,
   TRequestWithParams,
@@ -10,10 +11,8 @@ import {
   TResponseTaskGetOne,
   TResponseTaskPatch,
   TResponseTasksGetAll,
-  TTask,
   TTasksList,
 } from "./types";
-import { TTaskBodyModel, TTaskParamsModel, TTaskQueryModel } from "./models";
 
 const app = express();
 const port = process.env.PORT || 3000;
