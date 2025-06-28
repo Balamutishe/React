@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { randomUUID } from "crypto";
 import { TTaskBodyModel, TTaskParamsModel, TTaskQueryModel } from "../models";
 import {
   TRequestWithBody,
@@ -14,24 +13,30 @@ import {
 } from "../types";
 import { db } from "../db/db";
 import { HTTP_STATUSES } from "../utils";
+import {
+  taskCreate,
+  taskDelete,
+  taskFindById,
+  tasksFilterBySearchValue,
+  tasksUpdate,
+} from "../repository";
 
-const router = Router();
+export const taskRouter = Router();
 
-router.get(
+taskRouter.get(
   "/",
   (req: TRequestWithQuery<TTaskQueryModel>, res: TResponseTasksGetAll) => {
     let tasks = [...db.tasks];
 
     if (req.query.title) {
-      const searchString = req.query.title.toString();
-      tasks = tasks.filter((c) => c.title.includes(searchString));
+      tasks = tasksFilterBySearchValue(tasks, req.query.title);
     }
 
     res.status(HTTP_STATUSES.OK_200).json(tasks);
   }
 );
 
-router.post(
+taskRouter.post(
   "/",
   (req: TRequestWithBody<TTaskBodyModel>, res: TResponseTaskCreate) => {
     const tasks = [...db.tasks];
@@ -41,18 +46,7 @@ router.post(
       return;
     }
 
-    const newTask = {
-      id: randomUUID(),
-      title: req.body.title,
-      status: "not completed",
-      description: req.body.description
-        ? req.body.description
-        : "Task description",
-      priority: req.body.priority ? req.body.priority : "low",
-      due_date: new Date().toDateString(),
-    };
-
-    tasks.push(newTask);
+    const newTask = taskCreate(db.tasks, req.body);
 
     if (tasks.length === db.tasks.length) {
       res
@@ -66,7 +60,7 @@ router.post(
   }
 );
 
-router.get(
+taskRouter.get(
   "/:id",
   (req: TRequestWithParams<TTaskParamsModel>, res: TResponseTaskGetOne) => {
     const tasks = [...db.tasks];
@@ -76,7 +70,7 @@ router.get(
       return;
     }
 
-    const task = tasks.find((c) => c.id === req.params.id);
+    const task = taskFindById(tasks, req.params.id);
 
     if (!task) {
       res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
@@ -87,7 +81,7 @@ router.get(
   }
 );
 
-router.patch(
+taskRouter.patch(
   "/:id",
   (
     req: TRequestWithParamsAndBody<TTaskParamsModel, TTaskBodyModel>,
@@ -100,24 +94,15 @@ router.patch(
       return;
     }
 
-    const updateTasks = tasks.map((c) => {
-      if (c.id === req.params.id && req.body) {
-        return {
-          ...c,
-          ...req.body,
-        };
-      }
-
-      return c;
-    });
+    const tasksNew = tasksUpdate(tasks, req.params.id, req.body);
 
     res
       .status(HTTP_STATUSES.OK_200)
-      .json({ message: "Tasks modified successfully", data: updateTasks });
+      .json({ message: "Tasks modified successfully", data: tasksNew });
   }
 );
 
-router.delete(
+taskRouter.delete(
   "/:id",
   (req: TRequestWithParams<TTaskParamsModel>, res: TResponseTaskDelete) => {
     let tasks = [...db.tasks];
@@ -127,7 +112,7 @@ router.delete(
       return;
     }
 
-    tasks = tasks.filter((c) => c.id === req.params.id);
+    tasks = taskDelete(tasks, req.params.id);
 
     if (tasks.length === db.tasks.length) {
       res
@@ -140,5 +125,3 @@ router.delete(
     }
   }
 );
-
-export default router;
