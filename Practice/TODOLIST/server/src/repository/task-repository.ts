@@ -1,8 +1,7 @@
-import { TTaskBodyModel } from "../models";
-import { TTasksList } from "../types";
+import { TTasksList, TTaskBody } from "../types";
 import { randomUUID } from "crypto";
 
-export const taskCreate = (db: TTasksList, taskData: TTaskBodyModel) => {
+export const taskCreate = (db: TTasksList, taskData: TTaskBody) => {
   const newTask = {
     id: randomUUID(),
     title: taskData.title ? taskData.title : "New task",
@@ -33,7 +32,7 @@ export const taskFindById = (db: TTasksList, id: string) => {
 export const tasksUpdate = (
   db: TTasksList,
   id: string,
-  dataUpdate: TTaskBodyModel
+  dataUpdate: TTaskBody
 ) => {
   return db.map((c) => {
     if (c.id === id && dataUpdate) {

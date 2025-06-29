@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { TTaskBodyModel, TTaskParamsModel, TTaskQueryModel } from "../models";
 import {
   TRequestWithBody,
   TRequestWithParams,
@@ -10,6 +9,9 @@ import {
   TResponseTaskGetOne,
   TResponseTaskPatch,
   TResponseTasksGetAll,
+  TTaskBody,
+  TTaskParams,
+  TTaskQuery,
 } from "../types";
 import { db } from "../db/db";
 import { HTTP_STATUSES } from "../utils";
@@ -20,12 +22,43 @@ import {
   tasksFilterBySearchValue,
   tasksUpdate,
 } from "../repository";
+import { taskBodyParser } from "../middleware/taskBodyParser";
 
 export const taskRouter = Router();
+//   title: z
+//     .string()
+//     .min(3, "The minimum length of the title is at least three characters")
+//     .max(
+//       50,
+//       "The maximum length of the title is no more than fifty characters"
+//     ),
+//   status: z.string().optional(),
+//   description: z.string().optional(),
+//   priority: z.string().optional(),
+//   due_date: z.string().optional(),
+// });
+
+// const TaskBodyParserMiddleware =
+//   () => (req: Request, res: Response, next: NextFunction) => {
+//     const bodyResult = TaskBodySchema.safeParse(req.body);
+
+//     if (bodyResult.success) {
+//       next();
+//     } else {
+//       const errors = bodyResult.error.errors.map((err) => {
+//         return {
+//           errorField: err.path.toString(),
+//           message: err.message,
+//         };
+//       });
+
+//       res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errors);
+//     }
+//   };
 
 taskRouter.get(
   "/",
-  (req: TRequestWithQuery<TTaskQueryModel>, res: TResponseTasksGetAll) => {
+  (req: TRequestWithQuery<TTaskQuery>, res: TResponseTasksGetAll) => {
     let tasks = [...db.tasks];
 
     if (req.query.title) {
@@ -38,20 +71,16 @@ taskRouter.get(
 
 taskRouter.post(
   "/",
-  (req: TRequestWithBody<TTaskBodyModel>, res: TResponseTaskCreate) => {
+  taskBodyParser(),
+  (req: TRequestWithBody<TTaskBody>, res: TResponseTaskCreate) => {
     const tasks = [...db.tasks];
-
-    if (!req.body.title) {
-      res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
-      return;
-    }
 
     const newTask = taskCreate(db.tasks, req.body);
 
     if (tasks.length === db.tasks.length) {
       res
         .status(HTTP_STATUSES.NOT_FOUND_404)
-        .json({ message: "task not created" });
+        .send({ message: "task not created" });
     } else {
       res
         .status(HTTP_STATUSES.CREATED_201)
@@ -62,7 +91,7 @@ taskRouter.post(
 
 taskRouter.get(
   "/:id",
-  (req: TRequestWithParams<TTaskParamsModel>, res: TResponseTaskGetOne) => {
+  (req: TRequestWithParams<TTaskParams>, res: TResponseTaskGetOne) => {
     const tasks = [...db.tasks];
 
     if (!req.params.id) {
@@ -83,8 +112,9 @@ taskRouter.get(
 
 taskRouter.patch(
   "/:id",
+  taskBodyParser(),
   (
-    req: TRequestWithParamsAndBody<TTaskParamsModel, TTaskBodyModel>,
+    req: TRequestWithParamsAndBody<TTaskParams, TTaskBody>,
     res: TResponseTaskPatch
   ) => {
     let tasks = [...db.tasks];
@@ -104,7 +134,7 @@ taskRouter.patch(
 
 taskRouter.delete(
   "/:id",
-  (req: TRequestWithParams<TTaskParamsModel>, res: TResponseTaskDelete) => {
+  (req: TRequestWithParams<TTaskParams>, res: TResponseTaskDelete) => {
     let tasks = [...db.tasks];
 
     if (!req.params.id) {
