@@ -1,9 +1,13 @@
-import { TTasksList, TTaskBody } from "../types";
+import { TTaskBody, TDbTasks, TTasksList, TTask } from "../types";
 import { randomUUID } from "crypto";
+import { Collection, OptionalId, Db } from "mongodb";
 
-export const taskCreate = (db: TTasksList, taskData: TTaskBody) => {
+export const tasksGetAll = async (db: Db) => {
+  return await db.collection("tasks").find().toArray();
+};
+
+export const taskCreate = async (db: Db, taskData: TTaskBody) => {
   const newTask = {
-    id: randomUUID(),
     title: taskData.title ? taskData.title : "New task",
     status: "not completed",
     description: taskData.description
@@ -13,39 +17,28 @@ export const taskCreate = (db: TTasksList, taskData: TTaskBody) => {
     due_date: new Date().toDateString(),
   };
 
-  db.push(newTask);
-
-  return newTask;
+  return await db.collection("tasks").insertOne(newTask);
 };
 
-export const tasksFilterBySearchValue = (
-  db: TTasksList,
-  searchValue: string
+export const tasksFilterBySearchValue = async (
+  db: Db,
+  searchData: { title: string }
 ) => {
-  return db.filter((c) => c.title.includes(searchValue));
+  return await db.collection("tasks").find(searchData).toArray();
 };
 
-export const taskFindById = (db: TTasksList, id: string) => {
-  return db.find((c) => c.id === id);
+export const taskFindById = async (db: Collection<TTasksList>, id: string) => {
+  return await db.findOne({ id });
 };
 
-export const tasksUpdate = (
-  db: TTasksList,
+export const tasksUpdate = async (
+  db: Collection<TTasksList>,
   id: string,
   dataUpdate: TTaskBody
 ) => {
-  return db.map((c) => {
-    if (c.id === id && dataUpdate) {
-      return {
-        ...c,
-        ...dataUpdate,
-      };
-    }
-
-    return c;
-  });
+  return await db.updateOne({ id }, dataUpdate);
 };
 
-export const taskDelete = (db: TTasksList, id: string) => {
-  return db.filter((c) => c.id !== id);
+export const taskDelete = async (db: Collection<TTasksList>, id: string) => {
+  return await db.deleteOne({ id });
 };

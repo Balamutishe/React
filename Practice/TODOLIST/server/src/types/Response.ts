@@ -1,8 +1,15 @@
 import { Response } from "express";
 import { TTask, TTasksList } from "./Task";
+import { WithId } from "mongodb";
 
-export type TResponseTasksGetAll = Response<TTasksList>;
-export type TResponseTaskGetOne = Response<TTask>;
+export type TResponseTasksGetAll = Response<{
+  message: string;
+  data?: WithId<TTasksList>[];
+}>;
+export type TResponseTaskGetOne = Response<{
+  message: string;
+  data?: WithId<TTask>[] | undefined;
+}>;
 export type TResponseTaskPatch = Response<{
   message: string;
   data?: TTasksList;
