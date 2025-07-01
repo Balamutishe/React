@@ -1,5 +1,5 @@
 import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
-import { ObjectId, UpdateResult } from "mongodb";
+import { DeleteResult, InsertOneResult, ObjectId, UpdateResult } from "mongodb";
 
 export const tasksFind = async (
   collection: TCollectionTasks,
@@ -17,7 +17,7 @@ export const tasksFind = async (
 export const taskCreate = async (
   collection: TCollectionTasks,
   taskData: TTaskBody
-) => {
+): Promise<InsertOneResult<TTasksList>> => {
   const newTask = {
     title: taskData.title ? taskData.title : "New task",
     status: "not completed",
@@ -44,6 +44,9 @@ export const tasksUpdate = async (
   );
 };
 
-export const taskDelete = async (collection: TCollectionTasks, id: string) => {
+export const taskDelete = async (
+  collection: TCollectionTasks,
+  id: string
+): Promise<DeleteResult> => {
   return await collection.deleteOne({ _id: new ObjectId(id) });
 };
