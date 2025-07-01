@@ -1,12 +1,18 @@
-import { TTaskBody, TDbTasks, TTasksList, TTask } from "../types";
-import { randomUUID } from "crypto";
-import { Collection, OptionalId, Db } from "mongodb";
+import { TTaskBody, TTasksList, TCollectionTasks } from "../types";
+import { Collection, ObjectId } from "mongodb";
 
-export const tasksGetAll = async (db: Db) => {
-  return await db.collection("tasks").find().toArray();
+export const tasksGetAll = async (collection: Collection<TTasksList>) => {
+  return await collection.find({}).toArray();
 };
 
-export const taskCreate = async (db: Db, taskData: TTaskBody) => {
+export const taskGetOne = async (collection: TCollectionTasks, id: string) => {
+  return await collection.findOne({ _id: new ObjectId(id) });
+};
+
+export const taskCreate = async (
+  collection: TCollectionTasks,
+  taskData: TTaskBody
+) => {
   const newTask = {
     title: taskData.title ? taskData.title : "New task",
     status: "not completed",
@@ -17,28 +23,32 @@ export const taskCreate = async (db: Db, taskData: TTaskBody) => {
     due_date: new Date().toDateString(),
   };
 
-  return await db.collection("tasks").insertOne(newTask);
+  // @ts-ignore
+  return await collection.insertOne(newTask);
 };
 
 export const tasksFilterBySearchValue = async (
-  db: Db,
-  searchData: { title: string }
+  collection: TCollectionTasks,
+  searchData: string
 ) => {
-  return await db.collection("tasks").find(searchData).toArray();
+  return await collection.find({ title: { $regex: searchData } }).toArray();
 };
 
-export const taskFindById = async (db: Collection<TTasksList>, id: string) => {
-  return await db.findOne({ id });
+export const taskFindById = async (
+  collection: Collection<TTasksList>,
+  id: string
+) => {
+  return await collection.findOne({ _id: new ObjectId(id) });
 };
 
 export const tasksUpdate = async (
-  db: Collection<TTasksList>,
+  collection: TCollectionTasks,
   id: string,
   dataUpdate: TTaskBody
 ) => {
-  return await db.updateOne({ id }, dataUpdate);
+  return await collection.updateOne({ _id: new ObjectId(id) }, dataUpdate);
 };
 
-export const taskDelete = async (db: Collection<TTasksList>, id: string) => {
-  return await db.deleteOne({ id });
+export const taskDelete = async (collection: TCollectionTasks, id: string) => {
+  return await collection.deleteOne({ _id: new ObjectId(id) });
 };

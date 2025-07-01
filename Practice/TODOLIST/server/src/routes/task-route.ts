@@ -1,10 +1,11 @@
 import { Router, Response } from "express";
-import { IRequestTypes, TResponseTaskCreate } from "../types";
+import { IRequestTypes, TResponseTaskCreate, TTasksList } from "../types";
 import { HTTP_STATUSES } from "../utils";
 import {
   taskCreate,
   taskDelete,
   taskFindById,
+  taskGetOne,
   tasksFilterBySearchValue,
   tasksGetAll,
   tasksUpdate,
@@ -13,55 +14,61 @@ import { taskBodyParser } from "../middleware/taskBodyParser";
 import { DbFetch } from "../middleware/fetchDb";
 
 export const taskRouter = Router();
-taskRouter.use(DbFetch());
+taskRouter.use(DbFetch("tasks"));
 
 taskRouter.get("/", async (req: IRequestTypes, res: Response) => {
-  if (!req.db) {
+  if (!req.collection) {
     res.sendStatus(500);
     return;
   }
 
-  const tasks = await tasksGetAll(req.db);
-
   if (req.query.title) {
-    const tasksFiltered = await tasksFilterBySearchValue(req.db, req.query);
+    const tasksFiltered = await tasksFilterBySearchValue(
+      req.collection,
+      req.query.title
+    );
+
     res
       .status(HTTP_STATUSES.OK_200)
       .json({ message: "Successfully filtered", data: tasksFiltered });
+  } else {
+    const tasks = await tasksGetAll(req.collection);
+    res
+      .status(HTTP_STATUSES.OK_200)
+      .json({ message: "No filter", data: tasks });
   }
-
-  res.status(HTTP_STATUSES.OK_200).json({ message: "No filter", data: tasks });
 });
 
 taskRouter.post(
   "/",
   taskBodyParser(),
   async (req: IRequestTypes, res: Response) => {
-    if (!req.db) {
+    if (!req.collection) {
       res.sendStatus(500);
       return;
     }
 
-    const newTask = await taskCreate(req.db, req.body);
+    const taskCreateResult = await taskCreate(req.collection, req.body);
 
-    res
-      .status(HTTP_STATUSES.CREATED_201)
-      .json({ message: "task successfully created", data: newTask });
+    if (!taskCreateResult.acknowledged) {
+      res
+        .status(HTTP_STATUSES.NOT_FOUND_404)
+        .send({ message: "task not created" });
+    } else {
+      const newTask = await taskGetOne(
+        req.collection,
+        taskCreateResult.insertedId.toString()
+      );
 
-    // if (req.db && req.db.length === db.tasks.length) {
-    //   res
-    //     .status(HTTP_STATUSES.NOT_FOUND_404)
-    //     .send({ message: "task not created" });
-    // } else {
-    //   res
-    //     .status(HTTP_STATUSES.CREATED_201)
-    //     .json({ message: "task successfully created", data: newTask });
-    // }
+      res
+        .status(HTTP_STATUSES.CREATED_201)
+        .json({ message: "task successfully created", data: newTask });
+    }
   }
 );
 
 taskRouter.get("/:id", async (req: IRequestTypes, res: Response) => {
-  if (!req.db) {
+  if (!req.collection) {
     res.sendStatus(500);
     return;
   }
@@ -71,7 +78,7 @@ taskRouter.get("/:id", async (req: IRequestTypes, res: Response) => {
     return;
   }
 
-  const task = await taskFindById(req.db, req.params.id);
+  const task = await taskFindById(req.collection, req.params.id);
 
   if (!task) {
     res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
@@ -87,7 +94,7 @@ taskRouter.patch(
   "/:id",
   taskBodyParser(),
   (req: IRequestTypes, res: Response) => {
-    if (!req.db) {
+    if (!req.collection) {
       res.sendStatus(500);
       return;
     }
@@ -97,7 +104,7 @@ taskRouter.patch(
       return;
     }
 
-    const tasksNew = tasksUpdate(req.db, req.params.id, req.body);
+    const tasksNew = tasksUpdate(req.collection, req.params.id, req.body);
 
     res
       .status(HTTP_STATUSES.OK_200)
@@ -105,8 +112,8 @@ taskRouter.patch(
   }
 );
 
-taskRouter.delete("/:id", (req: IRequestTypes, res: Response) => {
-  if (!req.db) {
+taskRouter.delete("/:id", async (req: IRequestTypes, res: Response) => {
+  if (!req.collection) {
     res.sendStatus(500);
     return;
   }
@@ -116,15 +123,9 @@ taskRouter.delete("/:id", (req: IRequestTypes, res: Response) => {
     return;
   }
 
-  const tasksUpdate = taskDelete(req.db, req.params.id);
+  const tasksUpdate = await taskDelete(req.collection, req.params.id);
 
-  // if (req.db.length === tasksUpdate.length) {
-  //   res
-  //     .status(HTTP_STATUSES.NOT_FOUND_404)
-  //     .json({ message: "task not deleted" });
-  // } else {
-  //   res
-  //     .status(HTTP_STATUSES.NO_CONTENT_204)
-  //     .json({ message: "task successfully deleted" });
-  // }
+  res
+    .status(HTTP_STATUSES.NO_CONTENT_204)
+    .json({ message: "task successfully deleted" });
 });

@@ -24,4 +24,4 @@ export type TTaskBody = z.infer<typeof TaskBodySchema>;
 export type TTaskParams = z.infer<typeof TaskParamsSchema>;
 export type TTaskQuery = z.infer<typeof TaskQuerySchema>;
 
-export type TDbTasks = Collection<TTasksList>;
+export type TCollectionTasks = Collection<TTasksList>;
