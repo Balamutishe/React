@@ -16,18 +16,8 @@ export const tasksFind = async (
 
 export const taskCreate = async (
   collection: TCollectionTasks,
-  taskData: TTaskBody
+  newTask: TTask
 ): Promise<InsertOneResult<TTasksList>> => {
-  const newTask = {
-    title: taskData.title ? taskData.title : "New task",
-    status: "not completed",
-    description: taskData.description
-      ? taskData.description
-      : "Task description",
-    priority: taskData.priority ? taskData.priority : "low",
-    due_date: new Date().toDateString(),
-  };
-
   // @ts-ignore
   return await collection.insertOne(newTask);
 };

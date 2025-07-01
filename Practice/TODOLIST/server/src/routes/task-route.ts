@@ -1,7 +1,7 @@
 import { Router, Response } from "express";
 import { IRequestTypes } from "../types";
 import { HTTP_STATUSES } from "../utils";
-import { taskCreate, taskDelete, tasksFind, tasksUpdate } from "../repository";
+import { tasksService } from "../domain/task-service";
 import { taskBodyParser, DbFetch } from "../middleware";
 
 export const taskRouter = Router();
@@ -14,14 +14,14 @@ taskRouter.get("/", async (req: IRequestTypes, res: Response) => {
   }
 
   if (req.query.title) {
-    const tasksFiltered = await tasksFind(
+    const tasksFiltered = await tasksService.tasksFind(
       req.collection,
       null,
       req.query.title
     );
 
     if (tasksFiltered && tasksFiltered.length === 0) {
-      const tasks = await tasksFind(req.collection);
+      const tasks = await tasksService.tasksFind(req.collection);
       res
         .status(HTTP_STATUSES.OK_200)
         .json({ message: "Tasks by title not found", data: tasks });
@@ -31,7 +31,7 @@ taskRouter.get("/", async (req: IRequestTypes, res: Response) => {
         .json({ message: "Successfully filtered", data: tasksFiltered });
     }
   } else {
-    const tasks = await tasksFind(req.collection);
+    const tasks = await tasksService.tasksFind(req.collection);
     res
       .status(HTTP_STATUSES.OK_200)
       .json({ message: "Tasks received successfully", data: tasks });
@@ -47,14 +47,17 @@ taskRouter.post(
       return;
     }
 
-    const taskCreateResult = await taskCreate(req.collection, req.body);
+    const taskCreateResult = await tasksService.taskCreate(
+      req.collection,
+      req.body
+    );
 
     if (!taskCreateResult.acknowledged) {
       res
         .status(HTTP_STATUSES.NOT_FOUND_404)
         .send({ message: "task not created" });
     } else {
-      const newTask = await tasksFind(
+      const newTask = await tasksService.tasksFind(
         req.collection,
         taskCreateResult.insertedId.toString()
       );
@@ -77,7 +80,7 @@ taskRouter.get("/:id", async (req: IRequestTypes, res: Response) => {
     return;
   }
 
-  const task = await tasksFind(req.collection, req.params.id);
+  const task = await tasksService.tasksFind(req.collection, req.params.id);
 
   if (!task) {
     res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
@@ -103,14 +106,17 @@ taskRouter.patch(
       return;
     }
 
-    const taskUpdateResult = await tasksUpdate(
+    const taskUpdateResult = await tasksService.taskUpdate(
       req.collection,
       req.params.id,
       req.body
     );
 
     if (taskUpdateResult.matchedCount !== 0) {
-      const taskUpdated = await tasksFind(req.collection, req.params.id);
+      const taskUpdated = await tasksService.tasksFind(
+        req.collection,
+        req.params.id
+      );
 
       res.status(HTTP_STATUSES.OK_200).json({
         message: "Tasks modified successfully",
@@ -135,7 +141,10 @@ taskRouter.delete("/:id", async (req: IRequestTypes, res: Response) => {
     return;
   }
 
-  const tasksDeletedResult = await taskDelete(req.collection, req.params.id);
+  const tasksDeletedResult = await tasksService.taskDelete(
+    req.collection,
+    req.params.id
+  );
 
   if (tasksDeletedResult.deletedCount !== 0) {
     res
