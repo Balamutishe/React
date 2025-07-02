@@ -11,5 +11,9 @@ export interface IRequestTypes extends Request {
   collection?: Collection<TTasksList>;
   params: { id?: string };
   body: TTaskBody;
-  query: { title: "string" };
+  query: {
+    title?: "string";
+    pageNumber?: "string";
+    pageSize?: "string";
+  };
 }

@@ -1,18 +1,33 @@
 import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
 import { DeleteResult, InsertOneResult, UpdateResult, WithId } from "mongodb";
-import { taskCreate, taskDelete, tasksFind, tasksUpdate } from "../repository";
+import { tasksRepository } from "../repository";
 
 export const tasksService = {
-  async tasksFind(
+  async tasksFindAll(
     collection: TCollectionTasks,
-    id?: string | null,
-    searchData?: string
-  ): Promise<WithId<TTasksList> | WithId<TTasksList>[] | null> {
-    if (id) return await tasksFind(collection, id);
+    pageSize: number,
+    pageNumber: number
+  ): Promise<WithId<TTasksList>[]> {
+    const elementsCount = await tasksRepository.tasksCountGet(collection);
 
-    if (searchData) return await tasksFind(collection, null, searchData);
+    const pagesCount = Math.ceil(pageSize / elementsCount);
+    const skipValue = (pageNumber - 1) * pageSize;
 
-    return await tasksFind(collection);
+    return await tasksRepository.tasksFindAll(collection, pageSize, skipValue);
+  },
+
+  async taskFindById(
+    collection: TCollectionTasks,
+    id: string
+  ): Promise<WithId<TTasksList> | null> {
+    return await tasksRepository.taskFindById(collection, id);
+  },
+
+  async taskFindByFilter(
+    collection: TCollectionTasks,
+    searchData: string
+  ): Promise<WithId<TTasksList>[]> {
+    return await tasksRepository.taskFindByFilter(collection, searchData);
   },
 
   async taskCreate(
@@ -30,7 +45,7 @@ export const tasksService = {
     };
 
     // @ts-ignore
-    return await taskCreate(collection, newTask);
+    return await tasksRepository.taskCreate(collection, newTask);
   },
 
   async taskUpdate(
@@ -38,13 +53,13 @@ export const tasksService = {
     id: string,
     dataUpdate: TTaskBody
   ): Promise<UpdateResult<TTasksList>> {
-    return await tasksUpdate(collection, id, dataUpdate);
+    return await tasksRepository.tasksUpdate(collection, id, dataUpdate);
   },
 
   async taskDelete(
     collection: TCollectionTasks,
     id: string
   ): Promise<DeleteResult> {
-    return await taskDelete(collection, id);
+    return await tasksRepository.taskDelete(collection, id);
   },
 };
