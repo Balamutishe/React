@@ -18,8 +18,17 @@ export const tasksRepository = {
     return await collection.findOne({ _id: new ObjectId(id) });
   },
 
-  async taskFindByFilter(collection: TCollectionTasks, searchData: string) {
-    return await collection.find({ title: { $regex: searchData } }).toArray();
+  async taskFindByFilter(
+    collection: TCollectionTasks,
+    searchData: string,
+    skipValue: number,
+    limitValue: number
+  ) {
+    return await collection
+      .find({ title: { $regex: searchData } })
+      .skip(skipValue)
+      .limit(limitValue)
+      .toArray();
   },
 
   async taskCreate(

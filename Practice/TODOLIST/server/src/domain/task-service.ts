@@ -24,9 +24,16 @@ export const tasksService = {
 
   async taskFindByFilter(
     collection: TCollectionTasks,
-    searchData: string
+    searchData: string,
+    skipValue: number,
+    limitValue: number
   ): Promise<WithId<TTasksList>[]> {
-    return await tasksRepository.taskFindByFilter(collection, searchData);
+    return await tasksRepository.taskFindByFilter(
+      collection,
+      searchData,
+      skipValue,
+      limitValue
+    );
   },
 
   async taskCreate(

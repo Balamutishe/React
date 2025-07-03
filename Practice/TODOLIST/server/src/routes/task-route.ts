@@ -18,20 +18,23 @@ taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
   const queryPageNumber = Number(req.query.pageNumber) || 1;
   const queryPageSize = Number(req.query.pageSize) || 5;
 
-  if (queryTitle) {
-    const tasksFiltered = await tasksService.taskFindByFilter(
+  const { pagesCountValue, skipValue, limitValue } =
+    await tasksService.queryPagesDataTransform(
       req.collection,
+      queryPageSize,
+      queryPageNumber,
       queryTitle
     );
 
-    if (tasksFiltered.length !== 0) {
-      const { pagesCountValue, limitValue, skipValue } =
-        await tasksService.queryPagesDataTransform(
-          req.collection,
-          queryPageSize,
-          queryPageNumber
-        );
+  if (queryTitle) {
+    const tasksFiltered = await tasksService.taskFindByFilter(
+      req.collection,
+      queryTitle,
+      skipValue,
+      limitValue
+    );
 
+    if (tasksFiltered.length === 0) {
       const tasks = await tasksService.tasksFindAll(
         req.collection,
         limitValue,
@@ -46,13 +49,6 @@ taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
       return;
     }
 
-    const { pagesCountValue } = await tasksService.queryPagesDataTransform(
-      req.collection,
-      queryPageSize,
-      queryPageNumber,
-      queryTitle
-    );
-
     res.status(HTTP_STATUSES.OK_200).json({
       message: "Successfully filtered",
       data: { tasks: tasksFiltered, pagesCountValue },
@@ -60,13 +56,6 @@ taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
 
     return;
   }
-
-  const { pagesCountValue, limitValue, skipValue } =
-    await tasksService.queryPagesDataTransform(
-      req.collection,
-      queryPageSize,
-      queryPageNumber
-    );
 
   const tasks = await tasksService.tasksFindAll(
     req.collection,
