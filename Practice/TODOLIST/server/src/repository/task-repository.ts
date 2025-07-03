@@ -4,10 +4,14 @@ import { DeleteResult, InsertOneResult, ObjectId, UpdateResult } from "mongodb";
 export const tasksRepository = {
   async tasksFindAll(
     collection: TCollectionTasks,
-    pageSize: number,
+    limitValue: number,
     skipValue: number
   ) {
-    return await collection.find({}).skip(skipValue).limit(pageSize).toArray();
+    return await collection
+      .find({})
+      .skip(skipValue)
+      .limit(limitValue)
+      .toArray();
   },
 
   async taskFindById(collection: TCollectionTasks, id: string) {
@@ -45,7 +49,11 @@ export const tasksRepository = {
     return await collection.deleteOne({ _id: new ObjectId(id) });
   },
 
-  async tasksCountGet(collection: TCollectionTasks) {
+  async tasksCountGet(collection: TCollectionTasks, searchData?: string) {
+    if (searchData) {
+      return await collection.countDocuments({ title: { $regex: searchData } });
+    }
+
     return await collection.countDocuments({});
   },
 };

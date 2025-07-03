@@ -1,19 +1,18 @@
-import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
+import { TTaskBody, TCollectionTasks, TTasksList } from "../types";
 import { DeleteResult, InsertOneResult, UpdateResult, WithId } from "mongodb";
 import { tasksRepository } from "../repository";
 
 export const tasksService = {
   async tasksFindAll(
     collection: TCollectionTasks,
-    pageSize: number,
-    pageNumber: number
+    limitValue: number,
+    skipValue: number
   ): Promise<WithId<TTasksList>[]> {
-    const elementsCount = await tasksRepository.tasksCountGet(collection);
-
-    const pagesCount = Math.ceil(pageSize / elementsCount);
-    const skipValue = (pageNumber - 1) * pageSize;
-
-    return await tasksRepository.tasksFindAll(collection, pageSize, skipValue);
+    return await tasksRepository.tasksFindAll(
+      collection,
+      limitValue,
+      skipValue
+    );
   },
 
   async taskFindById(
@@ -61,5 +60,32 @@ export const tasksService = {
     id: string
   ): Promise<DeleteResult> {
     return await tasksRepository.taskDelete(collection, id);
+  },
+
+  async tasksCountGet(collection: TCollectionTasks, searchData?: string) {
+    return await tasksRepository.tasksCountGet(collection, searchData);
+  },
+
+  async queryPagesDataTransform(
+    collection: TCollectionTasks,
+    pageSize: number,
+    pageNumber: number,
+    searchData?: string
+  ) {
+    let elementsCount = 0;
+
+    searchData
+      ? (elementsCount = await this.tasksCountGet(collection, searchData))
+      : (elementsCount = await this.tasksCountGet(collection));
+
+    const limitValue = pageSize;
+    const pagesCountValue = Math.ceil(elementsCount / pageSize);
+    const skipValue = (pageNumber - 1) * pageSize;
+
+    return {
+      pagesCountValue,
+      limitValue,
+      skipValue,
+    };
   },
 };

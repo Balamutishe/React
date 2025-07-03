@@ -1,48 +1,83 @@
 import { Router, Response } from "express";
-import { IRequestTypes } from "../types";
+import { IRequestTypes, TResponseTasksGetAll } from "../types";
 import { HTTP_STATUSES } from "../utils";
 import { tasksService } from "../domain";
 import { taskBodyParser, DbFetch } from "../middleware";
+import { dataPageTransform } from "../utils/dataPageTransform";
 
 export const taskRouter = Router();
 taskRouter.use(DbFetch("tasks"));
 
-taskRouter.get("/", async (req: IRequestTypes, res: Response) => {
+taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
   if (!req.collection) {
     res.sendStatus(500);
     return;
   }
 
-  if (req.query.title) {
+  const queryTitle = req.query.title;
+  const queryPageNumber = Number(req.query.pageNumber) || 1;
+  const queryPageSize = Number(req.query.pageSize) || 5;
+
+  if (queryTitle) {
     const tasksFiltered = await tasksService.taskFindByFilter(
       req.collection,
-      req.query.title
+      queryTitle
     );
 
-    if (tasksFiltered && tasksFiltered.length === 0) {
+    if (tasksFiltered.length !== 0) {
+      const { pagesCountValue, limitValue, skipValue } =
+        await tasksService.queryPagesDataTransform(
+          req.collection,
+          queryPageSize,
+          queryPageNumber
+        );
+
       const tasks = await tasksService.tasksFindAll(
         req.collection,
-        req.query.pageSize ? +req.query.pageSize : 5,
-        req.query.pageNumber ? +req.query.pageNumber : 1
+        limitValue,
+        skipValue
       );
-      res
-        .status(HTTP_STATUSES.OK_200)
-        .json({ message: "Tasks by title not found", data: tasks });
-    } else {
-      res
-        .status(HTTP_STATUSES.OK_200)
-        .json({ message: "Successfully filtered", data: tasksFiltered });
+
+      res.status(HTTP_STATUSES.OK_200).json({
+        message: "Tasks by title not found",
+        data: { tasks, pagesCountValue },
+      });
+
+      return;
     }
-  } else {
-    const tasks = await tasksService.tasksFindAll(
+
+    const { pagesCountValue } = await tasksService.queryPagesDataTransform(
       req.collection,
-      req.query.pageSize ? +req.query.pageSize : 5,
-      req.query.pageNumber ? +req.query.pageNumber : 1
+      queryPageSize,
+      queryPageNumber,
+      queryTitle
     );
-    res
-      .status(HTTP_STATUSES.OK_200)
-      .json({ message: "Tasks received successfully", data: tasks });
+
+    res.status(HTTP_STATUSES.OK_200).json({
+      message: "Successfully filtered",
+      data: { tasks: tasksFiltered, pagesCountValue },
+    });
+
+    return;
   }
+
+  const { pagesCountValue, limitValue, skipValue } =
+    await tasksService.queryPagesDataTransform(
+      req.collection,
+      queryPageSize,
+      queryPageNumber
+    );
+
+  const tasks = await tasksService.tasksFindAll(
+    req.collection,
+    limitValue,
+    skipValue
+  );
+
+  res.status(HTTP_STATUSES.OK_200).json({
+    message: "Tasks received successfully",
+    data: { tasks, pagesCountValue },
+  });
 });
 
 taskRouter.post(
