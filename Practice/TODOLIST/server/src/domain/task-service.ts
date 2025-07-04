@@ -1,46 +1,34 @@
-import { TTaskBody, TCollectionTasks, TTasksList } from "../types";
+import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
 import { DeleteResult, InsertOneResult, UpdateResult, WithId } from "mongodb";
 import { tasksRepository } from "../repository";
 
 export const tasksService = {
   async tasksFindAll(
-    collection: TCollectionTasks,
     limitValue: number,
     skipValue: number
-  ): Promise<WithId<TTasksList>[]> {
-    return await tasksRepository.tasksFindAll(
-      collection,
-      limitValue,
-      skipValue
-    );
+  ): Promise<WithId<TTask>[]> {
+    return await tasksRepository.tasksFindAll(limitValue, skipValue);
   },
 
-  async taskFindById(
-    collection: TCollectionTasks,
-    id: string
-  ): Promise<WithId<TTasksList> | null> {
-    return await tasksRepository.taskFindById(collection, id);
+  async taskFindById(id: string): Promise<WithId<TTask> | null> {
+    return await tasksRepository.taskFindById(id);
   },
 
   async taskFindByFilter(
-    collection: TCollectionTasks,
     searchData: string,
     skipValue: number,
     limitValue: number
-  ): Promise<WithId<TTasksList>[]> {
+  ): Promise<WithId<TTask>[]> {
     return await tasksRepository.taskFindByFilter(
-      collection,
       searchData,
       skipValue,
       limitValue
     );
   },
 
-  async taskCreate(
-    collection: TCollectionTasks,
-    taskData: TTaskBody
-  ): Promise<InsertOneResult<TTasksList>> {
+  async taskCreate(taskData: TTaskBody): Promise<InsertOneResult<TTask>> {
     const newTask = {
+      id: crypto.randomUUID(),
       title: taskData.title ? taskData.title : "New task",
       status: "not completed",
       description: taskData.description
@@ -50,44 +38,44 @@ export const tasksService = {
       due_date: new Date().toDateString(),
     };
 
-    // @ts-ignore
-    return await tasksRepository.taskCreate(collection, newTask);
+    return await tasksRepository.taskCreate(newTask);
   },
 
   async taskUpdate(
-    collection: TCollectionTasks,
     id: string,
     dataUpdate: TTaskBody
-  ): Promise<UpdateResult<TTasksList>> {
-    return await tasksRepository.tasksUpdate(collection, id, dataUpdate);
+  ): Promise<UpdateResult<TTask>> {
+    return await tasksRepository.tasksUpdate(id, dataUpdate);
   },
 
-  async taskDelete(
-    collection: TCollectionTasks,
-    id: string
-  ): Promise<DeleteResult> {
-    return await tasksRepository.taskDelete(collection, id);
+  async taskDelete(id: string): Promise<DeleteResult> {
+    return await tasksRepository.taskDelete(id);
   },
 
-  async tasksCountGet(collection: TCollectionTasks, searchData?: string) {
-    return await tasksRepository.tasksCountGet(collection, searchData);
+  async tasksCountGet(searchData?: string) {
+    return await tasksRepository.tasksCountGet(searchData);
   },
 
   async queryPagesDataTransform(
-    collection: TCollectionTasks,
-    pageSize: number,
-    pageNumber: number,
+    pageSize?: number,
+    pageNumber?: number,
     searchData?: string
-  ) {
+  ): Promise<{
+    pagesCountValue: number;
+    limitValue: number;
+    skipValue: number;
+  }> {
     let elementsCount = 0;
+    const pageNumberVariant = pageNumber || 1;
+    const pageSizeVariant = pageSize || 5;
 
     searchData
-      ? (elementsCount = await this.tasksCountGet(collection, searchData))
-      : (elementsCount = await this.tasksCountGet(collection));
+      ? (elementsCount = await this.tasksCountGet(searchData))
+      : (elementsCount = await this.tasksCountGet());
 
-    const limitValue = pageSize;
-    const pagesCountValue = Math.ceil(elementsCount / pageSize);
-    const skipValue = (pageNumber - 1) * pageSize;
+    const limitValue = pageSizeVariant;
+    const pagesCountValue = Math.ceil(elementsCount / pageSizeVariant);
+    const skipValue = (pageNumberVariant - 1) * pageSizeVariant;
 
     return {
       pagesCountValue,

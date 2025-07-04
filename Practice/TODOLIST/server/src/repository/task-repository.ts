@@ -1,30 +1,35 @@
 import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
-import { DeleteResult, InsertOneResult, ObjectId, UpdateResult } from "mongodb";
+import {
+  DeleteResult,
+  InsertOneResult,
+  ObjectId,
+  OptionalId,
+  UpdateResult,
+  WithId,
+} from "mongodb";
+import { client } from "../db/mongoClient";
+
+const collectionTasks = client.db().collection<TTask>("tasks");
 
 export const tasksRepository = {
-  async tasksFindAll(
-    collection: TCollectionTasks,
-    limitValue: number,
-    skipValue: number
-  ) {
-    return await collection
+  async tasksFindAll(limitValue: number, skipValue: number) {
+    return await collectionTasks
       .find({})
       .skip(skipValue)
       .limit(limitValue)
       .toArray();
   },
 
-  async taskFindById(collection: TCollectionTasks, id: string) {
-    return await collection.findOne({ _id: new ObjectId(id) });
+  async taskFindById(id: string) {
+    return await collectionTasks.findOne({ _id: new ObjectId(id) });
   },
 
   async taskFindByFilter(
-    collection: TCollectionTasks,
     searchData: string,
     skipValue: number,
     limitValue: number
-  ) {
-    return await collection
+  ): Promise<WithId<TTask>[]> {
+    return await collectionTasks
       .find({ title: { $regex: searchData } })
       .skip(skipValue)
       .limit(limitValue)
@@ -32,37 +37,32 @@ export const tasksRepository = {
   },
 
   async taskCreate(
-    collection: TCollectionTasks,
-    newTask: TTask
-  ): Promise<InsertOneResult<TTasksList>> {
-    // @ts-ignore
-    return await collection.insertOne(newTask);
+    newTask: OptionalId<TTask>
+  ): Promise<InsertOneResult<TTask>> {
+    return await collectionTasks.insertOne(newTask);
   },
 
   async tasksUpdate(
-    collection: TCollectionTasks,
     id: string,
     dataUpdate: TTaskBody
-  ): Promise<UpdateResult<TTasksList>> {
-    return await collection.updateOne(
+  ): Promise<UpdateResult<TTask>> {
+    return await collectionTasks.updateOne(
       { _id: new ObjectId(id) },
-      //@ts-ignore
       { $set: dataUpdate }
     );
   },
 
-  async taskDelete(
-    collection: TCollectionTasks,
-    id: string
-  ): Promise<DeleteResult> {
-    return await collection.deleteOne({ _id: new ObjectId(id) });
+  async taskDelete(id: string): Promise<DeleteResult> {
+    return await collectionTasks.deleteOne({ _id: new ObjectId(id) });
   },
 
-  async tasksCountGet(collection: TCollectionTasks, searchData?: string) {
+  async tasksCountGet(searchData?: string): Promise<number> {
     if (searchData) {
-      return await collection.countDocuments({ title: { $regex: searchData } });
+      return await collectionTasks.countDocuments({
+        title: { $regex: searchData },
+      });
     }
 
-    return await collection.countDocuments({});
+    return await collectionTasks.countDocuments({});
   },
 };

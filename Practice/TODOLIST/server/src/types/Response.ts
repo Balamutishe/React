@@ -4,7 +4,7 @@ import { WithId } from "mongodb";
 
 export type TResponseTasksGetAll = Response<{
   message: string;
-  data: { tasks: WithId<TTasksList>[]; pagesCountValue: number };
+  data: { tasks: WithId<TTask>[]; pagesCountValue: number };
 }>;
 export type TResponseTaskGetOne = Response<{
   message: string;
@@ -16,6 +16,6 @@ export type TResponseTaskPatch = Response<{
 }>;
 export type TResponseTaskCreate = Response<{
   message: string;
-  data?: TTask;
+  data: WithId<TTask> | null;
 }>;
 export type TResponseTaskDelete = Response<{ message: string }>;

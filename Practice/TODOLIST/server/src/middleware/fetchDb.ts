@@ -3,14 +3,12 @@ import { IRequestTypes, TTask, TTasksList } from "../types";
 import { clientPromise } from "../db/mongoClient";
 
 export const DbFetch =
-  (collectionName: string) =>
-  async (req: IRequestTypes, res: Response, next: NextFunction) => {
+  () => async (req: IRequestTypes, res: Response, next: NextFunction) => {
     try {
       const client = await clientPromise;
-      const db = client.db();
-      req.collection = db.collection(collectionName);
-      next();
+      await client.db().command({ ping: 1 });
+      console.log("Connected successfully to mongo server");
     } catch (error) {
-      next(error);
+      await client.close();
     }
   };

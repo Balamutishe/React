@@ -1,45 +1,34 @@
 import { Router, Response } from "express";
-import { IRequestTypes, TResponseTasksGetAll } from "../types";
+import {
+  IRequestTypes,
+  TResponseTasksGetAll,
+  TResponseTaskCreate,
+} from "../types";
 import { HTTP_STATUSES } from "../utils";
 import { tasksService } from "../domain";
-import { taskBodyParser, DbFetch } from "../middleware";
-import { dataPageTransform } from "../utils/dataPageTransform";
+import { taskBodyParser } from "../middleware";
 
 export const taskRouter = Router();
-taskRouter.use(DbFetch("tasks"));
 
 taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
-  if (!req.collection) {
-    res.sendStatus(500);
-    return;
-  }
-
   const queryTitle = req.query.title;
-  const queryPageNumber = Number(req.query.pageNumber) || 1;
-  const queryPageSize = Number(req.query.pageSize) || 5;
 
   const { pagesCountValue, skipValue, limitValue } =
     await tasksService.queryPagesDataTransform(
-      req.collection,
-      queryPageSize,
-      queryPageNumber,
+      Number(req.query.pageSize),
+      Number(req.query.pageNumber),
       queryTitle
     );
 
   if (queryTitle) {
     const tasksFiltered = await tasksService.taskFindByFilter(
-      req.collection,
       queryTitle,
       skipValue,
       limitValue
     );
 
     if (tasksFiltered.length === 0) {
-      const tasks = await tasksService.tasksFindAll(
-        req.collection,
-        limitValue,
-        skipValue
-      );
+      const tasks = await tasksService.tasksFindAll(limitValue, skipValue);
 
       res.status(HTTP_STATUSES.OK_200).json({
         message: "Tasks by title not found",
@@ -57,11 +46,7 @@ taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
     return;
   }
 
-  const tasks = await tasksService.tasksFindAll(
-    req.collection,
-    limitValue,
-    skipValue
-  );
+  const tasks = await tasksService.tasksFindAll(limitValue, skipValue);
 
   res.status(HTTP_STATUSES.OK_200).json({
     message: "Tasks received successfully",
@@ -72,24 +57,15 @@ taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
 taskRouter.post(
   "/",
   taskBodyParser(),
-  async (req: IRequestTypes, res: Response) => {
-    if (!req.collection) {
-      res.sendStatus(500);
-      return;
-    }
-
-    const taskCreateResult = await tasksService.taskCreate(
-      req.collection,
-      req.body
-    );
+  async (req: IRequestTypes, res: TResponseTaskCreate) => {
+    const taskCreateResult = await tasksService.taskCreate(req.body);
 
     if (!taskCreateResult.acknowledged) {
       res
         .status(HTTP_STATUSES.NOT_FOUND_404)
-        .send({ message: "task not created" });
+        .send({ message: "task not created", data: null });
     } else {
       const newTask = await tasksService.taskFindById(
-        req.collection,
         taskCreateResult.insertedId.toString()
       );
 
@@ -101,17 +77,12 @@ taskRouter.post(
 );
 
 taskRouter.get("/:id", async (req: IRequestTypes, res: Response) => {
-  if (!req.collection) {
-    res.sendStatus(500);
-    return;
-  }
-
   if (!req.params.id) {
     res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
-  const task = await tasksService.taskFindById(req.collection, req.params.id);
+  const task = await tasksService.taskFindById(req.params.id);
 
   if (!task) {
     res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
@@ -127,27 +98,18 @@ taskRouter.patch(
   "/:id",
   taskBodyParser(),
   async (req: IRequestTypes, res: Response) => {
-    if (!req.collection) {
-      res.sendStatus(500);
-      return;
-    }
-
     if (!req.params.id) {
       res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
       return;
     }
 
     const taskUpdateResult = await tasksService.taskUpdate(
-      req.collection,
       req.params.id,
       req.body
     );
 
     if (taskUpdateResult.matchedCount !== 0) {
-      const taskUpdated = await tasksService.taskFindById(
-        req.collection,
-        req.params.id
-      );
+      const taskUpdated = await tasksService.taskFindById(req.params.id);
 
       res.status(HTTP_STATUSES.OK_200).json({
         message: "Tasks modified successfully",
@@ -162,24 +124,16 @@ taskRouter.patch(
 );
 
 taskRouter.delete("/:id", async (req: IRequestTypes, res: Response) => {
-  if (!req.collection) {
-    res.sendStatus(500);
-    return;
-  }
-
   if (!req.params.id) {
     res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
-  const tasksDeletedResult = await tasksService.taskDelete(
-    req.collection,
-    req.params.id
-  );
+  const tasksDeletedResult = await tasksService.taskDelete(req.params.id);
 
   if (tasksDeletedResult.deletedCount !== 0) {
     res
-      .status(HTTP_STATUSES.NO_CONTENT_204)
+      .status(HTTP_STATUSES.OK_200)
       .json({ message: "task successfully deleted" });
   } else {
     res
