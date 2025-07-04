@@ -1,4 +1,4 @@
-import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
+import { TTaskBody, TTask } from "../types";
 import {
   DeleteResult,
   InsertOneResult,
@@ -30,7 +30,7 @@ export const tasksRepository = {
     limitValue: number
   ): Promise<WithId<TTask>[]> {
     return await collectionTasks
-      .find({ title: { $regex: searchData } })
+      .find({ title: { $regex: searchData, $options: "i" } })
       .skip(skipValue)
       .limit(limitValue)
       .toArray();

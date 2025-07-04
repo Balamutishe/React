@@ -1,10 +1,11 @@
 import { z } from "zod";
 
 export const UserSchema = z.object({
-  _id: z.string(),
   userName: z.string(),
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string(),
+  passwordHash: z.string(),
+  passwordSalt: z.string(),
+  createdAt: z.date(),
 });
 const UsersListSchema = z.array(UserSchema);
 
