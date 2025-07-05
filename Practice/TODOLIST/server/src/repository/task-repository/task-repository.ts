@@ -1,4 +1,4 @@
-import { TTaskBody, TTask } from "../types";
+import { TTaskBody, TTask } from "../../types";
 import {
   DeleteResult,
   InsertOneResult,
@@ -7,7 +7,7 @@ import {
   UpdateResult,
   WithId,
 } from "mongodb";
-import { client } from "../db/mongoClient";
+import { client } from "../../db/mongoClient";
 
 const collectionTasks = client.db().collection<TTask>("tasks");
 
