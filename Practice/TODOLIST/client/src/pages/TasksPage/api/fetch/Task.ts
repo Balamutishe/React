@@ -3,7 +3,7 @@ import {
   TasksListSchema,
   type TTask,
   type TTasksList,
-} from "@entities/types/Task";
+} from "../../types/Task";
 import { fetchConfig } from "@shared/utils/fetchConfig";
 
 export const fetchTasksGet = (): Promise<TTasksList> => {

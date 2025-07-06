@@ -18,7 +18,7 @@ export const fetchUserDelete = (id: string): Promise<string> => {
 };
 
 export const fetchUserLogin = (userDataLogin: {
-  username: string;
+  loginOrPassword: string;
   password: string;
 }): Promise<TUser> => {
   return fetchConfig("/api/users", "POST", userDataLogin).then((data) =>
