@@ -1,7 +1,7 @@
-import { Header } from "@widgets/Header/Header";
-import { Main } from "@widgets/Main/Main";
+import { Header } from "@widgets/layout/Header/Header";
+import { Main } from "@widgets/layout/Main/Main";
 import "./App.css";
-import { Navigation } from "@widgets/Navigation/Navigation";
+import { Navigation } from "@widgets/layout/Navigation";
 import { BrowserRouter } from "react-router";
 import { Provider } from "react-redux";
 import store from "@entities/redux/store";

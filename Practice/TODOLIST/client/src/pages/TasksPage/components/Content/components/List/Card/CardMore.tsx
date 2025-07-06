@@ -1,9 +1,9 @@
-import { Button } from "@shared/components/Button/Button";
+import { Button } from "@widgets/components/Button/Button";
 import { useState } from "react";
 import MoreIcon from "@shared/icons/more.svg?react";
-import c from "./TaskCard.module.css";
+import c from "./Card.module.css";
 
-export const TaskCardMore = () => {
+export const CardMore = () => {
   const [visibleActions, setActionsVisibility] = useState(false);
 
   const handlerActionsVisibility = () => {

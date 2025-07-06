@@ -1,11 +1,11 @@
-import { Input } from "@shared/components/Input/Input";
-import c from "./TasksPage.module.css";
-import { Button } from "@shared/components/Button/Button";
+import { Input } from "@widgets/components/Input/Input";
+import c from "./Header.module.css";
+import { Button } from "@widgets/components/Button/Button";
 import { handlerSwitchIcon } from "@shared/utils/handlerSwitchIcon";
 import { setSearchValue } from "@entities/redux/SearchValueSlice";
 import { useAppSelector, useAppDispatch } from "@entities/redux/store";
 
-export const TasksPageHeader = () => {
+export const Header = () => {
   const dispatch = useAppDispatch();
 
   const searchValue = useAppSelector((state) => state.searchValue.searchValue);
@@ -15,7 +15,7 @@ export const TasksPageHeader = () => {
   };
 
   return (
-    <div className={c.tasksPageHeader}>
+    <div className={c.header}>
       <Input
         value={searchValue}
         type="text"

@@ -1,4 +1,4 @@
-import { Button } from "@shared/components/Button/Button";
+import { Button } from "@widgets/components/Button/Button";
 import { handlerSwitchIcon } from "@shared/utils/handlerSwitchIcon";
 import c from "./Navigation.module.css";
 

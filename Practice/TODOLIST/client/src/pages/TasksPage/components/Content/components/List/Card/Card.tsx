@@ -1,11 +1,11 @@
-import c from "./TaskCard.module.css";
-import { TaskCardMore } from "./TaskCardMore";
+import c from "./Card.module.css";
+import { CardMore } from "./CardMore";
 import { handlerSwitchPriorityColor } from "@shared/utils/handleSwitchPriorityColor";
 
-export const TaskCard = () => {
+export const Card = () => {
   return (
     <div
-      className={`${c.taskCard} ${handlerSwitchPriorityColor("medium", {
+      className={`${c.taskCard} ${handlerSwitchPriorityColor("low", {
         priorityHigh: c.priorityHigh,
         priorityMedium: c.priorityMedium,
         priorityLow: c.priorityLow,
@@ -13,7 +13,7 @@ export const TaskCard = () => {
     >
       <div className={c.taskCardHeader}>
         <h3>Task Title</h3>
-        <TaskCardMore />
+        <CardMore />
       </div>
       <div className={c.taskCardContent}>
         <p>Task description goes here.</p>

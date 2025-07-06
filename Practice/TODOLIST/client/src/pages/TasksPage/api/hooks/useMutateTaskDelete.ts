@@ -1,4 +1,4 @@
-import { fetchTaskDelete } from "@shared/api/Task";
+import { fetchTaskDelete } from "../fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useMutateTaskDelete = (id: string) => {

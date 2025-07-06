@@ -1,4 +1,4 @@
-import { NavigationLink } from "@widgets/Navigation/NavLink";
+import { NavigationLink } from "./NavigationLink";
 import c from "./Navigation.module.css";
 import type { FC } from "react";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import c from "./Navigation.module.css";
 import { NavigationTasksList } from "./NavigationTasksList";
-import { NavigationLink } from "./NavLink";
+import { NavigationLink } from "./NavigationLink";
 import { handlerSwitchIcon } from "@shared/utils/handlerSwitchIcon";
 
 export const NavigationList = () => {

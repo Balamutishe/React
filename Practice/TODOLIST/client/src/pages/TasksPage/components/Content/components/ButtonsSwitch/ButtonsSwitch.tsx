@@ -1,8 +1,8 @@
-import { Button } from "@shared/components/Button/Button";
+import { Button } from "@widgets/components/Button/Button";
 import { useState } from "react";
-import c from "./TasksPage.module.css";
+import c from "./ButtonsSwitch.module.css";
 
-export const TasksTypeSwitcher = () => {
+export const ButtonsSwitch = () => {
   const [stateTasks, setStateTasks] = useState("active");
 
   const handleSwitch = (type: "active" | "completed") => {
@@ -10,7 +10,7 @@ export const TasksTypeSwitcher = () => {
   };
 
   return (
-    <div className={c.tasksTypeSwitcher}>
+    <div className={c.buttonsSwitcher}>
       <Button
         text="Active task"
         variant={stateTasks === "active" ? "primary" : "secondary"}

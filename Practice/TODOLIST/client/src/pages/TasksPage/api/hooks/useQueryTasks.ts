@@ -1,4 +1,4 @@
-import { fetchTasksGet } from "@shared/api/Task";
+import { fetchTasksGet } from "../fetch";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useQueryUserMe = () => {

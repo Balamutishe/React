@@ -1,4 +1,4 @@
-import { fetchTaskCreate } from "@shared/api/Task";
+import { fetchTaskCreate } from "../fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useMutateTaskCreate = (taskData: {
