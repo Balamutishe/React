@@ -2,15 +2,14 @@ import { Collection, ObjectId } from "mongodb";
 import { z } from "zod";
 
 export const TaskSchema = z.object({
-  id: z.string().uuid(),
   title: z.string(),
   status: z.string(),
   description: z.string(),
   priority: z.string(),
-  due_date: z.string(),
+  due_date: z.date(),
 });
 export const TasksListSchema = z.array(TaskSchema);
-export const TaskBodySchema = TaskSchema.omit({ id: true }).partial().required({
+export const TaskBodySchema = TaskSchema.partial().required({
   title: true,
 });
 

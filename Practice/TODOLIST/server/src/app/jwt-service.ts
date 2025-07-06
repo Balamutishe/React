@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const jwtService = {
   async createJWT(user: TUserDB) {
     const token = jwt.sign({ userId: user._id }, settings.JWT_SECRET, {
-      expiresIn: "1h", //время смерти токена
+      expiresIn: "5h", //время смерти токена
     });
 
     return token;

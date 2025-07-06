@@ -7,56 +7,62 @@ import {
 import { HTTP_STATUSES } from "../utils";
 import { tasksService } from "../domain";
 import { taskBodyParser } from "../middleware";
+import { auth } from "../middleware/auth";
 
 export const taskRouter = Router();
+taskRouter.use(auth);
 
-taskRouter.get("/", async (req: IRequestTypes, res: TResponseTasksGetAll) => {
-  const queryTitle = req.query.title;
+taskRouter.get(
+  "/",
+  auth,
+  async (req: IRequestTypes, res: TResponseTasksGetAll) => {
+    const queryTitle = req.query.title;
 
-  const { pagesCountValue, skipValue, limitValue } =
-    await tasksService.queryPagesDataTransform(
-      Number(req.query.pageSize),
-      Number(req.query.pageNumber),
-      queryTitle
-    );
+    const { pagesCountValue, skipValue, limitValue } =
+      await tasksService.queryPagesDataTransform(
+        Number(req.query.pageSize),
+        Number(req.query.pageNumber),
+        queryTitle
+      );
 
-  if (queryTitle) {
-    const tasksFiltered = await tasksService.taskFindByFilter(
-      queryTitle,
-      skipValue,
-      limitValue
-    );
+    if (queryTitle) {
+      const tasksFiltered = await tasksService.taskFindByFilter(
+        queryTitle,
+        skipValue,
+        limitValue
+      );
 
-    if (tasksFiltered.length === 0) {
-      const tasks = await tasksService.tasksFindAll(limitValue, skipValue);
+      if (tasksFiltered.length === 0) {
+        const tasks = await tasksService.tasksFindAll(limitValue, skipValue);
+
+        res.status(HTTP_STATUSES.OK_200).json({
+          message: "Tasks by title not found",
+          data: { tasks, pagesCountValue },
+        });
+
+        return;
+      }
 
       res.status(HTTP_STATUSES.OK_200).json({
-        message: "Tasks by title not found",
-        data: { tasks, pagesCountValue },
+        message: "Successfully filtered",
+        data: { tasks: tasksFiltered, pagesCountValue },
       });
 
       return;
     }
 
+    const tasks = await tasksService.tasksFindAll(limitValue, skipValue);
+
     res.status(HTTP_STATUSES.OK_200).json({
-      message: "Successfully filtered",
-      data: { tasks: tasksFiltered, pagesCountValue },
+      message: "Tasks received successfully",
+      data: { tasks, pagesCountValue },
     });
-
-    return;
   }
-
-  const tasks = await tasksService.tasksFindAll(limitValue, skipValue);
-
-  res.status(HTTP_STATUSES.OK_200).json({
-    message: "Tasks received successfully",
-    data: { tasks, pagesCountValue },
-  });
-});
+);
 
 taskRouter.post(
   "/",
-  taskBodyParser(),
+  taskBodyParser,
   async (req: IRequestTypes, res: TResponseTaskCreate) => {
     const taskCreateResult = await tasksService.taskCreate(req.body);
 
@@ -96,7 +102,7 @@ taskRouter.get("/:id", async (req: IRequestTypes, res: Response) => {
 
 taskRouter.patch(
   "/:id",
-  taskBodyParser(),
+  taskBodyParser,
   async (req: IRequestTypes, res: Response) => {
     if (!req.params.id) {
       res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);

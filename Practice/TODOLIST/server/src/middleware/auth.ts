@@ -5,7 +5,9 @@ import { usersService } from "../domain";
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.headers.authorization) {
-    res.send(HTTP_STATUSES.NOT_AUTHORIZED_401);
+    res
+      .status(HTTP_STATUSES.NOT_AUTHORIZED_401)
+      .send({ error: "Unauthorized" });
     return;
   }
 
@@ -16,7 +18,9 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     // @ts-ignore
     req.user = await usersService.userFindById(userId);
     next();
+  } else {
+    res
+      .status(HTTP_STATUSES.NOT_AUTHORIZED_401)
+      .send({ error: "Unauthorized" });
   }
-
-  res.send(HTTP_STATUSES.NOT_AUTHORIZED_401);
 };

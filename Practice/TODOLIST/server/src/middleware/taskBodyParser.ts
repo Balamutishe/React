@@ -16,20 +16,23 @@ const TaskBodySchema = z.object({
   due_date: z.string().optional(),
 });
 
-export const taskBodyParser =
-  () => (req: Request, res: Response, next: NextFunction) => {
-    const bodyResult = TaskBodySchema.safeParse(req.body);
+export const taskBodyParser = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const bodyResult = TaskBodySchema.safeParse(req.body);
 
-    if (bodyResult.success) {
-      next();
-    } else {
-      const errors = bodyResult.error.errors.map((err) => {
-        return {
-          errorField: err.path.toString(),
-          message: err.message,
-        };
-      });
+  if (bodyResult.success) {
+    next();
+  } else {
+    const errors = bodyResult.error.errors.map((err) => {
+      return {
+        errorField: err.path.toString(),
+        message: err.message,
+      };
+    });
 
-      res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errors);
-    }
-  };
+    res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errors);
+  }
+};

@@ -1,16 +1,17 @@
-import { TTaskBody, TCollectionTasks, TTasksList, TTask } from "../types";
+import { TTaskBody, TTask } from "../types";
 import { DeleteResult, InsertOneResult, UpdateResult, WithId } from "mongodb";
 import { tasksRepository } from "../repository";
+import { TTaskDB } from "../repository/task-repository/task-repository-types";
 
 export const tasksService = {
   async tasksFindAll(
     limitValue: number,
     skipValue: number
-  ): Promise<WithId<TTask>[]> {
+  ): Promise<WithId<TTaskDB>[]> {
     return await tasksRepository.tasksFindAll(limitValue, skipValue);
   },
 
-  async taskFindById(id: string): Promise<WithId<TTask> | null> {
+  async taskFindById(id: string): Promise<WithId<TTaskDB> | null> {
     return await tasksRepository.taskFindById(id);
   },
 
@@ -18,7 +19,7 @@ export const tasksService = {
     searchData: string,
     skipValue: number,
     limitValue: number
-  ): Promise<WithId<TTask>[]> {
+  ): Promise<WithId<TTaskDB>[]> {
     return await tasksRepository.taskFindByFilter(
       searchData,
       skipValue,
@@ -26,16 +27,16 @@ export const tasksService = {
     );
   },
 
-  async taskCreate(taskData: TTaskBody): Promise<InsertOneResult<TTask>> {
+  async taskCreate(taskData: TTaskBody): Promise<InsertOneResult<TTaskDB>> {
     const newTask = {
-      id: crypto.randomUUID(),
+      _id: crypto.randomUUID(),
       title: taskData.title ? taskData.title : "New task",
       status: "not completed",
       description: taskData.description
         ? taskData.description
         : "Task description",
       priority: taskData.priority ? taskData.priority : "low",
-      due_date: new Date().toDateString(),
+      due_date: new Date(),
     };
 
     return await tasksRepository.taskCreate(newTask);
@@ -44,7 +45,7 @@ export const tasksService = {
   async taskUpdate(
     id: string,
     dataUpdate: TTaskBody
-  ): Promise<UpdateResult<TTask>> {
+  ): Promise<UpdateResult<TTaskDB>> {
     return await tasksRepository.tasksUpdate(id, dataUpdate);
   },
 
