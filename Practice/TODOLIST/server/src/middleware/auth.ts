@@ -1,26 +1,49 @@
 import { Request, Response, NextFunction } from "express";
-import { HTTP_STATUSES } from "../utils";
 import { jwtService } from "../app/jwt-service";
 import { usersService } from "../domain";
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
-  if (!req.headers.authorization) {
-    res
-      .status(HTTP_STATUSES.NOT_AUTHORIZED_401)
-      .send({ error: "Unauthorized" });
-    return;
+  const accessToken = req.headers["authorization"];
+  const refreshToken = req.cookies["refreshToken"];
+
+  if (!accessToken && !refreshToken) {
+    res.status(401).send("Access Denied. No token provided.");
   }
 
-  const token = req.headers.authorization.split(" ")[1]; // "bearer askjfnsdnfksndfksndjgnskd"
+  try {
+    const userId = await jwtService.userIdGetByToken(accessToken!);
 
-  const userId = await jwtService.userIdGetByToken(token);
-  if (userId) {
-    // @ts-ignore
-    req.user = await usersService.userFindById(userId);
+    const user = await usersService.userFindById(userId);
+    //@ts-ignore
+    req.user = user;
     next();
-  } else {
-    res
-      .status(HTTP_STATUSES.NOT_AUTHORIZED_401)
-      .send({ error: "Unauthorized" });
+  } catch (error) {
+    if (!refreshToken) {
+      res.status(401).send("Access Denied. No refresh token provided.");
+    }
+
+    try {
+      const { newAccessToken, newRefreshToken } = await jwtService.refreshJWT(
+        refreshToken
+      );
+
+      if (!newAccessToken && !newRefreshToken) {
+        res.status(401).send("Access Denied. No token provided.");
+      } else {
+        if (newAccessToken) {
+          res
+            .cookie("refreshToken", newRefreshToken, {
+              httpOnly: true,
+              sameSite: "strict",
+            })
+            .header("Authorization", newAccessToken)
+            .send({ message: "New token successfully created" });
+
+          next();
+        }
+      }
+    } catch (error) {
+      next(error);
+    }
   }
 };

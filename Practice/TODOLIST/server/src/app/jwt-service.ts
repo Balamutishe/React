@@ -4,17 +4,45 @@ import jwt from "jsonwebtoken";
 
 export const jwtService = {
   async createJWT(user: TUserDB) {
-    const token = jwt.sign({ userId: user._id }, settings.JWT_SECRET, {
-      expiresIn: "5h", //время смерти токена
+    const accessToken = jwt.sign({ userId: user._id }, settings.JWT_SECRET, {
+      expiresIn: "1h", //время смерти токена
+    });
+    const refreshToken = jwt.sign({ userId: user._id }, settings.JWT_SECRET, {
+      expiresIn: "1d",
     });
 
-    return token;
+    return {
+      accessToken,
+      refreshToken,
+    };
+  },
+
+  async refreshJWT(refreshToken: string) {
+    const decoded: any = jwt.verify(refreshToken, settings.JWT_SECRET);
+
+    const newAccessToken = jwt.sign(
+      { userId: decoded.userId },
+      settings.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    const newRefreshToken = jwt.sign(
+      { userId: decoded.user.userId },
+      settings.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    return { newAccessToken, newRefreshToken };
   },
 
   async userIdGetByToken(token: string) {
     try {
-      const result: any = jwt.verify(token, settings.JWT_SECRET);
-      return result.userId;
+      const decoded: any = jwt.verify(token, settings.JWT_SECRET);
+      return decoded.userId;
     } catch (err) {
       return null;
     }

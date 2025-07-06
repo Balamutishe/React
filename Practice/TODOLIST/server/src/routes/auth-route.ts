@@ -6,17 +6,51 @@ import { auth, registerUserBodyParser } from "../middleware";
 
 export const authRouter = Router();
 
-authRouter.post("/login", auth, async (req: Request, res: Response) => {
+authRouter.post("/login", async (req: Request, res: Response) => {
   const user = await usersService.checkCredentials(
     req.body.loginOrEmail,
     req.body.password
   );
 
   if (user) {
-    const token = await jwtService.createJWT(user);
-    res.status(HTTP_STATUSES.OK_200).send(token);
+    const { refreshToken, accessToken } = await jwtService.createJWT(user);
+    res
+      .cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        sameSite: "strict",
+      })
+      .header("Authorization", accessToken)
+      .send(user);
   } else {
     res.status(HTTP_STATUSES.NOT_AUTHORIZED_401);
+  }
+});
+
+authRouter.post("/logout", auth, async (req, res) => {
+  res.clearCookie("refreshToken");
+  res.status(201).json("Logout successful");
+});
+
+authRouter.post("/refresh", async (req: Request, res: Response) => {
+  const refreshToken = req.cookies["refreshToken"];
+  if (!refreshToken) {
+    res.status(401).send("Access Denied. No refresh token provided.");
+    return;
+  }
+
+  try {
+    const { newAccessToken } = await jwtService.refreshJWT(refreshToken);
+
+    if (newAccessToken) {
+      res
+        .header("Authorization", newAccessToken)
+        //@ts-ignore
+        .send(req.user);
+    } else {
+      res.status(400).send("Invalid access token.");
+    }
+  } catch (error) {
+    res.status(400).send("Invalid refresh token.");
   }
 });
 
