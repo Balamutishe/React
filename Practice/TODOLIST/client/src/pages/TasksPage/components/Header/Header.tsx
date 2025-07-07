@@ -1,6 +1,6 @@
 import c from "./Header.module.css";
-import { Search } from "@features/Search";
-import { TaskAdd } from "@features/TaskAdd";
+import { Search } from "@features/Task/Search";
+import { TaskAdd } from "@features/Task/TaskAdd";
 
 export const Header = () => {
   return (

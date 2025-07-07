@@ -1,0 +1,18 @@
+.buttons {
+  position: absolute;
+  right: 0;
+}
+
+.buttonsInvisible {
+  display: none;
+}
+
+.buttons > button {
+  width: 100%;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+}
+
+.buttons > button {
+  margin-bottom: 0.5rem;
+}

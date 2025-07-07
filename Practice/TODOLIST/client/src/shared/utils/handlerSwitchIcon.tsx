@@ -9,9 +9,12 @@ import ArrowDownIcon from "@shared/icons/arrow_down.svg?react";
 import ArrowUpIcon from "@shared/icons/arrow_up.svg?react";
 import AddIcon from "@shared/icons/add.svg?react";
 import SearchIcon from "@shared/icons/search.svg?react";
+import MainIcon from "@shared/icons/house.svg?react";
 
 export const handlerSwitchIcon = (text: string, className?: string) => {
   switch (text) {
+    case "Main":
+      return <MainIcon className={className} />;
     case "Dashboard":
       return <DashboardIcon className={className} />;
     case "Tasks":

@@ -1,5 +1,5 @@
-import { List } from "./components";
-import { ButtonsSwitch } from "./components";
+import { List } from "@widgets/components/List";
+import { ButtonsSwitch } from "@features/Task/ButtonsSwitch";
 
 export const Content = () => {
   return (

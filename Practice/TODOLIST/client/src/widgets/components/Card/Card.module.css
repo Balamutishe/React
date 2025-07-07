@@ -1,0 +1,33 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(206, 256, 250, 0.8);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  position: relative;
+}
+
+.cardContent {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.priorityHigh {
+  background-color: brown;
+}
+
+.priorityMedium {
+  background-color: darkgoldenrod;
+}
+
+.priorityLow {
+  background-color: rgba(206, 256, 250, 0.8);
+}

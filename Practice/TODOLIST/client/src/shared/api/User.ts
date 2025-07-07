@@ -1,11 +1,5 @@
-import { UserSchema, type TUser } from "@entities/types/User";
+import { UserSchema, type TUser } from "@entities/User";
 import { fetchConfig } from "@shared/utils/fetchConfig";
-
-export const fetchUserMe = (): Promise<TUser> => {
-  return fetchConfig("/api/users/me", "GET").then((data) =>
-    UserSchema.parse(data)
-  );
-};
 
 export const fetchUserChange = (userData: Partial<TUser>): Promise<TUser> => {
   return fetchConfig(`/api/users/${userData.id}`, "PATCH", userData).then(

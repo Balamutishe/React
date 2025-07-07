@@ -5,7 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Header } from "@widgets/layout";
 import { Main } from "@widgets/layout";
 import { Navigation } from "@widgets/layout";
-import store from "@entities/redux/store";
+import store from "@app/redux/store";
 import { queryClient } from "@shared/api/queryClient";
 
 import "./App.css";

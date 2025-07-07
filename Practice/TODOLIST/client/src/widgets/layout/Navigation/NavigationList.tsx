@@ -6,6 +6,7 @@ export const NavigationList = () => {
   return (
     <ul className={c.list}>
       <li key={crypto.randomUUID()} className={c.listItem}>
+        {handlerSwitchIcon("Main", c.navIcon)}
         <NavigationLink to={"/"} textLink={"Main"} />
       </li>
       <li key={crypto.randomUUID()} className={c.listItem}>

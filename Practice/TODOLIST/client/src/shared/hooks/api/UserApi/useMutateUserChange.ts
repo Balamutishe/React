@@ -1,4 +1,4 @@
-import type { TUser } from "@entities/types/User";
+import type { TUser } from "@entities/User";
 import { fetchUserChange } from "@shared/api/User";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
