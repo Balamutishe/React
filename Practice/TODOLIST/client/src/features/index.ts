@@ -1,1 +1,1 @@
-export { Search } from "./Task/Search";
+export * from "./Task";

@@ -14,12 +14,12 @@ export const TasksSwitchState = () => {
       <Button
         text="In progress"
         variant={state === "firstState" ? "primary" : "secondary"}
-        onClick={() => handleSwitch("secondState")}
+        onClick={() => handleSwitch("firstState")}
       />
       <Button
         text="Completed"
         variant={state === "secondState" ? "primary" : "secondary"}
-        onClick={() => handleSwitch("firstState")}
+        onClick={() => handleSwitch("secondState")}
       />
     </div>
   );

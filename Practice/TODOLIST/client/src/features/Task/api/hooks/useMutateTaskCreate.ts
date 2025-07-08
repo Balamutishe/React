@@ -1,13 +1,13 @@
 import type { TTask } from "@entities/Task";
-import { fetchTaskChange } from "./fetchTaskChange";
+import { fetchTaskCreate } from "../../../Task/api/fetch/fetchTaskCreate";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useMutateTaskChange = (taskData: Partial<TTask>) => {
+export const useMutateTaskCreate = (taskData: Omit<TTask, "id">) => {
   const queryClient = useQueryClient();
 
   return useMutation(
     {
-      mutationFn: () => fetchTaskChange(taskData),
+      mutationFn: () => fetchTaskCreate(taskData),
     },
     queryClient
   );

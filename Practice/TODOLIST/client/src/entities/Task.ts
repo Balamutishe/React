@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 export const TaskSchema = z.object({
-  id: z.string(),
+  _id: z.string(),
   title: z.string(),
   status: z.string(),
   description: z.string(),
   priority: z.string(),
-  due_date: z.string(),
+  due_date: z.date(),
 });
 
 export type TTask = z.infer<typeof TaskSchema>;

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchValueReducer from "@features/Task/Search/slices/SearchValueSlice";
+import searchValueReducer from "@features/Task/components/Search/slices/SearchValueSlice";
 import {
   useDispatch,
   useSelector,

@@ -1,4 +1,4 @@
-import { TasksSwitchState } from "@features/Task/TasksSwitchState";
+import { TasksSwitchState } from "@features/Task/components/TasksSwitchState";
 import { List } from "@widgets/components/List";
 
 export const Content = () => {

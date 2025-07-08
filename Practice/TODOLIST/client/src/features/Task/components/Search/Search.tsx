@@ -1,4 +1,4 @@
-import { setSearchValue } from "@features/Task/Search/slices/SearchValueSlice";
+import { setSearchValue } from "./slices";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
 import { handlerSwitchIcon } from "@shared/utils/handlerSwitchIcon";
 import { Input } from "@widgets/components/Input/Input";

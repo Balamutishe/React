@@ -1,4 +1,4 @@
-import { TaskCard } from "@features/Task/TaskCard/TaskCard";
+import { TaskCard } from "@features/Task";
 import c from "./List.module.css";
 
 export const List = () => {
