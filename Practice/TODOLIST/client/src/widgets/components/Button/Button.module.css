@@ -45,3 +45,12 @@
   color: rgba(255, 255, 255);
   background-color: rgba(240, 40, 40, 0.87);
 }
+
+.successful {
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.5rem;
+
+  color: rgba(255, 255, 255);
+  background-color: rgba(80, 240, 40, 0.87);
+}

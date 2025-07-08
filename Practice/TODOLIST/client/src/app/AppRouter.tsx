@@ -3,6 +3,7 @@ import { MainPage } from "@pages/MainPage";
 import { CalendarPage } from "@pages/CalendarPage";
 import { TasksPage } from "@pages/TasksPage";
 import { DashboardPage } from "@pages/DashboardPage";
+import { AccountPage } from "@pages/AccountPage";
 
 export const AppRouter = () => {
   return (
@@ -11,6 +12,7 @@ export const AppRouter = () => {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/tasks/:id?" element={<TasksPage />} />
       <Route path="/calendar" element={<CalendarPage />} />
+      <Route path="/settings" element={<AccountPage />} />
       <Route path="*" element={<div>NotFound</div>} />
     </Routes>
   );

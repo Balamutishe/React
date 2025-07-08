@@ -1,8 +1,8 @@
-import { CardMoreActions } from "@features/Card/CardMoreActions/CardMoreActions";
+import { TaskMoreActions } from "../TaskMoreActions";
 import { handlerSwitchPriorityColor } from "@shared/utils/handleSwitchPriorityColor";
-import c from "./Card.module.css";
+import c from "./TaskCard.module.css";
 
-export const Card = () => {
+export const TaskCard = () => {
   return (
     <div
       className={`${c.card} ${handlerSwitchPriorityColor("low", {
@@ -13,7 +13,7 @@ export const Card = () => {
     >
       <div className={c.cardHeader}>
         <h3>Task Title</h3>
-        <CardMoreActions />
+        <TaskMoreActions />
       </div>
       <div className={c.cardContent}>
         <p>Task description goes here.</p>

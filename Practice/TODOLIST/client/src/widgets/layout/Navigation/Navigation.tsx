@@ -1,6 +1,5 @@
 import c from "./Navigation.module.css";
 import { NavigationList } from "./NavigationList";
-import { NavigationSettings } from "./NavigationSettings";
 import { NavigationTitle } from "./NavigationTitle";
 
 export const Navigation = () => {
@@ -10,7 +9,6 @@ export const Navigation = () => {
         <NavigationTitle title="TODOMASTER" />
         <NavigationList />
       </div>
-      <NavigationSettings />
     </nav>
   );
 };

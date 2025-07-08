@@ -4,7 +4,13 @@ import c from "./Button.module.css";
 interface IButtonProps {
   text?: string;
   children?: ReactNode;
-  variant?: "default" | "primary" | "secondary" | "danger" | "icon";
+  variant:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "successful"
+    | "icon";
   onClick?: () => void;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
@@ -20,11 +26,7 @@ export const Button: FC<IButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${c.button} ${variant === "default" && c.default} ${
-        variant === "primary" && c.primary
-      } ${variant === "secondary" && c.secondary} ${
-        variant === "danger" && c.danger
-      }`}
+      className={`${c.button} ${c[variant]}`}
       onClick={onClick}
       disabled={disabled}
       type={type}

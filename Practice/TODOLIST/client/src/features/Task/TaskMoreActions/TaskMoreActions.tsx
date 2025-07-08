@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Button } from "@widgets/components/Button/Button";
 import MoreIcon from "@shared/icons/more.svg?react";
-import { TaskButtonsActions } from "@features/Task/TaskButtonsActions/TaskButtonsActions";
+import { Button } from "@widgets/components";
 
-export const CardMoreActions = () => {
+import c from "./TaskMoreActions.module.css";
+
+export const TaskMoreActions = () => {
   const [visible, setVisibility] = useState(false);
 
   const handlerActionsVisibility = () => {
@@ -19,7 +20,11 @@ export const CardMoreActions = () => {
           onClick={handlerActionsVisibility}
         />
       </div>
-      <TaskButtonsActions visibility={visible} />
+      <div className={visible ? `${c.buttons}` : `${c.buttonsInvisible}`}>
+        <Button text="Complete" variant="successful" />
+        <Button text="Change" variant="secondary" />
+        <Button text="Delete" variant="danger" />
+      </div>
     </div>
   );
 };

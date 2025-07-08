@@ -21,6 +21,10 @@ export const NavigationList = () => {
         {handlerSwitchIcon("Calendar", c.navIcon)}
         <NavigationLink to={"/calendar"} textLink={"Calendar"} />
       </li>
+      <li>
+        {handlerSwitchIcon("Settings", c.navIcon)}
+        <NavigationLink to={"/settings"} textLink={"Settings"} />
+      </li>
     </ul>
   );
 };
