@@ -1,0 +1,16 @@
+.buttonsSwitcher {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 1rem;
+}
+
+.buttonsSwitcher > button:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.buttonsSwitcher > button:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
