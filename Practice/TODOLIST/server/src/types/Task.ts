@@ -2,6 +2,7 @@ import { Collection, ObjectId } from "mongodb";
 import { z } from "zod";
 
 export const TaskSchema = z.object({
+  _id: z.string(),
   title: z.string(),
   status: z.string(),
   description: z.string(),

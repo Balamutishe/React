@@ -3,6 +3,7 @@ import { usersService } from "../domain";
 import { HTTP_STATUSES } from "../utils";
 import { jwtService } from "../app/jwt-service";
 import { auth, registerUserBodyParser } from "../middleware";
+import { pick } from "lodash";
 
 export const authRouter = Router();
 
@@ -13,6 +14,8 @@ authRouter.post("/login", async (req: Request, res: Response) => {
   );
 
   if (user) {
+    const userData = pick(user, ["_id", "userName", "email", "createdAt"]);
+
     const { refreshToken, accessToken } = await jwtService.createJWT(user);
     res
       .cookie("refreshToken", refreshToken, {
@@ -20,7 +23,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
         sameSite: "strict",
       })
       .header("Authorization", accessToken)
-      .send(user);
+      .json({ message: "Successful login", data: userData });
   } else {
     res.status(HTTP_STATUSES.NOT_AUTHORIZED_401);
   }
@@ -68,13 +71,9 @@ authRouter.post(
       );
 
       if (userCreatedResult.acknowledged) {
-        const newUser = await usersService.userFindById(
-          userCreatedResult.insertedId
-        );
-
         res
           .status(HTTP_STATUSES.CREATED_201)
-          .send({ data: newUser, message: "User created" });
+          .send({ message: "Successful registration" });
       } else {
         throw new Error("User not created");
       }
