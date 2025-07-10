@@ -2,11 +2,11 @@ export {
   fetchTaskChange,
   fetchTaskCreate,
   fetchTaskDelete,
-  fetchTasksFilter,
+  fetchTasks,
 } from "./fetch";
 export {
   useMutateTaskChange,
   useMutateTaskCreate,
   useMutateTaskDelete,
-  useQueryTasksFilter,
+  useQueryTasks,
 } from "./hooks";
