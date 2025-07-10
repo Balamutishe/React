@@ -1,10 +1,14 @@
-import { TaskSchema, type TTask } from "@entities/Task";
 import { fetchConfig } from "@shared/utils/fetchConfig";
+import {
+  SchemaFetchResultTaskCreate,
+  type ModelFetchDataTaskCreate,
+  type ModelFetchResultTaskCreate,
+} from "../models";
 
 export const fetchTaskCreate = (
-  taskData: Omit<TTask, "id">
-): Promise<TTask> => {
+  taskData: ModelFetchDataTaskCreate
+): Promise<ModelFetchResultTaskCreate> => {
   return fetchConfig("/api/tasks", "POST", taskData).then((data) =>
-    TaskSchema.parse(data)
+    SchemaFetchResultTaskCreate.parse(data)
   );
 };

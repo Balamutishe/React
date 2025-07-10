@@ -1,4 +1,4 @@
-import { fetchTasksAll } from "../fetch/fetchTasksAll";
+import { fetchTasks } from "../fetch/fetchTasks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useQueryTasks = () => {
@@ -6,7 +6,7 @@ export const useQueryTasks = () => {
   return useQuery(
     {
       queryKey: ["users", "me"],
-      queryFn: () => fetchTasksAll(),
+      queryFn: () => fetchTasks(),
     },
     queryClient
   );

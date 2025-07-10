@@ -1,13 +1,13 @@
 import type { TUser } from "@entities/User";
-import { fetchUserChange } from "@shared/api/User";
+import { fetchAccountChange } from "../fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useMutateUserChange = (userData: Partial<TUser>) => {
+export const useMutateAccountChange = (userData: Partial<TUser>) => {
   const queryClient = useQueryClient();
 
   return useMutation(
     {
-      mutationFn: () => fetchUserChange(userData),
+      mutationFn: () => fetchAccountChange(userData),
     },
     queryClient
   );

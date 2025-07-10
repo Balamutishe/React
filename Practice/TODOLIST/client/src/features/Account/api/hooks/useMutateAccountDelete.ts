@@ -1,12 +1,12 @@
-import { fetchUserDelete } from "@shared/api/User";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchAccountDelete } from "../fetch";
 
-export const useMutateUserDelete = (id: string) => {
+export const useMutateAccountDelete = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation(
     {
-      mutationFn: () => fetchUserDelete(id),
+      mutationFn: () => fetchAccountDelete(id),
     },
     queryClient
   );

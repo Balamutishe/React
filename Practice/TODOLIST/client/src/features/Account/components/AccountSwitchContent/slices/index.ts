@@ -1,1 +1,1 @@
-export * from "./AccountSwitchContent";
+export * from "./AccountSwitchContentSlice";

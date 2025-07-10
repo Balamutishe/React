@@ -1,8 +1,14 @@
-import { TaskSchema, type TTask } from "@entities/Task";
 import { fetchConfig } from "@shared/utils/fetchConfig";
+import {
+  SchemaFetchResultTaskChange,
+  type ModelFetchResultTaskChange,
+  type ModelFetchDataTaskChange,
+} from "../models";
 
-export const fetchTaskChange = (taskData: Partial<TTask>): Promise<TTask> => {
-  return fetchConfig(`/api/tasks/${taskData.id}`, "PATCH", taskData).then(
-    (data) => TaskSchema.parse(data)
+export const fetchTaskChange = (
+  taskData: ModelFetchDataTaskChange
+): Promise<ModelFetchResultTaskChange> => {
+  return fetchConfig(`/api/tasks/${taskData._id}`, "PATCH", taskData).then(
+    (data) => SchemaFetchResultTaskChange.parse(data)
   );
 };

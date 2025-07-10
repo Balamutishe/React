@@ -1,8 +1,9 @@
+import type { FC } from "react";
 import { Button } from "@widgets/components/Button/Button";
-import c from "./AccountSwitchContent.module.css";
 import { useAppDispatch } from "@app/redux/store";
 import { setAccountContent } from "./slices";
-import type { FC } from "react";
+
+import c from "./AccountSwitchContent.module.css";
 
 interface IAccountSwitchContentProps {
   accountContentType: "info" | "settings";
@@ -13,7 +14,7 @@ export const AccountSwitchContent: FC<IAccountSwitchContentProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const handlerAccountTypeSwitch = (typeContent: string) =>
+  const handlerAccountTypeSwitch = (typeContent: "info" | "settings") =>
     dispatch(setAccountContent(typeContent));
 
   return (

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import searchValueReducer from "@features/Task/components/Search/slices/SearchValueSlice";
-import accountSwitchContentReducer from "@features/Account/components/AccountSwitchContent/slices/AccountSwitchContent";
+import accountSwitchContentReducer from "@features/Account/components/AccountSwitchContent/slices/AccountSwitchContentSlice";
 import {
   useDispatch,
   useSelector,
