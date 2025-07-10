@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchAccountLogout } from "../fetch";
+import { fetchLogout } from "../fetch";
 
-export const useMutateAccountLogout = () => {
+export const useMutateLogout = () => {
   const queryClient = useQueryClient();
   return useMutation(
     {
-      mutationFn: () => fetchAccountLogout(),
+      mutationFn: () => fetchLogout(),
       onSuccess: async () => {
         await queryClient.invalidateQueries({ queryKey: ["users", "me"] });
       },

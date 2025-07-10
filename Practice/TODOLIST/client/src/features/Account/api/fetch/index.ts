@@ -1,3 +1,2 @@
-export { fetchAccountChange } from "./fetchAccountChange";
-export { fetchAccountDelete } from "./fetchAccountDelete";
-export { fetchAccountLogout } from "./fetchAccountLogout";
+export * from "./fetchAccountChange";
+export * from "./fetchAccountDelete";

@@ -1,3 +1,2 @@
-export { useMutateAccountChange } from "./useMutateAccountChange";
-export { useMutateAccountDelete } from "./useMutateAccountDelete";
-export { useMutateAccountLogout } from "./useMutateAccountLogout";
+export * from "./useMutateAccountChange";
+export * from "./useMutateAccountDelete";
