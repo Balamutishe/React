@@ -2,8 +2,8 @@ import { UserSchema } from "@entities/User";
 import z from "zod";
 
 export const SchemaFetchDataLogin = z.object({
-  loginOrPassword: z.string(),
-  password: z.string(),
+  loginOrEmail: z.string().nonempty("Field loginOrEmail can't be empty"),
+  password: z.string().nonempty("Field password can't be empty"),
 });
 
 export const SchemaFetchResultLogin = z.object({

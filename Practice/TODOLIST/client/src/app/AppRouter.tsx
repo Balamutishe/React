@@ -9,10 +9,10 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
+      <Route path="/settings" element={<AccountPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/tasks/:id?" element={<TasksPage />} />
       <Route path="/calendar" element={<CalendarPage />} />
-      <Route path="/settings" element={<AccountPage />} />
       <Route path="*" element={<div>NotFound</div>} />
     </Routes>
   );

@@ -7,15 +7,15 @@ const initialState: IAccountSwitchContent = {
   accountContentType: "info",
 };
 
-const AccountSwitchContent = createSlice({
-  name: "accountContent",
+const AccountState = createSlice({
+  name: "accountState",
   initialState,
   reducers: {
-    setAccountContent: (state, action) => {
+    setAccountState: (state, action) => {
       state.accountContentType = action.payload;
     },
   },
 });
 
-export const { setAccountContent } = AccountSwitchContent.actions;
-export default AccountSwitchContent.reducer;
+export const { setAccountState } = AccountState.actions;
+export const AccountStateReducer = AccountState.reducer;

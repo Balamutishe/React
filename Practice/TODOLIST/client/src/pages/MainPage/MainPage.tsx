@@ -1,9 +1,9 @@
-import { Account } from "@features/Account/Account";
+import { Auth } from "@features/Auth";
 
 export const MainPage = () => {
   return (
     <div>
-      <Account />
+      <Auth />
     </div>
   );
 };

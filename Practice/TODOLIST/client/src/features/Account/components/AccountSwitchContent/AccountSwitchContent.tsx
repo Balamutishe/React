@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Button } from "@widgets/components/Button/Button";
 import { useAppDispatch } from "@app/redux/store";
-import { setAccountContent } from "./slices";
+import { setAccountState } from "../../slices";
 
 import c from "./AccountSwitchContent.module.css";
 
@@ -15,7 +15,7 @@ export const AccountSwitchContent: FC<IAccountSwitchContentProps> = ({
   const dispatch = useAppDispatch();
 
   const handlerAccountTypeSwitch = (typeContent: "info" | "settings") =>
-    dispatch(setAccountContent(typeContent));
+    dispatch(setAccountState(typeContent));
 
   return (
     <div className={c.buttonsSwitcher}>

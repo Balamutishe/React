@@ -1,3 +1,9 @@
+import { Account } from "@features/Account";
+
 export const AccountPage = () => {
-  return <div>AccountPage</div>;
+  return (
+    <div>
+      <Account />
+    </div>
+  );
 };

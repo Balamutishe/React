@@ -5,7 +5,7 @@ import { AccountContentView } from "./components/AccountContentView";
 
 export const Account = () => {
   const accountContentType = useAppSelector(
-    (state) => state.accountContentType.accountContentType
+    (state) => state.accountState.accountContentType
   );
 
   return (
