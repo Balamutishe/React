@@ -8,52 +8,47 @@ import { pick } from "lodash";
 export const authRouter = Router();
 
 authRouter.post("/login", async (req: Request, res: Response) => {
-  const user = await usersService.checkCredentials(
-    req.body.loginOrEmail,
-    req.body.password
-  );
+  try {
+    const user = await usersService.checkCredentials(
+      req.body.loginOrEmail,
+      req.body.password
+    );
 
-  if (user) {
+    if (!user) throw new Error("Incorrect login or password");
     const userData = pick(user, ["_id", "userName", "email", "createdAt"]);
 
     const { refreshToken, accessToken } = await jwtService.createJWT(user);
+    if (!refreshToken || !accessToken) throw new Error("Failed creation token");
+
     res
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
         sameSite: "strict",
       })
       .header("Authorization", accessToken)
-      .json({ message: "Successful login", data: userData });
-  } else {
-    res.status(HTTP_STATUSES.NOT_AUTHORIZED_401);
+      .json({ message: "Successful login", user: userData });
+  } catch (error) {
+    res.status(HTTP_STATUSES.BAD_REQUEST_400).send({ message: error });
   }
 });
 
 authRouter.post("/logout", auth, async (req, res) => {
   res.clearCookie("refreshToken");
-  res.status(201).json("Logout successful");
+  res.status(200).json({ message: "Logout successful" });
 });
 
-authRouter.post("/refresh", async (req: Request, res: Response) => {
-  const refreshToken = req.cookies["refreshToken"];
-  if (!refreshToken) {
-    res.status(401).send("Access Denied. No refresh token provided.");
-    return;
-  }
-
+authRouter.get("/refresh", auth, async (req: Request, res: Response) => {
   try {
-    const { newAccessToken } = await jwtService.refreshJWT(refreshToken);
+    //@ts-ignore
+    if (!req.accessToken) throw new Error("No refresh token provided");
 
-    if (newAccessToken) {
-      res
-        .header("Authorization", newAccessToken)
-        //@ts-ignore
-        .send(req.user);
-    } else {
-      res.status(400).send("Invalid access token.");
-    }
+    res
+      //@ts-ignore
+      .header("Authorization", req.accessToken)
+      //@ts-ignore
+      .send({ message: "Successful refresh", user: req.user });
   } catch (error) {
-    res.status(400).send("Invalid refresh token.");
+    res.status(HTTP_STATUSES.BAD_REQUEST_400).send({ message: error });
   }
 });
 
@@ -70,19 +65,16 @@ authRouter.post(
         password
       );
 
-      if (userCreatedResult.acknowledged) {
-        res
-          .status(HTTP_STATUSES.CREATED_201)
-          .send({ message: "Successful registration" });
-      } else {
-        throw new Error("User not created");
-      }
-    } catch (error: any) {
-      if (error.message === "User not created") {
-        res.send(HTTP_STATUSES.BAD_REQUEST_400).send({
-          message: error.message,
-        });
-      }
+      if (!userCreatedResult.acknowledged)
+        throw new Error("The user has not been registered");
+
+      res
+        .status(HTTP_STATUSES.CREATED_201)
+        .send({ message: "Successful registration" });
+    } catch (error) {
+      res.status(HTTP_STATUSES.BAD_REQUEST_400).send({
+        message: error,
+      });
     }
   }
 );

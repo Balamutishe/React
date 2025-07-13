@@ -23,7 +23,11 @@ export const usersService = {
   },
 
   async userFindById(id: string) {
-    return await usersRepository.userFindById(id);
+    try {
+      return await usersRepository.userFindById(id);
+    } catch (err) {
+      return err;
+    }
   },
 
   async checkCredentials(loginOrEmail: string, password: string) {
@@ -41,7 +45,7 @@ export const usersService = {
   },
 
   async usersCountGet(searchData?: string) {
-    return await usersRepository.tasksCountGet(searchData);
+    return await usersRepository.usersCountGet(searchData);
   },
 
   async queryPagesDataTransform(

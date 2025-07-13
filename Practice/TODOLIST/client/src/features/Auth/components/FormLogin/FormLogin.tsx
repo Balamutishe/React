@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import {
   useMutateLogin,
@@ -8,7 +9,6 @@ import {
 import { Button } from "@widgets/components";
 
 import c from "./FormLogin.module.css";
-import type { FC } from "react";
 
 interface IFormLogin {
   handlerSetFormTypes: (formType: "register") => void;
@@ -28,7 +28,9 @@ export const FormLogin: FC<IFormLogin> = ({ handlerSetFormTypes }) => {
     <div className={c.formContainer}>
       <form
         className={c.form}
-        onSubmit={handleSubmit((loginData) => handlerLogin.mutate(loginData))}
+        onSubmit={handleSubmit(async (loginData) => {
+          handlerLogin.mutate(loginData);
+        })}
       >
         <h2 className={c.title}>Войдите чтобы начать</h2>
         <div className={c.inputs}>

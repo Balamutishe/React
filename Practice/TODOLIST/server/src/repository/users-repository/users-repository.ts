@@ -29,7 +29,7 @@ export const usersRepository = {
     return collectionUsers.insertOne(newUser);
   },
 
-  async tasksCountGet(searchData?: string): Promise<number> {
+  async usersCountGet(searchData?: string): Promise<number> {
     if (searchData) {
       return await collectionUsers.countDocuments({
         title: { $regex: searchData },

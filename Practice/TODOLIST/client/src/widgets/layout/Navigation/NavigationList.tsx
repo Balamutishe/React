@@ -7,7 +7,7 @@ export const NavigationList = () => {
     <ul className={c.list}>
       <li key={crypto.randomUUID()} className={c.listItem}>
         {handlerSwitchIcon("Main", c.navIcon)}
-        <NavigationLink to={"/"} textLink={"Main"} />
+        <NavigationLink to={"/account"} textLink={"Main"} />
       </li>
       <li key={crypto.randomUUID()} className={c.listItem}>
         {handlerSwitchIcon("Dashboard", c.navIcon)}
@@ -20,10 +20,6 @@ export const NavigationList = () => {
       <li key={crypto.randomUUID()} className={c.listItem}>
         {handlerSwitchIcon("Calendar", c.navIcon)}
         <NavigationLink to={"/calendar"} textLink={"Calendar"} />
-      </li>
-      <li>
-        {handlerSwitchIcon("Settings", c.navIcon)}
-        <NavigationLink to={"/settings"} textLink={"Settings"} />
       </li>
     </ul>
   );

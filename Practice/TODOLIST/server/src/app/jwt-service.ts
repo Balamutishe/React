@@ -1,6 +1,7 @@
 import { settings } from "./settings";
 import { TUserDB } from "../repository/users-repository/users-repository-types";
 import jwt from "jsonwebtoken";
+import { usersService } from "../domain";
 
 export const jwtService = {
   async createJWT(user: TUserDB) {
@@ -29,7 +30,7 @@ export const jwtService = {
     );
 
     const newRefreshToken = jwt.sign(
-      { userId: decoded.user.userId },
+      { userId: decoded.userId },
       settings.JWT_SECRET,
       {
         expiresIn: "1d",
@@ -42,9 +43,15 @@ export const jwtService = {
   async userIdGetByToken(token: string) {
     try {
       const decoded: any = jwt.verify(token, settings.JWT_SECRET);
-      return decoded.userId;
+      console.log(decoded.userId);
+
+      if (!decoded.userId) {
+        throw new Error("userID by accessToken not found");
+      } else {
+        return await usersService.userFindById(decoded.userId);
+      }
     } catch (err) {
-      return null;
+      return err;
     }
   },
 };

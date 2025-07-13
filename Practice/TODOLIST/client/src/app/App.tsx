@@ -7,12 +7,14 @@ import { Main } from "@widgets/layout";
 import { Navigation } from "@widgets/layout";
 import store from "@app/redux/store";
 import { queryClient } from "@shared/api/queryClient";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "./App.css";
 
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
       <Provider store={store}>
         <BrowserRouter>
           <div className="app-container">

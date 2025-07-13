@@ -7,8 +7,11 @@ export const SchemaFetchDataLogin = z.object({
 });
 
 export const SchemaFetchResultLogin = z.object({
-  message: z.string(),
-  data: UserSchema,
+  token: z.string(),
+  data: z.object({
+    message: z.string(),
+    user: UserSchema,
+  }),
 });
 
 export type ModelFetchDataLogin = z.infer<typeof SchemaFetchDataLogin>;

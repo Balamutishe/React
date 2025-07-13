@@ -1,14 +1,22 @@
-import { fetchConfig } from "@shared/utils/fetchConfig";
-import {
-  SchemaFetchResultLogin,
-  type ModelFetchDataLogin,
-  type ModelFetchResultLogin,
-} from "../models";
+import { SchemaFetchResultLogin, type ModelFetchDataLogin } from "../models";
+import { validateResponse } from "@shared/utils/validateResponse";
 
-export const fetchLogin = (
-  userDataLogin: ModelFetchDataLogin
-): Promise<ModelFetchResultLogin> => {
-  return fetchConfig("/api/login", "POST", userDataLogin).then((data) =>
-    SchemaFetchResultLogin.parse(data)
-  );
+export const fetchLogin = (userDataLogin: ModelFetchDataLogin) => {
+  return fetch("/api/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userDataLogin),
+  })
+    .then(validateResponse)
+    .then(async (response) => {
+      const authToken = response.headers.get("Authorization");
+
+      return {
+        token: authToken,
+        user: await response.json(),
+      };
+    })
+    .then((data) => SchemaFetchResultLogin.parse(data));
 };

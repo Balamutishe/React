@@ -5,7 +5,7 @@ export const useQueryTasks = () => {
   const queryClient = useQueryClient();
   return useQuery(
     {
-      queryKey: ["users", "me"],
+      queryKey: ["tasks", "all"],
       queryFn: () => fetchTasks(),
     },
     queryClient
