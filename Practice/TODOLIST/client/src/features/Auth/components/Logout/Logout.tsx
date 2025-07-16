@@ -8,7 +8,7 @@ export const Logout = () => {
     <Button
       type="button"
       variant="danger"
-      text="Выйти из аккаунта"
+      text="Выйти"
       onClick={() => handlerLogout.mutate()}
     />
   );
