@@ -15,7 +15,7 @@ export const fetchLogin = (userDataLogin: ModelFetchDataLogin) => {
 
       return {
         token: authToken,
-        user: await response.json(),
+        data: await response.json(),
       };
     })
     .then((data) => SchemaFetchResultLogin.parse(data));

@@ -17,7 +17,7 @@ export const useQueryRefresh = () => {
           return data;
         }),
       queryKey: ["refresh"],
-      retry: false,
+      retry: 1,
     },
     queryClient
   );

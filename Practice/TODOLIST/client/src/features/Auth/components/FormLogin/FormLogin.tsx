@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
+
 import {
   useMutateLogin,
   type ModelFetchDataLogin,
@@ -20,18 +21,18 @@ export const FormLogin: FC<IFormLogin> = ({ handlerSetFormTypes }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<ModelFetchDataLogin>({
+    mode: "onChange",
     resolver: zodResolver(SchemaFetchDataLogin),
   });
   const handlerLogin = useMutateLogin();
 
+  const onSubmit = (data: ModelFetchDataLogin) => {
+    handlerLogin.mutate(data);
+  };
+
   return (
     <div className={c.formContainer}>
-      <form
-        className={c.form}
-        onSubmit={handleSubmit(async (loginData) => {
-          handlerLogin.mutate(loginData);
-        })}
-      >
+      <form className={c.form} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={c.title}>Войдите чтобы начать</h2>
         <div className={c.inputs}>
           <div className={c.inputContainer}>

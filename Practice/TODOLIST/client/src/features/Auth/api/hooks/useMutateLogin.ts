@@ -7,6 +7,9 @@ export const useMutateLogin = () => {
   return useMutation(
     {
       mutationFn: fetchLogin,
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey: ["refresh"] });
+      },
     },
     queryClient
   );
