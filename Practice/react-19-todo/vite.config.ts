@@ -5,4 +5,10 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    watch: {
+      // Исключаем db.json из наблюдения
+      ignored: ["**/db.json"],
+    },
+  },
 });
