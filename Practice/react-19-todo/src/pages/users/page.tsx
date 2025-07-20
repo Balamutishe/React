@@ -3,6 +3,7 @@ import { type User } from "../../shared/api/api";
 import { ErrorBoundary } from "react-error-boundary";
 import { type CreateUserAction, type DeleteUserAction } from "./actions";
 import { useUsers } from "./useUsers";
+import { Link } from "react-router-dom";
 
 export function UsersPage() {
   const { useUsersList, createUserAction, deleteUserAction } = useUsers();
@@ -81,7 +82,11 @@ export function UsersList({
   return (
     <div className="flex flex-col">
       {users.map((user) => (
-        <UserCard user={user} deleteUserAction={deleteUserAction} />
+        <UserCard
+          key={user.id}
+          user={user}
+          deleteUserAction={deleteUserAction}
+        />
       ))}
     </div>
   );
@@ -101,13 +106,19 @@ export function UserCard({
       {user.email}
       <form className="ml-auto" action={dispatch}>
         <input name="id" value={user.id} type="hidden" />
+        <Link
+          to={`/${user.id}/tasks`}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto disabled:bg-gray-400"
+        >
+          Tasks
+        </Link>
         <button
           type="submit"
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-auto disabled:bg-gray-400"
         >
-          Delete{" "}
-          {state.error && <div className="text-red-500">{state.error}</div>}
+          Delete
         </button>
+        {state.error && <div className="text-red-500">{state.error}</div>}
       </form>
     </div>
   );
