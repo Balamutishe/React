@@ -144,13 +144,13 @@ const Pagination = ({
   );
 };
 
-export function CreateTaskForm({
+const CreateTaskForm = ({
   userId,
   refetchTasks,
 }: {
   userId: string;
   refetchTasks: () => void;
-}) {
+}) => {
   const [state, dispatch, isPending] = useActionState(
     createTaskAction({ refetchTasks, userId }),
     { title: "" }
@@ -173,15 +173,15 @@ export function CreateTaskForm({
       </button>
     </form>
   );
-}
+};
 
-export function TasksList({
+const TasksList = ({
   tasksPromise,
   refetchTasks,
 }: {
   tasksPromise: Promise<Task[]>;
   refetchTasks: () => void;
-}) {
+}) => {
   const tasks = use(tasksPromise);
   return (
     <div className="flex flex-col">
@@ -190,15 +190,15 @@ export function TasksList({
       ))}
     </div>
   );
-}
+};
 
-export function TaskCard({
+const TaskCard = ({
   task,
   refetchTasks,
 }: {
   task: Task;
   refetchTasks: () => void;
-}) {
+}) => {
   const [state, dispatch, isPending] = useActionState(
     deleteTaskAction({ refetchTasks }),
     {}
@@ -223,4 +223,4 @@ export function TaskCard({
       </form>
     </div>
   );
-}
+};
