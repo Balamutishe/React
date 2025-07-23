@@ -1,0 +1,16 @@
+.containerHeader {
+  margin-bottom: 1rem;
+
+  border-bottom: 0.1rem #ffffff solid;
+}
+
+.containerMain {
+  display: flex;
+  justify-content: space-between;
+
+  max-width: 900px;
+  min-width: 320px;
+
+  margin: 0 auto;
+  padding: 1rem 0;
+}
