@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 900px;
+  min-width: 320px;
+
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.linksBlock > a:not(:last-child) {
+  margin-right: 1rem;
+}
