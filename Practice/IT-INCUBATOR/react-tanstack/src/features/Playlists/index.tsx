@@ -1,42 +1,26 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useState, type FC } from "react";
 import c from "./style.module.css";
-import { client } from "@shared/api";
 import { Pagination } from "@shared/ui/Pagination";
-import { useState } from "react";
+import { usePlaylistsQuery } from "./api";
 
-export const Playlists = () => {
+interface IProps {
+  userId: string;
+}
+
+export const Playlists: FC<IProps> = ({ userId }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  const query = useQuery({
-    queryKey: ["playlists", { currentPage, search }],
-    queryFn: async ({ signal }) => {
-      const response = await client.GET("/playlists", {
-        params: {
-          query: {
-            pageNumber: currentPage,
-            search,
-          },
-        },
-        // signal это контроллер созданный для управления запросом,
-        // если ты перешел например на другую страницу
-        // и не дождался резолва промиса
-        signal,
-      });
+  const { data, isPending, isFetching, isError, error, refetch } =
+    usePlaylistsQuery(userId, currentPage, search);
 
-      return response.data!;
-    },
-    // показ данных старой страницы пока не придут данные новой
-    placeholderData: keepPreviousData,
-  });
+  if (isPending) return <span>Loading...</span>;
 
-  if (query.isPending) return <span>Loading...</span>;
-
-  if (query.isError)
+  if (isError)
     return (
       <div>
-        <p>Error: {JSON.stringify(query.error.message)}</p>
-        <button onClick={() => query.refetch()}>Retry query</button>
+        <p>Error: {JSON.stringify(error.message)}</p>
+        <button onClick={() => refetch()}>Retry query</button>
       </div>
     );
 
@@ -44,9 +28,9 @@ export const Playlists = () => {
     <div className={c.containerPlaylists}>
       <Pagination
         current={currentPage}
-        pageCount={query.data.meta.pagesCount}
+        pageCount={data.meta.pagesCount}
         onPageNumberChange={setCurrentPage}
-        isFetching={query.isFetching}
+        isFetching={isFetching}
       />
       <div>
         <input
@@ -57,7 +41,7 @@ export const Playlists = () => {
         />
       </div>
       <ul>
-        {query.data.data.map((playlists) => (
+        {data.data.map((playlists) => (
           <li key={playlists.id}>{playlists.attributes.title}</li>
         ))}
       </ul>
