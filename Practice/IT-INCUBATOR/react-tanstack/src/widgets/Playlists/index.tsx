@@ -2,6 +2,7 @@ import { useState, type FC } from "react";
 import c from "./style.module.css";
 import { Pagination } from "@shared/ui/Pagination";
 import { usePlaylistsQuery } from "./api";
+import { PlayListDelete } from "@features/PlaylistDelete";
 
 interface IProps {
   userId: string;
@@ -42,7 +43,10 @@ export const Playlists: FC<IProps> = ({ userId }) => {
       </div>
       <ul>
         {data.data.map((playlists) => (
-          <li key={playlists.id}>{playlists.attributes.title}</li>
+          <li key={playlists.id}>
+            {playlists.attributes.title}{" "}
+            <PlayListDelete playlistId={playlists.id} />
+          </li>
         ))}
       </ul>
     </div>
