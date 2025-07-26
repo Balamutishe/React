@@ -1,7 +1,7 @@
 import { useMeQuery } from "@features/Auth";
 import { Playlists } from "@widgets/Playlists";
 import { Navigate } from "@tanstack/react-router";
-import { FormPlaylistsAdd } from "@features/PlaylistAdd";
+import { FormPlaylistsAdd } from "@features/Playlist/PlaylistAdd";
 
 export const MyPlaylistsPage = () => {
   const { data, isPending } = useMeQuery();

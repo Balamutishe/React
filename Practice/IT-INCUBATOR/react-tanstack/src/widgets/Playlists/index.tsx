@@ -2,7 +2,7 @@ import { useState, type FC } from "react";
 import c from "./style.module.css";
 import { Pagination } from "@shared/ui/Pagination";
 import { usePlaylistsQuery } from "./api";
-import { PlayListDelete } from "@features/PlaylistDelete";
+import { PlayListDelete } from "@features/Playlist/PlaylistDelete";
 
 interface IProps {
   userId: string;

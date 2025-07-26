@@ -1,3 +1,2 @@
 export { LoginButton } from "./Auth";
-export { FormPlaylistsAdd } from "./PlaylistAdd";
-export { PlayListDelete } from "./PlaylistDelete";
+export { FormPlaylistsAdd, PlayListDelete, PlaylistEdit } from "./Playlist";
