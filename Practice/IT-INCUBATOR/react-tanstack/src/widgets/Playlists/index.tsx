@@ -5,7 +5,7 @@ import { usePlaylistsQuery } from "./api";
 import { PlayListDelete } from "@features/Playlist/PlaylistDelete";
 
 interface IProps {
-  userId: string;
+  userId?: string;
   onPlaylistSelected?: (playlistId: string) => void;
 }
 
@@ -14,9 +14,9 @@ export const Playlists: FC<IProps> = ({ userId, onPlaylistSelected }) => {
   const [search, setSearch] = useState("");
 
   const { data, isPending, isFetching, isError } = usePlaylistsQuery(
-    userId,
     currentPage,
-    search
+    search,
+    userId
   );
 
   const handlePlaylistSelected = (playlistId: string) =>

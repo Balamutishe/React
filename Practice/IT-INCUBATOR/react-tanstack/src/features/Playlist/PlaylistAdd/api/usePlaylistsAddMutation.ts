@@ -15,5 +15,6 @@ export const usePlayListsAddMutation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["playlists"] });
     },
+    retry: false,
   });
 };

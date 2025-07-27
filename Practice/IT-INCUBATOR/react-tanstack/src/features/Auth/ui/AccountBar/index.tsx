@@ -3,12 +3,14 @@ import { CurrentUser } from "../CurrentUser";
 import { useMeQuery } from "@features/Auth/api";
 
 export const AccountBar = () => {
-  const userData = useMeQuery();
+  const { data, isFetching, isError } = useMeQuery();
+
+  if (isFetching) return <div>Loading...</div>;
+  if (isError) return <LoginButton />;
 
   return (
     <div>
-      {!userData.data && <LoginButton />}
-      {userData.data && <CurrentUser userData={userData.data} />}
+      <CurrentUser userData={data!} />
     </div>
   );
 };

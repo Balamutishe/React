@@ -7,7 +7,7 @@ export const useMeQuery = () => {
     queryFn: async () => {
       const response = await client.GET("/auth/me");
 
-      return response.data;
+      return response.data!;
     },
     retry: false,
   });

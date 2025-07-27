@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const usePlaylistGetOne = (playlistId: string | null) => {
   return useQuery({
-    queryKey: ["playlist", playlistId],
+    queryKey: ["playlists", "details", playlistId],
     queryFn: async () => {
       const response = await client.GET("/playlists/{playlistId}", {
         params: {

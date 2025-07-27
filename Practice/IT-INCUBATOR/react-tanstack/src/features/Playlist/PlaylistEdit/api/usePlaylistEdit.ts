@@ -18,5 +18,6 @@ export const usePlaylistEdit = (playlistId: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["playlists"] });
     },
+    retry: false,
   });
 };

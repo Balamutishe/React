@@ -18,19 +18,19 @@ const makeRefreshToken = () => {
         }),
       }
     )
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
           throw new Error("Failed to refresh token");
         }
-        return response.json();
+        return await response.json();
       })
       .then((data) => {
         localStorage.setItem("musicfun-access-token", data.accessToken);
         localStorage.setItem("musicfun-refresh-token", data.refreshToken);
       })
       .catch((error) => {
-        localStorage.removeItem("musicfun-access-token");
-        localStorage.removeItem("musicfun-refresh-token");
+        // localStorage.removeItem("musicfun-access-token");
+        // localStorage.removeItem("musicfun-refresh-token");
         console.error(error);
       })
       .finally(() => {
@@ -44,6 +44,7 @@ const makeRefreshToken = () => {
 const authMiddleware: Middleware = {
   onRequest({ request }) {
     const accessToken = localStorage.getItem("musicfun-access-token");
+
     if (accessToken) {
       request.headers.set("Authorization", `Bearer ${accessToken}`);
     }

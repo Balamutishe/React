@@ -2,9 +2,9 @@ import { client } from "@shared/api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const usePlaylistsQuery = (
-  userId: string,
   currentPage: number,
-  search: string
+  search: string,
+  userId?: string
 ) => {
   return useQuery({
     queryKey: ["playlists", { currentPage, search, userId }],

@@ -17,7 +17,7 @@ export const useLoginMutation = () => {
           code,
           redirectUri,
           rememberMe: true,
-          accessTokenTTL: "1d",
+          accessTokenTTL: "1h",
         },
       });
 
@@ -25,10 +25,10 @@ export const useLoginMutation = () => {
 
       return response.data;
     },
-    onSuccess: async (data) => {
+    onSuccess: (data) => {
       localStorage.setItem("musicfun-refresh-token", data.refreshToken);
       localStorage.setItem("musicfun-access-token", data.accessToken);
-      await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
+      queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
     },
   });
 };
