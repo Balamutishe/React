@@ -2,7 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { usePlaylistEdit } from "./api/usePlaylistEdit";
 import type { SchemaUpdatePlaylistRequestPayload } from "@shared/api";
 import { Input } from "./ui";
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import { usePlaylistGetOne } from "./api";
 
 interface IProps {
@@ -16,6 +16,10 @@ export const FormPlaylistEdit: FC<IProps> = ({ playlistId }) => {
   const methodsForm = useForm<SchemaUpdatePlaylistRequestPayload>();
 
   const onSubmit = (data: SchemaUpdatePlaylistRequestPayload) => mutate(data);
+
+  useEffect(() => {
+    methodsForm.reset();
+  }, [playlistId]);
 
   if (!playlistId) return <></>;
   if (isPending) return <div>Loading...</div>;

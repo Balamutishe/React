@@ -1,23 +1,21 @@
 import createClient, { type Middleware } from "openapi-fetch";
 import { type paths } from "./schema";
+import { baseUrl, apiKey, refreshTokenKey, accessTokenKey } from "./apiConfig";
 
 let refreshPromise: Promise<void> | null = null;
 
 const makeRefreshToken = () => {
   if (!refreshPromise) {
-    refreshPromise = fetch(
-      "https://musicfun.it-incubator.app/api/1.0/auth/refresh",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": "dc801b81-3ff9-44de-89bf-5e6053d49d68",
-        },
-        body: JSON.stringify({
-          refreshToken: localStorage.getItem("musicfun-refresh-token"),
-        }),
-      }
-    )
+    refreshPromise = fetch(`${baseUrl}auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": apiKey,
+      },
+      body: JSON.stringify({
+        refreshToken: localStorage.getItem(refreshTokenKey),
+      }),
+    })
       .then(async (response) => {
         if (!response.ok) {
           throw new Error("Failed to refresh token");
@@ -25,8 +23,8 @@ const makeRefreshToken = () => {
         return await response.json();
       })
       .then((data) => {
-        localStorage.setItem("musicfun-access-token", data.accessToken);
-        localStorage.setItem("musicfun-refresh-token", data.refreshToken);
+        localStorage.setItem(accessTokenKey, data.accessToken);
+        localStorage.setItem(refreshTokenKey, data.refreshToken);
       })
       .catch((error) => {
         // localStorage.removeItem("musicfun-access-token");
@@ -43,7 +41,7 @@ const makeRefreshToken = () => {
 
 const authMiddleware: Middleware = {
   onRequest({ request }) {
-    const accessToken = localStorage.getItem("musicfun-access-token");
+    const accessToken = localStorage.getItem(accessTokenKey);
 
     if (accessToken) {
       request.headers.set("Authorization", `Bearer ${accessToken}`);
@@ -74,7 +72,7 @@ const authMiddleware: Middleware = {
 
       retryRequest.headers.set(
         "Authorization",
-        `Bearer ${localStorage.getItem("musicfun-access-token")}`
+        `Bearer ${localStorage.getItem(accessTokenKey)}`
       );
 
       return fetch(retryRequest);
@@ -85,9 +83,9 @@ const authMiddleware: Middleware = {
 };
 
 export const client = createClient<paths>({
-  baseUrl: "https://musicfun.it-incubator.app/api/1.0/",
+  baseUrl: `${baseUrl}`,
   headers: {
-    "api-key": "dc801b81-3ff9-44de-89bf-5e6053d49d68",
+    "api-key": `${apiKey}`,
   },
 });
 
