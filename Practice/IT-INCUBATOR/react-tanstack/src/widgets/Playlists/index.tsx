@@ -6,24 +6,24 @@ import { PlayListDelete } from "@features/Playlist/PlaylistDelete";
 
 interface IProps {
   userId: string;
+  onPlaylistSelected?: (playlistId: string) => void;
 }
 
-export const Playlists: FC<IProps> = ({ userId }) => {
+export const Playlists: FC<IProps> = ({ userId, onPlaylistSelected }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  const { data, isPending, isFetching, isError, error, refetch } =
-    usePlaylistsQuery(userId, currentPage, search);
+  const { data, isPending, isFetching, isError } = usePlaylistsQuery(
+    userId,
+    currentPage,
+    search
+  );
+
+  const handlePlaylistSelected = (playlistId: string) =>
+    onPlaylistSelected?.(playlistId);
 
   if (isPending) return <span>Loading...</span>;
-
-  if (isError)
-    return (
-      <div>
-        <p>Error: {JSON.stringify(error.message)}</p>
-        <button onClick={() => refetch()}>Retry query</button>
-      </div>
-    );
+  if (isError) return <div>Error...</div>;
 
   return (
     <div className={c.containerPlaylists}>
@@ -43,7 +43,10 @@ export const Playlists: FC<IProps> = ({ userId }) => {
       </div>
       <ul>
         {data.data.map((playlists) => (
-          <li key={playlists.id}>
+          <li
+            key={playlists.id}
+            onClick={() => handlePlaylistSelected(playlists.id)}
+          >
             {playlists.attributes.title}{" "}
             <PlayListDelete playlistId={playlists.id} />
           </li>
