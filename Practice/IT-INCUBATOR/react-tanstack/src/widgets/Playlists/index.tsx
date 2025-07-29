@@ -43,11 +43,10 @@ export const Playlists: FC<IProps> = ({ userId, onPlaylistSelected }) => {
       </div>
       <ul>
         {data.data.map((playlists) => (
-          <li
-            key={playlists.id}
-            onClick={() => handlePlaylistSelected(playlists.id)}
-          >
-            {playlists.attributes.title}{" "}
+          <li key={playlists.id}>
+            <span onClick={() => handlePlaylistSelected(playlists.id)}>
+              {playlists.attributes.title}
+            </span>
             <PlayListDelete playlistId={playlists.id} />
           </li>
         ))}
