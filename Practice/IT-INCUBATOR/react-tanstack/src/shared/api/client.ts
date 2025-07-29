@@ -57,9 +57,8 @@ const authMiddleware: Middleware = {
     if (response.ok) return response;
 
     if (!response.ok && response.status !== 401) {
-      throw new Error(
-        `${response.url}: ${response.status} ${response.statusText}`
-      );
+      const errorBody = await response.json();
+      throw new Error(errorBody);
     }
 
     try {

@@ -4,10 +4,14 @@ import type { SchemaCreatePlaylistRequestPayload } from "@shared/api";
 import { Input } from "./ui";
 
 export const FormPlaylistsAdd = () => {
-  const { mutate } = usePlayListsAddMutation();
+  const { mutateAsync } = usePlayListsAddMutation();
   const methodsForm = useForm<SchemaCreatePlaylistRequestPayload>();
 
-  const onSubmit = (data: SchemaCreatePlaylistRequestPayload) => mutate(data);
+  const onSubmit = async (data: SchemaCreatePlaylistRequestPayload) => {
+    await mutateAsync(data);
+
+    methodsForm.reset();
+  };
 
   return (
     <FormProvider {...methodsForm}>
@@ -16,6 +20,7 @@ export const FormPlaylistsAdd = () => {
         onSubmit={methodsForm.handleSubmit(onSubmit)}
       >
         <h2 style={{ marginBottom: "0.5rem" }}>Playlists add</h2>
+        {methodsForm.formState.errors && <div>Errors...</div>}
         <div
           style={{
             display: "flex",
