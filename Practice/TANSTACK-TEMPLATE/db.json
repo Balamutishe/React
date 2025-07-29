@@ -1,0 +1,39 @@
+{
+  "clients": [
+    {
+      "id": "1",
+      "name": "Petya Petrovic",
+      "createdAt": "12.02.2021",
+      "updatedAt": "24.03.2022",
+      "contacts": [{ "email": "www.email.ru" }, { "phone": "+7(999)888-77-66" }]
+    },
+    {
+      "id": "2",
+      "name": "Ivan Ivanovic",
+      "createdAt": "14.05.2023",
+      "updatedAt": "10.10.2025",
+      "contacts": [{ "email": "www.email.ru" }, { "phone": "+7(999)888-77-66" }]
+    },
+    {
+      "id": "3",
+      "name": "Semen Semenovic",
+      "createdAt": "22.04.2023",
+      "updatedAt": "14.02.2024",
+      "contacts": [{ "email": "www.email.ru" }, { "phone": "+7(999)888-77-66" }]
+    },
+    {
+      "id": "4",
+      "name": "Alex Alexandrovic",
+      "createdAt": "25.01.2024",
+      "updatedAt": "12.02.2025",
+      "contacts": [{ "email": "www.email.ru" }, { "phone": "+7(999)888-77-66" }]
+    },
+    {
+      "id": "1",
+      "name": "Sirena Wanderwudsen",
+      "createdAt": "11.04.2023",
+      "updatedAt": "14.01.2025",
+      "contacts": [{ "email": "www.email.ru" }, { "phone": "+7(999)888-77-66" }]
+    }
+  ]
+}
