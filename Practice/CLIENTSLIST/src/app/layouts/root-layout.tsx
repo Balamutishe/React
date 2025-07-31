@@ -1,14 +1,12 @@
-import { Header } from "@widgets/Header";
-import { Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Header } from "@widgets/header";
+import { Main } from "@widgets/main";
 
 export const RootLayout = () => {
   return (
     <>
       <Header />
-      <main className="py-12 px-4">
-        <Outlet />
-      </main>
+      <Main />
       <TanStackRouterDevtools />
     </>
   );
