@@ -10,8 +10,15 @@ export const ClientsPage = () => {
     case "pending":
       return <div>Loading...</div>;
     case "success":
-      <div>
-        <List data={queryResult.data} variant="clients" />
-      </div>;
+      return (
+        <div className="w-full">
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold">Clients</h2>
+          </div>
+          <div className="w-full">
+            <List data={queryResult.data} variant="clients" />
+          </div>
+        </div>
+      );
   }
 };

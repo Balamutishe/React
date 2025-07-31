@@ -9,12 +9,12 @@ interface IProps {
 
 export const List: FC<IProps> = ({ data, variant }) => {
   return (
-    <ul>
+    <ul className="w-full">
       {data.map((item) => {
         if (variant === "clients") {
           const clientData = item as TClient;
           return (
-            <li key={clientData.id}>
+            <li key={clientData.id} className="w-full">
               <ClientCard {...clientData} />
             </li>
           );

@@ -1,0 +1,1 @@
+export { useClientDelete } from "./useClientDelete";
