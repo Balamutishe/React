@@ -1,13 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ClientsPage } from "@pages/clients-page";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: ClientsPage,
 });
-
-function Index() {
-  return (
-    <div>
-      <h3>Welcome Home!</h3>
-    </div>
-  );
-}
