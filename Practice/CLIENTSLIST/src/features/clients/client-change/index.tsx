@@ -3,22 +3,21 @@ import { FormProvider, useForm } from "react-hook-form";
 import type { TClient } from "@shared/types";
 import { useClientChange } from "./api";
 import { InputFormField } from "@shared/ui";
-import type { FC } from "react";
+import { useStateFormChange } from "@app/store";
 
-interface IProps {
-  username: string;
-  surname: string;
-}
-
-export const ClientChange: FC<IProps> = ({ username, surname }) => {
+export const ClientChange = () => {
   const changeMutation = useClientChange();
   const methodsForm = useForm();
+  const { username, surname } = useStateFormChange(
+    (state) => state.fieldsValues
+  );
+  const stateVisibilityForm = useStateFormChange((state) => state.isOpen);
 
   const onSubmit = (clientData: Partial<TClient>) =>
     changeMutation.mutate(clientData);
 
   return (
-    <div>
+    <div className={`${stateVisibilityForm ? "block" : "hidden"}`}>
       <FormProvider {...methodsForm}>
         <form onSubmit={methodsForm.handleSubmit(onSubmit)}>
           <InputFormField

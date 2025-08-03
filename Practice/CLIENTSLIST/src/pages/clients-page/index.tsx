@@ -1,5 +1,6 @@
 import { List } from "@widgets/list";
 import { useClientsQuery } from "./api/useClientsQuery";
+import { ClientChange } from "@features/clients";
 
 export const ClientsPage = () => {
   const queryResult = useClientsQuery();
@@ -18,6 +19,7 @@ export const ClientsPage = () => {
           <div className="w-full">
             <List data={queryResult.data} variant="clients" />
           </div>
+          <ClientChange />
         </div>
       );
   }
