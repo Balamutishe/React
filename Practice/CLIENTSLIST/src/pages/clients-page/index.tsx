@@ -19,7 +19,9 @@ export const ClientsPage = () => {
           <div className="w-full">
             <List data={queryResult.data} variant="clients" />
           </div>
-          <ClientChange />
+          <div className="flex justify-center">
+            <ClientChange />
+          </div>
         </div>
       );
   }
