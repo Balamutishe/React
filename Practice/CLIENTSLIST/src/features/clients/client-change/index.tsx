@@ -13,6 +13,8 @@ export const ClientChange = () => {
   );
   const stateVisibilityForm = useStateFormChange((state) => state.isOpen);
 
+  const handleSetFormIsOpen = useStateFormChange((state) => state.setIsOpen);
+
   const onSubmit = (clientData: Partial<TClient>) =>
     changeMutation.mutate(clientData);
 
@@ -31,9 +33,9 @@ export const ClientChange = () => {
             defaultValue={surname}
           />
           <button type="submit">Change</button>
-          <button>Exit</button>
         </form>
       </FormProvider>
+      <button onClick={() => handleSetFormIsOpen(false)}>Exit</button>
     </div>
   );
 };
