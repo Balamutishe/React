@@ -5,14 +5,11 @@ export const InputFormField = ({
   placeholder,
   defaultValue,
   varStyle,
-  onClick,
 }: {
   registerName: string;
   placeholder: string;
   defaultValue?: string;
   varStyle?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick: (e: any) => void;
 }) => {
   const { register } = useFormContext();
 
@@ -23,7 +20,6 @@ export const InputFormField = ({
       {...register(registerName)}
       defaultValue={defaultValue}
       className={varStyle}
-      onClick={(e) => onClick(e)}
     />
   );
 };
