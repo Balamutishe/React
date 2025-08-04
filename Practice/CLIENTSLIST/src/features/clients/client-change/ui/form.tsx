@@ -6,12 +6,14 @@ import type { TClient } from "@shared/types";
 import { useStateCurrentUser } from "@app/store";
 
 export const Form = () => {
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, reset } = useFormContext();
   const { id } = useStateCurrentUser((state) => state.userData);
   const changeMutation = useClientChange();
 
-  const onSubmit = (clientData: Partial<TClient>) =>
+  const onSubmit = (clientData: Partial<TClient>) => {
     changeMutation.mutate({ id, clientData });
+    reset();
+  };
 
   return (
     <form
