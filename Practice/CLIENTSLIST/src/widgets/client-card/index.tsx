@@ -9,14 +9,14 @@ export const ClientCard = (props: TClient) => {
   const handleUsersDataSet = () => {
     setCurrentUser({
       id: props.id,
-      username: props.name,
+      name: props.name,
       surname: props.surname,
     });
     setIsOpen(true);
   };
 
   return (
-    <div className="w-full flex justify-spaces-between mb-10">
+    <div className="w-full flex justify-spaces-between mb-2 py-6 px-6 bg-white rounded">
       <span className="w-1/12">{props.id}</span>
       <span className="w-1/3">
         {props.name} {props.surname}

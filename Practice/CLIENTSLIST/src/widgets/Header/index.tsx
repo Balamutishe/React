@@ -2,7 +2,7 @@ import Logo from "./logo.svg?react";
 
 export const Header = () => {
   return (
-    <header className="flex items-center py-6 px-4 bg-[#FFFFFF]">
+    <header className="flex items-center py-6 px-10 bg-[#FFFFFF]">
       <div className="mr-20">
         <Logo />
       </div>
