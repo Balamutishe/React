@@ -2,10 +2,11 @@ import { List } from "@widgets/list";
 import { useClientsQuery } from "./api/useClientsQuery";
 import { ClientChange, ClientCreate } from "@features/clients";
 import { Modal } from "@widgets/modal";
-import { useStateModal } from "@app/store";
+import { useStateModal, useStateSearch } from "@app/store";
 
 export const ClientsPage = () => {
-  const queryResult = useClientsQuery();
+  const { searchValue } = useStateSearch((state) => state);
+  const queryResult = useClientsQuery(searchValue);
   const { setIsVisibility, setVariant, variant } = useStateModal(
     (state) => state
   );
