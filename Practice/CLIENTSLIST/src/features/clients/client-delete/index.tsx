@@ -3,16 +3,14 @@ import { useClientDelete } from "./api";
 
 interface IProps {
   id: string;
+  variant?: string;
 }
 
-export const ClientDelete: FC<IProps> = ({ id }) => {
+export const ClientDelete: FC<IProps> = ({ id, variant }) => {
   const deleteMutation = useClientDelete();
 
   return (
-    <button
-      className="cursor-pointer"
-      onClick={() => deleteMutation.mutate(id)}
-    >
+    <button className={variant} onClick={() => deleteMutation.mutate(id)}>
       Delete
     </button>
   );
