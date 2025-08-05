@@ -1,7 +1,9 @@
+import { useStateModal } from "@app/store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useClientCreate = () => {
   const queryClient = useQueryClient();
+  const { setIsVisibility } = useStateModal((state) => state);
 
   return useMutation({
     mutationFn: async ({
@@ -31,6 +33,7 @@ export const useClientCreate = () => {
       return response.json();
     },
     onSuccess: () => {
+      setIsVisibility(false);
       queryClient.invalidateQueries({ queryKey: ["clients", "all"] });
     },
     onError: (error) => {

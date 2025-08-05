@@ -1,10 +1,10 @@
 import type { TClient } from "@shared/types";
 import { ClientDelete } from "@features/clients";
-import { useStateFormChange, useStateCurrentUser } from "@app/store";
+import { useStateCurrentUser, useStateModal } from "@app/store";
 
 export const ClientCard = (props: TClient) => {
   const setCurrentUser = useStateCurrentUser((state) => state.setUserData);
-  const setIsOpen = useStateFormChange((state) => state.setIsOpen);
+  const { setVariant, setIsVisibility } = useStateModal((state) => state);
 
   const handleUsersDataSet = () => {
     setCurrentUser({
@@ -12,7 +12,8 @@ export const ClientCard = (props: TClient) => {
       name: props.name,
       surname: props.surname,
     });
-    setIsOpen(true);
+    setVariant("edit");
+    setIsVisibility(true);
   };
 
   return (

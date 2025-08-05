@@ -1,10 +1,10 @@
+import { useStateModal } from "@app/store";
 import type { TClient } from "@shared/types";
-import { useStateFormChange } from "@app/store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useClientChange = () => {
   const queryClient = useQueryClient();
-  const setIsOpen = useStateFormChange((state) => state.setIsOpen);
+  const { setIsVisibility } = useStateModal((state) => state);
 
   return useMutation({
     mutationFn: async ({
@@ -19,7 +19,10 @@ export const useClientChange = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(clientData),
+        body: JSON.stringify({
+          ...clientData,
+          updatedAt: new Date().toISOString(),
+        }),
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -27,7 +30,7 @@ export const useClientChange = () => {
       return response.json();
     },
     onSuccess: () => {
-      setIsOpen(false);
+      setIsVisibility(false);
       queryClient.invalidateQueries({ queryKey: ["clients", "all"] });
     },
     onError: (error) => {
