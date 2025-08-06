@@ -1,18 +1,17 @@
-import { useStateModal } from "@app/store";
+import { useStateCurrentUser, useStateModal } from "@app/store";
 import type { TClient } from "@shared/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useClientChange = () => {
   const queryClient = useQueryClient();
   const { setIsVisibility } = useStateModal((state) => state);
+  const { id } = useStateCurrentUser((state) => state.userData);
 
   return useMutation({
     mutationFn: async ({
-      id,
       clientData,
     }: {
-      id: string;
-      clientData: Partial<TClient>;
+      clientData: Pick<TClient, "name" | "surname">;
     }) => {
       const response = await fetch(`http://localhost:3001/clients/${id}`, {
         method: "PATCH",

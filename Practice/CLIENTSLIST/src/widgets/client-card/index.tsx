@@ -19,7 +19,7 @@ export const ClientCard = (props: TClient) => {
 
   return (
     <div className="w-full flex justify-between items-center mb-2 py-6 px-6 bg-white rounded">
-      <span className="w-1/12">
+      <span className="w-1/12 text-gray-400">
         {props.id.substring(0, props.id.indexOf("-"))}
       </span>
       <span className="w-1/5">
