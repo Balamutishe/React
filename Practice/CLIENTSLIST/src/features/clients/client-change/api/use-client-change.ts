@@ -8,11 +8,7 @@ export const useClientChange = () => {
   const { id } = useStateCurrentUser((state) => state.userData);
 
   return useMutation({
-    mutationFn: async ({
-      clientData,
-    }: {
-      clientData: Pick<TClient, "name" | "surname">;
-    }) => {
+    mutationFn: async (clientData: Partial<TClient>) => {
       const response = await fetch(`http://localhost:3001/clients/${id}`, {
         method: "PATCH",
         headers: {

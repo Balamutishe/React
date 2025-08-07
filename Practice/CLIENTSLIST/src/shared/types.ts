@@ -4,5 +4,5 @@ export type TClient = {
   surname: string;
   createdAt: string;
   updatedAt: string;
-  contacts: [{ email: string }, { phone: string }];
+  contacts: { type: string; value: string }[];
 };

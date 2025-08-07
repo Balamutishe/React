@@ -11,6 +11,14 @@ export const ClientsPage = () => {
     (state) => state
   );
 
+  // const { register, control, handleSubmit } = useForm({
+  //   // defaultValues: {}; you can populate the fields by this attribute
+  // });
+  // const { fields, append, remove } = useFieldArray({
+  //   control,
+  //   name: "contact",
+  // });
+
   switch (queryResult.status) {
     case "error":
       return <div>Error: {queryResult.error.message}</div>;
@@ -37,6 +45,42 @@ export const ClientsPage = () => {
           <Modal>
             {variant === "create" ? <ClientCreate /> : <ClientChange />}
           </Modal>
+
+          {/* <form onSubmit={handleSubmit((data) => console.log(data))}>
+            <ul>
+              {fields.map((item, index) => (
+                <li key={item.id}>
+                  <Controller
+                    render={({ field }) => (
+                      <select {...field}>
+                        <option value="Телефон">Телефон</option>
+                        <option value="Почта">Почта</option>
+                      </select>
+                    )}
+                    name={`contact.${index}.type`}
+                    control={control}
+                  />
+                  <Controller
+                    render={({ field }) => <input {...field} />}
+                    name={`contact.${index}.value`}
+                    control={control}
+                  />
+                  <button type="button" onClick={() => remove(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => {
+                append({ type: "Почта", value: "0000000000" });
+              }}
+            >
+              append
+            </button>
+            <input type="submit" />
+          </form> */}
         </div>
       );
   }

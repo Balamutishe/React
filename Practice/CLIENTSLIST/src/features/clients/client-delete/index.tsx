@@ -10,7 +10,11 @@ export const ClientDelete: FC<IProps> = ({ id, variant }) => {
   const deleteMutation = useClientDelete();
 
   return (
-    <button className={variant} onClick={() => deleteMutation.mutate(id)}>
+    <button
+      type="button"
+      className={variant}
+      onClick={() => deleteMutation.mutate(id)}
+    >
       Удалить
     </button>
   );

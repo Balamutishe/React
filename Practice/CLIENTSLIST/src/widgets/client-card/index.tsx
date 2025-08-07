@@ -22,21 +22,16 @@ export const ClientCard = (props: TClient) => {
       <span className="w-1/12 text-gray-400">
         {props.id.substring(0, props.id.indexOf("-"))}
       </span>
-      <span className="w-1/5">
+      <span className="w-1/6">
         {props.name} {props.surname}
       </span>
-      <span className="w-1/6">{dateTimeUpdate(props.createdAt)}</span>
-      <span className="w-1/6">{dateTimeUpdate(props.updatedAt)}</span>
-      <span className="w-1/6">
+      <span className="w-1/7">{dateTimeUpdate(props.createdAt)}</span>
+      <span className="w-1/7">{dateTimeUpdate(props.updatedAt)}</span>
+      <span className="w-1/5">
         {props.contacts.map((contact) => (
           <>
-            <span key={crypto.randomUUID()}>
-              {Object.entries(contact).map(([contactType, contactValue]) => (
-                <span>
-                  {contactType}: {contactValue}
-                </span>
-              ))}
-            </span>
+            <span className="mr-1">{contact.type}:</span>
+            <span>{contact.value}</span>
             <br />
           </>
         ))}

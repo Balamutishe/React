@@ -1,8 +1,7 @@
 import type { FC } from "react";
-import { useFormContext } from "react-hook-form";
 
 interface IProps {
-  name: string;
+  name?: string;
   labelText?: string;
   placeholder?: string;
   defaultValue?: string;
@@ -16,8 +15,6 @@ export const InputFormField: FC<IProps> = ({
   defaultValue,
   varStyle,
 }) => {
-  const { register } = useFormContext();
-
   return (
     <>
       {labelText && (
@@ -28,7 +25,6 @@ export const InputFormField: FC<IProps> = ({
       <input
         type="text"
         placeholder={placeholder}
-        {...register(name)}
         defaultValue={defaultValue}
         className={`px-2 py-2 bg-gray-300 rounded ${varStyle}`}
       />

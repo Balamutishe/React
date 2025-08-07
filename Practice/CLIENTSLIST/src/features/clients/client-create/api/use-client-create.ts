@@ -1,5 +1,4 @@
 import { useStateModal } from "@app/store";
-import type { TClient } from "@shared/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useClientCreate = () => {
@@ -7,10 +6,10 @@ export const useClientCreate = () => {
   const { setIsVisibility } = useStateModal((state) => state);
 
   return useMutation({
-    mutationFn: async ({
-      clientData,
-    }: {
-      clientData: Pick<TClient, "name" | "surname">;
+    mutationFn: async (clientData: {
+      name: string;
+      surname: string;
+      contacts: { type: string; value: string }[];
     }) => {
       const response = await fetch(`http://localhost:3001/clients`, {
         method: "POST",
@@ -23,7 +22,7 @@ export const useClientCreate = () => {
           surname: clientData.surname,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          contacts: [],
+          contacts: clientData.contacts,
         }),
       });
       if (!response.ok) {
