@@ -16,7 +16,7 @@ export const Modal: FC<IModalProps> = ({ children }) => {
       onClick={() => setIsVisibility(false)}
     >
       <div
-        className="relative flex w-1/4 items-center justify-center flex flex-col px-6 py-4 bg-gray-400 rounded"
+        className="relative flex w-1/3 items-center justify-center flex flex-col px-6 py-4 bg-gray-400 rounded"
         onClick={(e) => e.stopPropagation()}
       >
         <button

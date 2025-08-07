@@ -20,7 +20,7 @@ export const ClientsPage = () => {
       return (
         <div className="w-full">
           <div className="flex justify-between align-center mb-10">
-            <h2 className="text-3xl font-semibold">Clients</h2>
+            <h2 className="text-3xl font-semibold">Клиенты</h2>
             <button
               onClick={() => {
                 setIsVisibility(true);

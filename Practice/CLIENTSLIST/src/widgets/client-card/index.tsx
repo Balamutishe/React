@@ -46,7 +46,7 @@ export const ClientCard = (props: TClient) => {
           className="w-1/2 mr-3 px-4 py-3 cursor-pointer bg-orange-300 hover:bg-orange-500 hover:text-white rounded"
           onClick={handleUsersDataSet}
         >
-          Change
+          Изменить
         </button>
         <ClientDelete
           id={props.id}
