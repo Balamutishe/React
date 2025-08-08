@@ -5,11 +5,13 @@ interface StateCurrentUser {
     id: string;
     name: string;
     surname: string;
+    contacts?: { type: string; value: string }[];
   };
   setUserData: (userData: {
     id: string;
     name: string;
     surname: string;
+    contacts?: { type: string; value: string }[];
   }) => void;
 }
 
@@ -18,6 +20,7 @@ export const useStateCurrentUser = create<StateCurrentUser>((set) => ({
     id: "",
     name: "",
     surname: "",
+    contacts: [],
   },
   setUserData: (userData) => set({ userData }),
 }));

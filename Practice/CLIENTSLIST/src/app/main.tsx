@@ -8,6 +8,7 @@ import { routeTree } from "./routes/routeTree.gen.ts";
 
 import "./styles/index.css";
 import "./styles/reset.css";
+import { StrictMode } from "react";
 
 const router = createRouter({ routeTree });
 
@@ -18,8 +19,10 @@ declare module "@tanstack/react-router" {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <QueryClientProvider client={queryClient}>
-    <ReactQueryDevtools initialIsOpen={false} />
-    <RouterProvider router={router} />
-  </QueryClientProvider>
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  </StrictMode>
 );

@@ -6,3 +6,9 @@ export type TClient = {
   updatedAt: string;
   contacts: { type: string; value: string }[];
 };
+
+export type TFormData = {
+  name: string;
+  surname: string;
+  contacts: { type: string; value: string }[];
+};

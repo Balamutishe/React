@@ -12,6 +12,7 @@ export const ClientCard = (props: TClient) => {
       id: props.id,
       name: props.name,
       surname: props.surname,
+      contacts: props.contacts,
     });
     setVariant("edit");
     setIsVisibility(true);
