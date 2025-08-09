@@ -60,7 +60,7 @@ export const ClientForm: FC<IProps> = ({ variant }) => {
         contacts={variant === "edit" ? contacts : undefined}
       />
 
-      <FormActions id={id} />
+      <FormActions id={id} variant={variant} />
     </form>
   );
 };

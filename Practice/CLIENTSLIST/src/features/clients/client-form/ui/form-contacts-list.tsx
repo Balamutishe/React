@@ -34,7 +34,7 @@ export const FormContactsList: FC<IProps> = ({ contacts, control }) => {
     <div className="w-full px-4 py-2 mb-4 bg-gray-300 hover:bg-gray-300 rounded">
       <button
         type="button"
-        className="w-full px-4 py-2 mb-4  cursor-pointer"
+        className={`w-full px-4 py-2 ${contacts && "mb-4"} cursor-pointer`}
         onClick={() => {
           append({ type: "Телефон", value: "+7(999)-888-77-66" });
         }}
@@ -43,11 +43,14 @@ export const FormContactsList: FC<IProps> = ({ contacts, control }) => {
       </button>
       <ul>
         {fields.map((item, index) => (
-          <li key={item.id} className="flex justify-between mb-4 bg-white">
-            <div>
+          <li
+            key={item.id}
+            className="flex justify-between w-full mb-4 bg-white"
+          >
+            <div className="w-9/10">
               <Controller
                 render={({ field }) => (
-                  <select {...field} className="mr-4 px-4 py-2">
+                  <select {...field} className="w-1/3 px-4 py-2">
                     <option value="Телефон">Телефон</option>
                     <option value="Почта">Почта</option>
                   </select>
@@ -57,7 +60,7 @@ export const FormContactsList: FC<IProps> = ({ contacts, control }) => {
               />
               <Controller
                 render={({ field }) => (
-                  <input {...field} className="px-4 py-2" />
+                  <input {...field} className="w-2/3 px-4 py-2" />
                 )}
                 name={`contacts.${index}.value`}
                 control={control}
@@ -65,10 +68,10 @@ export const FormContactsList: FC<IProps> = ({ contacts, control }) => {
             </div>
             <button
               type="button"
-              className="px-4 py-2"
+              className="w-1/10 px-4 py-2"
               onClick={() => remove(index)}
             >
-              Удалить
+              X
             </button>
           </li>
         ))}
