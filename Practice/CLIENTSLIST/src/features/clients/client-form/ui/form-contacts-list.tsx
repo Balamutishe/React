@@ -31,40 +31,48 @@ export const FormContactsList: FC<IProps> = ({ contacts, control }) => {
   }, [contacts, onAppendContactsFields]);
 
   return (
-    <div>
-      <ul>
-        {fields.map((item, index) => (
-          <li key={item.id}>
-            <Controller
-              render={({ field }) => (
-                <select {...field}>
-                  <option value="Телефон">Телефон</option>
-                  <option value="Почта">Почта</option>
-                </select>
-              )}
-              name={`contacts.${index}.type`}
-              control={control}
-            />
-            <Controller
-              render={({ field }) => <input {...field} />}
-              name={`contacts.${index}.value`}
-              control={control}
-            />
-            <button type="button" onClick={() => remove(index)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="w-full px-4 py-2 mb-4 bg-gray-300 hover:bg-gray-300 rounded">
       <button
         type="button"
-        className="w-1/4 px-4 py-2 mb-2 bg-blue-600 hover:bg-blue-300 text-white hover:text-gray-700 rounded cursor-pointer"
+        className="w-full px-4 py-2 mb-4  cursor-pointer"
         onClick={() => {
           append({ type: "Телефон", value: "+7(999)-888-77-66" });
         }}
       >
-        append
+        Добавить контакт
       </button>
+      <ul>
+        {fields.map((item, index) => (
+          <li key={item.id} className="flex justify-between mb-4 bg-white">
+            <div>
+              <Controller
+                render={({ field }) => (
+                  <select {...field} className="mr-4 px-4 py-2">
+                    <option value="Телефон">Телефон</option>
+                    <option value="Почта">Почта</option>
+                  </select>
+                )}
+                name={`contacts.${index}.type`}
+                control={control}
+              />
+              <Controller
+                render={({ field }) => (
+                  <input {...field} className="px-4 py-2" />
+                )}
+                name={`contacts.${index}.value`}
+                control={control}
+              />
+            </div>
+            <button
+              type="button"
+              className="px-4 py-2"
+              onClick={() => remove(index)}
+            >
+              Удалить
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
