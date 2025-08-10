@@ -2,18 +2,15 @@ import { Header } from "@shared/ui/Header";
 import { Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { AccountBar } from "@features/Auth";
-
-import c from "./root-layout.module.css";
+import { Main } from "@shared/ui/Main";
 
 export const RootLayout = () => {
   return (
     <>
-      <div className={c.containerHeader}>
-        <Header renderAccountBar={() => <AccountBar />} />
-      </div>
-      <div className={c.containerMain}>
+      <Header renderAccountBar={() => <AccountBar />} />
+      <Main>
         <Outlet />
-      </div>
+      </Main>
       <TanStackRouterDevtools />
     </>
   );

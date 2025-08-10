@@ -27,13 +27,13 @@ const makeRefreshToken = () => {
         localStorage.setItem(refreshTokenKey, data.refreshToken);
       })
       .catch((error) => {
-        // localStorage.removeItem("musicfun-access-token");
-        // localStorage.removeItem("musicfun-refresh-token");
+        localStorage.removeItem("musicfun-access-token");
+        localStorage.removeItem("musicfun-refresh-token");
         console.error(error);
-      })
-      .finally(() => {
-        refreshPromise = null;
       });
+    // .finally(() => {
+    //   refreshPromise = null;
+    // });
   }
 
   return refreshPromise;

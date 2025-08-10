@@ -1,10 +1,4 @@
-.containerHeader {
-  margin-bottom: 1rem;
-
-  border-bottom: 0.1rem #ffffff solid;
-}
-
-.containerMain {
+.main {
   display: flex;
   justify-content: space-between;
 

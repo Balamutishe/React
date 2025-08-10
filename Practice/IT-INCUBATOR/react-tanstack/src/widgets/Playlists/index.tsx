@@ -1,6 +1,6 @@
 import { useState, type FC } from "react";
 import c from "./style.module.css";
-import { Pagination } from "@shared/ui/Pagination";
+import { Pagination } from "@widgets/Pagination";
 import { usePlaylistsQuery } from "./api";
 import { PlayListDelete } from "@features/Playlist/PlaylistDelete";
 
@@ -29,7 +29,7 @@ export const Playlists: FC<IProps> = ({ userId, onPlaylistSelected }) => {
     <div className={c.containerPlaylists}>
       <Pagination
         current={currentPage}
-        pageCount={data.meta.pagesCount}
+        pagesCount={data.meta.pagesCount}
         onPageNumberChange={setCurrentPage}
         isFetching={isFetching}
       />

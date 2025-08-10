@@ -20,7 +20,6 @@ export const FormPlaylistsAdd = () => {
         onSubmit={methodsForm.handleSubmit(onSubmit)}
       >
         <h2 style={{ marginBottom: "0.5rem" }}>Playlists add</h2>
-        {methodsForm.formState.errors && <div>Errors...</div>}
         <div
           style={{
             display: "flex",

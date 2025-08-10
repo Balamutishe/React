@@ -10,11 +10,13 @@ interface IProps {
 export const Header: FC<IProps> = ({ renderAccountBar }) => {
   return (
     <header className={c.header}>
-      <div className={c.linksBlock}>
-        <Link to="/">Playlists</Link>
-      </div>
+      <div className={c.content}>
+        <div className={c.linksBlock}>
+          <Link to="/">Playlists</Link>
+        </div>
 
-      <div>{renderAccountBar()}</div>
+        <div>{renderAccountBar()}</div>
+      </div>
     </header>
   );
 };

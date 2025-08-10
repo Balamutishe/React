@@ -1,4 +1,10 @@
 .header {
+  margin-bottom: 1rem;
+
+  border-bottom: 0.1rem #9c9c9c solid;
+}
+
+.content {
   display: flex;
   justify-content: space-between;
   align-items: center;
